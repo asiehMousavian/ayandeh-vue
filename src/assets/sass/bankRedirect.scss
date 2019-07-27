@@ -1,0 +1,104 @@
+.main-body {
+    h1 {
+        color: #313131;
+        font-size: 20px;
+        line-height: 23px;
+        margin: 30px 0;
+        text-align: center;
+    }
+
+    .pursuit-btns {
+        padding: 40px 15px;
+        border-top: 2px solid #b7b7b7;
+
+        .code-span {
+            font-size: 25px;
+            line-height: 18px;
+            color: #303030;
+            font-family: "Iransans_Medium";
+
+        }
+
+        .value-span {
+            color: #000000;
+            font-size: 25px;
+            line-height: 16px;
+            font-family: "Iransans_Bold";
+
+        }
+    }
+}
+@media #{$size1200} {
+    .pursuit-btn-group {
+        .btn {
+            font-weight: 100;
+            font-size: 14px;
+            font-family: "Iransans";
+        }
+    }
+    .main-body{
+        .pursuit-btns {
+
+            .code-span {
+                font-size: 20px;
+            }
+
+            .value-span {
+                font-size: 18px;
+
+            }
+        }
+    }
+}
+@media #{$size568}{
+    .pursuit-btn-group{
+        margin-top: 0;
+        flex-direction: column;
+        .btn{
+            margin:0 auto 10px;
+            width: 50%;
+        }
+    }
+}
+@media #{$size480} {
+
+    .main-body {
+        h1 {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+    }
+    .img-container
+    {
+        img{
+            height: 50px;
+        }
+    }
+    .main-body{
+        .pursuit-btns {
+            padding: 15px 5px;
+            margin: 0 0 10px 0;
+            .code-span {
+                font-size: 15px;
+            }
+
+            .value-span {
+                font-size: 15px;
+            }
+        }
+    }
+}
+@media #{$size375} {
+    .pursuit-btn-group{
+        .btn{
+            width: 60%;
+        }
+    }
+}
+@media #{$size360} {
+    .pursuit-btn-group{
+        .btn{
+            width: 70%;
+        }
+    }
+}

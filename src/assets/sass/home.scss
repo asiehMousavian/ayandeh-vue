@@ -1,0 +1,65 @@
+/******* Login/register tab ******/
+.box_tab{
+  .box_tab_t{
+    border-bottom: solid 1px #dfdfdf;
+    ul{
+      display: flex;
+      li{
+        width: 50%;
+        a{
+          display: block;
+          height: 68px;
+          line-height: 68px;
+          text-align: center;
+          color: $c1;
+          font-family: "Iransans_Medium";
+          font-size: 24px;
+          @media #{$size992}{
+            height: 55px;
+            line-height: 55px;
+            font-size: 18px;
+          }
+          @media #{$size414}{
+            height: 45px;
+            line-height: 45px;
+            font-size: 15px;
+          }
+          &.active{
+            color: $c5;
+            position: relative;
+            &:before{
+              @extend .sprite;
+              width: 100%;
+              height: 3px;
+              position: absolute;
+              bottom: -1px;
+              right: 0;
+              z-index: 100;
+              background-color: $c5;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tab-content{
+    padding: 60px 20px 70px 20px;
+    @media #{$size992}{
+      padding: 30px 20px;
+    }
+  }
+}
+.box_c{
+  margin: 50px 0 20px 0;
+}
+.box_text{
+  text-align: center;
+  margin-bottom: 50px;
+  @media #{$size992}{
+    margin-bottom: 30px;
+  }
+  @media #{$size414}{
+    margin-bottom: 20px;
+  }
+}
+/******* Login/register tab ******/

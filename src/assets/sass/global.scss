@@ -1,0 +1,853 @@
+﻿@import "compass/reset";
+@import "compass/css3";
+@import "compass/support";
+@import "compass/utilities/sprites";
+/*******Global*******/
+* {
+  vertical-align: middle !important;
+}
+html {
+  line-height: inherit;
+}
+
+@mixin transition($property:all,$time:0.3s){
+  @include transition-property($property);
+  @include transition-duration($time);
+}
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+a{
+  @include transition;
+  img{
+    border: none;
+  }
+  &:hover,
+  &:focus{
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus{
+  @include transition;
+  outline: none;
+}
+
+button:focus{
+  outline: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.clear {
+  content: "";
+  display: table;
+  clear: both;
+}
+.sprite{
+  display: block;
+  content: "";
+}
+
+$size1440: "only screen and (max-width : 1440px)";
+$size1200: "only screen and (max-width : 1199px)";
+$size1024: "only screen and (max-width : 1024px)";
+$size992: "only screen and (max-width : 991px)";
+$size768: "only screen and (max-width : 767px)";
+$size568: "only screen and (max-width : 567px)";
+$size480: "only screen and (max-width : 480px)";
+$size440: "only screen and (max-width : 440px)";
+$size414: "only screen and (max-width : 414px)";
+$size375: "only screen and (max-width : 375px)";
+$size360: "only screen and (max-width : 360px)";
+$size320: "only screen and (max-width : 320px)";
+
+$c1: #000;
+$c2: #fff;
+$c3: #d8ccbc;
+$c4: #333300;
+$c5: #7d4434;
+$c6: #5c3226;
+
+$gr: #333;
+$gr2: #666;
+$border: #4e4e4e;
+
+/********* Fonts **********/
+@font-face {
+  font-family: "Iransans_Bold";
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+  url('../fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+  url('../fonts/woff/IRANSansWeb(FaNum)_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('../fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Iransans_Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Medium.eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Medium.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+  url('../fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+  url('../fonts/woff/IRANSansWeb(FaNum)_Medium.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('../fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Iransans";
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/eot/IRANSansWeb(FaNum).eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+  url('../fonts/woff2/IRANSansWeb(FaNum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+  url('../fonts/woff/IRANSansWeb(FaNum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('../fonts/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+@font-face {
+  font-family: "Iransans_Light";
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Light.eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Light.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+  url('../fonts/woff2/IRANSansWeb(FaNum)_Light.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+  url('../fonts/woff/IRANSansWeb(FaNum)_Light.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('../fonts/ttf/IRANSansWeb(FaNum)_Light.ttf') format('truetype');
+}
+/********* Fonts **********/
+/*********** All Pages **********/
+body{
+  font-size: 12px;
+  background-color: #f2f2f2;
+  color: $c1;
+  font-family: "Iransans";
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  position: relative;
+}
+.mainarea{
+  padding: 40px 0;
+  @media #{$size480}{
+    padding: 20px 0;
+  }
+}
+.box{
+  @include border-radius(8px);
+  background-color: $c2;
+  @include box-shadow(0 3px 20px 0 rgba(216, 204, 188, 0.3));
+  border: solid 1px #dfdfdf;
+}
+.mb20{
+  margin-bottom: 20px;
+}
+.btn{
+  height: 48px;
+  line-height: 47px;
+  text-align: center;
+  @include border-radius(4px);
+  color: $c2 !important;
+  background-color: $c5;
+  font-size: 18px;
+  font-family: "Iransans_Bold";
+  padding: 0 45px;
+  cursor: pointer;
+  @media #{$size1440}{
+    font-size: 16px;
+    padding: 0 30px;
+  }
+  @media #{$size992}{
+    font-size: 15px;
+    padding: 0 20px;
+  }
+  @media #{$size480}{
+    padding: 0 10px;
+    font-size: 13px;
+    height: 40px;
+    line-height: 39px;
+  }
+  &:hover{
+    color: $c2;
+    background-color: $c6;
+  }
+  &.btn-cancel {
+    background: #d8ccbc;
+    color: $c1 !important;
+    width: 170px;
+    @include border-radius(4px);
+    height: 48px;
+    @media #{$size480}{
+      height: 40px;
+      line-height: 39px;
+    }
+  }
+  &.edit_btn{
+    padding: 0 20px;
+  }
+}
+button.btn{
+  line-height: inherit;
+  padding: 0 15px 3px 15px;
+  @media #{$size480}{
+    padding: 0 10px;
+  }
+}
+/********** Form **********/
+.form-group{
+  margin-bottom: 40px;
+  position: relative;
+  @media #{$size568}{
+    margin-bottom: 20px;
+  }
+  label{
+    display: block;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: $c1;
+    font-family: "Iransans_Bold";
+    @media #{$size1440}{
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+    @media #{$size992}{
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    @media #{$size568}{
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+  }
+  .inp_border{
+    position: relative;
+    .placeholder{
+      position: absolute;
+      top: 10px;
+      right: 0;
+      font-size: 18px;
+      color: #575757;
+      @include transition;
+      @media #{$size1200}{
+        font-size: 16px;
+      }
+      @media #{$size768}{
+        font-size: 14px;
+      }
+      @media #{$size480}{
+        font-size: 12px;
+      }
+      @media #{$size360}{
+        font-size: 11px;
+      }
+    }
+    .line{
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      height: 2px;
+      width: 0;
+      background-color: $c5;
+      @include transition;
+    }
+    .form-control{
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-bottom: solid 1px #727d7d;
+      @include border-radius(0px);
+      outline: none;
+      @include box-shadow(none);
+      padding: 0;
+      position: relative;
+      z-index: 1;
+      background-color: transparent;
+      @media #{$size768}{
+        height: 45px;
+      }
+      @media #{$size480}{
+        height: 40px;
+      }
+      &:focus{
+        ~ .placeholder{
+          top: -10px;
+          font-size: 15px;
+          color: $c5;
+          @media #{$size768}{
+            font-size: 13px;
+          }
+          @media #{$size480}{
+            font-size: 11px;
+          }
+          @media #{$size360}{
+            font-size: 10px;
+          }
+        }
+        ~ .line{
+          width: 100%;
+        }
+      }
+    }
+    &.visited{
+      .placeholder{
+        top: -10px;
+        font-size: 15px;
+        @media #{$size768}{
+          font-size: 14px;
+        }
+        @media #{$size480}{
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+.form-alert{
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 100;
+  p{
+    font-size: 15px;
+    color: #cb0d0d;
+    @media #{$size1440}{
+      font-size: 13px;
+    }
+    @media #{$size992}{
+      font-size: 12px;
+    }
+    @media #{$size480}{
+      font-size: 11px;
+    }
+  }
+}
+.select2-container{
+  width: 225px !important;
+  text-align: right;
+  font-size: 15px;
+  color: #070707;
+  @media #{$size480}{
+    width: 180px !important;
+    font-size: 13px;
+  }
+  .select2-selection--single{
+    background-color: #e6e6e6;
+    @include border-radius(5px);
+    border: solid 1px $c5;
+    text-align: right;
+    direction: rtl;
+    height: 35px;
+    @include  box-shadow(none);
+    outline: none;
+    .select2-selection__rendered{
+      line-height: 32px;
+    }
+    .select2-selection__arrow{
+      height: 35px;
+      top: 0;
+      b{
+        border-width: 7px 6px 0 6px;
+        border-color: $c1 transparent transparent transparent;
+      }
+    }
+
+  }
+  &.select2-container--open{
+    .select2-selection--single{
+      .select2-selection__arrow{
+        b{
+          border-width: 0 6px 7px 6px;
+          border-color: transparent transparent $c1 transparent;
+        }
+      }
+    }
+  }
+}
+.f_body{
+  .f_form{
+    width: 41.5%;
+  }
+  .exchange{
+    width: 17%;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+}
+.forget_pass{
+  font-family: "Iransans_Medium";
+  font-size: 20px;
+  color: $c5;
+  border-bottom: dashed 1px $c5;
+  @media #{$size992}{
+    font-size: 18px;
+  }
+  @media #{$size768}{
+    font-size: 16px;
+  }
+  @media #{$size414}{
+    font-size: 14px;
+  }
+  &:hover{
+    color: $c5;
+  }
+}
+/********** Form **********/
+.text{
+  p{
+    font-size: 20px;
+    line-height: 38px;
+    @media #{$size992}{
+      font-size: 15px;
+      line-height: 27px;
+    }
+    @media #{$size568}{
+      font-size: 13px;
+      line-height: 25px;
+    }
+  }
+}
+.desc{
+  h3{
+    font-family: "Iransans_Medium";
+    font-size: 21px;
+    margin-bottom: 15px;
+    @media #{$size1440}{
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    @media #{$size1200}{
+      font-size: 15px;
+    }
+  }
+  p{
+    font-size: 20px;
+    line-height: 46px;
+    @media #{$size1440}{
+      font-size: 16px;
+      line-height: 32px;
+    }
+    @media #{$size1200}{
+      font-size: 16px;
+      line-height: 27px;
+    }
+  }
+}
+.modal{
+  padding-right: 0 !important;
+}
+/*********** All Pages **********/
+/************ Header ***********/
+#header{
+  .header{
+    background-color: $c3;
+    padding: 15px 0;
+    #logo{
+      margin-left: 50px;
+      @media #{$size992}{
+        margin-left: 20px;
+      }
+      @media #{$size375}{
+        margin-left: 10px;
+      }
+      img{
+        @media #{$size568}{
+          width: 150px;
+        }
+        @media #{$size375}{
+          width: 130px;
+        }
+      }
+    }
+    #menu{
+      display: flex;
+      align-items: center;
+      @media #{$size992}{
+        display: none;
+      }
+      ul{
+        display: flex;
+        li{
+          margin-left: 30px;
+          &:last-child{
+            margin-left: 0;
+          }
+          a{
+            display: block;
+            font-size: 16px;
+            color: $c4;
+          }
+        }
+      }
+    }
+    .toggle_menu{
+      display: none;
+      font-size: 16px;
+      color: $c4;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-right: 26px;
+      @media #{$size992}{
+        display: flex;
+      }
+      @media #{$size568}{
+        font-size: 14px;
+      }
+      @media #{$size375}{
+        font-size: 12px;
+      }
+      .toggle_menu_ic{
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -7px;
+        i{
+          display: block;
+          margin: 0 auto 4px auto;
+          width: 20px;
+          height: 2px;
+          background-color: $c4;
+          &:first-child{
+            -webkit-transform-origin: 4px 8px;
+            -moz-transform-origin: 4px 8px;
+            -o-transform-origin: 4px 8px;
+            transform-origin: 4px 8px;
+          }
+          &:nth-child(3){
+            -webkit-transform-origin: 5px -6px;
+            -moz-transform-origin: 5px -6px;
+            -o-transform-origin: 5px -6px;
+            transform-origin: 5px -6px;
+          }
+        }
+      }
+    }
+    .login_link{
+      font-size: 16px;
+      color: $c4;
+      @media #{$size568}{
+        font-size: 13px;
+      }
+      @media #{$size375}{
+        font-size: 12px;
+      }
+      img{
+        margin-right: 12px;
+        @media #{$size568}{
+          margin-right: 5px;
+          width: 20px;
+        }
+      }
+    }
+  }
+}
+.top_site{
+  align-items: center;
+}
+.page-header {
+  font-size: 24px;
+  color: $c1;
+  font-family: "Iransans_Bold";
+  //margin: 20px 0;
+  text-align: center;
+  @media #{$size568}{
+    font-size: 20px;
+  }
+  @media #{$size480}{
+    font-size: 17px;
+    margin: 20px 0;
+  }
+  &.c_green{
+    color: #0f7d29;
+  }
+  &.c_red{
+    color: #e2241b;
+  }
+}
+/************ Header ************/
+
+/************ Modal ************/
+.modal{
+  .modal-content{
+    overflow: hidden;
+    position: relative;
+    .modal_extra{
+      position: absolute;
+      right: -50%;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background-color: $c2;
+      @include box-shadow(-5px 0 6px 0 rgba(64, 64, 64, 0.16));
+      @include transition(all,0.3s);
+      @media #{$size992}{
+        width: 100%;
+        right: -100%;
+      }
+      &.active{
+        right: 0;
+      }
+      .modal_extra_close{
+        display: block;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        background-color: $c2;
+        @include border-radius(50%);
+        @include box-shadow(0 0 13px 0 rgba(0, 0, 0, 0.16));
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        z-index: 100;
+        cursor: pointer;
+        @media #{$size1440}{
+          width: 32px;
+          height: 32px;
+          line-height: 32px;
+        }
+      }
+      .desc_scroll{
+        overflow-y: auto;
+      }
+      .box_tab{
+        position: relative;
+        height: 100%;
+        #box_tab_content2{
+          height: calc(100% - 68px);
+          padding-bottom: 15px;
+          .tab-content{
+            height: 100%;
+            overflow-y: auto;
+          }
+        }
+      }
+    }
+    .box_tab{
+      .box_tab_t{
+        border: none;
+        ul{
+          border: none;
+          li{
+            width: auto;
+            a{
+              padding: 0 20px;
+              @media #{$size1440}{
+                padding: 0 15px;
+                font-size: 16px;
+              }
+              @media #{$size768}{
+                font-size: 14px;
+              }
+              @media #{$size568}{
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+      .tab-content{
+        padding: 25px 20px;
+        @media #{$size1440}{
+          padding: 20px 15px;
+        }
+        @media #{$size1200}{
+          padding: 8px 15px;
+        }
+      }
+    }
+    .modal-body{
+      padding: 25px 20px;
+      @media #{$size568}{
+        padding: 20px 15px;
+      }
+      @media #{$size480}{
+        padding: 15px 10px;
+      }
+      .modal_title{
+        font-family: "Iransans_Bold";
+        font-size: 24px;
+        margin-bottom: 25px;
+        @media #{$size1440}{
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+        @media #{$size1200}{
+          font-size: 15px;
+          margin-bottom: 15px;
+        }
+      }
+      .modal_txt{
+        margin-bottom: 30px;
+        @media #{$size1440}{
+          margin-bottom: 20px;
+        }
+        p{
+          text-align: center;
+          font-size: 20px;
+          line-height: 38px;
+          @media #{$size1440}{
+            font-size: 16px;
+            line-height: 27px;
+          }
+          @media #{$size992}{
+            font-size: 14px;
+          }
+          @media #{$size480}{
+            font-size: 12px;
+            line-height: 24px;
+          }
+        }
+      }
+      .modal_desc{
+        margin-bottom: 30px;
+        @media #{$size1440}{
+          margin-bottom: 20px;
+        }
+        p{
+          font-family: "Iransans_Bold";
+          text-align: center;
+          font-size: 22px;
+          @media #{$size1440}{
+            font-size: 18px;
+          }
+          @media #{$size1200}{
+            font-size: 16px;
+          }
+          @media #{$size992}{
+            font-size: 14px;
+          }
+          @media #{$size480}{
+            font-size: 12px;
+          }
+        }
+      }
+      .modal_dropdown{
+        .modal_dropdown_body{
+          @media #{$size414}{
+            display: block !important;
+          }
+          >div{
+            @media #{$size414}{
+              width: 100%;
+            }
+            .select2-container{
+              @media #{$size360}{
+                width: 100% !important;
+              }
+            }
+          }
+        }
+      }
+      .confirm_text{
+        p{
+          font-size: 20px;
+          color: #575757;
+          font-family: "Iransans_Bold";
+          @media #{$size1440}{
+            font-size: 16px;
+          }
+          @media #{$size992}{
+            font-size: 14px;
+          }
+          @media #{$size768}{
+            font-size: 13px;
+          }
+          @media #{$size568}{
+            font-size: 12px;
+          }
+          a{
+            color: $c5;
+            border-bottom: dashed 1px $c5;
+          }
+        }
+      }
+    }
+    .modal-footer{
+      border: none;
+      justify-content: start;
+    }
+  }
+}
+/************ Modal ************/
+.pursuit-btn-group {
+  margin-top: 20px;
+  .btn{
+    margin: 0 15px;
+  }
+}
+/********** Small Menu ***********/
+.small_menu{
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: $c2;
+  overflow-x: auto !important;
+  z-index: 2010;
+  >ul{
+    >li{
+      border-bottom: solid 1px #e8e8e8;
+      >a{
+        display: block;
+        padding: 8px 10px;
+        color: $c4;
+      }
+      &:hover{
+        >a{
+          color: $c5;
+        }
+      }
+    }
+  }
+  .small_menu_t{
+    display: block;
+    position: relative;
+    background-color: $c3;
+    color: $c1;
+    font-family: "Iransans_Bold";
+    font-size: 16px;
+    padding: 10px;
+  }
+  .small_menu_close{
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    z-index: 100;
+  }
+}
+/********** Small Menu ***********/
+/********** Filter Body **********/
+.filter_body{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.75);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2000;
+  display: none;
+}
+/********** Filter Body ***********/

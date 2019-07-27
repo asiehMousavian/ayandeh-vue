@@ -1,0 +1,494 @@
+@import 'global';
+/******** Colors **********/
+$c0: #595959;
+$c1: #000;
+$c2: #fff;
+$c3: #20ce70;
+$c4: #27ba89;
+$gr: #333;
+$border: #ebeded;
+$border2: #F0F2F2;
+/********* Fonts **********/
+@font-face {
+  font-family: "Iransans_Bold";
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('../fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('../fonts/woff/IRANSansWeb(FaNum)_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('../fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf') format('truetype');
+ }
+@font-face {
+  font-family: "Iransans";
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/eot/IRANSansWeb(FaNum).eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('../fonts/woff2/IRANSansWeb(FaNum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('../fonts/woff/IRANSansWeb(FaNum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('../fonts/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+@font-face {
+  font-family: "Iransans_Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Medium.eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Medium.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('../fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('../fonts/woff/IRANSansWeb(FaNum)_Medium.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('../fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Iransans_Light";
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Light.eot');
+  src: url('../fonts/eot/IRANSansWeb(FaNum)_Light.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('../fonts/woff2/IRANSansWeb(FaNum)_Light.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('../fonts/woff/IRANSansWeb(FaNum)_Light.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('../fonts/ttf/IRANSansWeb(FaNum)_Light.ttf') format('truetype');
+}
+body{
+  font-size: 12px;
+  background-color: $border;
+  color: #000;
+  font-family: "Iransans";
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  position: relative;
+}
+/********* All Pages ********/
+.mb15{
+  margin-bottom: 15px;
+}
+.form-group{
+  margin-bottom: 20px;
+}
+.inp_border{
+  position: relative;
+  .inp_border_icon{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+  }
+  .form-control{
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: solid 1px $c0;
+    color: $c1;
+    @include box-shadow(none);
+    @include border-radius(0px);
+    padding: 0 5px;
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+    @include placeholder {
+      color: $c1;
+      font-size: 12px;
+    }
+    &:focus{
+      ~ .placeholder{
+          top: -20px;
+          right: 0;
+          padding: 0;
+          color: $c3;
+          z-index: 2;
+          font-size: 10px;
+      }
+      ~ .line{
+        width: 100%;
+      }
+    }
+  }
+  textarea{
+    &.form-control{
+      height: 85px;
+      resize: none;
+      padding: 10px 0;
+    }
+  }
+  .placeholder{
+    font-size: 12px;
+    color: $c1;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 35px;
+    @include transition;
+  }
+  .line{
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: $c3;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    @include transition(all,0.5s);
+  }
+  &.visited{
+    .placeholder{
+      top: -20px;
+      right: 0;
+      padding: 0;
+      z-index: 2;
+      font-size: 11px;
+    }
+  }
+}
+.btn{
+  width: 100%;
+  height: 45px;
+  // line-height: 45px;
+  background-color: $c3;
+  @include border-radius(5px);
+  @include box-shadow(none);
+  color: $c1;
+  font-size: 16px;
+  padding: 0 10px 3px 10px;
+  font-family: "Iransans_Medium";
+  &:focus{
+    @include box-shadow(none);
+  }
+}
+.register_txt{
+  margin-top: 15px;
+  p{
+    font-family: "Iransans_Medium";
+    font-size: 16px;
+    color: $c4;
+    text-align: center;
+    @media #{$size375}{
+      font-size: 14px;
+    }
+    @media #{$size320}{
+      font-size: 12px;
+    }
+    a{
+      color: $c3;
+      border-bottom: solid 1px $c3;
+    }
+  }
+}
+form{
+  .row{
+    margin-left: -5px;
+    margin-right: -5px;
+    >div{
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+  }
+}
+.button_btn{
+  display: flex;
+  .btn{
+    width: auto;
+    &.btn-r{
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+    &.btn-l{
+      -webkit-flex-grow: 2;
+      flex-grow: 2;
+      margin-right: 10px;
+    }
+  }
+}
+.alert{
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 9px;
+  position: relative;
+  padding-right: 10px;
+  &:before{
+    display: block;
+    content: "";
+    width: 5px;
+    height: 5px;
+    @include border-radius(50%);
+    position: absolute;
+    top: 50%;
+    margin-top: -2.5px;
+    right: 0;
+    z-index: 10;
+  }
+  &.alert-warning{
+    color: #e2241b;
+    font-family: "Iransans_Medium";
+    &:before{
+      background-color: #e2241b;
+    }
+  }
+}
+/********* Mainarea ********/
+.mainarea{
+  padding: 20px 0;
+  font-size: 11px;
+}
+/******** sandoqha-list *******/
+.box{
+  position: relative;
+  @include box-shadow(0,4px,8px,rgba(15,18,17,.8));
+  .box_top{
+    padding: 25px 10px;
+    border-bottom: solid 1px $border2;
+    overflow: hidden;
+    position: relative;
+    background-color: $c2;
+    @include border-radius(5px 5px 0 0);
+    .box_top_t{
+      display: block;
+      font-size: 16px;
+      font-family: "Iransans_Bold";
+      color: $c0;
+      img{
+        margin-left: 5px;
+      }
+    }
+    .box_photo{
+      position: absolute;
+      left: -34px;
+      top: 0;
+    }
+  }
+  .box_bottom{
+    padding: 7px 10px;
+    font-size: 13px;
+    color: #A5ADAD;
+    background-color: $c2;
+    @include border-radius(0 0 5px 5px);
+    display: flex;
+    justify-content: flex-end;
+    i{
+      font-style: normal;
+      color: $c0;
+    }
+    .see{
+      font-family: "Iransans_Bold";
+      font-size: 13px;
+      color: #0f1211;
+      img{
+        margin-right: 4px;
+      }
+    }
+  }
+}
+/******* sandoqha-detail *******/
+.box_tab{
+  .nav-tabs{
+    display: -webkit-flex;
+    display: flex;
+    li{
+      flex: 1 0 0;
+      a{
+        display: block;
+        font-size: 14px;
+        color: #a5adad;
+        padding: 10px 0 5px 0;
+        text-align: center;
+        border-bottom: solid 1px #d8dada;
+        @media #{$size375}{
+          font-size: 12px;
+        }
+        &.active{
+          color: $c3;
+          border-color: $c3;
+          -webkit-background-image: linear-gradient(#ffffff 0%, #dafbf0 100%);
+          -moz-background-image: linear-gradient(#ffffff 0%, #dafbf0 100%);
+          -o-background-image: linear-gradient(#ffffff 0%, #dafbf0 100%);
+          background-image: linear-gradient(#ffffff 0%, #dafbf0 100%);
+        }
+      }
+    }
+  }
+  .tab-content{
+    padding-top: 20px;
+  }
+}
+.back{
+  @include box-shadow(0,4px,8px,rgba(15,18,17,0.8));
+  background-color: $c2;
+  @include border-radius(5px);
+}
+.fund_detail{
+  >ul{
+    >li{
+      padding: 20px 15px;
+      border-bottom: solid 1px $border;
+      &:last-child{
+        border: none;
+      }
+      .fund_detail_list{
+        ul{
+          li{
+            display: -webkit-flex;
+            display: flex;
+            font-family: "Iransans_Medium";
+            color: $c0;
+            margin-bottom: 15px;
+            &:last-child{
+              margin-bottom: 0;
+            }
+            span{
+              font-size: 14px;
+              font-family: "Iransans";
+              color: $c4;
+              margin-right: auto;
+              margin-top: -2px;
+            }
+          }
+        }
+      }
+      .fund_detail_pp{
+        h3{
+          text-align: center;
+          color: $c4;
+          margin-bottom: 10px;
+        }
+        .fund_detail_pp--d{
+          display: -webkit-flex;
+          display: flex;
+          align-items: center;
+          .fund_detail_pp--sec{
+             flex: 1;
+             p{
+              text-align: center;
+              font-family: "Iransans_Medium";
+              color: $c0;
+              &.p_sec{
+                font-size: 11px;
+              }
+             }
+          }
+          .divider{
+            width: 2px;
+            height: 13px;
+            background-color: $c4;
+          }
+        }
+      }
+      .fund_detail_com{
+        font-family: "Iransans_Medium";
+        color: $c0;
+        text-align: center;
+      }
+    }
+  }
+}
+.divider2{
+  width: 60%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.fund_modal{
+  padding: 15px;
+  color: $c0;
+  .fund_modal_t{
+    font-size: 15px;
+    font-family: "Iransans_Bold";
+    margin-bottom: 10px;
+  }
+}
+/********** sandoqha-signup **********/
+.register_form{
+  .inp_border{
+    .form-control{
+      padding-right: 30px;
+    }
+    .placeholder{
+      right: 30px;
+    }
+  }
+}
+.register{
+  .register_top{
+    background-color: #FFF4E6;
+    padding: 15px;
+    @include border-radius(5px 5px 0 0);
+    p{
+      font-size: 14px;
+      color: $c0;
+      text-align: center;
+      font-family: "Iransans_Medium";
+      @media #{$size375}{
+        font-size: 12px;
+      }
+    }
+  }
+  .register_bottom{
+    padding: 20px 15px;
+  }
+}
+/********** sandoqha-form **********/
+.top_title{
+  display: block;
+  margin-bottom: 15px;
+  font-family: 'Iransans_Bold';
+  font-size: 13px;
+  color: $c0;
+}
+.delete_photo{
+  display: inline-block;
+  margin-right: 10px;
+  color: #e10000;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  background-color: rgba(#E10000,0.1);
+  border: solid 1px #E10000;
+  font-family: 'Iransans_Bold';
+  padding: 0 12px;
+  @include border-radius(5px); 
+}
+.upload_sec{
+  .upload_sec_t{
+    display: block;
+    color: $c0;
+    margin-bottom: 15px;
+  }
+  .upload_sec_inp{
+    display: inline-block;
+    margin-bottom: 15px;
+    font-family: "Iransans_Medium";
+    color: $c3;
+    background-color: rgba($c3,0.1);
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    @include border-radius(5px);
+    border: solid 1px $c3;
+    position: relative;
+    padding: 0 10px;
+    img{
+      margin-left: 5px;
+    }
+    input{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      font-size: 0;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+}

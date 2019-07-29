@@ -7,6 +7,7 @@ import Detail from '@/components/detailPage/Detail'
 import detailList from '@/components/detailList/detailList'
 import redirect from '@/components/redirect'
 import user from '@/components/profile/user'
+// import service from '@/services/generalService'
 Vue.use(Router)
 
 export default new Router({

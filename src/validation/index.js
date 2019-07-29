@@ -26,7 +26,8 @@ const dictionary = {
       price: 'مبلغ',
       gender: 'جنسیت',
       acountType: 'نوع حساب',
-      address: 'آدرس'
+      address: 'آدرس',
+      password: 'رمز عبور'
     }
   }
 }
@@ -35,6 +36,7 @@ Vue.use(VeeValidate, {
 })
 Validator.localize(dictionary)
 Validator.localize('fa', fa)
+
 Validator.extend('phoneNumberFa', {
   validate (value) {
     return /^0[1-8]{2}[0-9]{8}$/g.test(value)
@@ -45,6 +47,13 @@ Validator.extend('mobileFa', {
     return /^09[0-9]{9}$/g.test(value)
   }
 })
+
+Validator.extend('ayandeAccountNumber', {
+  validate (value) {
+    return /^0[0-9]{12}$/g.test(value)
+  }
+})
+
 Validator.extend('nationalCode', {
   validate (value) {
     return isValidIranianNationalCode(value)

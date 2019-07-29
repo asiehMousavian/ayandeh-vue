@@ -7,7 +7,7 @@
         <div class="container">
           <h1 class="centerHeading">صندوق‌های سرمایه‌گذاری</h1>
           <div class="row">
-            <box-component v-for= "fund in funds" v-bind:key="fund.boxImage" v-bind:boxImage="fund.boxImage" v-bind:boxTitle="fund.boxTitle" v-bind:boxText="fund.boxText" v-bind:fundNumber="fund.fundNumber" v-bind:unitNumber="fund.unitNumber"></box-component>
+            <box-component v-for= "fund in funds" v-bind:key="fund.id" v-on:goToBoxDetail="goToBoxDetail(fund.id)" v-bind:boxImage="fund.boxImage" v-bind:boxTitle="fund.boxTitle" v-bind:boxText="fund.boxText" v-bind:fundNumber="fund.fundNumber" v-bind:unitNumber="fund.unitNumber"></box-component>
           </div>
         </div>
       </div>
@@ -25,6 +25,7 @@ export default {
     return {
       funds: [
         {
+          id:'box1',
           boxImage: '@/assets/images/gostaresh.png',
           boxTitle: 'صندوق سرمایه گذاری گسترش فردای ایرانیان',
           boxText: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.\n' +
@@ -34,12 +35,14 @@ export default {
           fundNumber: 132
         },
         {
+          id:'box2',
           boxTitle: 'salam',
           boxText: 'salaaaaaaam',
           unitNumber: 132,
           fundNumber: 132
         },
         {
+          id:'box3',
           boxTitle: 'salam',
           boxText: 'salaaaaaaam',
           unitNumber: 132,
@@ -50,6 +53,12 @@ export default {
   },
   components: {
     PageHeader, BoxComponent
+  },
+  methods:{
+    goToBoxDetail:function(id)
+    {
+      this.$router.push("/detail/"+id)
+    }
   }
 }
 </script>

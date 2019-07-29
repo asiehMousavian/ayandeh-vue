@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import VeeValidate from 'vee-validate'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+    
+Vue.use(VueAxios, axios)
+
 Vue.use(BootstrapVue)
 Vue.use(VeeValidate)
 

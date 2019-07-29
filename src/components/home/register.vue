@@ -2,51 +2,101 @@
   <div>
     <div class="box_text">
       <div class="text">
-        <p>اگر مشتری بانک آینده باشید به سهولت میتوانید به صندوق‌های
-          سرمایه‌گذاری دسترسی داشته باشید</p>
+        <p>
+          اگر مشتری بانک آینده باشید به سهولت میتوانید به صندوق‌های
+          سرمایه‌گذاری دسترسی داشته باشید
+        </p>
       </div>
     </div>
     <form>
       <div class="form-group">
         <div class="inp_border">
-          <input type="text" name="mobileNumber" class="form-control" v-validate="'numeric'">
+          <input
+            type="text"
+            v-model="account"
+            name="accountNumber"
+            class="form-control"
+            v-validate="'required|ayandeAccountNumber'"
+          />
           <div class="form-alert">
-            <p>{{ errors.first('mobileNumber') }}</p>
+            <p>{{ errors.first('accountNumber') }}</p>
           </div>
-          <i class="placeholder">شماره موبایل</i>
+          <span class="format_inp">hint</span>
+          <i class="placeholder">شماره حساب</i>
           <i class="line"></i>
         </div>
       </div>
-      <!--<form-input v-bind:labelTitle= "accountNumber"></form-input>-->
       <div class="d-flex">
         <submit-button v-bind:buttonTitle="registerButton" v-on:submit="register"></submit-button>
       </div>
     </form>
+
+    <div>
+      <b-modal id="resultModal" title="نتیجه" hide-header size="lg">
+        <container>
+          <p style="text-align:left">{{result}}</p>
+        </container>
+        <div slot="modal-footer">
+          <b-button class="btn" @click="closeModal">بستن</b-button>
+        </div>
+      </b-modal>
+    </div>
   </div>
 </template>
 
 <script>
-import FormInput from '../share/FormInput'
-import submitButton from '../share/submitButton'
+import FormInput from "../share/FormInput"
+import submitButton from "../share/submitButton"
+import generalService from "@/services/generalService"
 export default {
-  name: 'register',
-  data () {
+  name: "register",
+  data() {
     return {
-      accountNumber: 'شماره حساب',
-      registerButton: 'ورود به پیشخوان'
+      registerButton: "ورود به پیشخوان",
+      account: "",
+      result: ""
     }
   },
   components: {
-    submitButton, FormInput
+    submitButton,
+    FormInput
   },
   methods: {
-    register: function () {
-      // alert("register submit")
+    register: function() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          // eslint-disable-next-line
+          generalService
+            .postMethod("auth/register", { accountNumber: this.account })
+            .then(response => {
+              this.result = response.data
+            })
+            .catch(error => {
+              this.result = error
+            })
+             this.$bvModal.show('resultModal')
+        } else {
+          return
+        }
+      })
+    },
+    closeModal: function () {
+      this.$bvModal.hide('resultModal')
     }
   }
-}
+};
 </script>
 
 <style scoped>
-
+.form-alert {
+  left: 0;
+  background-color: #f2f2f2;
+}
+.format_inp {
+  display: block;
+  color: #666;
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+}
 </style>

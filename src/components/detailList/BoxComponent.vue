@@ -12,7 +12,7 @@
               {{boxText}}
             </p>
             <div class="d-flex justify-content-end">
-              <button class="btn">مشاهده صندوق</button>
+              <button @click="goToDetail" class="btn">مشاهده صندوق</button>
             </div>
           </div>
           <div class="d-flex justify-content-between box-footer">
@@ -28,7 +28,12 @@
 <script>
 export default {
   props: ['boxImage', 'boxTitle', 'boxText', 'unitNumber', 'fundNumber'],
-  name: 'boxComponent'
+  name: 'boxComponent',
+  methods:{
+    goToDetail:function(){
+        this.$emit('goToBoxDetail')
+    }
+  }
 }
 </script>
 

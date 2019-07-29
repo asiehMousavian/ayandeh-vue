@@ -9,13 +9,13 @@
           <div class="detail_btn">
             <ul class="list-unstyled">
               <li>
-                <a @click="showComponent('requestReport')" href="#">گزارش درخواست‌ها</a>
+                <a href="#" @click="showComponent('requestReport')">گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a @click="showComponent('statement')" href="#">گردش حساب</a>
+                <a href="#" @click="showComponent('statement')" >گردش حساب</a>
               </li>
               <li>
-                <a @click="showComponent('accountInfo')" href="#">اطلاعات کاربر</a>
+                <a href="" @click="goToUserProfile()">اطلاعات کاربر</a>
               </li>
               <li>
                 <a href="#" v-b-modal.descModal>توضیحات صندوق</a>
@@ -58,7 +58,7 @@
                 <inner-sodoor></inner-sodoor>
               </container>
               <div slot="modal-footer">
-                <a href="#" class="btn">اتصال به درگاه بانک</a>
+                <a @click="connectToBank" class="btn">اتصال به درگاه بانک</a>
                 <b-button class="btn btn-cancel" @click="closeModal">انصراف</b-button>
               </div>
             </b-modal>
@@ -75,7 +75,6 @@ import PageHeader from '../header/PageHeader'
 import Banner from '../share/Banner'
 import requestReport from './requestReport'
 import statement from './statement'
-import accountInfo from './accountInfo'
 import fundDescription from './fundDescription'
 import issueUnit from './issueUnit'
 import innerSodoor from './innerSodoor'
@@ -94,15 +93,23 @@ export default {
       // alert(componentName)
       this.currentComponent = componentName
     },
+    goToUserProfile:function(){
+      this.$router.push('/user')
+    },
     closeModal: function () {
       this.$bvModal.hide('descModal')
       this.$bvModal.hide('sodoorModal')
       this.$bvModal.hide('innerSodoorModal')
+    },
+    connectToBank:function()
+    {
+      this.$router.push('somewhere'+'data') 
     }
   },
   components: {
-    PageHeader, Banner, requestReport, statement, accountInfo, fundDescription, issueUnit, innerSodoor
+    PageHeader, Banner, requestReport, statement, fundDescription, issueUnit, innerSodoor
   }
+ 
 }
 </script>
 

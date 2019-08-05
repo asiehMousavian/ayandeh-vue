@@ -37,7 +37,6 @@
 <script>
 import sharedService from '@/services/sharedService'
 import submitButton from '../share/submitButton'
-import generalService from "@/services/generalService";
 
 export default {
   name: 'login',
@@ -60,17 +59,17 @@ export default {
     login: function () {
        this.$validator.validateAll().then(result => {
         if (result) {
-           generalService.postMethod("auth/login",{mobileNumber: this.mobile ,password:this.password}).then(Response => {
-             if (response.status === 200 && 'token' in response.body) {
-              this.$session.start()
-              this.$session.set('mySession', response.body.token)
-              Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
+          //  generalService.postMethod("auth/login",{mobileNumber: this.mobile ,password:this.password}).then(Response => {
+          //    if (response.status === 200 && 'token' in response.body) {
+          //     this.$session.start()
+          //     this.$session.set('mySession', response.body.token)
+          //     Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
 
-              this.$router.push('detailList') 
-            }
-           }).catch(error=>{
-             this.result="شماره موبایل یا رمز ورود اشتباه است"
-           });
+          //     this.$router.push('detailList') 
+          //   }
+          //  }).catch(error=>{
+          //    this.result="شماره موبایل یا رمز ورود اشتباه است"
+          //  });
           //todo
           this.$router.push('detailList') 
 

@@ -34,9 +34,10 @@ export default {
   },
   // ============== General Post method
   postMethod (url, data = {}) {
+    url=axios.defaults.baseURL+url;
     return axios.post(url, data)
       .then(response => {
-        return response.data
+        return response.data;
       })
   },
   // ============== General Upload method

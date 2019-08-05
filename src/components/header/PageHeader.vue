@@ -40,7 +40,7 @@
           <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-5 d-flex">
             <div class="d-flex align-items-center mr-auto">
               <!-- <a href="/" class="login_link"> -->
-              <a href="/#login" class="login_link">ورود</a>/ <a href="/#register" class="login_link">عضویت</a>
+              <a href="/login" class="login_link">ورود</a>/ <a href="/register" class="login_link">عضویت</a>
                 <!--            ورود / عضویت -->
                 <img src="@/assets/img/avatar.svg" alt="">
               <!-- </a> -->

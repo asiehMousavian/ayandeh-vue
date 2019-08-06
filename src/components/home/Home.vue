@@ -36,13 +36,6 @@ import register from '../home/register'
 import login from '../home/login'
 import { debuglog } from 'util'
 
-
-// import generalService from '@/services/generalService.js'
-
-var generalService= require('@/services/generalService')
-
-
-
 export default {
   name: 'Home',
   data () {
@@ -55,31 +48,11 @@ export default {
     PageHeader, register, login
   },
   mounted () {
-
-var sessionObj={
-  "device": {
-    "appVersion": "1.0.1",
-    "brand": "t",
-    "buildNo": 0,
-    "deviceId": "1",
-    "imei": "t",
-    "imsi": "t",
-    "mac": "t",
-    "model": "t",
-    "osVersion": "t",
-    "platform": "Android"
-  }
-}
-var response=""
-    setTimeout(() => {
-          response = generalService.default.postMethod('auth/session',sessionObj)
-    }, 300)
-    console.log(response)
-     
     setTimeout(() => {
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
     }, 100)
   }
+
 }
 </script>
 

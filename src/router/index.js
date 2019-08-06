@@ -10,8 +10,10 @@ import Detail from '@/components/detailPage/Detail'
 import detailList from '@/components/detailList/detailList'
 import redirect from '@/components/redirect'
 import user from '@/components/profile/user'
-
 Vue.use(Router)
+import VueSession from 'vue-session'
+Vue.use(VueSession)
+const session = Vue.prototype.$session;
 
 
 // router.beforeEach((to, from, next) => {
@@ -31,24 +33,71 @@ Vue.use(Router)
 // });
 
 
-const guard = function(to, from, next) {
-  axios.get('/api/checkAuthToken').then(response => {
-      // check valid:
-      next();
+// const guard = function(to, from, next) {
+//   axios.get('/api/checkAuthToken').then(response => {
+//       // check valid:
+//       next();
+//   }).catch(error => {
+//       window.location.href = "/login";
+//   })
+// }
+
+import generalService from '@/services/generalService'
+let sessionObj={
+  "device": {
+    "appVersion": "1.0.1",
+    "brand": "t",
+    "buildNo": 0,
+    "deviceId": "1",
+    "imei": "t",
+    "imsi": "t",
+    "mac": "t",
+    "model": "t",
+    "osVersion": "t",
+    "platform": "Android"
+  }
+}
+
+var GetSession = function(to, from, next) {
+  generalService.postMethod('auth/session',sessionObj).then(response => {
+    if(response.message=="OK" && response.status == 0){
+      if(response.content.session){
+        //todo
+          // localStorage.setItem("session",JSON.stringify(response.content.session))
+          //ehsan
+          // localStorage.setItem("session","EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j")
+          localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+      }
+      generalService.setSession()
+      next()
+    }
   }).catch(error => {
-      window.location.href = "/login";
+    //todo
   })
-};
-
-
+}
+var checkSession=function(to,from,next)
+{
+  if(session.has("isLogged"))
+  {
+    let logged=  session.get('isLogged')
+    if(logged)
+      next()
+  }
+  else
+  {
+    next('login')
+  }
+}
 export default new Router({
   mode: 'history',
   routes: [
-  
     {
       path: '/',
       name: 'Home',
       component: Home,
+      beforeEnter: (to, from, next) => {
+        GetSession(to, from, next)
+       },
       children:[
         {
           path: 'login',
@@ -61,19 +110,24 @@ export default new Router({
       ]
     },
     {
+      path: '/detailList',
+      name: 'detailList',
+      component: detailList,
+      beforeEnter:(to,from,next)=>{
+        checkSession(to,from,next)
+      }
+    },
+
+
+    {
       path: '/detail/:id',
       name: 'Detail',
       component: Detail
-      //check
       // beforeEnter: (to, from, next) => {
       //   guard(to, from, next);
       // }
     },
-    {
-      path: '/detailList',
-      name: 'detailList',
-      component: detailList
-    },
+   
     {
       path: '/redirect/:status',
       name: 'redirect',

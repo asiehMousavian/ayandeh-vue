@@ -1,6 +1,6 @@
 import axios from 'axios'
-// axios.defaults.baseURL = 'http://192.168.1.12:8086/v1/'
-axios.defaults.baseURL = process.env.SERVER_URL
+axios.defaults.baseURL = 'http://192.168.1.12:8086/v1/'
+// axios.defaults.baseURL = process.env.SERVER_URL
 // axios.defaults.baseURL = '/v1/'
 axios.interceptors.request.use(function (config) {
   // Do something before request is sent
@@ -34,10 +34,9 @@ export default {
   },
   // ============== General Post method
   postMethod (url, data = {}) {
-    url=axios.defaults.baseURL+url;
     return axios.post(url, data)
       .then(response => {
-        return response.data;
+        return response.data
       })
   },
   // ============== General Upload method
@@ -57,6 +56,7 @@ export default {
       })
   },
   setSession () {
+
     axios.interceptors.request.use(function (config) {
       // Do something before request is sent
       config.headers = {'X-Session': localStorage.getItem('session')}

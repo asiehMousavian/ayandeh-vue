@@ -43,7 +43,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import FormInput from "../share/FormInput"
 import submitButton from "../share/submitButton"
@@ -71,7 +70,6 @@ export default {
               email: "azade_khalili@yahoo.com",
               password: "123"
           }
-          // eslint-disable-next-line
           generalService
             .postMethod("auth/register", userInfo)
             .then(response => {

@@ -39,8 +39,6 @@ import submitButton from '../share/submitButton'
 import { debuglog } from 'util'
 import generalService from '@/services/generalService.js'
 import { userInfo } from 'os';
-
-
 export default {
   name: 'login',
   data () {
@@ -53,9 +51,6 @@ export default {
   },
   components: {
     submitButton
-  },
-  mounted () {
-    // sharedService.handleInputLabels()
   },
   methods: {
     login: function () {
@@ -74,7 +69,6 @@ export default {
               password:"123"
           }
            generalService.postMethod('auth/login',UserInfo).then(response => {
-
              if (response.message=="OK" && response.status == 0){// && 'token' in response.body) {
                 this.$session.start()
                 this.$session.set('isLogged', true)
@@ -84,15 +78,11 @@ export default {
            }).catch(error=>{
               this.result = error.response.data.message
            });
-          //todo
-          // this.$router.push('detailList') 
-
-        } else {
+        }
+         else {
           return;
         }
       });
-
-
     }
   }
 }

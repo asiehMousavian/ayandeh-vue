@@ -82,7 +82,7 @@ export default {
                 this.$router.push('detailList') 
             }
            }).catch(error=>{
-             this.result="شماره موبایل یا رمز ورود اشتباه است"
+              this.result = error.response.data.message
            });
           //todo
           // this.$router.push('detailList') 

@@ -31,8 +31,6 @@ const session = Vue.prototype.$session;
 //   }
 //   // next(); - This is in the wrong place
 // });
-
-
 // const guard = function(to, from, next) {
 //   axios.get('/api/checkAuthToken').then(response => {
 //       // check valid:
@@ -117,26 +115,29 @@ export default new Router({
         checkSession(to,from,next)
       }
     },
-
-
     {
       path: '/detail/:id',
       name: 'Detail',
-      component: Detail
-      // beforeEnter: (to, from, next) => {
-      //   guard(to, from, next);
-      // }
+      component: Detail,
+      beforeEnter:(to,from,next)=>{
+        checkSession(to,from,next)
+      }
     },
-   
     {
       path: '/redirect/:status',
       name: 'redirect',
-      component: redirect
+      component: redirect,
+      beforeEnter:(to,from,next)=>{
+        checkSession(to,from,next)
+      }
     },
     {
       path: '/user',
       name: 'user',
-      component: user
+      component: user,
+      beforeEnter:(to,from,next)=>{
+        checkSession(to,from,next)
+      }
     }
 
 //end of all routes

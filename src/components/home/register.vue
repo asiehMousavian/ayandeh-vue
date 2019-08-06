@@ -47,7 +47,8 @@
 <script>
 import FormInput from "../share/FormInput"
 import submitButton from "../share/submitButton"
-import generalService from "@/services/generalService"
+import generalService from '@/services/generalService.js'
+
 export default {
   name: "register",
   data() {
@@ -65,14 +66,22 @@ export default {
     register: function() {
       this.$validator.validateAll().then(result => {
         if (result) {
+          let userInfo={
+              confirmPassword: "123",
+              email: "azade_khalili@yahoo.com",
+              password: "123"
+          }
           // eslint-disable-next-line
           generalService
-            .postMethod("auth/register", { accountNumber: this.account })
+            .postMethod("auth/register", userInfo)
             .then(response => {
-              this.result = response.data
+              if(response.status==0 && response.message=="OK")
+              {
+                this.result = "ثبت نام با موفقیت انجام شد"
+              }
             })
             .catch(error => {
-              this.result = error
+              this.result = error.response.data.message
             })
              this.$bvModal.show('resultModal')
         } else {

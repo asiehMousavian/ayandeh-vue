@@ -7,7 +7,7 @@
         <div class="container">
           <h1 class="centerHeading">صندوق‌های سرمایه‌گذاری</h1>
           <div class="row">
-            <box-component v-for="found in founds" :key="found.id" :found="found"></box-component>
+            <box-component v-for= "fund in funds" v-bind:key="fund.id" v-on:goToBoxDetail="goToBoxDetail(fund.id)" v-bind:fund="fund"></box-component>
           </div>
         </div>
       </div>
@@ -22,46 +22,28 @@ import PageHeader from '../header/PageHeader'
 import BoxComponent from './BoxComponent'
 export default {
   name: 'detailList',
-  data () {
+  data: function () {
     return {
       wholeResponse: [],
       get_founds_url: 'invest/fund',
-      founds: []
-      // funds: [
-      //   {
-      //     boxImage: '@/assets/images/gostaresh.png',
-      //     boxTitle: 'صندوق سرمایه گذاری گسترش فردای ایرانیان',
-      //     boxText: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.\n' +
-      //     '                          چاپگرها و متون بلکه\n' +
-      //     ' روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد',
-      //     unitNumber: 132,
-      //     fundNumber: 132
-      //   },
-      //   {
-      //     boxTitle: 'salam',
-      //     boxText: 'salaaaaaaam',
-      //     unitNumber: 132,
-      //     fundNumber: 132
-      //   },
-      //   {
-      //     boxTitle: 'salam',
-      //     boxText: 'salaaaaaaam',
-      //     unitNumber: 132,
-      //     fundNumber: 132
-      //   }
-      // ]
+      funds: []
     }
+  },
+  mounted () {
+    this.getFunds()
   },
   methods: {
     getFunds () {
-      service.getMethod(this.get_founds_url)
+      service.getMethod('invest/fund')
         .then(response => {
-          this.founds = response.content
-          return response.content
+          this.funds = response.content
         })
         .catch(error => {
           console.log(error)
         })
+    },
+    goToBoxDetail: function (id) {
+      this.$router.push('/detail/' + id)
     }
   },
   components: {

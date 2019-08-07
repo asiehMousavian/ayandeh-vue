@@ -9,10 +9,10 @@
             <div class="d-flex" style="width: 100%">
               <img src="@/assets/img/gostaresh.png" alt="">
               <div class="banner_desc_body--text" style="width: 100%">
-                <h3 class="banner_desc_body--t">{{fundTitle}}</h3>
+                <h3 class="banner_desc_body--t">{{fund.name}}</h3>
                 <div class="d-flex">
-                  <span class="ml-auto banner_desc_body--s">{{fundText}}</span>
-                  <span class="mr-auto banner_desc_body--date">تاریخ شروع فعالیت : {{fundDate}}</span>
+                  <span class="ml-auto banner_desc_body--s">با مجور رسمی از سازمان بورس</span>
+                  <span class="mr-auto banner_desc_body--date">تاریخ شروع فعالیت : {{fund.startDate}}</span>
                 </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
 </template>
 <script>
 export default {
-  props: ['fundTitle', 'fundText', 'fundDate'],
+  props: ['fund'],
   name: 'Banner'
 }
 </script>

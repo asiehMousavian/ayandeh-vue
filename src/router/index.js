@@ -24,7 +24,7 @@ export default new Router({
       component: News
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'Detail',
       component: Detail
     },
@@ -34,7 +34,7 @@ export default new Router({
       component: detailList
     },
     {
-      path: '/redirect',
+      path: '/redirect/:status',
       name: 'redirect',
       component: redirect
     },

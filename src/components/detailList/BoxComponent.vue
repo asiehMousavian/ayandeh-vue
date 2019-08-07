@@ -3,22 +3,22 @@
     <div class="box">
       <div class="clearfix">
         <div class="box-img">
-<!--          <img v-bind:src= "boxImage" alt="">-->
+          <img src="@/assets/images/gostaresh.png" alt="">
         </div>
         <div class="box-body">
           <div class="box-header">
-            <h1 class="heading">{{found.name}}</h1>
-<!--            <p class="body-p">-->
-<!--              {{boxText}}-->
-<!--            </p>-->
-<!--            <div class="d-flex justify-content-end">-->
-<!--              <button class="btn">مشاهده صندوق</button>-->
-<!--            </div>-->
+            <h1 class="heading">{{fund.name}}</h1>
+            <p class="body-p">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+            </p>
+            <div class="d-flex justify-content-end">
+              <button @click="goToDetail(10915)" class="btn">مشاهده صندوق</button>
+            </div>
           </div>
-<!--          <div class="d-flex justify-content-between box-footer">-->
-<!--            <div class="box-footer-item"><span>تعداد واحدها</span><span>{{found.fundUnit}} واحد</span></div>-->
-<!--            <div class="box-footer-item"><span>واحد صندوق شما</span><span>{{fundNumber}} واحد</span></div>-->
-<!--          </div>-->
+          <div class="d-flex justify-content-between box-footer">
+            <div class="box-footer-item"><span>تعداد واحدها</span><span>132 واحد</span></div>
+            <div class="box-footer-item"><span>واحد صندوق شما</span><span>132 واحد</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -27,8 +27,13 @@
 
 <script>
 export default {
-  props: ['found'],
-  name: 'boxComponent'
+  props: ['fund'],
+  name: 'boxComponent',
+  methods: {
+    goToDetail: function () {
+      this.$router.push('detail/10915')
+    }
+  }
 }
 </script>
 

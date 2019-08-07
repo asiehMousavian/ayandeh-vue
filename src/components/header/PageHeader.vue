@@ -14,7 +14,7 @@
               <div id="menu">
                 <ul class="list-unstyled">
                   <li>
-                    <a href="#">صندوق‌های سرمایه‌گذاری</a>
+                    <a href="#" @click="goToBoxes">صندوق‌های سرمایه‌گذاری</a>
                   </li>
                   <li>
                     <a href="#">همکاران ما</a>
@@ -55,7 +55,13 @@
 </template>
 <script>
 export default {
-  name: 'PageHeader'
+  name: 'PageHeader',
+  methods:{
+    goToBoxes:function()
+    {
+      this.$router.push("/detailList")
+    }
+  }
 }
 </script>
 

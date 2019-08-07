@@ -1,20 +1,24 @@
 <template>
   <div>
     <form>
-      <!--<form-input v-bind:labelTitle= "PhoneTitle"></form-input>-->
       <div class="form-group">
         <div class="inp_border">
-          <input type="text" name="mobileNumber" class="form-control" v-validate="'numeric'">
+          <input type="text" name="mobileNumber" v-model="mobile" class="form-control" v-validate="'required|mobileFa'">
           <div class="form-alert">
             <p>{{ errors.first('mobileNumber') }}</p>
           </div>
+          <span class="format_inp">hint</span>
           <i class="placeholder">شماره موبایل</i>
           <i class="line"></i>
         </div>
       </div>
       <div class="form-group">
         <div class="inp_border">
-          <input type="password" name="password" class="form-control">
+          <input type="password" name="password" v-model="password" class="form-control" v-validate="'required'">
+          <div class="form-alert">
+            <p>{{ errors.first('password') }}</p>
+            <span style="color:#cb0d0d" class="format_inp">{{result}}</span>
+          </div>
           <i class="placeholder">رمز عبور</i>
           <i class="line"></i>
         </div>
@@ -32,13 +36,16 @@
 <script>
 import sharedService from '@/services/sharedService'
 import submitButton from '../share/submitButton'
+import generalService from '@/services/generalService'
+
 export default {
   name: 'login',
   data () {
     return {
-      inputVal: '',
-      isVistited: false,
-      submitTitle: 'ورود به حساب کاربری'
+      submitTitle: 'ورود به حساب کاربری',
+      mobile: '',
+      password: '',
+      result: ''
     }
   },
   components: {
@@ -48,21 +55,40 @@ export default {
     sharedService.handleInputLabels()
   },
   methods: {
-    blurFunction: function () {
-      // eslint-disable-next-line eqeqeq
-      // if (this.inputVal != '') {
-      //   this.isVistited = true
-      // } else {
-      //   this.isVistited = false
-      // }
-    },
     login: function () {
-      debugger
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          generalService.postMethod('auth/login', {mobileNumber: this.mobile, password: this.password}).then(Response => {
+            if (response.status === 200 && 'token' in response.body) {
+              this.$session.start()
+              this.$session.set('mySession', response.body.token)
+              Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
+              this.$router.push('detailList')
+            }
+          }).catch(error => {
+            this.result = 'شماره موبایل یا رمز ورود اشتباه است'
+          })
+          // todo
+          this.$router.push('detailList')
+        } else {
+
+        }
+      })
     }
   }
 }
 </script>
 
 <style scoped>
-
+.form-alert {
+  left: 0;
+  background-color: #f2f2f2;
+}
+.format_inp {
+  display: block;
+  color: #666;
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+}
 </style>

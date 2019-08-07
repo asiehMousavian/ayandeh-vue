@@ -31,9 +31,9 @@
           <div class="row">
             <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
               <div class="d-flex justify-content-center pursuit-btn-group">
-                <submit-button v-bind:buttonTitle="statementButton"></submit-button>
-                <submit-button v-bind:buttonTitle="accountButton"></submit-button>
-                <button class="btn btn-cancel" @click="test()">بازگشت</button>
+                <submit-button v-bind:buttonTitle="statementButton" v-on:submit="goToStatement"></submit-button>
+                <submit-button v-bind:buttonTitle="accountButton" v-on:submit="goToUserProfile"></submit-button>
+                <button class="btn btn-cancel" @click="back()">بازگشت</button>
               </div>
             </div>
           </div>
@@ -47,6 +47,7 @@
 <script>
 import PageHeader from './header/PageHeader'
 import submitButton from './share/submitButton'
+import { truncate } from 'fs';
 export default {
   props: [],
   name: 'redirect',
@@ -62,18 +63,34 @@ export default {
     }
   },
   methods: {
-    test: function () {
-      let $router = this.$router
-      $router.push('/')
+    back: function () {
+      //todo
+      this.$router.push('/detail/box1')
+    },
+    goToStatement:function()
+    {
+
+    },
+    goToUserProfile:function()
+    {
+      this.$router.push('/user')
+
     }
   },
   mounted () {
-    setTimeout(() => {
-      // eslint-disable-next-line eqeqeq
-      if (this.$route.hash == '#failed') {
+    // setTimeout(() => {
+    //   // eslint-disable-next-line
+    //   if (this.$route.hash == '#failed') {
+    //     this.isSucceed = false
+    //   }
+    // }, 100)
+    var status=this.$route.params.status
+      if (status == "failed") {
         this.isSucceed = false
       }
-    }, 100)
+      else if(status == "success"){
+        this.isSucceed = true
+      }
   }
 }
 </script>

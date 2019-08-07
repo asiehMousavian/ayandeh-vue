@@ -20,33 +20,32 @@
           <div class="detail_list__p--d">
             <div class="detail_list__p--sec">
               <p>۱ ماه</p>
-              <p>۲۳،۰۰۰،۰۰۰ ریال</p>
+              <p>%{{fund.simpleMonthly}}</p>
             </div>
             <div class="divider"></div>
             <div class="detail_list__p--sec">
               <p>3 ماه</p>
-              <p>32،۰۰۰،۰۰۰ ریال</p>
+              <p>%{{fund.simpleMonthly3}}</p>
             </div>
             <div class="divider"></div>
             <div class="detail_list__p--sec">
               <p>6 ماه</p>
-              <p>57،۰۰۰،۰۰۰ ریال</p>
+              <p>%{{fund.simpleYearly}}</p>
             </div>
           </div>
         </div>
-      </li>
-      <li>
+
         <div class="detail_list__p">
           <h3>مبالغ ابطال و صدور</h3>
           <div class="detail_list__p--d">
             <div class="detail_list__p--sec">
               <i>مبلغ ابطال</i>
-              <i>۲۳،۰۰۰،۰۰۰ ریال</i>
+              <i>{{fund.saleNav  | persianCurrency}} ریال</i>
             </div>
             <div class="divider"></div>
             <div class="detail_list__p--sec">
               <i>مبلغ صدور</i>
-              <i>۳۲،۰۰۰،۰۰۰ ریال</i>
+              <i>{{fund.purchaseNav | persianCurrency}} ریال</i>
             </div>
           </div>
         </div>
@@ -66,11 +65,18 @@
 <script>
 export default {
   name: 'requestReport',
-  data () {
-    return {
-
+  props: ['fund'],
+  filters: {
+    persianCurrency: function (value) {
+      return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1/')
     }
   }
+  // data: function () {
+  //   return {
+  //     get_founds_url: 'invest/fund',
+  //     funds: []
+  //   }
+  // }
 }
 </script>
 <style scoped>

@@ -3,19 +3,19 @@
     <page-header></page-header>
     <!-- Main -->
     <div id="main" role="main">
-      <banner v-bind:fundTitle="fundtitle" v-bind:fundText="fundtext" v-bind:fundDate="funddate"></banner>
+      <banner v-bind:fund="fund"></banner>
       <div class="mainarea">
         <div class="container">
           <div class="detail_btn">
             <ul class="list-unstyled">
               <li>
-                <a @click="showComponent('requestReport')" href="#">گزارش درخواست‌ها</a>
+                <a href="#" @click="showComponent('requestReport')">گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a @click="showComponent('statement')" href="#">گردش حساب</a>
+                <a href="#" @click="showComponent('statement')" >گردش حساب</a>
               </li>
               <li>
-                <a @click="showComponent('accountInfo')" href="#">اطلاعات کاربر</a>
+                <a href="" @click="goToUserProfile()">اطلاعات کاربر</a>
               </li>
               <li>
                 <a href="#" v-b-modal.descModal>توضیحات صندوق</a>
@@ -29,7 +29,8 @@
             </ul>
           </div>
           <div>
-            <component :is="currentComponent"></component>
+            <request-report v-bind:fund="fund"></request-report>
+<!--            <component :is="currentComponent"></component>-->
           </div>
           <div>
             <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
@@ -58,7 +59,7 @@
                 <inner-sodoor></inner-sodoor>
               </container>
               <div slot="modal-footer">
-                <a href="#" class="btn">اتصال به درگاه بانک</a>
+                <a @click="connectToBank" class="btn">اتصال به درگاه بانک</a>
                 <b-button class="btn btn-cancel" @click="closeModal">انصراف</b-button>
               </div>
             </b-modal>
@@ -75,18 +76,19 @@ import PageHeader from '../header/PageHeader'
 import Banner from '../share/Banner'
 import requestReport from './requestReport'
 import statement from './statement'
-import accountInfo from './accountInfo'
 import fundDescription from './fundDescription'
 import issueUnit from './issueUnit'
 import innerSodoor from './innerSodoor'
+import service from '@/services/generalService.js'
 export default {
   name: 'Detail',
   data () {
     return {
-      fundtitle: 'صندوق سرمایه‌گذاری گسترش فردای ایرانیان',
-      fundtext: 'با مجور رسمی از سازمان بورس',
-      funddate: '94/4/21',
-      currentComponent: 'requestReport'
+      // fundtitle: 'صندوق سرمایه‌گذاری گسترش فردای ایرانیان',
+      // fundtext: 'با مجور رسمی از سازمان بورس',
+      // funddate: '94/4/21',
+      currentComponent: 'requestReport',
+      fund: {}
     }
   },
   methods: {
@@ -94,15 +96,36 @@ export default {
       // alert(componentName)
       this.currentComponent = componentName
     },
+    goToUserProfile: function () {
+      this.$router.push('/user')
+    },
     closeModal: function () {
       this.$bvModal.hide('descModal')
       this.$bvModal.hide('sodoorModal')
       this.$bvModal.hide('innerSodoorModal')
+    },
+    connectToBank: function () {
+      // this.$router.push('somewhere'+'data')
+    },
+    getFunds: function () {
+      // let url = 'invest/fund/{' + id + '}'
+      service.getMethod('invest/fund/10915')
+        .then(response => {
+          this.fund = response.content
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   components: {
-    PageHeader, Banner, requestReport, statement, accountInfo, fundDescription, issueUnit, innerSodoor
+    PageHeader, Banner, requestReport, statement, fundDescription, issueUnit, innerSodoor
+  },
+  mounted () {
+    // let myId = this.$route.params.id
+    this.getFunds()
   }
+
 }
 </script>
 

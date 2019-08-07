@@ -60,14 +60,14 @@ export default {
           //   mobile: this.mobile,
           //   password:this.password
           // }
-          // let UserInfo={
-          //     email: "ehs.ghasemi@gmail.com",
-          //     password:"1"
-          // }
-            let UserInfo={
-              email: "shokri074@gmail.com",
-              password:"123"
+          let UserInfo={
+              email: "ehs.ghasemi@gmail.com",
+              password:"1"
           }
+          //   let UserInfo={
+          //     email: "shokri074@gmail.com",
+          //     password:"123"
+          // }
            generalService.postMethod('auth/login',UserInfo).then(response => {
              if (response.message=="OK" && response.status == 0){// && 'token' in response.body) {
                 this.$session.start()

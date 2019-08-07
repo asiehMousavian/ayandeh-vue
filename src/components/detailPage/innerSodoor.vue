@@ -21,8 +21,12 @@
 <!--                <option>واریز درگاه</option>-->
 <!--                <option>واریز درگاه</option>-->
 <!--              </select>-->
-              <vue-select class="vue-select1" name="select1" :options="options1" :model.sync="result1">
-              </vue-select>
+              <!-- <vue-select class="vue-select1" name="select1" :options="options1" :model.sync="result1">
+              </vue-select> -->
+
+              <!-- <select class="form-control" v-model="selected">
+                  <option v-for="option in options" v-bind:key="option.value">{{ option.text }}</option>
+              </select> -->
 
             </div>
           </div>
@@ -57,8 +61,13 @@ import FormInput from '../share/FormInput'
 export default {
   name: 'innerSodoor',
   data () {
-    return {
-
+    return {  
+       selected: 'A',
+    options: [
+      { text: 'One', value: 'A' },
+      { text: 'Two', value: 'B' },
+      { text: 'Three', value: 'C' }
+    ]
     }
   },
   components: {

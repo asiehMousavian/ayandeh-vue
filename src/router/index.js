@@ -63,8 +63,8 @@ var GetSession = function(to, from, next) {
         //todo
           // localStorage.setItem("session",JSON.stringify(response.content.session))
           //ehsan
-          // localStorage.setItem("session","EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j")
-          localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+          localStorage.setItem("session","EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j")
+          // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
       }
       generalService.setSession()
       next()

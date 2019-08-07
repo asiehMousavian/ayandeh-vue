@@ -3,7 +3,7 @@
     <form>
       <div class="form-group">
         <div class="inp_border">
-          <input type="text" name="mobileNumber" v-model="mobile" class="form-control" v-validate="'required|mobileFa'">
+          <input type="text" name="mobileNumber" v-model="mobile"  class="form-control" v-validate="'required|mobileFa'">
           <div class="form-alert">
             <p>{{ errors.first('mobileNumber') }}</p>
           </div>
@@ -34,42 +34,48 @@
 </template>
 
 <script>
-import sharedService from '@/services/sharedService'
 import submitButton from '../share/submitButton'
-import generalService from '@/services/generalService'
 
+import generalService from '@/services/generalService'
 export default {
   name: 'login',
   data () {
     return {
       submitTitle: 'ورود به حساب کاربری',
-      mobile: '',
-      password: '',
+      mobile: '09120450115',
+      password: '1',
       result: ''
     }
   },
   components: {
     submitButton
   },
-  mounted () {
-    sharedService.handleInputLabels()
-  },
   methods: {
     login: function () {
       this.$validator.validateAll().then(result => {
         if (result) {
-          generalService.postMethod('auth/login', {mobileNumber: this.mobile, password: this.password}).then(Response => {
-            if (response.status === 200 && 'token' in response.body) {
+          // let UserInfo={
+          //   mobile: this.mobile,
+          //   password:this.password
+          // }
+          let UserInfo = {
+            email: 'ehs.ghasemi@gmail.com',
+            password: '1'
+          }
+          //   let UserInfo={
+          //     email: "shokri074@gmail.com",
+          //     password:"123"
+          // }
+          generalService.postMethod('auth/login', UserInfo).then(response => {
+            if (response.message === 'OK' && response.status === 0) { // && 'token' in response.body) {
               this.$session.start()
-              this.$session.set('mySession', response.body.token)
-              Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
+              this.$session.set('isLogged', true)
+              // Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
               this.$router.push('detailList')
             }
           }).catch(error => {
-            this.result = 'شماره موبایل یا رمز ورود اشتباه است'
+            this.result = error.response.data.message
           })
-          // todo
-          this.$router.push('detailList')
         } else {
 
         }

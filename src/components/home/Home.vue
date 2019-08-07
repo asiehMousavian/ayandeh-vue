@@ -34,12 +34,14 @@
 import PageHeader from '../header/PageHeader'
 import register from '../home/register'
 import login from '../home/login'
+import { debuglog } from 'util'
+
 export default {
   name: 'Home',
   data () {
     return {
-      tabs: ['#login', '#register'],
-      tabIndex: 1
+      tabs: ['/login', '/register'],
+      tabIndex: 1,
     }
   },
   components: {
@@ -47,9 +49,10 @@ export default {
   },
   mounted () {
     setTimeout(() => {
-      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash)
+      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
     }, 100)
   }
+
 }
 </script>
 

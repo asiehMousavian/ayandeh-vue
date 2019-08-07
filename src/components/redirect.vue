@@ -65,7 +65,7 @@ export default {
   methods: {
     back: function () {
       //todo
-      this.$router.push('/detail/box1')
+      this.$router.push('/detailList')
     },
     goToStatement:function()
     {

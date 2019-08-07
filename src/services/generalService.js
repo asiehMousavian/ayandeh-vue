@@ -1,5 +1,7 @@
 import axios from 'axios'
+
 axios.defaults.baseURL = process.env.SERVER_URL
+
 axios.interceptors.request.use(function (config) {
   // Do something before request is sent
   config.headers = {'X-Session': localStorage.getItem('session')}

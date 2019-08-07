@@ -20,6 +20,7 @@
 import service from '@/services/generalService'
 import PageHeader from '../header/PageHeader'
 import BoxComponent from './BoxComponent'
+import { debuglog } from 'util';
 export default {
   name: 'detailList',
   data: function () {

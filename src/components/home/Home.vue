@@ -1,6 +1,8 @@
 <template>
   <div class="all">
     <page-header></page-header>
+    <loading :active.sync="isLoading"></loading>
+
     <!-- Main -->
     <div id="main" role="main">
       <div class="mainarea">
@@ -36,21 +38,38 @@ import register from '../home/register'
 import login from '../home/login'
 import { debuglog } from 'util'
 
+  import Loading from 'vue-loading-overlay'
+  import 'vue-loading-overlay/dist/vue-loading.css'
+
+
 export default {
   name: 'Home',
   data () {
     return {
       tabs: ['/login', '/register'],
       tabIndex: 1,
+      isLoading :true
     }
   },
   components: {
-    PageHeader, register, login
+    PageHeader, register, login, Loading
   },
   mounted () {
+    // setTimeout(() => {
+    //   this.isLoding=false
+    // }, 1000)
+
+
     setTimeout(() => {
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
     }, 100)
+  },
+  beforeCreate()
+  {
+    setTimeout(() => {
+      this.isLoading=false
+    }, 1000)
+
   }
 
 }

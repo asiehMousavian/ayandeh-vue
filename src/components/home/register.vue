@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="d-flex">
-        <button :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.prevent="register">{{registerButton}}</button>
+        <button :disabled = 'errors.any() || !isComplete' type="button" class="btn mx-auto" @click.prevent="register">{{registerButton}}</button>
       </div>
     </form>
   </div>
@@ -40,14 +40,13 @@ export default {
   data() {
     return {
       registerButton: "ورود به پیشخوان",
-      account: "0121212121212"
+      account: ""
     }
   },
   computed: {
   isComplete () {
-   this.$validator.validateAll().then(result => {
-     return result
-   })
+    return this.account
+  
   }
 },
   methods: {

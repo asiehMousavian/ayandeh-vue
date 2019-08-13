@@ -25,7 +25,7 @@
       </div>
       <div class="d-flex box_c">
         <!-- <button  :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.prevent="login">{{submitTitle}}</button> -->
-        <VueLoadingButton :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.native="login" :loading="isLoading">{{submitTitle}}</VueLoadingButton>
+        <VueLoadingButton :disabled = 'errors.any() || !isComplete' type="button" class="btn mx-auto" @click.native="login" :loading="isLoading">{{submitTitle}}</VueLoadingButton>
       </div>
       <div class="d-flex">
         <a href="#" class="forget_pass mx-auto">فراموشی رمز عبور؟</a>
@@ -53,11 +53,11 @@ export default {
   components:{VueLoadingButton},
   computed: {
     isComplete () {
-      this.$validator.validateAll().then(result => {
-      return result
-   })
+     return this.mobile && this.password
+   
   }
 },
+
   methods: {
     login: function () {
       this.isLoading = true;

@@ -29,8 +29,11 @@
             </ul>
           </div>
           <div>
-            <request-report v-bind:fund="fund"></request-report>
+            <!-- <request-report v-bind:fund="fund"></request-report> -->
 <!--            <component :is="currentComponent"></component>-->
+          </div>
+          <div>
+            <turnover></turnover>
           </div>
           <div>
             <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
@@ -79,6 +82,8 @@ import statement from './statement'
 import fundDescription from './fundDescription'
 import issueUnit from './issueUnit'
 import innerSodoor from './innerSodoor'
+
+import turnover from './turnOver'
 import service from '@/services/generalService.js'
 // import { resolve } from 'dns';
 export default {
@@ -133,7 +138,7 @@ export default {
     }
   },
   components: {
-    PageHeader, Banner, requestReport, statement, fundDescription, issueUnit, innerSodoor
+    PageHeader, Banner, requestReport, statement, fundDescription, issueUnit, innerSodoor,turnover
   },
   mounted () {
     // let myId = this.$route.params.id

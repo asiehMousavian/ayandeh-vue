@@ -47,7 +47,8 @@
 <script>
 import PageHeader from './header/PageHeader'
 import submitButton from './share/submitButton'
-import { truncate } from 'fs';
+// eslint-disable-next-line no-unused-vars
+import { truncate } from 'fs'
 export default {
   props: [],
   name: 'redirect',
@@ -64,17 +65,14 @@ export default {
   },
   methods: {
     back: function () {
-      //todo
+      // todo
       this.$router.push('/detailList')
     },
-    goToStatement:function()
-    {
+    goToStatement: function () {
 
     },
-    goToUserProfile:function()
-    {
+    goToUserProfile: function () {
       this.$router.push('/user')
-
     }
   },
   mounted () {
@@ -84,13 +82,12 @@ export default {
     //     this.isSucceed = false
     //   }
     // }, 100)
-    var status=this.$route.params.status
-      if (status == "failed") {
-        this.isSucceed = false
-      }
-      else if(status == "success"){
-        this.isSucceed = true
-      }
+    var status = this.$route.params.status
+    if (status === 'failed') {
+      this.isSucceed = false
+    } else if (status === 'success') {
+      this.isSucceed = true
+    }
   }
 }
 </script>

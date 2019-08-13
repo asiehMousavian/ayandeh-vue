@@ -12,7 +12,7 @@
                 <a href="#" @click="showComponent('requestReport')">گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="#" @click="showComponent('statement')" >گردش حساب</a>
+                <a href="#" @click="showComponent('statement')">گردش حساب</a>
               </li>
               <li>
                 <a href="" @click="goToUserProfile()">اطلاعات کاربر</a>
@@ -79,7 +79,7 @@ import statement from './statement'
 import fundDescription from './fundDescription'
 import issueUnit from './issueUnit'
 import innerSodoor from './innerSodoor'
-import service from '@/services/generalService.js'
+import service from '@/services/generalService'
 export default {
   name: 'Detail',
   data () {
@@ -108,7 +108,6 @@ export default {
       // this.$router.push('somewhere'+'data')
     },
     getFunds: function () {
-      // let url = 'invest/fund/{' + id + '}'
       service.getMethod('invest/fund/10915')
         .then(response => {
           this.fund = response.content

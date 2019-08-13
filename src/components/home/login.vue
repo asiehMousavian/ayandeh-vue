@@ -24,7 +24,8 @@
         </div>
       </div>
       <div class="d-flex box_c">
-        <submit-button v-bind:buttonTitle="submitTitle" v-on:submit="login"></submit-button>
+<!--        <submit-button v-bind:buttonTitle="submitTitle" v-on:submit="login"></submit-button>-->
+        <VueLoadingButton  type="button" class="btn mx-auto" @click.native="login" :loading="isLoading">{{submitTitle}}</VueLoadingButton>
       </div>
       <div class="d-flex">
         <a href="#" class="forget_pass mx-auto">فراموشی رمز عبور؟</a>
@@ -35,8 +36,10 @@
 
 <script>
 import submitButton from '../share/submitButton'
-
 import generalService from '@/services/generalService'
+import VueLoadingButton from 'vue-loading-button'
+import axiosRetry from 'axios-retry'
+
 export default {
   name: 'login',
   data () {
@@ -44,57 +47,62 @@ export default {
       submitTitle: 'ورود به حساب کاربری',
       mobile: '09120450115',
       password: '1',
-      result: ''
+      result: '',
+      isLoading: false
     }
   },
   components: {
-    submitButton
+    submitButton, VueLoadingButton, axiosRetry
   },
   methods: {
     login: function () {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          // let UserInfo={
-          //   mobile: this.mobile,
-          //   password:this.password
-          // }
-          let UserInfo = {
-            email: 'ehs.ghasemi@gmail.com',
-            password: '1'
-          }
-          //   let UserInfo={
-          //     email: "shokri074@gmail.com",
-          //     password:"123"
-          // }
-          generalService.postMethod('auth/login', UserInfo).then(response => {
-            if (response.message === 'OK' && response.status === 0) { // && 'token' in response.body) {
-              this.$session.start()
-              this.$session.set('isLogged', true)
-              // Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
-              this.$router.push('detailList')
+      this.isLoading = true
+      setTimeout(() => {
+        this.isLoading = false
+        this.$validator.validateAll().then(result => {
+          if (result) {
+            // let UserInfo={
+            //   mobile: this.mobile,
+            //   password:this.password
+            // }
+            let UserInfo = {
+              email: 'ehs.ghasemi@gmail.com',
+              password: '1'
             }
-          }).catch(error => {
-            this.result = error.response.data.message
-          })
-        } else {
+            //   let UserInfo={
+            //     email: "shokri074@gmail.com",
+            //     password:"123"
+            // }
+            generalService.postMethod('auth/login', UserInfo).then(response => {
+              if (response.message === 'OK' && response.status === 0) { // && 'token' in response.body) {
+                this.$session.start()
+                this.$session.set('isLogged', true)
+                // Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
+                this.$router.push('detailList')
+              }
+            }).catch(error => {
+              this.result = error.response.data.message
+            })
+          } else {
 
-        }
-      })
+          }
+        })
+      }, 3000)
     }
   }
 }
 </script>
 
 <style scoped>
-.form-alert {
-  left: 0;
-  background-color: #f2f2f2;
-}
-.format_inp {
-  display: block;
-  color: #666;
-  font-size: 13px;
-  position: absolute;
-  right: 0;
-}
+  .form-alert {
+    left: 0;
+    background-color: #f2f2f2;
+  }
+  .format_inp {
+    display: block;
+    color: #666;
+    font-size: 13px;
+    position: absolute;
+    right: 0;
+  }
 </style>

@@ -44,17 +44,17 @@
   </div>
 </template>
 <script>
-import FormInput from "../share/FormInput"
-import submitButton from "../share/submitButton"
-import generalService from '@/services/generalService.js'
+import FormInput from '../share/FormInput'
+import submitButton from '../share/submitButton'
+import generalService from '@/services/generalService'
 
 export default {
-  name: "register",
-  data() {
+  name: 'register',
+  data () {
     return {
-      registerButton: "ورود به پیشخوان",
-      account: "",
-      result: ""
+      registerButton: 'ورود به پیشخوان',
+      account: '',
+      result: ''
     }
   },
   components: {
@@ -62,28 +62,27 @@ export default {
     FormInput
   },
   methods: {
-    register: function() {
+    register: function () {
       this.$validator.validateAll().then(result => {
         if (result) {
-          let userInfo={
-              confirmPassword: "123",
-              email: "azade_khalili@yahoo.com",
-              password: "123"
+          let userInfo = {
+            confirmPassword: '123',
+            email: 'azade_khalili@yahoo.com',
+            password: '123'
           }
           generalService
-            .postMethod("auth/register", userInfo)
+            .postMethod('auth/register', userInfo)
             .then(response => {
-              if(response.status==0 && response.message=="OK")
-              {
-                this.result = "ثبت نام با موفقیت انجام شد"
+              if (response.status === 0 && response.message === 'OK') {
+                this.result = 'ثبت نام با موفقیت انجام شد'
               }
             })
             .catch(error => {
               this.result = error.response.data.message
             })
-             this.$bvModal.show('resultModal')
+          this.$bvModal.show('resultModal')
         } else {
-          return
+
         }
       })
     },
@@ -91,7 +90,7 @@ export default {
       this.$bvModal.hide('resultModal')
     }
   }
-};
+}
 </script>
 
 <style scoped>

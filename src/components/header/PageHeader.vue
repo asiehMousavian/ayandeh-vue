@@ -56,10 +56,9 @@
 <script>
 export default {
   name: 'PageHeader',
-  methods:{
-    goToBoxes:function()
-    {
-      this.$router.push("/detailList")
+  methods: {
+    goToBoxes: function () {
+      this.$router.push('/detailList')
     }
   }
 }

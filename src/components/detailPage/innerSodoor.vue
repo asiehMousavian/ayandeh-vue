@@ -61,13 +61,13 @@ import FormInput from '../share/FormInput'
 export default {
   name: 'innerSodoor',
   data () {
-    return {  
-       selected: 'A',
-    options: [
-      { text: 'One', value: 'A' },
-      { text: 'Two', value: 'B' },
-      { text: 'Three', value: 'C' }
-    ]
+    return {
+      selected: 'A',
+      options: [
+        { text: 'One', value: 'A' },
+        { text: 'Two', value: 'B' },
+        { text: 'Three', value: 'C' }
+      ]
     }
   },
   components: {

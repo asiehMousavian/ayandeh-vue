@@ -21,7 +21,7 @@
                     <div class="inp_border">
                       <input type="text" name="firstName" class="form-control" v-validate="'required|alpha'">
                       <div class="form-alert">
-                        <p>{{ errors.first('firstName') }}</p>
+                        <p v-show="errors.has('firstName')">{{ errors.first('firstName') }}</p>
                       </div>
                       <i class="placeholder"> نام</i>
                       <i class="line"></i>
@@ -33,7 +33,7 @@
                     <div class="inp_border">
                       <input type="text" name="lastName" class="form-control" v-validate="'required|alpha'">
                       <div class="form-alert">
-                        <p>{{ errors.first('lastName') }}</p>
+                        <p v-show="errors.first('lastName')">{{ errors.first('lastName') }}</p>
                       </div>
                       <i class="placeholder">نام خانوادگی</i>
                       <i class="line"></i>
@@ -189,7 +189,7 @@
                       <div class="form-alert">
                         <p>{{ errors.first('ibanNumber') }}</p>
                       </div>
-                      <span class="format_inp">IR XXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                      <span class="format_inp">مثال:IR410160000000008301078412</span>
                       <i class="placeholder">شماره شبا</i>
                       <i class="line"></i>
                     </div>
@@ -214,6 +214,7 @@
 
 <script>
 import PageHeader from '../header/PageHeader'
+import sharedService from '@/services/sharedService'
 export default {
   name: 'user',
   data () {
@@ -224,9 +225,20 @@ export default {
   components: {
     PageHeader
   },
+  mounted () {
+    sharedService.handleInputLabels()
+    sharedService.checkInputs()
+    sharedService.toggleMenu()
+  },
   methods: {
     submitData () {
-      debugger
+      this.$validator.validate().then(valid => {
+        if (!valid) {
+          alert()
+        } else {
+          // this.$bvModal.show('modal1')
+        }
+      })
     },
     previewFiles () {
       let files = this.$refs.myFile.files

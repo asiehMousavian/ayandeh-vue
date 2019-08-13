@@ -1,3 +1,9 @@
+import Vue from 'vue'
+import VueSnackbar from 'vue-snack'
+import 'vue-snack/dist/vue-snack.min.css'
+Vue.use(VueSnackbar)
+
+const snackbar = Vue.prototype.$snack
 /* eslint-disable */
 export default {
   handleInputLabels () {
@@ -31,5 +37,23 @@ export default {
       $('.small_menu').animate({'right': '-300px'}, 300)
       $(this).css('display', 'none')
     })
+  },
+  Done (msg) {
+    snackbar.success({
+      text: msg,
+      button: 'باشه'
+      //   action: this.doSomeThing
+    })
+  },
+  Failed (msg) {
+    snackbar.danger({
+      text: msg,
+      button: 'باشه'
+    })
   }
+
 }
+
+
+
+

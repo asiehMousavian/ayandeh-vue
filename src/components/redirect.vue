@@ -1,10 +1,15 @@
 <template>
   <div class="all">
     <page-header></page-header>
+
     <!-- MainBody-->
     <div id="main" role="main">
+
       <div class="mainarea">
-        <div class="container">
+        <div v-if="isDone" class="container">
+
+    <!-- <loading :active.sync="isLoading"></loading> -->
+
           <div v-if="isSucceed">
             <div class="d-flex">
               <img class="mx-auto" src="@/assets/images/checked (1).png" alt="">
@@ -23,7 +28,7 @@
                 <h1 v-if="isSucceed">توجه داشته باشید که عملیات صدور دو روز کاری زمان خواهد برد</h1>
                 <div class="d-flex justify-content-between pursuit-btns">
                   <div><span class="code-span">کد پیگیری درخواست:</span></div>
-                  <div><span class="value-span">{{trackingCode}}</span></div>
+                  <div><span class="value-span">{{receiptNumber}}</span></div>
                 </div>
               </div>
             </div>
@@ -49,8 +54,10 @@ import PageHeader from './header/PageHeader'
 import submitButton from './share/submitButton'
 // eslint-disable-next-line no-unused-vars
 import { truncate } from 'fs'
+import generalService from '@/services/generalService'
+// import Loading from 'vue-loading-overlay'
+// import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
-  props: [],
   name: 'redirect',
   components: {
     PageHeader, submitButton
@@ -58,9 +65,11 @@ export default {
   data: function () {
     return {
       isSucceed: true,
-      trackingCode: '۴۳۲۱۵۸۷۱۲',
+      receiptNumber: '۴۳۲۱۵۸۷۱۲',
       statementButton: 'مشاهده گردش حساب',
-      accountButton: 'مشاهده اطلاعات کاربر'
+      accountButton: 'مشاهده اطلاعات کاربر',
+      isDone: false
+      // isLoading :true
     }
   },
   methods: {
@@ -73,21 +82,35 @@ export default {
     },
     goToUserProfile: function () {
       this.$router.push('/user')
+    },
+    getInvoiceStatus: function () {
+      let invoiceId = this.$route.params.invoiceId
+      generalService.getMethod(`payment/invoice/${invoiceId}/`).then(response => {
+        if (response.message === 'OK' && response.status === 0) {
+          this.receiptNumber = response.content.receiptNumber
+          if (response.content.status === 'Failed') {
+            this.isSucceed = false
+          } else {
+            this.isSucceed = true
+          }
+        } else {
+          // todo
+          debugger
+        }
+      }).catch(error => {
+        // todo
+        console.log(error)
+      })
+      setTimeout(() => {
+        this.isDone = true
+      }, 200)
     }
   },
   mounted () {
-    // setTimeout(() => {
-    //   // eslint-disable-next-line
-    //   if (this.$route.hash == '#failed') {
-    //     this.isSucceed = false
-    //   }
-    // }, 100)
-    var status = this.$route.params.status
-    if (status === 'failed') {
-      this.isSucceed = false
-    } else if (status === 'success') {
-      this.isSucceed = true
-    }
+    this.getInvoiceStatus()
+  },
+  beforeCreate () {
+    // setTimeout(() => {this.isLoading=false}, 3000)
   }
 }
 </script>

@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+import axiosRetry from 'axios-retry';
+ 
+// axiosRetry(axios, { retries: 2 });
+// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay});
+
 axios.defaults.baseURL = process.env.SERVER_URL
 
 axios.interceptors.request.use(function (config) {
@@ -13,7 +18,9 @@ axios.interceptors.request.use(function (config) {
 export default {
   // ============== General Get method
   getMethod (url, data = {params: {}}) {
+    // return axios.get(url, data, {'axios-retry': {retries: 1}})
     return axios.get(url, data)
+
       .then(response => {
         return response.data
       })
@@ -64,5 +71,15 @@ export default {
       // Do something with request error
       return Promise.reject(error)
     })
+  },
+
+  getSession()
+  {
+    let mySession=localStorage.getItem('session')
+      if(!mySession)
+      {
+        return false
+      }
+      return true
   }
 }

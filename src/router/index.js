@@ -56,6 +56,7 @@ let sessionObj = {
 }
 
 var GetSession = function (to, from, next) {
+  if (!generalService.getSession()) {
   generalService.postMethod('auth/session', sessionObj).then(response => {
     if (response.message === 'OK' && response.status === 0) {
       if (response.content.session) {
@@ -72,6 +73,11 @@ var GetSession = function (to, from, next) {
   }).catch(error => {
     // todo
   })
+}
+else{
+  next()
+}
+
 }
 var checkSession = function (to, from, next) {
   if (session.has('isLogged')) {
@@ -119,7 +125,7 @@ export default new Router({
       }
     },
     {
-      path: '/redirect/:status',
+      path: '/redirect/:invoiceId',
       name: 'redirect',
       component: redirect,
       beforeEnter: (to, from, next) => {

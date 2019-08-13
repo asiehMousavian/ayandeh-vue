@@ -8,15 +8,40 @@ import VeeValidate from 'vee-validate'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 // import vueJquery from 'vue-jquery'
-
 import VueSession from 'vue-session'
-Vue.use(VueSession)
+import VueSnackbar from 'vue-snack'
+import 'vue-snack/dist/vue-snack.min.css'
 
 Vue.use(VueAxios, axios)
+// import VuePromiseBtn from 'vue-promise-btn'
+// // // not required. Styles for built-in spinner
+// // import 'vue-promise-btn/dist/vue-promise-btn.css'
+// Vue.use(VuePromiseBtn) // or with global options:  Vue.use(VuePromiseBtn, {loader: '...'})
+// Vue.prototype.$clientName = {value: 'ورود / عضویت'}
+// Vue.mixin({
+//   data: function() {
+//     return {
+//       globalVar:'global'
+//     }
+//   }
+// })
+// let globalData = new Vue({
+//   data: { $globalVar: 'green' }
+// });
+// Vue.mixin({
+//   computed: {
+//     $globalVar: {
+//       get: function () { return globalData.$data.$globalVar },
+//       set: function (newColor) { globalData.$data.$globalVar = newColor; }
+//     }
+//   }
+// })
 
+Vue.use(VueSnackbar)
+Vue.use(VueSession)
+Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(VeeValidate)
-// Vue.use(vueJquery)
 
 // require('./assets/css/global.css')
 require('./validation/index')
@@ -27,7 +52,6 @@ require('./assets/css/app.css')
 require('./assets/js/jquery.js')
 // require('./assets/css/screen.css')
 Vue.config.productionTip = false
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

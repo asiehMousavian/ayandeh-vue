@@ -14,7 +14,7 @@
               <div id="menu">
                 <ul class="list-unstyled">
                   <li>
-                    <a href="#" @click="goToBoxes">صندوق‌های سرمایه‌گذاری</a>
+                    <a href="\detailList">صندوق‌های سرمایه‌گذاری</a>
                   </li>
                   <li>
                     <a href="#">همکاران ما</a>
@@ -39,10 +39,14 @@
           </div>
           <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-5 d-flex">
             <div class="d-flex align-items-center mr-auto">
-              <!-- <a href="/" class="login_link"> -->
-              <a href="/login" class="login_link">ورود</a>/ <a href="/register" class="login_link">عضویت</a>
-                <!--            ورود / عضویت -->
+              <span class="login_link">
+                {{name}}
                 <img src="@/assets/img/avatar.svg" alt="">
+              </span>
+              <!-- <a href="/" class="login_link"> -->
+              <!-- {{name}} -->
+              <!-- <a href="/login" class="login_link">ورود</a>/ <a href="/register" class="login_link">عضویت</a> -->
+                <!-- <img src="@/assets/img/avatar.svg" alt=""> -->
               <!-- </a> -->
             </div>
           </div>
@@ -54,11 +58,25 @@
 
 </template>
 <script>
+import { debuglog } from 'util'
 export default {
   name: 'PageHeader',
+  data () {
+    return {
+      name: ''
+    }
+  },
   methods: {
     goToBoxes: function () {
       this.$router.push('/detailList')
+    }
+  },
+  mounted () {
+    if (this.$session.has('clientName')) {
+      let clientname = this.$session.get('clientName')
+      if (clientname) {
+        this.name = clientname
+      }
     }
   }
 }

@@ -80,6 +80,7 @@ import fundDescription from './fundDescription'
 import issueUnit from './issueUnit'
 import innerSodoor from './innerSodoor'
 import service from '@/services/generalService'
+
 export default {
   name: 'Detail',
   data () {
@@ -105,7 +106,19 @@ export default {
       this.$bvModal.hide('innerSodoorModal')
     },
     connectToBank: function () {
-      // this.$router.push('somewhere'+'data')
+      let baseUrl = window.location.origin // + '/#/'
+      debugger
+      let paymentObj =
+      {
+        detail: 'string',
+        price: 100000,
+        redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
+      }
+      service.postMethod('payment', paymentObj).then(response => {
+        if (response.message === 'OK' && response.status === 0) {
+          window.location.href = response.content.redirectUrl
+        }
+      }).catch(error => {})
     },
     getFunds: function () {
       service.getMethod('invest/fund/10915')

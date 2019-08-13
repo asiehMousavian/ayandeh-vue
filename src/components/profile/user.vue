@@ -8,22 +8,27 @@
           <div class="top_site d-flex">
             <h1 class="page-header ml-auto">ورود اطلاعات کاربر</h1>
             <a href="#" class="btn edit_btn mr-auto">
-              <img src="@/assets/img/edit.svg" alt="">
+              <img src="@/assets/img/edit.svg" alt />
               ویرایش اطلاعات
             </a>
           </div>
-          <form class="user-details-form" action="">
+          <form class="user-details-form" action>
             <div class="form-row-new">
               <h1 class="form-header">مشخصات عمومی</h1>
               <div class="row">
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="firstName" class="form-control" v-validate="'required|alpha'">
+                      <input
+                        type="text"
+                        name="firstName"
+                        class="form-control"
+                        v-validate="'required|alpha'"
+                      />
                       <div class="form-alert">
                         <p v-show="errors.has('firstName')">{{ errors.first('firstName') }}</p>
                       </div>
-                      <i class="placeholder"> نام</i>
+                      <i class="placeholder">نام</i>
                       <i class="line"></i>
                     </div>
                   </div>
@@ -31,7 +36,12 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="lastName" class="form-control" v-validate="'required|alpha'">
+                      <input
+                        type="text"
+                        name="lastName"
+                        class="form-control"
+                        v-validate="'required|alpha'"
+                      />
                       <div class="form-alert">
                         <p v-show="errors.first('lastName')">{{ errors.first('lastName') }}</p>
                       </div>
@@ -45,7 +55,12 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="birth" class="form-control" v-validate="'required|date_format:yyyy/MM/dd'">
+                      <input
+                        type="text"
+                        name="birth"
+                        class="form-control"
+                        v-validate="'required|date_format:yyyy/MM/dd'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('birth') }}</p>
                       </div>
@@ -58,7 +73,12 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="birthCertNumber" class="form-control" v-validate="'required|numeric|max:10'">
+                      <input
+                        type="text"
+                        name="birthCertNumber"
+                        class="form-control"
+                        v-validate="'required|numeric|max:10'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('birthCertNumber') }}</p>
                       </div>
@@ -70,7 +90,12 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="issuingCity" class="form-control" v-validate="'required|alpha'">
+                      <input
+                        type="text"
+                        name="issuingCity"
+                        class="form-control"
+                        v-validate="'required|alpha'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('issuingCity') }}</p>
                       </div>
@@ -84,11 +109,16 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="nationalId" class="form-control" v-validate="'required|numeric|length:10'">
+                      <input
+                        type="text"
+                        name="nationalId"
+                        class="form-control"
+                        v-validate="'required|numeric|length:10'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('nationalId') }}</p>
                       </div>
-                      <i class="placeholder"> کد ملی</i>
+                      <i class="placeholder">کد ملی</i>
                       <i class="line"></i>
                     </div>
                   </div>
@@ -96,17 +126,24 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="d-flex justify-content-end align-items-center uploadBtns">
                     <div class="form-group">
-                      <input type="file" name="nationalCardPhoto" ref="myFile" @change="previewFiles()" class="upload-btn" v-validate="'required|image'"
-                             value="آپلود تصویر کارت ملی">
+                      <input
+                        type="file"
+                        name="nationalCardPhoto"
+                        ref="myFile"
+                        @change="previewFiles()"
+                        class="upload-btn"
+                        v-validate="'required|image'"
+                        value="آپلود تصویر کارت ملی"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('nationalCardPhoto') }}</p>
                       </div>
-<!--                      <div class="pic marginR25">-->
-                        <img v-bind:src="profileImage" id="sample" alt="">
-<!--                        <span class="dl_pic">-->
-<!--                            <img src="@/assets/img/close2.svg" alt="">-->
-<!--                        </span>-->
-<!--                      </div>-->
+                      <!--                      <div class="pic marginR25">-->
+                      <img v-bind:src="profileImage" id="sample" alt />
+                      <!--                        <span class="dl_pic">-->
+                      <!--                            <img src="@/assets/img/close2.svg" alt="">-->
+                      <!--                        </span>-->
+                      <!--                      </div>-->
                     </div>
                   </div>
                 </div>
@@ -118,7 +155,12 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="phoneNumber" class="form-control" v-validate="'required|numeric'">
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        class="form-control"
+                        v-validate="'required|numeric'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('phoneNumber') }}</p>
                       </div>
@@ -130,7 +172,13 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="mobileNumber" class="form-control" v-validate="'required|numeric'">
+                      <input
+                        type="text"
+                        name="mobileNumber"
+                        class="form-control"
+                        v-on:blur="nationalIdMobileCompatibility"
+                        v-validate="'required|numeric'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('mobileNumber') }}</p>
                       </div>
@@ -144,7 +192,12 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="address" class="form-control" v-validate="'required'">
+                      <input
+                        type="text"
+                        name="address"
+                        class="form-control"
+                        v-validate="'required'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('address') }}</p>
                       </div>
@@ -156,7 +209,12 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="postalCode" class="form-control" v-validate="'required|numeric|length:10'">
+                      <input
+                        type="text"
+                        name="postalCode"
+                        class="form-control"
+                        v-validate="'required|numeric|length:10'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('postalCode') }}</p>
                       </div>
@@ -173,7 +231,12 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="bankName" class="form-control" v-validate="'required|alpha'">
+                      <input
+                        type="text"
+                        name="bankName"
+                        class="form-control"
+                        v-validate="'required|alpha'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('bankName') }}</p>
                       </div>
@@ -185,7 +248,13 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="ibanNumber" class="form-control"  v-validate="'required|length:27'">
+                      <input
+                        type="text"
+                        name="ibanNumber"
+                        v-on:blur="getBankInfo"
+                        class="form-control"
+                        v-validate="'required|length:27'"
+                      />
                       <div class="form-alert">
                         <p>{{ errors.first('ibanNumber') }}</p>
                       </div>
@@ -213,14 +282,19 @@
 </template>
 
 <script>
+
 import PageHeader from '../header/PageHeader'
 import sharedService from '@/services/sharedService'
+
+import generalService from "@/services/generalService"
+import { debuglog } from "util"
+
 export default {
-  name: 'user',
-  data () {
+  name: "user",
+  data() {
     return {
-      profileImage: ''
-    }
+      profileImage: ""
+    };
   },
   components: {
     PageHeader
@@ -231,6 +305,7 @@ export default {
     sharedService.toggleMenu()
   },
   methods: {
+
     submitData () {
       this.$validator.validate().then(valid => {
         if (!valid) {
@@ -240,16 +315,65 @@ export default {
         }
       })
     },
+    nationalIdMobileCompatibility () {
+      // check value of mobile and natonalcode
+      let condition = true
+      if (condition) {
+        generalService
+          .getMethod('auth/nationalId-mobile-compatibility', {
+            params: {nationalId: '4680059088', mobileNumber: '09120450115'}
+          })
+          .then(response => {
+            if (response.message === 'OK' && response.status === 0) {
+              if (response.content.status) {
+              } else {
+                this.errors.add({
+                  field: 'mobileNumber',
+                  msg: 'کد ملی و شماره موبایل تطابق ندارد'
+                })
+              }
+            }
+          })
+          .catch(error => {
+            // todo
+            console.log(error.response.message);
+          })
+      }
+    },
+    getBankInfo () {
+      let condition = true
+      if (condition) {
+        // generalService
+        //   .getMethod("account", {
+        //     params: { iban: "IR070560086280002295585001"}}).then(response => {
+        //       debugger
+        //     if (response.message === "OK" && response.status === 0) {
+        //       // if (response.content.status) {
+        //       // }
+        //       //  else
+        //       //   {
+        //       //   this.errors.add({
+        //       //     field: "mobileNumber",
+        //       //     msg: "کد ملی و شماره موبایل تطابق ندارد"
+        //       //   })
+        //       // }
+        //     }
+        //   })
+        //   .catch(error => {
+        //     //todo
+        //     console.log(error);
+        //   })
+      }
+    },
+
     previewFiles () {
       let files = this.$refs.myFile.files
       let That = this
       if (files && files[0]) {
         const reader = new FileReader()
-
         reader.onload = function (e) {
           That.profileImage = e.target.result
         }
-
         reader.readAsDataURL(files[0])
       }
     }
@@ -258,15 +382,15 @@ export default {
 </script>
 
 <style scoped>
-  .form-alert{
-    left: 0;
-    background-color: #f2f2f2;
-  }
-  .format_inp{
-    display: block;
-    color: #666;
-    font-size: 13px;
-    position: absolute;
-    right: 0;
-  }
+.form-alert {
+  left: 0;
+  background-color: #f2f2f2;
+}
+.format_inp {
+  display: block;
+  color: #666;
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+}
 </style>

@@ -8,7 +8,7 @@
         </p>
       </div>
     </div>
-    <form>
+    <form id="registerForm">
       <div class="form-group">
         <div class="inp_border">
           <input
@@ -21,33 +21,22 @@
           <div class="form-alert">
             <p>{{ errors.first('accountNumber') }}</p>
           </div>
-          <span class="format_inp">hint</span>
+          <span class="format_inp">نمونه شماره حساب : 021586521485</span>
           <i class="placeholder">شماره حساب</i>
           <i class="line"></i>
         </div>
       </div>
       <div class="d-flex">
-        <submit-button v-bind:buttonTitle="registerButton" v-on:submit="register"></submit-button>
+        <button :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.prevent="register">{{registerButton}}</button>
       </div>
     </form>
-
-    <div>
-      <b-modal id="resultModal" title="نتیجه" hide-header size="lg">
-        <container>
-          <p style="text-align:left">{{result}}</p>
-        </container>
-        <div slot="modal-footer">
-          <b-button class="btn" @click="closeModal">بستن</b-button>
-        </div>
-      </b-modal>
-    </div>
   </div>
 </template>
 <script>
-import FormInput from '../share/FormInput'
-import submitButton from '../share/submitButton'
+// import FormInput from '../share/FormInput'
+// import submitButton from '../share/submitButton'
 import generalService from '@/services/generalService'
-
+import sharedService from '@/services/sharedService'
 export default {
   name: 'register',
   data () {
@@ -57,9 +46,12 @@ export default {
       result: ''
     }
   },
-  components: {
-    submitButton,
-    FormInput
+  computed: {
+    isComplete () {
+      this.$validator.validateAll().then(result => {
+        return result
+      })
+    }
   },
   methods: {
     register: function () {
@@ -74,35 +66,40 @@ export default {
             .postMethod('auth/register', userInfo)
             .then(response => {
               if (response.status === 0 && response.message === 'OK') {
-                this.result = 'ثبت نام با موفقیت انجام شد'
+                sharedService.Done('ثبت نام با موفقیت انجام شد')
               }
+            }).catch(error => {
+              sharedService.Failed(error.response.data.message)
             })
-            .catch(error => {
-              this.result = error.response.data.message
-            })
-          this.$bvModal.show('resultModal')
         } else {
-
         }
       })
-    },
-    closeModal: function () {
-      this.$bvModal.hide('resultModal')
     }
   }
 }
 </script>
 
 <style scoped>
-.form-alert {
-  left: 0;
-  background-color: #f2f2f2;
-}
-.format_inp {
-  display: block;
-  color: #666;
-  font-size: 13px;
-  position: absolute;
-  right: 0;
-}
+  #registerForm .form-alert {
+    left: 0;
+    background-color: #fff;
+  }
+  #registerForm .format_inp {
+    display: block;
+    color: #575757;
+    font-size: 15px;
+    position: absolute;
+    right: 0;
+  }
+
+  @media only screen and (max-width: 991px) {
+   #registerForm .format_inp {
+      font-size: 12px;
+    }
+  }
+  @media only screen and (max-width: 567px) {
+   #registerForm .format_inp {
+      font-size: 10px;
+    }
+  }
 </style>

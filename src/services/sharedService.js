@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueSnackbar from 'vue-snack'
 import 'vue-snack/dist/vue-snack.min.css'
 Vue.use(VueSnackbar)
-
 const snackbar = Vue.prototype.$snack
+
 /* eslint-disable */
 export default {
   handleInputLabels () {
@@ -51,7 +51,6 @@ export default {
       button: 'باشه'
     })
   }
-
 }
 
 

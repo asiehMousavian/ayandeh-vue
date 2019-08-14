@@ -13,12 +13,16 @@
       </div>
     </div>
     <!-- Main -->
+    <!-- Mobile Menu -->
+    <toggleMenu></toggleMenu>
+    <!-- Mobile Menu -->
   </div>
 </template>
 
 <script>
 import service from '@/services/generalService'
 import PageHeader from '../header/PageHeader'
+import toggleMenu from '../share/toggleMenu'
 import BoxComponent from './BoxComponent'
 
 export default {
@@ -30,14 +34,17 @@ export default {
       funds: []
     }
   },
-  mounted () {
-    this.getFunds()
+  mounted: function () {
+    if (!this.getLocalItem()) {
+      this.getFunds()
+    }
   },
   methods: {
     getFunds () {
       service.getMethod('invest/fund')
         .then(response => {
           this.funds = response.content
+          this.setLocalItem()
         })
         .catch(error => {
           console.log(error)
@@ -45,10 +52,22 @@ export default {
     },
     goToBoxDetail: function (id) {
       this.$router.push('/detail/' + id)
+    },
+    getLocalItem () {
+      let mySession = localStorage.getItem('item')
+      if (mySession) {
+        this.funds = JSON.parse(mySession)
+        return true
+      } else {
+        return false
+      }
+    },
+    setLocalItem () {
+      localStorage.setItem('item', JSON.stringify(this.funds))
     }
   },
   components: {
-    PageHeader, BoxComponent
+    PageHeader, BoxComponent, toggleMenu
   }
 }
 </script>

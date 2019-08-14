@@ -57,32 +57,31 @@ let sessionObj = {
 
 var GetSession = function (to, from, next) {
   if (!generalService.getSession()) {
-  generalService.postMethod('auth/session', sessionObj).then(response => {
-    if (response.message === 'OK' && response.status === 0) {
-      if (response.content.session) {
-        // todo
-        // localStorage.setItem("session",JSON.stringify(response.content.session))
-        // ehsan
-        localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
-        // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+    generalService.postMethod('auth/session', sessionObj).then(response => {
+      if (response.message === 'OK' && response.status === 0) {
+        if (response.content.session) {
+          // todo
+          // localStorage.setItem("session",JSON.stringify(response.content.session))
+          // ehsan
+          localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
+          // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+        }
+        generalService.setSession()
+        return true
+        // next()
       }
-      generalService.setSession()
-      return true
-      // next()
-    }
-    // eslint-disable-next-line handle-callback-err
-  }).catch(error => {
-    // todo
-    // next({
-    //   name: "login", // back to safety route //
-    //   query: { redirectFrom: to.fullPath }
-    // })
-  })
-}
-else{
-  return true
-  // next()
-}
+      // eslint-disable-next-line handle-callback-err
+    }).catch(error => {
+      // todo
+      // next({
+      //   name: "login", // back to safety route //
+      //   query: { redirectFrom: to.fullPath }
+      // })
+    })
+  } else {
+    return true
+    // next()
+  }
 }
 var isLogged = function () {
   if (session.has('isLogged')) {
@@ -109,14 +108,11 @@ export default new Router({
       name: 'Home',
       component: Home,
       beforeEnter: (to, from, next) => {
-        if(GetSession(to, from, next))
-        {
-          if(isLogged())
-          {
+        if (GetSession(to, from, next)) {
+          if (isLogged()) {
             // next(-2)
             next('detailList')
-          }
-          else{
+          } else {
             next()
           }
         }
@@ -128,7 +124,7 @@ export default new Router({
           beforeRouteEnter (to, from, next) {
             debugger
           }
-         
+
         },
         {
           path: 'register',

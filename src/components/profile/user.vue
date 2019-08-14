@@ -7,10 +7,10 @@
         <div class="container">
           <div class="top_site d-flex">
             <h1 class="page-header ml-auto">ورود اطلاعات کاربر</h1>
-            <a href="#" class="btn edit_btn mr-auto">
+            <button class="btn edit_btn mr-auto" disabled style="cursor: default">
               <img src="@/assets/img/edit.svg" alt />
               ویرایش اطلاعات
-            </a>
+            </button>
           </div>
           <form class="user-details-form" action>
             <div class="form-row-new">
@@ -19,12 +19,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="firstName"
-                        class="form-control"
-                        v-validate="'required|alpha'"
-                      />
+                      <input type="text" name="firstName" class="form-control" v-validate="'required|alpha'"/>
                       <div class="form-alert">
                         <p v-show="errors.has('firstName')">{{ errors.first('firstName') }}</p>
                       </div>
@@ -36,12 +31,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="lastName"
-                        class="form-control"
-                        v-validate="'required|alpha'"
-                      />
+                      <input type="text" name="lastName" class="form-control" v-validate="'required|alpha'"/>
                       <div class="form-alert">
                         <p v-show="errors.first('lastName')">{{ errors.first('lastName') }}</p>
                       </div>
@@ -55,12 +45,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="birth"
-                        class="form-control"
-                        v-validate="'required|date_format:yyyy/MM/dd'"
-                      />
+                      <input type="tell" name="birth" class="form-control birth" v-validate="'required'" @blur="checkDate()" v-mask="'## ## ####'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('birth') }}</p>
                       </div>
@@ -73,12 +58,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="birthCertNumber"
-                        class="form-control"
-                        v-validate="'required|numeric|max:10'"
-                      />
+                      <input type="text" name="birthCertNumber" class="form-control" v-validate="'required|numeric|max:10'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('birthCertNumber') }}</p>
                       </div>
@@ -90,12 +70,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="issuingCity"
-                        class="form-control"
-                        v-validate="'required|alpha'"
-                      />
+                      <input type="text" name="issuingCity" class="form-control" v-validate="'required|alpha'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('issuingCity') }}</p>
                       </div>
@@ -109,12 +84,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="nationalId"
-                        class="form-control"
-                        v-validate="'required|numeric|length:10'"
-                      />
+                      <input type="text" name="nationalId" class="form-control" v-validate="'required|numeric|length:10'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('nationalId') }}</p>
                       </div>
@@ -126,20 +96,24 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="d-flex justify-content-end align-items-center uploadBtns">
                     <div class="form-group">
-                      <input
-                        type="file"
-                        name="nationalCardPhoto"
-                        ref="myFile"
-                        @change="previewFiles()"
-                        class="upload-btn"
-                        v-validate="'required|image'"
-                        value="آپلود تصویر کارت ملی"
-                      />
-                      <div class="form-alert">
-                        <p>{{ errors.first('nationalCardPhoto') }}</p>
-                      </div>
-                      <!--                      <div class="pic marginR25">-->
-                      <img v-bind:src="profileImage" id="sample" alt />
+                        <div class="d-flex align-items-center">
+                          <div class="upload_file btn">
+                            آپلود تصویر کارت ملی
+                            <input type="file" name="nationalCardPhoto" ref="myFile" @change="previewFiles()"
+                                   class="upload-btn" v-validate="'required'" value=""/>
+                          </div>
+                          <div class="upload_pic" style="margin-right: 20px; width: 120px;">
+                              <img v-bind:src="profileImage" id="sample" alt />
+<!--                              <span class="dl_pic">-->
+<!--                                 <img src="@/assets/img/close2.svg" alt="">-->
+<!--                              </span>-->
+                          </div>
+                        </div>
+                        <div class="form-alert">
+                          <p>{{ errors.first('nationalCardPhoto') }}</p>
+                        </div>
+                        <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>
+                            <!--                      <div class="pic marginR25">-->
                       <!--                        <span class="dl_pic">-->
                       <!--                            <img src="@/assets/img/close2.svg" alt="">-->
                       <!--                        </span>-->
@@ -155,15 +129,11 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="phoneNumber"
-                        class="form-control"
-                        v-validate="'required|numeric'"
-                      />
+                      <input type="text" name="phoneNumber" class="form-control" v-validate="'required|phoneNumberFa'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('phoneNumber') }}</p>
                       </div>
+                      <span class="format_inp">مثال:02144874661</span>
                       <i class="placeholder">شماره تماس</i>
                       <i class="line"></i>
                     </div>
@@ -172,16 +142,12 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="mobileNumber"
-                        class="form-control"
-                        v-on:blur="nationalIdMobileCompatibility"
-                        v-validate="'required|numeric'"
-                      />
+                      <input type="text" name="mobileNumber" class="form-control"
+                             v-on:blur="nationalIdMobileCompatibility" v-validate="'required|mobileFa'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('mobileNumber') }}</p>
                       </div>
+                      <span class="format_inp">مثال:09121804532</span>
                       <i class="placeholder">شماره موبایل</i>
                       <i class="line"></i>
                     </div>
@@ -192,12 +158,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="address"
-                        class="form-control"
-                        v-validate="'required'"
-                      />
+                      <input type="text" name="address" class="form-control" v-validate="'required'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('address') }}</p>
                       </div>
@@ -209,12 +170,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="postalCode"
-                        class="form-control"
-                        v-validate="'required|numeric|length:10'"
-                      />
+                      <input type="text" name="postalCode" class="form-control" v-validate="'required|numeric|length:10'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('postalCode') }}</p>
                       </div>
@@ -231,12 +187,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="bankName"
-                        class="form-control"
-                        v-validate="'required|alpha'"
-                      />
+                      <input type="text" name="bankName" class="form-control" v-validate="'required|alpha'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('bankName') }}</p>
                       </div>
@@ -248,13 +199,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input
-                        type="text"
-                        name="ibanNumber"
-                        v-on:blur="getBankInfo"
-                        class="form-control"
-                        v-validate="'required|length:27'"
-                      />
+                      <input type="text" name="ibanNumber" v-on:blur="getBankInfo" class="form-control" v-validate="'required|length:27'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('ibanNumber') }}</p>
                       </div>
@@ -278,26 +223,35 @@
         </div>
       </div>
     </div>
+    <!-- Main -->
+    <!-- Mobile Menu -->
+    <toggleMenu></toggleMenu>
+    <!-- Mobile Menu -->
   </div>
 </template>
 
 <script>
 
 import PageHeader from '../header/PageHeader'
+import toggleMenu from '../share/toggleMenu'
 import sharedService from '@/services/sharedService'
-
-import generalService from "@/services/generalService"
-import { debuglog } from "util"
+import generalService from '@/services/generalService'
 
 export default {
-  name: "user",
-  data() {
+  name: 'user',
+  data () {
+    // var userInfo
     return {
-      profileImage: ""
-    };
+      userInfo: {
+        profilePic: {},
+        birthCertPic: {},
+        birthCertDescPic: {},
+        nationalCardPic: {}
+      }
+    }
   },
   components: {
-    PageHeader
+    PageHeader, toggleMenu
   },
   mounted () {
     sharedService.handleInputLabels()
@@ -305,7 +259,6 @@ export default {
     sharedService.toggleMenu()
   },
   methods: {
-
     submitData () {
       this.$validator.validate().then(valid => {
         if (!valid) {
@@ -314,6 +267,10 @@ export default {
           // this.$bvModal.show('modal1')
         }
       })
+    },
+    checkDate () {
+      let v = this.userInfo.birth.split(' ').reverse()
+      this.userInfo.birth = v.join('/')
     },
     nationalIdMobileCompatibility () {
       // check value of mobile and natonalcode
@@ -336,7 +293,7 @@ export default {
           })
           .catch(error => {
             // todo
-            console.log(error.response.message);
+            console.log(error.response.message)
           })
       }
     },
@@ -365,7 +322,6 @@ export default {
         //   })
       }
     },
-
     previewFiles () {
       let files = this.$refs.myFile.files
       let That = this
@@ -382,15 +338,34 @@ export default {
 </script>
 
 <style scoped>
-.form-alert {
-  left: 0;
-  background-color: #f2f2f2;
-}
-.format_inp {
-  display: block;
-  color: #666;
-  font-size: 13px;
-  position: absolute;
-  right: 0;
-}
+  .form-alert {
+    left: 0;
+    background-color: #f2f2f2;
+  }
+  .format_inp {
+    display: block;
+    color: #666;
+    font-size: 13px;
+    position: absolute;
+    right: 0;
+  }
+  .upload_file{
+    position: relative;
+    cursor: pointer;
+  }
+  .user-details-form .form-row-new .uploadBtns .upload-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    font-size: 0;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+    margin-top: 0;
+  }
 </style>

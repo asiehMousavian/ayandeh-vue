@@ -1,9 +1,5 @@
 import axios from 'axios'
-
-// import axiosRetry from 'axios-retry';
- 
-// axiosRetry(axios, { retries: 2 });
-// axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay});
+import axiosRetry from 'axios-retry'
 
 axios.defaults.baseURL = process.env.SERVER_URL
 
@@ -72,14 +68,11 @@ export default {
       return Promise.reject(error)
     })
   },
-
-  getSession()
-  {
-    let mySession=localStorage.getItem('session')
-      if(!mySession)
-      {
-        return false
-      }
-      return true
+  getSession () {
+    let mySession = localStorage.getItem('session')
+    if (!mySession) {
+      return false
+    }
+    return true
   }
 }

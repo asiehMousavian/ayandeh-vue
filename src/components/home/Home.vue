@@ -1,6 +1,7 @@
 <template>
   <div class="all">
     <page-header></page-header>
+
     <!-- Main -->
     <div id="main" role="main">
       <div class="mainarea">
@@ -27,38 +28,18 @@
       </div>
     </div>
     <!-- Main -->
-    <!-- Small Menu -->
-    <div class="small_menu">
-      <a href="javascripts:void(0)" class="small_menu_close">
-        <img src="@/assets/img/close.png" alt="">
-      </a>
-      <span class="small_menu_t">منوی دسترسی</span>
-      <ul class="list-unstyled">
-        <li>
-          <a href="#">صندوق‌های سرمایه‌گذاری</a>
-        </li>
-        <li>
-          <a href="#">همکاران ما</a>
-        </li>
-        <li>
-          <a href="#">درباره ما</a>
-        </li>
-        <li>
-          <a href="#">تماس با ما</a>
-        </li>
-      </ul>
-    </div>
-    <!-- Small Menu -->
-    <!-- Filter Body -->
-    <div class="filter_body"></div>
-    <!-- Filter Body -->
+    <!-- Mobile Menu -->
+    <toggleMenu></toggleMenu>
+    <!-- Mobile Menu -->
   </div>
 </template>
 <script>
 import PageHeader from '../header/PageHeader'
 import register from '../home/register'
 import login from '../home/login'
+import toggleMenu from '../share/toggleMenu'
 import sharedService from '@/services/sharedService'
+
 export default {
   name: 'Home',
   data () {
@@ -67,12 +48,9 @@ export default {
     }
   },
   components: {
-    PageHeader, register, login
+    PageHeader, register, login, toggleMenu
   },
   mounted () {
-    // setTimeout(() => {
-    //   this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
-    // }, 100)
     sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()

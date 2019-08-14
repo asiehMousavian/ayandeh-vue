@@ -41,7 +41,7 @@
           </div>
         </div>
         <div v-else>
-            <loading :active.sync="isLoading"></loading>
+          <loading :active.sync="isLoading"></loading>
         </div>
       </div>
     </div>
@@ -52,9 +52,7 @@
 <script>
 import PageHeader from './header/PageHeader'
 import submitButton from './share/submitButton'
-import { truncate } from 'fs'
 import generalService from '@/services/generalService'
-import { debuglog } from 'util';
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
@@ -69,7 +67,7 @@ export default {
       statementButton: 'مشاهده گردش حساب',
       accountButton: 'مشاهده اطلاعات کاربر',
       isDone: false,
-      isLoading :true
+      isLoading: true
     }
   },
   methods: {
@@ -97,19 +95,19 @@ export default {
           // todo
           debugger
         }
-         this.isDone = true
+        this.isDone = true
       }).catch(error => {
         // todo
         console.log(error)
-         this.isDone = true
-         this.isSucceed = false
+        this.isDone = true
+        this.isSucceed = false
       })
     }
   },
   mounted () {
-    this.isDone=false
+    this.isDone = false
     this.getInvoiceStatus()
-  },
+  }
 }
 </script>
 

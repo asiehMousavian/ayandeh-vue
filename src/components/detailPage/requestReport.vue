@@ -1,4 +1,5 @@
 <template>
+
   <div class="detail_list">
     <ul class="list-unstyled">
       <li>
@@ -60,9 +61,11 @@
       </li>
     </ul>
   </div>
+
 </template>
 
 <script>
+
 export default {
   name: 'requestReport',
   props: ['fund'],
@@ -71,12 +74,6 @@ export default {
       return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1/')
     }
   }
-  // data: function () {
-  //   return {
-  //     get_founds_url: 'invest/fund',
-  //     funds: []
-  //   }
-  // }
 }
 </script>
 <style scoped>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import axiosRetry from 'axios-retry';
+// import axiosRetry from 'axios-retry';
  
 // axiosRetry(axios, { retries: 2 });
 // axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay});
@@ -17,9 +17,9 @@ axios.interceptors.request.use(function (config) {
 })
 export default {
   // ============== General Get method
-  getMethod (url, data = {params: {}}) {
-    // return axios.get(url, data, {'axios-retry': {retries: 1}})
-    return axios.get(url, data)
+  getMethod (url, data = {params: {}},retries) {
+    return axios.get(url, data, {'axios-retry': {retries: retries}})
+    // return axios.get(url, data)
 
       .then(response => {
         return response.data

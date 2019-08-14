@@ -36,8 +36,8 @@
 import generalService from '@/services/generalService'
 import sharedService from '@/services/sharedService'
 export default {
-  name: "register",
-  data() {
+  name: 'register',
+  data () {
     return {
       registerButton: "ورود به پیشخوان",
       account: ""
@@ -46,71 +46,57 @@ export default {
   computed: {
   isComplete () {
     return this.account
-  
   }
 },
   methods: {
-    register: function() {
+    register: function () {
       this.$validator.validateAll().then(result => {
         if (result) {
-          let userInfo={
-              confirmPassword: "123",
-              email: "azade_khalili@yahoo.com",
-              password: "123"
+          let userInfo = {
+            confirmPassword: '123',
+            email: 'azade_khalili@yahoo.com',
+            password: '123'
           }
           generalService
-            .postMethod("auth/register", userInfo)
+            .postMethod('auth/register', userInfo)
             .then(response => {
-              if(response.status === 0 && response.message === "OK")
-              {
-                sharedService.Done("ثبت نام با موفقیت انجام شد")
+              if (response.status === 0 && response.message === 'OK') {
+                sharedService.Done('ثبت نام با موفقیت انجام شد')
               }
+            }).catch(error => {
+              sharedService.Failed(error.response.data.message)
             })
-            .catch(error => {
-                sharedService.Failed(error.response.data.message)
-            })
-        } else {
-          return
+        }
+        else {
+          //todo
         }
       })
     }
   }
-};
+}
 </script>
 
 <style scoped>
-
-/* .snackbar .snackbar__text 
-{
-  font-size: 30px !important;
-  margin: 0 10px !important;
-  padding: 0 10px !important;
-}
-.snackbar .snackbar__action
-{
-  font-size: 30px !important;
-  margin: 0 10px;
-} */
-#registerForm .form-alert {
-  left: 0;
-  background-color: #fff;
-}
-#registerForm .format_inp {
-  display: block;
-  color: #575757;
-  font-size: 15px;
-  position: absolute;
-  right: 0;
-}
-
-@media only screen and (max-width: 991px) {
- #registerForm .format_inp {
-    font-size: 12px;
+  #registerForm .form-alert {
+    left: 0;
+    background-color: #fff;
   }
-}
-@media only screen and (max-width: 567px) {
- #registerForm .format_inp {
-    font-size: 10px;
+  #registerForm .format_inp {
+    display: block;
+    color: #575757;
+    font-size: 15px;
+    position: absolute;
+    right: 0;
   }
-}
+
+  @media only screen and (max-width: 991px) {
+   #registerForm .format_inp {
+      font-size: 12px;
+    }
+  }
+  @media only screen and (max-width: 567px) {
+   #registerForm .format_inp {
+      font-size: 10px;
+    }
+  }
 </style>

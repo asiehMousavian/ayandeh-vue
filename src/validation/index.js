@@ -32,7 +32,7 @@ const dictionary = {
   }
 }
 Vue.use(VeeValidate, {
-  events: 'change|blur'
+  'events': 'change|blur'
 })
 Validator.localize(dictionary)
 Validator.localize('fa', fa)

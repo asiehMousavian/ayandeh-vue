@@ -158,12 +158,12 @@ body{
   @include border-radius(4px);
   color: $c2 !important;
   background-color: $c5;
-  font-size: 18px;
+  font-size: 18px !important;
   font-family: "Iransans_Bold";
   padding: 0 45px;
   cursor: pointer;
   @media #{$size1440}{
-    font-size: 16px;
+    font-size: 16px !important;
     padding: 0 30px;
   }
   @media #{$size992}{
@@ -172,7 +172,7 @@ body{
   }
   @media #{$size480}{
     padding: 0 10px;
-    font-size: 13px;
+    font-size: 13px !important;
     height: 40px;
     line-height: 39px;
   }
@@ -283,6 +283,7 @@ button.btn{
           top: -10px;
           font-size: 15px;
           color: $c5;
+          z-index: 10;
           @media #{$size768}{
             font-size: 13px;
           }
@@ -302,6 +303,7 @@ button.btn{
       .placeholder{
         top: -10px;
         font-size: 15px;
+        z-index: 10;
         @media #{$size768}{
           font-size: 14px;
         }
@@ -785,6 +787,9 @@ button.btn{
     }
   }
 }
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
 /************ Modal ************/
 .pursuit-btn-group {
   margin-top: 20px;
@@ -851,3 +856,29 @@ button.btn{
   display: none;
 }
 /********** Filter Body ***********/
+
+/*********** New Style ***********/
+input:-webkit-autofill,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover{
+  background-color: transparent!important;
+  -webkit-box-shadow: 0 0 0 30px #fff inset!important;
+  -moz-box-shadow: 0 0 0 30px #fff inset!important;
+  -o-box-shadow: 0 0 0 30px #fff inset!important;
+  box-shadow: 0 0 0 30px #fff inset!important;
+}
+.user-details-form input:-webkit-autofill,
+.user-details-form input:-webkit-autofill:active,
+.user-details-form input:-webkit-autofill:focus,
+.user-details-form input:-webkit-autofill:hover{
+  background-color: transparent!important;
+  -webkit-box-shadow: 0 0 0 30px #f2f2f2 inset!important;
+  -moz-box-shadow: 0 0 0 30px #f2f2f2 inset!important;
+  -o-box-shadow: 0 0 0 30px #f2f2f2 inset!important;
+  box-shadow: 0 0 0 30px #f2f2f2 inset!important;
+}
+.spinner span{
+  border-color: $c2 transparent transparent transparent !important;
+}
+/*********** New Style ***********/

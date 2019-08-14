@@ -67,18 +67,32 @@ var GetSession = function (to, from, next) {
         // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
       }
       generalService.setSession()
-      next()
+      return true
+      // next()
     }
     // eslint-disable-next-line handle-callback-err
   }).catch(error => {
     // todo
+    // next({
+    //   name: "login", // back to safety route //
+    //   query: { redirectFrom: to.fullPath }
+    // })
   })
 }
 else{
-  next()
+  return true
+  // next()
+}
+}
+var isLogged = function () {
+  if (session.has('isLogged')) {
+    let logged = session.get('isLogged')
+    if (logged) { return true}
+  } else {
+    return false
+  }
 }
 
-}
 var checkSession = function (to, from, next) {
   if (session.has('isLogged')) {
     let logged = session.get('isLogged')
@@ -95,12 +109,26 @@ export default new Router({
       name: 'Home',
       component: Home,
       beforeEnter: (to, from, next) => {
-        GetSession(to, from, next)
+        if(GetSession(to, from, next))
+        {
+          if(isLogged())
+          {
+            // next(-2)
+            next('detailList')
+          }
+          else{
+            next()
+          }
+        }
       },
       children: [
         {
           path: 'login',
-          component: login
+          component: login,
+          beforeRouteEnter (to, from, next) {
+            debugger
+          }
+         
         },
         {
           path: 'register',

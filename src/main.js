@@ -7,18 +7,17 @@ import BootstrapVue from 'bootstrap-vue'
 import VeeValidate from 'vee-validate'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+// import vueJquery from 'vue-jquery'
 import VueSession from 'vue-session'
-import VueSnackbar from 'vue-snack' 
+import VueSnackbar from 'vue-snack'
 import 'vue-snack/dist/vue-snack.min.css'
 
-// import DatatableFactory from 'vuejs-datatable'
+ import DatatableFactory from 'vuejs-datatable'
 
 // import VuePromiseBtn from 'vue-promise-btn'
 // // // not required. Styles for built-in spinner
 // // import 'vue-promise-btn/dist/vue-promise-btn.css'
 // Vue.use(VuePromiseBtn) // or with global options:  Vue.use(VuePromiseBtn, {loader: '...'})
-
-
 // Vue.prototype.$clientName = {value: 'ورود / عضویت'}
 // Vue.mixin({
 //   data: function() {
@@ -27,8 +26,6 @@ import 'vue-snack/dist/vue-snack.min.css'
 //     }
 //   }
 // })
-
-
 // let globalData = new Vue({
 //   data: { $globalVar: 'green' }
 // });
@@ -41,13 +38,12 @@ import 'vue-snack/dist/vue-snack.min.css'
 //   }
 // })
 
-
 Vue.use(VueSnackbar)
 Vue.use(VueSession)
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(VeeValidate)
-// Vue.use(DatatableFactory)
+Vue.use(DatatableFactory)
 
 
 // require('./assets/css/global.css')
@@ -55,6 +51,8 @@ require('./validation/index')
 require('./assets/css/bootstrap.min.css')
 require('./assets/css/bootstrap.min.rtl.css')
 require('./assets/css/app.css')
+/* eslint-disable */
+require('./assets/js/jquery.js')
 // require('./assets/css/screen.css')
 Vue.config.productionTip = false
 new Vue({

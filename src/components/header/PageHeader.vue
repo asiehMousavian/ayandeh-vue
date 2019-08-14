@@ -7,14 +7,14 @@
           <div class="col-xl-9 col-lg-9 col-md-8 col-sm-7 col-7">
             <div class="d-flex">
               <div id="logo">
-                <a href="#" class="logo">
+                <a href="#" class="logo" @click.prevent="goToDetailList">
                   <img src="@/assets/img/logo.png" alt="">
                 </a>
               </div>
               <div id="menu">
                 <ul class="list-unstyled">
                   <li>
-                    <a href="\detailList">صندوق‌های سرمایه‌گذاری</a>
+                    <a href="#" @click.prevent="goToDetailList">صندوق‌های سرمایه‌گذاری</a>
                   </li>
                   <li>
                     <a href="#">همکاران ما</a>
@@ -58,22 +58,27 @@
 
 </template>
 <script>
-import { debuglog } from 'util';
+import { debuglog } from 'util'
 export default {
   name: 'PageHeader',
-  data(){
-    return{
-      name:'ورود / عضویت'
+  data () {
+    return {
+      name: ''
     }
   },
-  mounted(){
-      if (this.$session.has('clientName')) {
-          let clientname = this.$session.get('clientName')
-          if (clientname) { 
-              this.name=clientname
-          }
-        }
-        }
+  methods: {
+    goToDetailList: function () {
+      this.$router.push('/detailList')
+    }
+  },
+  mounted () {
+    if (this.$session.has('clientName')) {
+      let clientname = this.$session.get('clientName')
+      if (clientname) {
+        this.name = clientname
+      }
+    }
+  }
 }
 </script>
 

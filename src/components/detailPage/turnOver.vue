@@ -9,13 +9,13 @@
     <div class="back fund_detail" v-show="!hasError">
       <div class="row">
         <div id="table" class="col-xs-12 table-responsive">
-          <!-- <datatable :columns="columns" :data="getData"  id="data-table" class="table-responsive"></datatable> -->
+          <datatable :columns="columns" :data="getData"  id="data-table" class="table-responsive"></datatable>
         </div>
       </div>
 
       <div class="row">
         <div class="col-xs-12 form-inline">
-          <!-- <datatable-pager v-model="page" type="abbreviated"  :per-page="per_page"></datatable-pager> -->
+          <datatable-pager v-model="page" type="abbreviated"  :per-page="per_page"></datatable-pager>
         </div>
       </div>
     </div>
@@ -47,12 +47,12 @@ export default {
 
   methods: {
     getData: function (params, setRowData) {
-        debugger
-      params.dsCode = this.$route.params.foundId
+        // debugger
+      params.dsCode = this.$route.params.id
       params.from = (params.page_number - 1) * params.page_length
       params.page = params.page_number
       params.page_saze = 10
-      service.getMethod('/invest/fund/user/turnover', {params: params})
+      generalService.getMethod('/invest/fund/user/turnover', {params: params})
         .then(response => {
           if (response.content.data.length === 0) {
             this.hasError = true

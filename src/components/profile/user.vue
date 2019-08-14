@@ -26,7 +26,7 @@
                         v-validate="'required|alpha'"
                       />
                       <div class="form-alert">
-                        <p>{{ errors.first('firstName') }}</p>
+                        <p v-show="errors.has('firstName')">{{ errors.first('firstName') }}</p>
                       </div>
                       <i class="placeholder">نام</i>
                       <i class="line"></i>
@@ -43,7 +43,7 @@
                         v-validate="'required|alpha'"
                       />
                       <div class="form-alert">
-                        <p>{{ errors.first('lastName') }}</p>
+                        <p v-show="errors.first('lastName')">{{ errors.first('lastName') }}</p>
                       </div>
                       <i class="placeholder">نام خانوادگی</i>
                       <i class="line"></i>
@@ -258,7 +258,7 @@
                       <div class="form-alert">
                         <p>{{ errors.first('ibanNumber') }}</p>
                       </div>
-                      <span class="format_inp">IR XXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+                      <span class="format_inp">مثال:IR410160000000008301078412</span>
                       <i class="placeholder">شماره شبا</i>
                       <i class="line"></i>
                     </div>
@@ -282,9 +282,12 @@
 </template>
 
 <script>
-import PageHeader from "../header/PageHeader";
-import generalService from "@/services/generalService";
-import { debuglog } from "util";
+
+import PageHeader from '../header/PageHeader'
+import sharedService from '@/services/sharedService'
+
+import generalService from "@/services/generalService"
+import { debuglog } from "util"
 
 export default {
   name: "user",
@@ -296,35 +299,49 @@ export default {
   components: {
     PageHeader
   },
+  mounted () {
+    sharedService.handleInputLabels()
+    sharedService.checkInputs()
+    sharedService.toggleMenu()
+  },
   methods: {
-    nationalIdMobileCompatibility() {
-      //check value of mobile and natonalcode
-      let condition = true;
+
+    submitData () {
+      this.$validator.validate().then(valid => {
+        if (!valid) {
+          alert()
+        } else {
+          // this.$bvModal.show('modal1')
+        }
+      })
+    },
+    nationalIdMobileCompatibility () {
+      // check value of mobile and natonalcode
+      let condition = true
       if (condition) {
         generalService
-          .getMethod("auth/nationalId-mobile-compatibility", {
-            params: { nationalId: "4680059088", mobileNumber: "09120450115" }
+          .getMethod('auth/nationalId-mobile-compatibility', {
+            params: {nationalId: '4680059088', mobileNumber: '09120450115'}
           })
           .then(response => {
-            if (response.message === "OK" && response.status === 0) {
+            if (response.message === 'OK' && response.status === 0) {
               if (response.content.status) {
               } else {
                 this.errors.add({
-                  field: "mobileNumber",
-                  msg: "کد ملی و شماره موبایل تطابق ندارد"
+                  field: 'mobileNumber',
+                  msg: 'کد ملی و شماره موبایل تطابق ندارد'
                 })
               }
             }
           })
           .catch(error => {
-            //todo
+            // todo
             console.log(error.response.message);
           })
       }
     },
-    getBankInfo()
-    {
-       let condition = true;
+    getBankInfo () {
+      let condition = true
       if (condition) {
         // generalService
         //   .getMethod("account", {
@@ -348,23 +365,20 @@ export default {
         //   })
       }
     },
-    submitData() {
-    },
-    previewFiles() {
-      let files = this.$refs.myFile.files;
-      let That = this;
+
+    previewFiles () {
+      let files = this.$refs.myFile.files
+      let That = this
       if (files && files[0]) {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-          That.profileImage = e.target.result;
-        };
-
-        reader.readAsDataURL(files[0]);
+        const reader = new FileReader()
+        reader.onload = function (e) {
+          That.profileImage = e.target.result
+        }
+        reader.readAsDataURL(files[0])
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

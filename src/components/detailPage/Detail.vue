@@ -12,7 +12,7 @@
                 <a href="#" @click="showComponent('requestReport')">گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="#" @click="showComponent('statement')" >گردش حساب</a>
+                <a href="#" @click="showComponent('statement')">گردش حساب</a>
               </li>
               <li>
                 <a href="" @click="goToUserProfile()">اطلاعات کاربر</a>
@@ -29,11 +29,11 @@
             </ul>
           </div>
           <div>
-            <!-- <request-report v-bind:fund="fund"></request-report> -->
-<!--            <component :is="currentComponent"></component>-->
+            <request-report v-bind:fund="fund"></request-report>
+           <!-- <component :is="currentComponent"></component> -->
           </div>
           <div>
-            <turnover></turnover>
+            <!-- <turnover></turnover> -->
           </div>
           <div>
             <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
@@ -111,24 +111,22 @@ export default {
       this.$bvModal.hide('innerSodoorModal')
     },
     connectToBank: function () {
-      let baseUrl= window.location.origin // + '/#/'
+      let baseUrl = window.location.origin // + '/#/'
       debugger
-      let paymentObj=
+      let paymentObj =
       {
-         detail: "string",
+        detail: 'string',
         price: 100000,
-        redirectUrl: baseUrl+"/redirect" // `${baseUrl}/redirect`
+        redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
       }
-      service.postMethod("payment",paymentObj).then(response=>{
-        if(response.message === "OK" && response.status===0)
-        {
+      service.postMethod('payment', paymentObj).then(response => {
+        if (response.message === 'OK' && response.status === 0) {
           window.location.href = response.content.redirectUrl
         }
-      }).catch(error=>{})
+      }).catch(error => {})
     },
     getFunds: function () {
-      // let url = 'invest/fund/{' + id + '}'
-      service.getMethod('invest/fund/10915')
+      service.getMethod('invest/fund/10915',2)
         .then(response => {
           this.fund = response.content
         })
@@ -152,4 +150,5 @@ export default {
   .btn.btn-cancel{
     border: none;
   }
+
 </style>

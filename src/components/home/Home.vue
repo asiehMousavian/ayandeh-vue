@@ -1,7 +1,7 @@
 <template>
   <div class="all">
     <page-header></page-header>
-    <loading :active.sync="isLoading"></loading>
+    <!-- <loading :active.sync="isLoading"></loading> -->
 
     <!-- Main -->
     <div id="main" role="main">
@@ -29,6 +29,31 @@
       </div>
     </div>
     <!-- Main -->
+    <!-- Small Menu -->
+    <div class="small_menu">
+      <a href="javascripts:void(0)" class="small_menu_close">
+        <img src="@/assets/img/close.png" alt="">
+      </a>
+      <span class="small_menu_t">منوی دسترسی</span>
+      <ul class="list-unstyled">
+        <li>
+          <a href="#">صندوق‌های سرمایه‌گذاری</a>
+        </li>
+        <li>
+          <a href="#">همکاران ما</a>
+        </li>
+        <li>
+          <a href="#">درباره ما</a>
+        </li>
+        <li>
+          <a href="#">تماس با ما</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Small Menu -->
+    <!-- Filter Body -->
+    <div class="filter_body"></div>
+    <!-- Filter Body -->
   </div>
 </template>
 
@@ -36,19 +61,16 @@
 import PageHeader from '../header/PageHeader'
 import register from '../home/register'
 import login from '../home/login'
-import { debuglog } from 'util'
-
-  import Loading from 'vue-loading-overlay'
-  import 'vue-loading-overlay/dist/vue-loading.css'
-
+import sharedService from '@/services/sharedService'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'Home',
   data () {
     return {
-      tabs: ['/login', '/register'],
-      tabIndex: 1,
-      isLoading :true
+      tabIndex: 0
+      // isLoading: true
     }
   },
   components: {
@@ -58,19 +80,19 @@ export default {
     // setTimeout(() => {
     //   this.isLoding=false
     // }, 1000)
-
-
-    setTimeout(() => {
-      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
-    }, 100)
+    // setTimeout(() => {
+    //   this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
+    // }, 100)
+    sharedService.handleInputLabels()
+    sharedService.checkInputs()
+    sharedService.toggleMenu()
   },
-  beforeCreate()
-  {
-    setTimeout(() => {
-      this.isLoading=false
-    }, 1000)
-
-  }
+ 
+  // beforeCreate () {
+  //   setTimeout(() => {
+  //     this.isLoading = false
+  //   }, 1000)
+  // }
 
 }
 </script>

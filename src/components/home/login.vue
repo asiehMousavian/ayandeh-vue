@@ -35,10 +35,10 @@
 </template>
 
 <script>
+import submitButton from '../share/submitButton'
 import generalService from '@/services/generalService'
-import sharedService from '@/services/sharedService'
 import VueLoadingButton from 'vue-loading-button'
-
+import sharedService from '@/services/sharedService'
 export default {
   name: 'login',
   data () {
@@ -46,104 +46,98 @@ export default {
       submitTitle: 'ورود به حساب کاربری',
       mobile: '',
       password: '',
-      responseRresult:'',
-      isLoading:false
+      result: '',
+      isLoading: false,
+      responseRresult:''
     }
   },
   components:{VueLoadingButton},
   computed: {
     isComplete () {
      return this.mobile && this.password
-   
   }
 },
-
   methods: {
     login: function () {
-      this.isLoading = true;
-      setTimeout(() => 
-      {
+      this.isLoading = true
+      setTimeout(() => {
         this.$validator.validateAll().then(result => {
-        if (result) {
-          // let UserInfo={
-          //   mobile: this.mobile,
-          //   password:this.password
-          // }
-          let UserInfo = {
-            email: 'ehs.ghasemi@gmail.com',
-            password: '1'
-          }
-          //   let UserInfo={
-          //     email: "shokri074@gmail.com",
-          //     password:"123"
-          // }
-          generalService.postMethod('auth/login', UserInfo).then(response => 
-          {
-            if (response.message === 'OK' && response.status === 0) {
-              if(response.content.user.isActive)
-              {
-                let fullname=response.content.user.firstName +" "+response.content.user.lastName
-                this.$session.start()
-                this.$session.set('isLogged', true)
-                this.$session.set('clientName', fullname)
-                // this.$clientName.value=fullname
-                this.$router.push('detailList')
-              }
-              else
-              {
-                sharedService.Failed("حساب کاربری شما در انتظار تایید است")
-              }
-              
+          if (result) {
+            // let UserInfo={
+            //   mobile: this.mobile,
+            //   password:this.password
+            // }
+            let UserInfo = {
+              email: 'ehs.ghasemi@gmail.com',
+              password: '1'
             }
-          }).catch(error => 
-          {
-           this.responseRresult= error.response.data.message
-          })
-        }
-         else {}
-      })
-      this.isLoading = false}, 1000);
+            //   let UserInfo={
+            //     email: "shokri074@gmail.com",
+            //     password:"123"
+            // }
+            generalService.postMethod('auth/login', UserInfo).then(response => {
+              if (response.message === 'OK' && response.status === 0) {
+                if (response.content.user.isActive) {
+                  let fullname = response.content.user.firstName + ' ' + response.content.user.lastName
+                  this.$session.start()
+                  this.$session.set('isLogged', true)
+                  this.$session.set('clientName', fullname)
+                  this.$session.set('nationalId', response.content.user.nationalId)
+                  this.$router.push('detailList')
+                } 
+                else {
+                  sharedService.Failed('حساب کاربری شما در انتظار تایید است')
+                }
+              }
+            }).catch(error => {
+              this.responseRresult = error.response.data.message
+            })
+          }
+           else {
+             //todo
+          }
+        })
+        this.isLoading = false
+      }, 1000)
     }
   }
 }
 </script>
-
 <style scoped>
-.form-alert {
-  left: 0;
-  background-color: #fff;
-}
-.format_inp {
-  display: block;
-  color: #575757;
-  font-size: 15px;
-  position: absolute;
-  right: 0;
-  direction: ltr;
-}
-
-#loginForm #phoneHint
-{
-  direction: ltr;
-}
-
-@media only screen and (max-width: 991px) {
- #loginForm .format_inp {
-    font-size: 12px;
+  .form-alert {
+    left: 0;
+    background-color: #fff;
   }
-}
-@media only screen and (max-width: 567px) {
- #loginForm .format_inp {
-    font-size: 10px;
+  .format_inp {
+    display: block;
+    color: #575757;
+    font-size: 15px;
+    position: absolute;
+    right: 0;
+    direction: ltr;
   }
-}
 
-.btn {
-  height: 48px;
-  line-height: 47px;
-  font-size: 18px;
-  font-family: "Iransans_Bold";
-  padding: 0 45px;
-  cursor: pointer;
-}
+  #loginForm #phoneHint
+  {
+    direction: ltr;
+  }
+
+  @media only screen and (max-width: 991px) {
+   #loginForm .format_inp {
+      font-size: 12px;
+    }
+  }
+  @media only screen and (max-width: 567px) {
+   #loginForm .format_inp {
+      font-size: 10px;
+    }
+  }
+  .btn {
+    height: 48px;
+    line-height: 47px;
+    font-size: 18px;
+    font-family: "Iransans_Bold";
+    padding: 0 45px;
+    cursor: pointer;
+  }
 </style>

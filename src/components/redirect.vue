@@ -22,6 +22,21 @@
             </div>
             <h1 class="page-header c_red">متاسفانه درخواست خرید با خطا مواجه شد</h1>
           </div>
+
+
+<!-- <div v-if="status==props.status.pending">
+            <div class="d-flex">
+              <img class="mx-auto" src="@/assets/images/checked (1).png" alt="">
+            </div>
+            <h1 class="page-header c_green">درخواست صدور صندوق شما با موفقیت انجام شد</h1>
+          </div>
+          <div v-else-if="status==props.status.pending">
+            <div class="d-flex">
+              <img class="mx-auto" src="@/assets/images/error.png" alt="">
+            </div>
+            <h1 class="page-header c_red">متاسفانه درخواست خرید با خطا مواجه شد</h1>
+          </div> -->
+
           <div class="row">
             <div class="col-xl-6 offset-xl-3 col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-xs-12" >
               <div class="d-flex flex-column main-body">
@@ -52,68 +67,74 @@
 <script>
 import PageHeader from './header/PageHeader'
 import submitButton from './share/submitButton'
+// eslint-disable-next-line no-unused-vars
+import { truncate } from 'fs'
 import generalService from '@/services/generalService'
+import { debuglog } from 'util';
 // import Loading from 'vue-loading-overlay'
 // import 'vue-loading-overlay/dist/vue-loading.css'
-
-import { truncate } from 'fs';
 export default {
   name: 'redirect',
+// props: {
+//   status: {
+//     type: String,
+//     enum: ['success', 'failed', 'pending']
+//   }
+// },
   components: {
     PageHeader, submitButton
   },
   data: function () {
     return {
       isSucceed: true,
+      // status:"props.status.pending",
       receiptNumber: '۴۳۲۱۵۸۷۱۲',
       statementButton: 'مشاهده گردش حساب',
       accountButton: 'مشاهده اطلاعات کاربر',
-      isDone:false
+      isDone: false
       // isLoading :true
     }
   },
   methods: {
     back: function () {
-      //todo
+      // todo
       this.$router.push('/detailList')
     },
-    goToStatement:function()
-    {
+    goToStatement: function () {
+
     },
-    goToUserProfile:function()
-    {
+    goToUserProfile: function () {
       this.$router.push('/user')
     },
-    getInvoiceStatus()
-    {
-        let invoiceId = this.$route.params.invoiceId
-        generalService.getMethod(`payment/invoice/${invoiceId}/`).then(response=>{
-        if(response.message=="OK" && response.status===0)
-        {
-            this.receiptNumber=response.content.receiptNumber
-            if(response.content.status==="Failed")
-              this.isSucceed = false
-            else
-              this.isSucceed = true
-        }
-        else
-        {
-          //todo
+    getInvoiceStatus: function () {
+      let invoiceId = this.$route.params.invoiceId
+      generalService.getMethod(`payment/invoice/${invoiceId}/`).then(response => {
+        if (response.message === 'OK' && response.status === 0) {
+          this.receiptNumber = response.content.receiptNumber
+          if (response.content.status === 'Failed') {
+            this.isSucceed = false
+          } else {
+            this.isSucceed = true
+          }
+        } else {
+          // todo
           debugger
         }
-       
-    }).catch(error=>{
-      //todo
-      console.log(error)
-    })
-    setTimeout(() => {this.isDone=true}, 200)
+      }).catch(error => {
+        // todo
+        console.log(error)
+      })
+      setTimeout(() => {
+        this.isDone = true
+      }, 200)
     }
   },
   mounted () {
+    // debugger
+    // console.log(this.props)
     this.getInvoiceStatus()
   },
-  beforeCreate()
-  {
+  beforeCreate () {
     // setTimeout(() => {this.isLoading=false}, 3000)
   }
 }

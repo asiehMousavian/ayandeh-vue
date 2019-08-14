@@ -41,7 +41,7 @@
             <div class="d-flex align-items-center mr-auto">
               <span class="login_link">
                 {{name}}
-                <img src="@/assets/img/avatar.svg" alt="">
+                <img src="@/assets/img/avatar.svg" alt="" v-if="name">
               </span>
               <!-- <a href="/" class="login_link"> -->
               <!-- {{name}} -->

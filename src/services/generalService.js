@@ -17,8 +17,8 @@ axios.interceptors.request.use(function (config) {
 })
 export default {
   // ============== General Get method
-  getMethod (url, data = {params: {}},retries) {
-    return axios.get(url, data, {'axios-retry': {retries: retries}})
+  getMethod (url, data = {params: {}}) {
+    return axios.get(url, data, {'axios-retry': {retries: data.retries}})
     // return axios.get(url, data)
 
       .then(response => {

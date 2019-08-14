@@ -12,7 +12,6 @@
           <datatable :columns="columns" :data="getData"  id="data-table" class="table-responsive"></datatable>
         </div>
       </div>
-
       <div class="row">
         <div class="col-xs-12 form-inline">
           <datatable-pager v-model="page" type="abbreviated"  :per-page="per_page"></datatable-pager>
@@ -20,10 +19,13 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import generalService from '@/services/generalService'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
   name: 'turnOver',
   props: ['row', 'column'],
@@ -44,16 +46,20 @@ export default {
       errorMsg: ''
     }
   },
+  components:{Loading},
+  mounted() {
+  },
 
   methods: {
     getData: function (params, setRowData) {
-        // debugger
-      params.dsCode = this.$route.params.id
+      params.dsCode = this.$route.params.fundId
       params.from = (params.page_number - 1) * params.page_length
       params.page = params.page_number
       params.page_saze = 10
       generalService.getMethod('/invest/fund/user/turnover', {params: params})
         .then(response => {
+         debugger
+
           if (response.content.data.length === 0) {
             this.hasError = true
             this.errorMsg = 'نتیجه ای یافت نشد'
@@ -78,6 +84,7 @@ export default {
           } else {
             this.errorMsg = 'اطلاعاتی وجود ندارد'
           }
+
       })
     }
   }

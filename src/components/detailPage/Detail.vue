@@ -8,33 +8,38 @@
         <div class="container">
           <div class="detail_btn">
             <ul class="list-unstyled">
-              <li>
-                <a href="#" @click="showComponent('requestReport')">گزارش درخواست‌ها</a>
+              <li >
+                <a href="" @click.prevent="showComponent('requestReport')" >گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="#" @click="showComponent('statement')">گردش حساب</a>
+                <a href="" @click.prevent="showComponent('turnover')">گردش حساب</a>
               </li>
               <li>
-                <a href="" @click="goToUserProfile()">اطلاعات کاربر</a>
+                <a href="" @click.prevent="goToUserProfile()">اطلاعات کاربر</a>
               </li>
               <li>
-                <a href="#" v-b-modal.descModal>توضیحات صندوق</a>
+                <a href="" v-b-modal.descModal>توضیحات صندوق</a>
               </li>
               <li>
-                <a href="#" v-b-modal.sodoorModal>صدور واحد</a>
+                <a href="" v-b-modal.sodoorModal>صدور واحد</a>
               </li>
               <li>
-                <a href="#" data-toggle="modal" data-target="#ebtalModal">ابطال واحد</a>
+                <a href="" data-toggle="modal" data-target="#ebtalModal">ابطال واحد</a>
               </li>
             </ul>
           </div>
+
           <div>
+            <component :is="currentComponent"></component>
+          </div>
+
+          <!-- <div v-if="currentComponent ==='requestReport'">
             <request-report v-bind:fund="fund"></request-report>
-           <!-- <component :is="currentComponent"></component> -->
           </div>
-          <div>
-            <!-- <turnover></turnover> -->
-          </div>
+          <div v-else-if="currentComponent ==='turnover'">
+            <turnover></turnover>
+          </div> -->
+
           <div>
             <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
               <container>
@@ -75,80 +80,89 @@
 </template>
 
 <script>
-import PageHeader from '../header/PageHeader'
-import Banner from '../share/Banner'
-import requestReport from './requestReport'
-import statement from './statement'
-import fundDescription from './fundDescription'
-import issueUnit from './issueUnit'
-import innerSodoor from './innerSodoor'
+import PageHeader from "../header/PageHeader";
+import Banner from "../share/Banner";
+import requestReport from "./requestReport";
+import statement from "./statement";
+import fundDescription from "./fundDescription";
+import issueUnit from "./issueUnit";
+import innerSodoor from "./innerSodoor";
 
-import turnover from './turnOver'
-import service from '@/services/generalService.js'
-// import { resolve } from 'dns';
+import turnover from "./turnOver";
+import service from "@/services/generalService.js";
 export default {
-  name: 'Detail',
-  data () {
+  name: "Detail",
+  data() {
     return {
       // fundtitle: 'صندوق سرمایه‌گذاری گسترش فردای ایرانیان',
       // fundtext: 'با مجور رسمی از سازمان بورس',
       // funddate: '94/4/21',
-      currentComponent: 'requestReport',
+      currentComponent: "requestReport",
       fund: {}
-    }
+    };
   },
   methods: {
-    showComponent: function (componentName) {
-      // alert(componentName)
-      this.currentComponent = componentName
+    showComponent: function(componentName) {
+      this.currentComponent = componentName;
+      localStorage.setItem('currentComponent', this.currentComponent)
     },
-    goToUserProfile: function () {
-      this.$router.push('/user')
+    goToUserProfile: function() {
+      this.$router.push("/user");
     },
-    closeModal: function () {
-      this.$bvModal.hide('descModal')
-      this.$bvModal.hide('sodoorModal')
-      this.$bvModal.hide('innerSodoorModal')
+    closeModal: function() {
+      this.$bvModal.hide("descModal");
+      this.$bvModal.hide("sodoorModal");
+      this.$bvModal.hide("innerSodoorModal");
     },
-    connectToBank: function () {
-      let baseUrl = window.location.origin // + '/#/'
-      debugger
-      let paymentObj =
-      {
-        detail: 'string',
+    connectToBank: function() {
+      let baseUrl = window.location.origin; // + '/#/'
+      debugger;
+      let paymentObj = {
+        detail: "string",
         price: 100000,
-        redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
-      }
-      service.postMethod('payment', paymentObj).then(response => {
-        if (response.message === 'OK' && response.status === 0) {
-          window.location.href = response.content.redirectUrl
-        }
-      }).catch(error => {})
-    },
-    getFunds: function () {
-      service.getMethod('invest/fund/10915',2)
+        redirectUrl: baseUrl + "/redirect" // `${baseUrl}/redirect`
+      };
+      service
+        .postMethod("payment", paymentObj)
         .then(response => {
-          this.fund = response.content
+          if (response.message === "OK" && response.status === 0) {
+            window.location.href = response.content.redirectUrl;
+          }
         })
-        .catch(error => {
-          console.log(error)
-        })
+        .catch(error => {});
     }
+   
   },
   components: {
-    PageHeader, Banner, requestReport, statement, fundDescription, issueUnit, innerSodoor,turnover
+    PageHeader,
+    Banner,
+    requestReport,
+    statement,
+    fundDescription,
+    issueUnit,
+    innerSodoor,
+    turnover
   },
-  mounted () {
-    // let myId = this.$route.params.id
-    this.getFunds()
+  mounted() {
+    let savedComponent = localStorage.getItem('currentComponent')
+    if(savedComponent == null)
+    {
+      localStorage.setItem('currentComponent', this.currentComponent)
+    }
+    else
+      this.currentComponent=savedComponent
   }
 
-}
+};
 </script>
 
 <style scoped>
-  .btn.btn-cancel{
-    border: none;
-  }
+.btn.btn-cancel {
+  border: none;
+}
 
+.active
+{
+    background-color: #5c3226;
+}
 </style>

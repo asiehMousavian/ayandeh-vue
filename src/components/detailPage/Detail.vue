@@ -152,7 +152,6 @@ export default {
     else
       this.currentComponent=savedComponent
   }
-
 };
 </script>
 

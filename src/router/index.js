@@ -57,27 +57,25 @@ let sessionObj = {
 
 var GetSession = function (to, from, next) {
   if (!generalService.getSession()) {
-  generalService.postMethod('auth/session', sessionObj).then(response => {
-    if (response.message === 'OK' && response.status === 0) {
-      if (response.content.session) {
+    generalService.postMethod('auth/session', sessionObj).then(response => {
+      if (response.message === 'OK' && response.status === 0) {
+        if (response.content.session) {
         // todo
         // localStorage.setItem("session",JSON.stringify(response.content.session))
         // ehsan
-        localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
+          localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
         // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+        }
+        generalService.setSession()
+        next()
       }
-      generalService.setSession()
-      next()
-    }
     // eslint-disable-next-line handle-callback-err
-  }).catch(error => {
+    }).catch(error => {
     // todo
-  })
-}
-else{
-  next()
-}
-
+    })
+  } else {
+    next()
+  }
 }
 var checkSession = function (to, from, next) {
   if (session.has('isLogged')) {

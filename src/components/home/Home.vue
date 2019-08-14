@@ -2,7 +2,6 @@
   <div class="all">
     <page-header></page-header>
     <loading :active.sync="isLoading"></loading>
-
     <!-- Main -->
     <div id="main" role="main">
       <div class="mainarea">
@@ -29,31 +28,9 @@
       </div>
     </div>
     <!-- Main -->
-    <!-- Small Menu -->
-    <div class="small_menu">
-      <a href="javascripts:void(0)" class="small_menu_close">
-        <img src="@/assets/img/close.png" alt="">
-      </a>
-      <span class="small_menu_t">منوی دسترسی</span>
-      <ul class="list-unstyled">
-        <li>
-          <a href="#">صندوق‌های سرمایه‌گذاری</a>
-        </li>
-        <li>
-          <a href="#">همکاران ما</a>
-        </li>
-        <li>
-          <a href="#">درباره ما</a>
-        </li>
-        <li>
-          <a href="#">تماس با ما</a>
-        </li>
-      </ul>
-    </div>
-    <!-- Small Menu -->
-    <!-- Filter Body -->
-    <div class="filter_body"></div>
-    <!-- Filter Body -->
+    <!-- Mobile Menu -->
+    <toggleMenu></toggleMenu>
+    <!-- Mobile Menu -->
   </div>
 </template>
 
@@ -61,10 +38,8 @@
 import PageHeader from '../header/PageHeader'
 import register from '../home/register'
 import login from '../home/login'
+import toggleMenu from '../share/toggleMenu'
 import sharedService from '@/services/sharedService'
-// eslint-disable-next-line no-unused-vars
-// import { debuglog } from 'util'
-
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 
@@ -77,13 +52,9 @@ export default {
     }
   },
   components: {
-    PageHeader, register, login, Loading
+    PageHeader, register, login, Loading, toggleMenu
   },
   mounted () {
-    // setTimeout(() => {
-    //   this.isLoding=false
-    // }, 1000)
-
     setTimeout(() => {
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
     }, 100)

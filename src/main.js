@@ -7,7 +7,7 @@ import BootstrapVue from 'bootstrap-vue'
 import VeeValidate from 'vee-validate'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-// import vueJquery from 'vue-jquery'
+import VueMask from 'v-mask'
 import VueSession from 'vue-session'
 import VueSnackbar from 'vue-snack'
 import 'vue-snack/dist/vue-snack.min.css'
@@ -42,7 +42,7 @@ Vue.use(VueSession)
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(VeeValidate)
-
+Vue.use(VueMask)
 // require('./assets/css/global.css')
 require('./validation/index')
 require('./assets/css/bootstrap.min.css')

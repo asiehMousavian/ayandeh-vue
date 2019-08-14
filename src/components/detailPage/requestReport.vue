@@ -1,5 +1,6 @@
 <template>
-  <div class="detail_list">
+
+  <div class="detail_list" v-if="isDone">
     <ul class="list-unstyled">
       <li>
         <div class="detail_list__p">
@@ -60,15 +61,50 @@
       </li>
     </ul>
   </div>
+  <div v-else>
+    <loading :active.sync="isLoading"></loading>
+  </div>
 </template>
 
 <script>
+import service from '@/services/generalService'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
   name: 'requestReport',
-  props: ['fund'],
+  // props: ['fund'],
+  data () {
+    return {
+      fund: {},
+      isDone: false,
+      isLoading: true
+    }
+  },
+  components: {
+    Loading
+  },
   filters: {
     persianCurrency: function (value) {
       return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1/')
+    }
+  },
+  mounted () {
+    // let myId = this.$route.params.id
+    this.isDone = false
+    this.getFunds()
+  },
+  methods: {
+    getFunds () {
+      let fundID = this.$route.params.fundId
+      service.getMethod('invest/fund/' + fundID)
+        .then(response => {
+          this.fund = response.content
+          this.isDone = true
+        })
+        .catch(error => {
+          console.log(error)
+          this.isDone = true
+        })
     }
   }
   // data: function () {

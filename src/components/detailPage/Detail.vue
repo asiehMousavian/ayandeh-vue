@@ -5,17 +5,17 @@
     <div id="main" role="main">
       <banner v-bind:fund="fund"></banner>
       <div class="mainarea">
-        <div class="container">
+        <div class="container" >
           <div class="detail_btn">
             <ul class="list-unstyled">
               <li>
-                <a href="#" @click="showComponent('requestReport')">گزارش درخواست‌ها</a>
+                <a href="#" @click.prevent="showComponent('requestReport')">گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="#" @click="showComponent('statement')">گردش حساب</a>
+                <a href="#" @click.prevent="showComponent('statement')">گردش حساب</a>
               </li>
               <li>
-                <a href="" @click="goToUserProfile()">اطلاعات کاربر</a>
+                <a href="" @click.prevent="goToUserProfile()">اطلاعات کاربر</a>
               </li>
               <li>
                 <a href="#" v-b-modal.descModal>توضیحات صندوق</a>
@@ -29,8 +29,8 @@
             </ul>
           </div>
           <div>
-            <request-report v-bind:fund="fund"></request-report>
-<!--            <component :is="currentComponent"></component>-->
+<!--            <request-report></request-report>-->
+            <component :is="currentComponent"></component>
           </div>
           <div>
             <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
@@ -68,19 +68,22 @@
       </div>
     </div>
     <!-- Main -->
+    <!-- Mobile Menu -->
+    <toggleMenu></toggleMenu>
+    <!-- Mobile Menu -->
   </div>
 </template>
 
 <script>
 import PageHeader from '../header/PageHeader'
 import Banner from '../share/Banner'
+import toggleMenu from '../share/toggleMenu'
 import requestReport from './requestReport'
 import statement from './statement'
 import fundDescription from './fundDescription'
 import issueUnit from './issueUnit'
 import innerSodoor from './innerSodoor'
 import service from '@/services/generalService'
-
 export default {
   name: 'Detail',
   data () {
@@ -89,7 +92,9 @@ export default {
       // fundtext: 'با مجور رسمی از سازمان بورس',
       // funddate: '94/4/21',
       currentComponent: 'requestReport',
-      fund: {}
+      fund: {},
+      isLoading: true,
+      isDone: false
     }
   },
   methods: {
@@ -118,24 +123,15 @@ export default {
         if (response.message === 'OK' && response.status === 0) {
           window.location.href = response.content.redirectUrl
         }
-      }).catch(error => {})
-    },
-    getFunds: function () {
-      service.getMethod('invest/fund/10915')
-        .then(response => {
-          this.fund = response.content
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      }).catch(error => {
+        console.log()
+      })
     }
   },
   components: {
-    PageHeader, Banner, requestReport, statement, fundDescription, issueUnit, innerSodoor
+    PageHeader, Banner, requestReport, statement, fundDescription, issueUnit, innerSodoor, toggleMenu
   },
   mounted () {
-    // let myId = this.$route.params.id
-    this.getFunds()
   }
 
 }

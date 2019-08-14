@@ -44,8 +44,6 @@ import submitButton from '../share/submitButton'
 import generalService from '@/services/generalService'
 import VueLoadingButton from 'vue-loading-button'
 import sharedService from '@/services/sharedService'
-
-
 export default {
   name: 'login',
   data () {
@@ -90,7 +88,6 @@ export default {
                 } else {
                   sharedService.Failed('حساب کاربری شما در انتظار تایید است')
                 }
-
               }
             }).catch(error => {
               this.responseRresult = error.response.data.message

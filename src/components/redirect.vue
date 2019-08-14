@@ -7,9 +7,7 @@
 
       <div class="mainarea">
         <div v-if="isDone" class="container">
-
-    <!-- <loading :active.sync="isLoading"></loading> -->
-
+          <!-- <loading :active.sync="isLoading"></loading> -->
           <div v-if="isSucceed">
             <div class="d-flex">
               <img class="mx-auto" src="@/assets/images/checked (1).png" alt="">
@@ -46,6 +44,9 @@
       </div>
     </div>
     <!-- MainBody-->
+    <!-- Mobile Menu -->
+    <toggleMenu></toggleMenu>
+    <!-- Mobile Menu -->
   </div>
 </template>
 
@@ -53,14 +54,14 @@
 import PageHeader from './header/PageHeader'
 import submitButton from './share/submitButton'
 // eslint-disable-next-line no-unused-vars
-import { truncate } from 'fs'
+import toggleMenu from './share/toggleMenu'
 import generalService from '@/services/generalService'
 // import Loading from 'vue-loading-overlay'
 // import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
   name: 'redirect',
   components: {
-    PageHeader, submitButton
+    PageHeader, submitButton, toggleMenu
   },
   data: function () {
     return {

@@ -12,7 +12,9 @@
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
             </p>
             <div class="d-flex justify-content-end">
-              <button @click="goToDetail(10915)" class="btn">مشاهده صندوق</button>
+              <VueLoadingButton @click.native="goToDetail(10915)" class="btn" :loading="isLoading" >
+                {{submitTitle}}
+              </VueLoadingButton>
             </div>
           </div>
           <div class="d-flex justify-content-between box-footer">
@@ -26,12 +28,26 @@
 </template>
 
 <script>
+import VueLoadingButton from 'vue-loading-button'
 export default {
   props: ['fund'],
   name: 'boxComponent',
+  data () {
+    return {
+      submitTitle: 'مشاهده صندوق',
+      isLoading: false
+    }
+  },
+  components: {
+    VueLoadingButton
+  },
   methods: {
     goToDetail: function () {
-      this.$router.push('detail/10915')
+      this.isLoading = true
+      setTimeout(() => {
+        this.isLoading = true
+        this.$router.push('detail/10915')
+      }, 1000)
     }
   }
 }

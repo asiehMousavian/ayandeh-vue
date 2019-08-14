@@ -24,12 +24,8 @@
         </div>
       </div>
       <div class="d-flex box_c">
-
-<!--        <submit-button v-bind:buttonTitle="submitTitle" v-on:submit="login"></submit-button>-->
-
         <!-- <button  :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.prevent="login">{{submitTitle}}</button> -->
-        <VueLoadingButton :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.native="login" :loading="isLoading">{{submitTitle}}</VueLoadingButton>
-
+        <VueLoadingButton :disabled = 'errors.any() || !isComplete' type="button" class="btn mx-auto" @click.native="login" :loading="isLoading">{{submitTitle}}</VueLoadingButton>
       </div>
       <div class="d-flex">
         <a href="#" class="forget_pass mx-auto">فراموشی رمز عبور؟</a>
@@ -39,7 +35,6 @@
 </template>
 
 <script>
-
 import submitButton from '../share/submitButton'
 import generalService from '@/services/generalService'
 import VueLoadingButton from 'vue-loading-button'
@@ -52,12 +47,16 @@ export default {
       mobile: '',
       password: '',
       result: '',
-      isLoading: false
+      isLoading: false,
+      responseRresult:''
     }
   },
-  components: {
-    submitButton, VueLoadingButton
-  },
+  components:{VueLoadingButton},
+  computed: {
+    isComplete () {
+     return this.mobile && this.password
+  }
+},
   methods: {
     login: function () {
       this.isLoading = true
@@ -83,32 +82,27 @@ export default {
                   this.$session.start()
                   this.$session.set('isLogged', true)
                   this.$session.set('clientName', fullname)
-                  // this.$clientName.value=fullname
+                  this.$session.set('nationalId', response.content.user.nationalId)
                   this.$router.push('detailList')
-                } else {
+                } 
+                else {
                   sharedService.Failed('حساب کاربری شما در انتظار تایید است')
                 }
               }
             }).catch(error => {
               this.responseRresult = error.response.data.message
             })
-          } else {
+          }
+           else {
+             //todo
           }
         })
         this.isLoading = false
       }, 1000)
     }
-  },
-  computed: {
-    isComplete () {
-      this.$validator.validateAll().then(result => {
-        return result
-      })
-    }
   }
 }
 </script>
-
 <style scoped>
   .form-alert {
     left: 0;

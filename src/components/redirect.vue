@@ -1,20 +1,19 @@
 <template>
-  <div class="all">
+  <div>
     <page-header></page-header>
-
     <!-- MainBody-->
     <div id="main" role="main">
-
       <div class="mainarea">
-        <div v-if="isDone" class="container">
-          <!-- <loading :active.sync="isLoading"></loading> -->
+        <div class="container" v-if="isDone">
           <div v-if="isSucceed">
+            <!-- <div v-if="status==1"> -->
             <div class="d-flex">
               <img class="mx-auto" src="@/assets/images/checked (1).png" alt="">
             </div>
             <h1 class="page-header c_green">درخواست صدور صندوق شما با موفقیت انجام شد</h1>
           </div>
           <div v-else>
+            <!-- <div v-if="status==2"> -->
             <div class="d-flex">
               <img class="mx-auto" src="@/assets/images/error.png" alt="">
             </div>
@@ -41,27 +40,25 @@
             </div>
           </div>
         </div>
+        <div v-else>
+          <loading :active.sync="isLoading"></loading>
+        </div>
       </div>
     </div>
     <!-- MainBody-->
-    <!-- Mobile Menu -->
-    <toggleMenu></toggleMenu>
-    <!-- Mobile Menu -->
   </div>
 </template>
 
 <script>
 import PageHeader from './header/PageHeader'
 import submitButton from './share/submitButton'
-// eslint-disable-next-line no-unused-vars
-import toggleMenu from './share/toggleMenu'
 import generalService from '@/services/generalService'
-// import Loading from 'vue-loading-overlay'
-// import 'vue-loading-overlay/dist/vue-loading.css'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
   name: 'redirect',
   components: {
-    PageHeader, submitButton, toggleMenu
+    PageHeader, submitButton, Loading
   },
   data: function () {
     return {
@@ -69,8 +66,8 @@ export default {
       receiptNumber: '۴۳۲۱۵۸۷۱۲',
       statementButton: 'مشاهده گردش حساب',
       accountButton: 'مشاهده اطلاعات کاربر',
-      isDone: false
-      // isLoading :true
+      isDone: false,
+      isLoading: true
     }
   },
   methods: {
@@ -86,7 +83,7 @@ export default {
     },
     getInvoiceStatus: function () {
       let invoiceId = this.$route.params.invoiceId
-      generalService.getMethod(`payment/invoice/${invoiceId}/`).then(response => {
+      generalService.getMethod(`payment/invoice2/${invoiceId}/`,{retries:2}).then(response => {
         if (response.message === 'OK' && response.status === 0) {
           this.receiptNumber = response.content.receiptNumber
           if (response.content.status === 'Failed') {
@@ -98,20 +95,18 @@ export default {
           // todo
           debugger
         }
+        this.isDone = true
       }).catch(error => {
         // todo
         console.log(error)
-      })
-      setTimeout(() => {
         this.isDone = true
-      }, 200)
+        this.isSucceed = false
+      })
     }
   },
   mounted () {
+    this.isDone = false
     this.getInvoiceStatus()
-  },
-  beforeCreate () {
-    // setTimeout(() => {this.isLoading=false}, 3000)
   }
 }
 </script>

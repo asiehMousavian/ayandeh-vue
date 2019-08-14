@@ -6,7 +6,7 @@
           خواهد شد</p>
       </div>
       <div class="modal_desc">
-        <p>کد ملی 0024323653 21 واحد دارد.</p>
+        <p>کد ملی <span>{{nationalId}}</span> <span>-{{unit}}-</span> واحد دارد.</p>
       </div>
       <form>
         <div class="f_body d-flex">
@@ -34,11 +34,22 @@ export default {
   data () {
     return {
       unitNumb: 'ورود تعداد واحد',
-      seeValue: 'مشاهده ارزش به ریال'
+      seeValue: 'مشاهده ارزش به ریال',
+      nationalId:'',
+      unit:0
     }
   },
   components: {
     FormInput
+  },
+  mounted()
+  {
+      if (this.$session.has('nationalId')) {
+      let nationalId = this.$session.get('nationalId')
+      if (nationalId) {
+        this.nationalId = nationalId
+      }
+    }
   }
 }
 </script>

@@ -60,23 +60,38 @@ var GetSession = function (to, from, next) {
     generalService.postMethod('auth/session', sessionObj).then(response => {
       if (response.message === 'OK' && response.status === 0) {
         if (response.content.session) {
-        // todo
-        // localStorage.setItem("session",JSON.stringify(response.content.session))
-        // ehsan
+          // todo
+          // localStorage.setItem("session",JSON.stringify(response.content.session))
+          // ehsan
           localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
-        // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+          // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
         }
         generalService.setSession()
-        next()
+        return true
+        // next()
       }
-    // eslint-disable-next-line handle-callback-err
+      // eslint-disable-next-line handle-callback-err
     }).catch(error => {
-    // todo
+      // todo
+      // next({
+      //   name: "login", // back to safety route //
+      //   query: { redirectFrom: to.fullPath }
+      // })
     })
   } else {
-    next()
+    return true
+    // next()
   }
 }
+var isLogged = function () {
+  if (session.has('isLogged')) {
+    let logged = session.get('isLogged')
+    if (logged) { return true}
+  } else {
+    return false
+  }
+}
+
 var checkSession = function (to, from, next) {
   if (session.has('isLogged')) {
     let logged = session.get('isLogged')
@@ -93,12 +108,23 @@ export default new Router({
       name: 'Home',
       component: Home,
       beforeEnter: (to, from, next) => {
-        GetSession(to, from, next)
+        if (GetSession(to, from, next)) {
+          if (isLogged()) {
+            // next(-2)
+            next('detailList')
+          } else {
+            next()
+          }
+        }
       },
       children: [
         {
           path: 'login',
-          component: login
+          component: login,
+          beforeRouteEnter (to, from, next) {
+            debugger
+          }
+
         },
         {
           path: 'register',
@@ -115,7 +141,7 @@ export default new Router({
       }
     },
     {
-      path: '/detail/:id',
+      path: '/detail/:fundId',
       name: 'Detail',
       component: Detail,
       beforeEnter: (to, from, next) => {

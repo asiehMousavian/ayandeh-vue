@@ -1,7 +1,7 @@
 <template>
   <div class="all">
     <page-header></page-header>
-    <loading :active.sync="isLoading"></loading>
+
     <!-- Main -->
     <div id="main" role="main">
       <div class="mainarea">
@@ -33,42 +33,28 @@
     <!-- Mobile Menu -->
   </div>
 </template>
-
 <script>
 import PageHeader from '../header/PageHeader'
 import register from '../home/register'
 import login from '../home/login'
 import toggleMenu from '../share/toggleMenu'
 import sharedService from '@/services/sharedService'
-import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'Home',
   data () {
     return {
-      tabIndex: 1,
-      isLoading: true
+      tabIndex: 0
     }
   },
   components: {
-    PageHeader, register, login, Loading, toggleMenu
+    PageHeader, register, login, toggleMenu
   },
   mounted () {
-    setTimeout(() => {
-      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.path)
-    }, 100)
-
     sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()
-  },
-  beforeCreate () {
-    setTimeout(() => {
-      this.isLoading = false
-    }, 1000)
   }
-
 }
 </script>
 

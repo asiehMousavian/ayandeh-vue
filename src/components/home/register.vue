@@ -27,32 +27,27 @@
         </div>
       </div>
       <div class="d-flex">
-        <button :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.prevent="register">{{registerButton}}</button>
+        <button :disabled = 'errors.any() || !isComplete' type="button" class="btn mx-auto" @click.prevent="register">{{registerButton}}</button>
       </div>
     </form>
   </div>
 </template>
 <script>
-// import FormInput from '../share/FormInput'
-// import submitButton from '../share/submitButton'
 import generalService from '@/services/generalService'
 import sharedService from '@/services/sharedService'
 export default {
   name: 'register',
   data () {
     return {
-      registerButton: 'ورود به پیشخوان',
-      account: '',
-      result: ''
+      registerButton: "ورود به پیشخوان",
+      account: ""
     }
   },
   computed: {
-    isComplete () {
-      this.$validator.validateAll().then(result => {
-        return result
-      })
-    }
-  },
+  isComplete () {
+    return this.account
+  }
+},
   methods: {
     register: function () {
       this.$validator.validateAll().then(result => {
@@ -71,7 +66,9 @@ export default {
             }).catch(error => {
               sharedService.Failed(error.response.data.message)
             })
-        } else {
+        }
+        else {
+          //todo
         }
       })
     }

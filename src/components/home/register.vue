@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       registerButton: "ورود به پیشخوان",
-      account: ""
+      account: "0121212121212"
     }
   },
   computed: {
@@ -61,10 +61,10 @@ export default {
             .postMethod('auth/register', userInfo)
             .then(response => {
               if (response.status === 0 && response.message === 'OK') {
-                sharedService.Done('ثبت نام با موفقیت انجام شد')
+                sharedService.requestDone('ثبت نام با موفقیت انجام شد')
               }
             }).catch(error => {
-              sharedService.Failed(error.response.data.message)
+              sharedService.requestFailed(error.response.data.message)
             })
         }
         else {
@@ -77,6 +77,9 @@ export default {
 </script>
 
 <style scoped>
+
+
+
   #registerForm .form-alert {
     left: 0;
     background-color: #fff;

@@ -1,50 +1,17 @@
 <template>
-  <div class="all">
+  <div>
+    <form action="">
     <h3 class="modal_title">پیش فاکتور صدور</h3>
     <div class="modal_txt">
       <p>عملیات صدور براساس NAV تخمینی برای ۲ روز کاری بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
         خواهد شد</p>
     </div>
     <div class="modal_desc">
-      <p>شما در حال صدور ۱۵۳ واحد سرمایه‌گذاری</p>
-      <p>به ارزش ۱۳،۰۰۰،۰۰۰ ریال می‌باشید</p>
-    </div>
-    <div class="modal_dropdown">
-      <div class="d-flex modal_dropdown_body">
-        <div class="ml-auto">
-          <div class="form-group">
-            <label>نوع پرداخت</label>
-            <div class="no_search">
-<!--              <select class="form-control">-->
-<!--                <option>واریز درگاه</option>-->
-<!--                <option>واریز درگاه</option>-->
-<!--                <option>واریز درگاه</option>-->
-<!--                <option>واریز درگاه</option>-->
-<!--              </select>-->
-              <!-- <vue-select class="vue-select1" name="select1" :options="options1" :model.sync="result1">
-              </vue-select> -->
-
-              <!-- <select class="form-control" v-model="selected">
-                  <option v-for="option in options" v-bind:key="option.value">{{ option.text }}</option>
-              </select> -->
-
-            </div>
-          </div>
-        </div>
-        <div class="mr-auto">
-          <div class="form-group">
-            <label>نوع درگاه</label>
-            <div class="no_search">
-              <select class="form-control">
-                <option>ایران کیش</option>
-                <option>ایران کیش</option>
-                <option>ایران کیش</option>
-                <option>ایران کیش</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
+        <p>
+            شما در حال صدور
+            <i>{{purchaseObj.unitCount}}</i> واحد سرمایه‌گذاری به ارزش
+            <i>{{purchaseObj.price}} ریال</i> می باشید
+        </p>
     </div>
     <div class="confirm_text">
       <p>
@@ -52,30 +19,58 @@
         و <a href="javascripts:void(0)" class="link2">شرایط احراز هویت</a> را مطالعه کرده ام
       </p>
     </div>
+    <br>
+    <div clas="form-alert">
+      <span style="color:#cb0d0d" class="format_inp">{{errMsg}}</span>
+    </div>
+    <br><br>
+    <div slot="modal-footer">
+          <a @click="connectToBank" class="btn">اتصال به درگاه بانک</a>
+          <b-button class="btn btn-cancel" @click="close">انصراف</b-button>
+        </div>
+    </form>
   </div>
-
 </template>
 
 <script>
-import FormInput from '../share/FormInput'
+import service from '@/services/generalService'
 export default {
   name: 'innerSodoor',
   data () {
     return {
-      selected: 'A',
-      options: [
-        { text: 'One', value: 'A' },
-        { text: 'Two', value: 'B' },
-        { text: 'Three', value: 'C' }
-      ]
-    }
+      purchaseObj:{},
+      errMsg:null
+  }
   },
-  components: {
-    FormInput
+  mounted(){
+    this.errMsg=null
+    this.purchaseObj=JSON.parse(this.$session.get("purchaseObj"))
+  },
+  methods:{
+      close() {
+      this.$emit("exit", true)
+    },
+        connectToBank () {
+      // let baseUrl = window.location.origin // + '/#/'
+      // let paymentObj = {
+      //   detail: 'string',
+      //   price: 100000,
+      //   redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
+      // }
+      service.postMethod('payment',this.purchaseObj)
+        .then(response => {
+          debugger
+          if (response.message === 'OK' && response.status === 0) {
+            window.location.href = response.content.redirectUrl
+          }
+        })
+        .catch(error => {
+          this.errMsg=error.response.data.message
+          //todo
+        })
+    }
   }
 }
 </script>
-
 <style scoped>
-
 </style>

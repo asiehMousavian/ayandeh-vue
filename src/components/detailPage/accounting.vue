@@ -1,4 +1,3 @@
-
 <template>
   <div class="container">
     <div class="back fund_detail mb15 table-err" v-if="hasError">
@@ -9,9 +8,13 @@
     <div class="back fund_detail" v-show="!hasError">
       <div class="row">
         <div id="table" class="col-xs-12 table-responsive">
-          <datatable :columns="columns" :data="getData"  id="data-table" class="table-responsive"></datatable>
+          <datatable
+            :columns="columns"
+            :data="getData"
+            id="data-table"></datatable>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12 form-inline">
           <datatable-pager v-model="page" type="abbreviated"  :per-page="per_page"></datatable-pager>
@@ -19,25 +22,24 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 import generalService from '@/services/generalService'
 import sharedService from '@/services/sharedService'
-
 export default {
-  name: 'turnOver',
+  name: 'Accounting',
   props: ['row', 'column'],
   data () {
     return {
       filter: '',
       columns: [
-        {label: 'نام شعبه', field: 'branchName', filterable: false},
-        {label: 'توضیحات', field: 'comments'},
-        {label: 'میزان اعتبار', field: 'creditAmount'},
-        {label: 'میزان بدهی', field: 'debitAmount'},
-        {label: 'نوع تراکنش', field: 'transactionType', align: 'right', sortable: false},
+        {label: 'تاریخ', field: 'orderDate', filterable: false},
+        {label: 'عملیات', field: 'orderTypeName'},
+        {label: 'مبلغ سفارش', field: 'orderAmount'},
+        {label: 'شماره پیگیری', field: 'receiptId'},
+        // {label: 'بستانکار', field: 'transactionType', align: 'right', sortable: false},
+        // {label: 'شعبه', field: 'transactionType', align: 'right', sortable: false}
       ],
       rows: window.rows,
       page: 1,
@@ -46,20 +48,21 @@ export default {
       errorMsg: ''
     }
   },
-  mounted() {
+  mounted () {
   },
   methods: {
-    getData: function (params, setRowData) {
-      params.dsCode = this.$route.params.fundId
+    getData:  function (params, setRowData) {
+      params.dsCode = this.$route.params.foundId
       params.from = (params.page_number - 1) * params.page_length
       params.page = params.page_number
       params.page_saze = 10
-      generalService.getMethod('/invest/fund/user/turnover', {params: params})
+      generalService.getMethod('/invest/fund/user/accounting', {params: params})
         .then(response => {
           if (response.content.data.length === 0) {
             this.hasError = true
             this.errorMsg = 'نتیجه ای یافت نشد'
             // sharedService.requestFailed(this.errorMsg)
+
           }
           let start_index = (params.page_number - 1) * params.page_length
           let end_index = start_index + params.page_length
@@ -69,20 +72,19 @@ export default {
           )
           $("li a").addClass("page-link");
         }).catch(error => {
-          this.hasError = true
-          if (error.response.data.message) {
-            if (error.response.data.developerMessage === 'errors.kariz.dev') {
-              this.errorMsg = 'در بازه زمانی کنونی قادر به دریافت اطلاعات نیستیم'
-            }
-            else {
-              this.errorMsg = 'اطلاعاتی وجود ندارد'
-              // sharedService.requestFailed(this.errorMsg)
-            }
-          } else {
+        this.hasError = true
+        if (error.response.data.message) {
+          if (error.response.data.developerMessage === 'errors.kariz.dev') {
+            this.errorMsg = 'در بازه زمانی کنونی قادر به دریافت اطلاعات نیستیم'
+          }
+          else {
             this.errorMsg = 'اطلاعاتی وجود ندارد'
             // sharedService.requestFailed(this.errorMsg)
-          }
 
+          }
+        } else {
+          this.errorMsg = 'از سرور پاسخ مناسبی دریافت نشد لطفا بعدا مراجعه نمایید'
+        }
       })
     }
   }
@@ -99,4 +101,9 @@ export default {
     color: #5c3226;
     font-size: 18px;
   }
+  #data-table{
+    text-align: right;
+    direction: rtl;
+  }
+
 </style>

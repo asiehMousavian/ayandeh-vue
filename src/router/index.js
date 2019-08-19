@@ -6,6 +6,7 @@ import register from '@/components/home/register'
 import login from '@/components/home//login'
 
 import Detail from '@/components/detailPage/Detail'
+
 import detailList from '@/components/detailList/detailList'
 import redirect from '@/components/redirect'
 import user from '@/components/profile/user'
@@ -147,7 +148,7 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         checkSession(to, from, next)
       }
-    },
+     },
     {
       path: '/redirect/:invoiceId',
       name: 'redirect',

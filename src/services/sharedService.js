@@ -38,14 +38,15 @@ export default {
       $(this).css('display', 'none')
     })
   },
-  Done (msg) {
+  requestDone (msg) {
     snackbar.success({
       text: msg,
-      button: 'باشه'
+      button: 'باشه',
+      // color: '#ddd'
       //   action: this.doSomeThing
     })
   },
-  Failed (msg) {
+  requestFailed (msg) {
     snackbar.danger({
       text: msg,
       button: 'باشه'

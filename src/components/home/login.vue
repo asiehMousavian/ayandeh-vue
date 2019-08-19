@@ -78,15 +78,13 @@ export default {
             generalService.postMethod('auth/login', UserInfo).then(response => {
               if (response.message === 'OK' && response.status === 0) {
                 if (response.content.user.isActive) {
-                  let fullname = response.content.user.firstName + ' ' + response.content.user.lastName
                   this.$session.start()
                   this.$session.set('isLogged', true)
-                  this.$session.set('clientName', fullname)
-                  this.$session.set('nationalId', response.content.user.nationalId)
+                  this.$session.set('clientInfo', JSON.stringify(response.content.user))
                   this.$router.push('detailList')
                 } 
                 else {
-                  sharedService.Failed('حساب کاربری شما در انتظار تایید است')
+                  sharedService.registerFailed('حساب کاربری شما در انتظار تایید است')
                 }
               }
             }).catch(error => {

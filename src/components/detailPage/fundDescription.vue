@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div>
     <div>
       <b-tabs>
         <b-tab title="توضیحات صندوق" title-item-class="desctab" active>

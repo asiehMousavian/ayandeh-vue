@@ -35,7 +35,6 @@
 </template>
 
 <script>
-// import submitButton from '../share/submitButton'
 import generalService from '@/services/generalService'
 import VueLoadingButton from 'vue-loading-button'
 import sharedService from '@/services/sharedService'
@@ -51,7 +50,7 @@ export default {
       responseRresult: ''
     }
   },
-  components: {VueLoadingButton},
+  components:{VueLoadingButton},
   computed: {
     isComplete () {
       return this.mobile && this.password
@@ -78,21 +77,21 @@ export default {
             generalService.postMethod('auth/login', UserInfo).then(response => {
               if (response.message === 'OK' && response.status === 0) {
                 if (response.content.user.isActive) {
-                  let fullname = response.content.user.firstName + ' ' + response.content.user.lastName
                   this.$session.start()
                   this.$session.set('isLogged', true)
-                  this.$session.set('clientName', fullname)
-                  this.$session.set('nationalId', response.content.user.nationalId)
+                  this.$session.set('clientInfo', JSON.stringify(response.content.user))
                   this.$router.push('detailList')
-                } else {
-                  sharedService.Failed('حساب کاربری شما در انتظار تایید است')
+                }
+                else {
+                  sharedService.registerFailed('حساب کاربری شما در انتظار تایید است')
                 }
               }
             }).catch(error => {
               this.responseRresult = error.response.data.message
             })
-          } else {
-            // todo
+          }
+          else {
+            //todo
           }
         })
         this.isLoading = false
@@ -121,12 +120,12 @@ export default {
   }
 
   @media only screen and (max-width: 991px) {
-   #loginForm .format_inp {
+    #loginForm .format_inp {
       font-size: 12px;
     }
   }
   @media only screen and (max-width: 567px) {
-   #loginForm .format_inp {
+    #loginForm .format_inp {
       font-size: 10px;
     }
   }

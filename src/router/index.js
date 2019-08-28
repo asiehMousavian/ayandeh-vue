@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import Home from '@/components/home/Home'
 import register from '@/components/home/register'
 import login from '@/components/home//login'
 
 import Detail from '@/components/detailPage/Detail'
+
 import detailList from '@/components/detailList/detailList'
 import redirect from '@/components/redirect'
 import user from '@/components/profile/user'
@@ -57,46 +57,40 @@ let sessionObj = {
 }
 
 var GetSession = function (to, from, next) {
-  localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
-  generalService.setSession()
-  next()
-  // if (!generalService.getSession()) {
-  //   generalService.postMethod('auth/session', sessionObj).then(response => {
-  //     if (response.message === 'OK' && response.status === 0) {
-  //       if (response.content.session) {
-  //         // todo
-  //         // localStorage.setItem("session",JSON.stringify(response.content.session))
-  //         // ehsan
-  //         localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
-  //         // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
-  //       }
-  //       generalService.setSession()
-  //       return true
-  //       // next()
-  //     }
-  //     // eslint-disable-next-line handle-callback-err
-  //   }).catch(error => {
-  //     // todo
-  //     // next({
-  //     //   name: "login", // back to safety route //
-  //     //   query: { redirectFrom: to.fullPath }
-  //     // })
-  //   })
-  // } else {
-  //   return true
-  //   // next()
-  // }
-}
-var isLogged = function () {
-  if (session.has('isLogged')) {
-    let logged = session.get('isLogged')
-    if (logged) { return true }
+  if (!generalService.getSession()) {
+    generalService.postMethod('auth/session', sessionObj).then(response => {
+      if (response.message === 'OK' && response.status === 0) {
+        if (response.content.session) {
+          //todo
+          // localStorage.setItem("session",JSON.stringify(response.content.session))
+          localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
+          // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+        }
+        generalService.setSession()
+        next()
+      }
+    }).catch(error => {
+      next()
+    })
   } else {
-    return false
+    debugger
+    next()
+    //  next({
+    //   name: "login", // back to safety route //
+    //   query: { redirectFrom: to.fullPath }
+    // })
   }
 }
+// var isLogged = function () {
+//   if (session.has('isLogged')) {
+//     let logged = session.get('isLogged')
+//     if (logged) { return true}
+//   } else {
+//     return false
+//   }
+// }
 
-var checkSession = function (to, from, next) {
+var checkIsLogged = function (to, from, next) {
   if (session.has('isLogged')) {
     let logged = session.get('isLogged')
     if (logged) { next() }
@@ -112,23 +106,21 @@ export default new Router({
       name: 'Home',
       component: Home,
       beforeEnter: (to, from, next) => {
-        if (GetSession(to, from, next)) {
-          if (isLogged()) {
-            // next(-2)
-            next('detailList')
-          } else {
-            next()
-          }
-        }
+        GetSession(to, from, next)
+        // if (GetSession(to, from, next)) {
+        //   // if (isLogged()) {
+        //   //   // next(-2)
+        //   //   next('detailList')
+        //   // } else {
+        //   //   next()
+        //   // }
+        // }
+        // else {}
       },
       children: [
         {
           path: 'login',
-          component: login,
-          beforeRouteEnter (to, from, next) {
-            debugger
-          }
-
+          component: login
         },
         {
           path: 'register',
@@ -141,7 +133,7 @@ export default new Router({
       name: 'detailList',
       component: detailList,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
     },
     {
@@ -149,7 +141,7 @@ export default new Router({
       name: 'Detail',
       component: Detail,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
     },
     {
@@ -157,13 +149,17 @@ export default new Router({
       name: 'redirect',
       component: redirect,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
     },
     {
       path: '/user',
       name: 'user',
-      component: user,
+      component: user
+      // beforeEnter: (to, from, next) => {
+      //   checkIsLogged(to, from, next)
+
+      // }
       // beforeEnter: (to, from, next) => {
       //   generalService.getMethod('invest/user/')
       //     .then(response => {
@@ -190,7 +186,7 @@ export default new Router({
       name: 'userInformation',
       component: userInformation,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
     }
     // end of all routes

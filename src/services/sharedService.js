@@ -39,14 +39,15 @@ export default {
       $(this).css('display', 'none')
     })
   },
-  Done (msg) {
+  requestDone (msg) {
     snackbar.success({
       text: msg,
-      button: 'باشه'
+      button: 'باشه',
+      // color: '#ddd'
       //   action: this.doSomeThing
     })
   },
-  Failed (msg) {
+  requestFailed (msg) {
     snackbar.danger({
       text: msg,
       button: 'باشه'
@@ -55,11 +56,26 @@ export default {
   checkReadOnly () {
     $('.form-control').each(function () {
       if ($(this[0]).val() !== '') {
-        $(this).attr('readonly',true);
+        $(this).attr('readonly', true);
       } else {
         $(this).removeAttr('readonly');
       }
     })
+  },
+  showModal() {
+    $('.modal .modal-content .modal_extra').addClass('active')
+
+
+    //$('.modal .modal-content .box_tab .box_tab_t ul').css("border","none")
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link').addClass("box_tab");
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link').addClass("box_tab_t");
+
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link').css({"display":"block","height":"68px","line-height":"68px","text-align":"center"," font-family":"Iransans_Medium"});
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active').css({"color":"#7d4434", "position":"relative"});
+
+  },
+  closeModal(){
+    $('.modal .modal-content .modal_extra').removeClass('active')
   }
 }
 

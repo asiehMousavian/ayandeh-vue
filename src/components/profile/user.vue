@@ -7,10 +7,10 @@
         <div class="container">
           <div class="top_site d-flex">
             <h1 class="page-header ml-auto">ورود اطلاعات کاربر</h1>
-<!--            <button class="btn edit_btn mr-auto" disabled style="cursor: default">-->
-<!--              <img src="@/assets/img/edit.svg" alt />-->
-<!--              ویرایش اطلاعات-->
-<!--            </button>-->
+            <!--            <button class="btn edit_btn mr-auto" disabled style="cursor: default">-->
+            <!--              <img src="@/assets/img/edit.svg" alt />-->
+            <!--              ویرایش اطلاعات-->
+            <!--            </button>-->
           </div>
           <form class="user-details-form" action>
             <div class="form-row-new">
@@ -95,27 +95,27 @@
                 </div>
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="d-flex justify-content-end align-items-center uploadBtns">
-<!--                    <div class="form-group">-->
-<!--                        <div class="d-flex align-items-center">-->
-<!--                          <div class="upload_file btn">-->
-<!--                            آپلود تصویر کارت ملی-->
-<!--                            <input type="file" name="nationalCardPhoto" ref="myFile" @change="previewFiles()"-->
-<!--                                   class="upload-btn" v-validate="'required'" value=""/>-->
-<!--                          </div>-->
-<!--                          <div class="upload_pic" style="margin-right: 20px; width: 120px;">-->
-<!--                              <img v-bind:src="profileImage" id="sample" alt />-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        <div class="form-alert">-->
-<!--                          <p>{{ errors.first('nationalCardPhoto') }}</p>-->
-<!--                        </div>-->
-<!--                        <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>-->
-<!--                            &lt;!&ndash;                      <div class="pic marginR25">&ndash;&gt;-->
-<!--                      &lt;!&ndash;                        <span class="dl_pic">&ndash;&gt;-->
-<!--                      &lt;!&ndash;                            <img src="@/assets/img/close2.svg" alt="">&ndash;&gt;-->
-<!--                      &lt;!&ndash;                        </span>&ndash;&gt;-->
-<!--                      &lt;!&ndash;                      </div>&ndash;&gt;-->
-<!--                    </div>-->
+                    <!--                    <div class="form-group">-->
+                    <!--                        <div class="d-flex align-items-center">-->
+                    <!--                          <div class="upload_file btn">-->
+                    <!--                            آپلود تصویر کارت ملی-->
+                    <!--                            <input type="file" name="nationalCardPhoto" ref="myFile" @change="previewFiles()"-->
+                    <!--                                   class="upload-btn" v-validate="'required'" value=""/>-->
+                    <!--                          </div>-->
+                    <!--                          <div class="upload_pic" style="margin-right: 20px; width: 120px;">-->
+                    <!--                              <img v-bind:src="profileImage" id="sample" alt />-->
+                    <!--                          </div>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="form-alert">-->
+                    <!--                          <p>{{ errors.first('nationalCardPhoto') }}</p>-->
+                    <!--                        </div>-->
+                    <!--                        <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>-->
+                    <!--                            &lt;!&ndash;                      <div class="pic marginR25">&ndash;&gt;-->
+                    <!--                      &lt;!&ndash;                        <span class="dl_pic">&ndash;&gt;-->
+                    <!--                      &lt;!&ndash;                            <img src="@/assets/img/close2.svg" alt="">&ndash;&gt;-->
+                    <!--                      &lt;!&ndash;                        </span>&ndash;&gt;-->
+                    <!--                      &lt;!&ndash;                      </div>&ndash;&gt;-->
+                    <!--                    </div>-->
                   </div>
                 </div>
               </div>
@@ -282,9 +282,9 @@ export default {
                 // sharedService.Done('ثبت نام با موفقیت انجام شد')
               }
             }).catch(error => {
-              console.log(error)
-              // sharedService.Failed(error.response.data.message)
-            })
+            console.log(error)
+            // sharedService.Failed(error.response.data.message)
+          })
         } else {
         }
       })

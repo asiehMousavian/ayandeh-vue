@@ -72,10 +72,19 @@ export default {
     }
   },
   mounted () {
-    if (this.$session.has('clientName')) {
-      let clientname = this.$session.get('clientName')
-      if (clientname) {
-        this.name = clientname
+    // if (this.$session.has('clientName')) {
+    //   let clientname = this.$session.get('clientName')
+    //   if (clientname) {
+    //     this.name = clientname
+    //   }
+    // }
+
+
+    if (this.$session.has('clientInfo')) {
+      let client = this.$session.get('clientInfo')
+      if (client) {
+        let user=JSON.parse(client)
+        this.name = user.firstName + ' ' + user.lastName
       }
     }
   }

@@ -33,8 +33,8 @@
           <div class="row">
             <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
               <div class="d-flex justify-content-center pursuit-btn-group">
-                <submit-button v-bind:buttonTitle="statementButton" v-on:submit="goToStatement"></submit-button>
-                <submit-button v-bind:buttonTitle="accountButton" v-on:submit="goToUserProfile"></submit-button>
+                 <button type="button" class="btn mx-auto" @click.prevent="goToTurnOver">مشاهده گردش حساب</button>
+                  <button type="button" class="btn mx-auto" @click.prevent="goToUserProfile">مشاهده اطلاعات کاربر</button>
                 <button class="btn btn-cancel" @click="back()">بازگشت</button>
               </div>
             </div>
@@ -64,32 +64,38 @@ export default {
     return {
       isSucceed: true,
       receiptNumber: '۴۳۲۱۵۸۷۱۲',
-      statementButton: 'مشاهده گردش حساب',
-      accountButton: 'مشاهده اطلاعات کاربر',
       isDone: false,
-      isLoading: true
+      isLoading: true,
+      fundId:0
     }
   },
   methods: {
     back: function () {
       // todo
-      this.$router.push('/detailList')
+      this.$router.back()
+      // this.$router.push('/detailList')
     },
-    goToStatement: function () {
-
+    goToTurnOver: function () {
+      this.$session.set('currentComponent', 'turnover')
+      this.$router.push(`/detail/${this.fundId}`)
     },
     goToUserProfile: function () {
       this.$router.push('/user')
     },
     getInvoiceStatus: function () {
       let invoiceId = this.$route.params.invoiceId
-      generalService.getMethod(`payment/invoice2/${invoiceId}/`,{retries:2}).then(response => {
+      generalService.getMethod(`payment/invoice2/${invoiceId}/`).then(response => {
         if (response.message === 'OK' && response.status === 0) {
           this.receiptNumber = response.content.receiptNumber
           if (response.content.status === 'Failed') {
             this.isSucceed = false
           } else {
             this.isSucceed = true
+            let issueObj=response.content
+            issueObj.dcCode=this.fundId
+            generalService.postMethod("invest/fund/issue",issueObj).then(response=>{
+              //todo
+            }).catch(error=>{})
           }
         } else {
           // todo
@@ -106,6 +112,8 @@ export default {
   },
   mounted () {
     this.isDone = false
+    let currentFund=JSON.parse(this.$session.get("currentFund"))
+    this.fundId=currentFund.code
     this.getInvoiceStatus()
   }
 }

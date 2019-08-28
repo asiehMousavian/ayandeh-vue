@@ -61,39 +61,36 @@ var GetSession = function (to, from, next) {
     generalService.postMethod('auth/session', sessionObj).then(response => {
       if (response.message === 'OK' && response.status === 0) {
         if (response.content.session) {
-          // todo
+          //todo
           // localStorage.setItem("session",JSON.stringify(response.content.session))
-          // ehsan
           localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
           // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
         }
         generalService.setSession()
-        return true
-        // next()
+        next()
       }
-      // eslint-disable-next-line handle-callback-err
     }).catch(error => {
-      // todo
-      // next({
-      //   name: "login", // back to safety route //
-      //   query: { redirectFrom: to.fullPath }
-      // })
+      next()
     })
   } else {
-    return true
-    // next()
+    debugger
+     next()
+    //  next({
+    //   name: "login", // back to safety route //
+    //   query: { redirectFrom: to.fullPath }
+    // })
   }
 }
-var isLogged = function () {
-  if (session.has('isLogged')) {
-    let logged = session.get('isLogged')
-    if (logged) { return true}
-  } else {
-    return false
-  }
-}
+// var isLogged = function () {
+//   if (session.has('isLogged')) {
+//     let logged = session.get('isLogged')
+//     if (logged) { return true}
+//   } else {
+//     return false
+//   }
+// }
 
-var checkSession = function (to, from, next) {
+var checkIsLogged = function (to, from, next) {
   if (session.has('isLogged')) {
     let logged = session.get('isLogged')
     if (logged) { next() }
@@ -109,23 +106,21 @@ export default new Router({
       name: 'Home',
       component: Home,
       beforeEnter: (to, from, next) => {
-        if (GetSession(to, from, next)) {
-          if (isLogged()) {
-            // next(-2)
-            next('detailList')
-          } else {
-            next()
-          }
-        }
+        GetSession(to, from, next)
+        // if (GetSession(to, from, next)) {
+        //   // if (isLogged()) {
+        //   //   // next(-2)
+        //   //   next('detailList')
+        //   // } else {
+        //   //   next()
+        //   // }
+        // }
+        // else {}
       },
       children: [
         {
           path: 'login',
-          component: login,
-          beforeRouteEnter (to, from, next) {
-            debugger
-          }
-
+          component: login
         },
         {
           path: 'register',
@@ -138,7 +133,7 @@ export default new Router({
       name: 'detailList',
       component: detailList,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
     },
     {
@@ -146,7 +141,7 @@ export default new Router({
       name: 'Detail',
       component: Detail,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
      },
     {
@@ -154,7 +149,7 @@ export default new Router({
       name: 'redirect',
       component: redirect,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
     },
     {
@@ -162,7 +157,7 @@ export default new Router({
       name: 'user',
       component: user,
       beforeEnter: (to, from, next) => {
-        checkSession(to, from, next)
+        checkIsLogged(to, from, next)
       }
     }
 

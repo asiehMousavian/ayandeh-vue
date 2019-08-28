@@ -51,7 +51,27 @@ export default {
       text: msg,
       button: 'باشه'
     })
+  },
+  showModal(){
+    $('.modal .modal-content .modal_extra').addClass('active')
+
+
+    //$('.modal .modal-content .box_tab .box_tab_t ul').css("border","none")
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link').addClass("box_tab");
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link').addClass("box_tab_t");
+
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link').css({"display":"block","height":"68px","line-height":"68px","text-align":"center"," font-family":"Iransans_Medium"});
+    // $('.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active').css({"color":"#7d4434", "position":"relative"});
+
+
+  },
+  closeModal()
+  {
+    $('.modal .modal-content .modal_extra').removeClass('active')
   }
+
+
+
 }
 
 

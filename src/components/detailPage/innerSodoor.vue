@@ -15,8 +15,8 @@
     </div>
     <div class="confirm_text">
       <p>
-        با زدن دکمه اتصال به درگاه قبول میکنم که <a href="javascripts:void(0)" class="link1"> توضیحات صندوق</a>
-        و <a href="javascripts:void(0)" class="link2">شرایط احراز هویت</a> را مطالعه کرده ام
+        با زدن دکمه اتصال به درگاه قبول میکنم که <a href="javascripts:void(0)" @click="showInnerModal(0)" class="link1"> توضیحات صندوق</a>
+        و <a href="javascripts:void(0)" @click="showInnerModal(1)" class="link2">شرایط احراز هویت</a> را مطالعه کرده ام
       </p>
     </div>
     <br>
@@ -27,19 +27,58 @@
     <div slot="modal-footer">
           <a @click="connectToBank" class="btn">اتصال به درگاه بانک</a>
           <b-button class="btn btn-cancel" @click="close">انصراف</b-button>
-        </div>
+    </div>
+
+     <div class="modal_extra">
+                    <span class="modal_extra_close" >
+                        <img src="@/assets/img/close.png" alt="" @click="closeInnerModal">
+                    </span>
+
+<div class="box_tab">
+  <b-tabs content-class="mt-3"  v-model="tabIndex">
+    <b-tab title="توضیحات صندوق" active>
+       <div class="desc_scroll">
+                                            <div class="desc">
+                                                <h3>لورم ایپسوم</h3>
+                                                <p>صندوق تجربه ایرانیان بزرگترین صندوق مختلط بازار سرمایه می ­باشد و بر اساس حدنصاب­ های مندرج در امیدنامه، وجوه خود را هم در سهام و حق تقدم آن و هم در اوراق مشارکت و سپرده بانکی سرمایه­ گذاری می­نماید.</p>
+                                                <h3>لورم ایپسوم</h3>
+                                                <p>صندوق تجربه ایرانیان بزرگترین صندوق مختلط بازار سرمایه می ­باشد و بر اساس حدنصاب­ های مندرج در امیدنامه، وجوه خود را هم در سهام و حق تقدم آن و هم در اوراق مشارکت و سپرده بانکی سرمایه­ گذاری می­نماید. با توجه به ماهیت مختلط این صندوق، گزینه بسیار مناسبی برای افرادی است که تمایل دارند علاوه بر اطمینان خاطر از سرمایه­ گذاری در بازار اوراق بهادار با درآمد ثابت، از نوسانات بازار سرمایه نیز بهره ببرند. صندوق تجربه ایرانیان پرداخت سود ماهانه نداشته و سود سرمایه ­گذاران از مابه ­التفاوت قیمت خریداری شده واحدها و قیمت روز آنها ناشی می ­شود.
+                                                </p>
+                                                <h3>لورم ایپسوم</h3>
+                                                <p>صندوق تجربه ایرانیان بزرگترین صندوق مختلط بازار سرمایه می ­باشد و بر اساس حدنصاب­ های مندرج در امیدنامه، وجوه خود را هم در سهام و حق تقدم آن و هم در اوراق مشارکت و سپرده بانکی سرمایه­ گذاری می­نماید.
+                                                </p>
+                                            </div>
+                                        </div>
+    </b-tab>
+    <b-tab title="شرایط احراز هویت">
+       <div class="desc">
+                                            <h3>لورم ایپسوم</h3>
+                                            <p>صندوق تجربه ایرانیان بزرگترین صندوق مختلط بازار سرمایه می ­باشد و بر اساس حدنصاب­ های مندرج در امیدنامه، وجوه خود را هم
+                                                در سهام و حق تقدم آن و هم در اوراق مشارکت و سپرده بانکی سرمایه­ گذاری می­نماید.</p>
+                                            
+                                        </div>
+    </b-tab>
+  </b-tabs>
+</div>
+
+
+                </div>
+
+
+
     </form>
   </div>
 </template>
-
 <script>
 import service from '@/services/generalService'
+import sharedService from '@/services/sharedService'
 export default {
   name: 'innerSodoor',
   data () {
     return {
       purchaseObj:{},
-      errMsg:null
+      errMsg:null,
+      tabIndex:0
   }
   },
   mounted(){
@@ -47,6 +86,14 @@ export default {
     this.purchaseObj=JSON.parse(this.$session.get("purchaseObj"))
   },
   methods:{
+    closeInnerModal()
+    {
+      sharedService.closeModal()
+    },
+    showInnerModal(tab){
+      this.tabIndex=tab
+      sharedService.showModal()
+    },
       close() {
       this.$emit("exit", true)
     },
@@ -73,4 +120,14 @@ export default {
 }
 </script>
 <style scoped>
+
+/* .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active 
+{
+      display: block !important;
+    height: 68px !important;
+    line-height: 68px !important;
+    text-align: center !important;
+    font-family: "Iransans_Medium" !important;
+      color: #7d4434 !important;
+} */
 </style>

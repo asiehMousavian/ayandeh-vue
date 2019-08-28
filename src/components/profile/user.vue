@@ -257,6 +257,40 @@ export default {
     sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()
+
+this.userInfo= {
+  "birthCertDescPicId": "string",
+  "birthCertPicId": "string",
+  "birthDate": 690064200000,
+  "children": 0,
+  "education": "DaneshAmooz",
+  "email": "ehs.ghasemi@gmail.com",
+  "firstName": "احسان",
+  "gender": "Male",
+  "homeTown": "string",
+  "lastName": "قاسمی",
+  "married": null,
+  "nationalCardPicId": "string",
+  "nationalId": "6649976164",
+  "personalPicId": "string",
+  "profilePicId": "string"
+}
+
+          generalService.postMethod('invest/user', this.userInfo).then(response => {
+              debugger
+              if (response.status === 0 && response.message === 'OK') {
+                // sharedService.Done('ثبت نام با موفقیت انجام شد')
+              }
+            }).catch(error => {
+              debugger
+              // sharedService.Failed(error.response.data.message)
+            })
+     
+   
+ 
+
+
+
   },
   methods: {
     submitData () {

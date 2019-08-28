@@ -165,8 +165,6 @@ export default {
     this.getFunds()
     this.getLicense()
     this.getCurrentComponent()
-
- 
   }
 }
 </script>

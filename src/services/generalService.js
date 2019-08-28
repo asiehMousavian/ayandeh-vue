@@ -14,7 +14,6 @@ axios.interceptors.request.use(function (config) {
 export default {
   // ============== General Get method
   getMethod (url, data = {params: {}}) {
-    // debugger
     let retry=data.params.retries
     // let retry=1
     // if(data.retries !=undefined)

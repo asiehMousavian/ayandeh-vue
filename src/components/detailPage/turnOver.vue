@@ -43,14 +43,21 @@ export default {
       page: 1,
       per_page: 10,
       hasError: false,
-      errorMsg: ''
+      errorMsg: '',
+      fund:{},
+      fundId:0
     }
   },
   mounted() {
   },
   methods: {
+    getFundInfo(){
+      this.fund = JSON.parse(this.$session.get("currentFund"))
+      this.fundId = this.fund.code
+    },
     getData: function (params, setRowData) {
-      params.dsCode = this.$route.params.fundId
+      this.getFundInfo()
+      params.dsCode =   this.fundId // this.$route.params.fundId
       params.from = (params.page_number - 1) * params.page_length
       params.page = params.page_number
       params.page_saze = 10
@@ -82,7 +89,6 @@ export default {
             this.errorMsg = 'اطلاعاتی وجود ندارد'
             // sharedService.requestFailed(this.errorMsg)
           }
-
       })
     }
   }

@@ -75,7 +75,7 @@
         }
     }
 }
-@media #{$size480} {
+@media only screen and (max-width : 480px){
     .user-details-form {
         .form-row-new {
             .uploadBtns {
@@ -86,3 +86,47 @@
         }
     }
 }
+/************ User Information ************/
+.user-details-desc{
+  background-color: $c2;
+  margin: 20px 0;
+  @include border-radius(4px);
+  .user-details-sec{
+    padding: 15px;
+    border-bottom: solid 1px #e8e8e8;
+    &:last-child{
+      border: none;
+    }
+    .user-details-sec--title{
+      font-size: 16px;
+      display: block;
+      font-family: "Iransans_Bold";
+      margin-bottom: 10px;
+    }
+    .user_info_sec{
+      margin-bottom: 5px;
+      .user_info_sec--t{
+        color: #1b1e21;
+        font-size: 12px;
+      }
+      .user_info_sec--txt{
+        color: #111;
+        font-size: 14px;
+        font-family: "Iransans_Medium";
+      }
+    }
+  }
+}
+.conf_text{
+  margin: 10px 0 0 0;
+  background-color: $c3;
+  @include border-radius(5px);
+  padding: 5px;
+  p{
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
+    font-family: "Iransans_Medium";
+  }
+}
+/************ User Information ************/

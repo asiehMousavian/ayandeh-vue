@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import submitButton from '../share/submitButton'
+// import submitButton from '../share/submitButton'
 import generalService from '@/services/generalService'
 import VueLoadingButton from 'vue-loading-button'
 import sharedService from '@/services/sharedService'
@@ -48,15 +48,15 @@ export default {
       password: '',
       result: '',
       isLoading: false,
-      responseRresult:''
+      responseRresult: ''
     }
   },
-  components:{VueLoadingButton},
+  components: {VueLoadingButton},
   computed: {
     isComplete () {
-     return this.mobile && this.password
-  }
-},
+      return this.mobile && this.password
+    }
+  },
   methods: {
     login: function () {
       this.isLoading = true
@@ -84,17 +84,15 @@ export default {
                   this.$session.set('clientName', fullname)
                   this.$session.set('nationalId', response.content.user.nationalId)
                   this.$router.push('detailList')
-                } 
-                else {
+                } else {
                   sharedService.Failed('حساب کاربری شما در انتظار تایید است')
                 }
               }
             }).catch(error => {
               this.responseRresult = error.response.data.message
             })
-          }
-           else {
-             //todo
+          } else {
+            // todo
           }
         })
         this.isLoading = false

@@ -9,28 +9,26 @@
           <div class="detail_btn">
             <ul class="list-unstyled">
               <li>
-                <a href="" @click.prevent="showComponent('requestReport')" >گزارش درخواست‌ها</a>
+                <a href="#" @click.prevent="showComponent('requestReport')" >گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="" @click.prevent="showComponent('turnover')">گردش حساب</a>
+                <a href="#" @click.prevent="showComponent('turnover')">گردش حساب</a>
 
               </li>
               <li>
-                <a href="" @click.prevent="goToUserProfile()">اطلاعات کاربر</a>
+                <a href="#" @click.prevent="goToUserProfile()">اطلاعات کاربر</a>
               </li>
               <li>
-                <a href="" v-b-modal.descModal>توضیحات صندوق</a>
+                <a href="#" v-b-modal.descModal>توضیحات صندوق</a>
               </li>
               <li>
-                <a href="" v-b-modal.sodoorModal>صدور واحد</a>
+                <a href="#" v-b-modal.sodoorModal>صدور واحد</a>
               </li>
               <li>
-                <a href="" data-toggle="modal" data-target="#ebtalModal">ابطال واحد</a>
+                <a href="#" data-toggle="modal" data-target="#ebtalModal">ابطال واحد</a>
               </li>
             </ul>
           </div>
-
-
           <div v-if="currentComponent === 'requestReport'">
             <request-report v-bind:fund="fund"></request-report>
           </div>
@@ -40,7 +38,6 @@
 <!--          <div>-->
 <!--            <component :is="currentComponent"></component>-->
 <!--          </div>-->
-
           <div>
             <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
               <container>
@@ -78,7 +75,6 @@
     </div>
     <div v-else>
       <loading :active.sync="isLoading"></loading>
-
     </div>
     <!-- Main -->
     <!-- Mobile Menu -->

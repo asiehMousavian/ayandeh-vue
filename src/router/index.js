@@ -9,6 +9,7 @@ import Detail from '@/components/detailPage/Detail'
 import detailList from '@/components/detailList/detailList'
 import redirect from '@/components/redirect'
 import user from '@/components/profile/user'
+import userInformation from '@/components/profile/userInformation'
 import VueSession from 'vue-session'
 
 // router.beforeEach((to, from, next) => {
@@ -56,37 +57,40 @@ let sessionObj = {
 }
 
 var GetSession = function (to, from, next) {
-  if (!generalService.getSession()) {
-    generalService.postMethod('auth/session', sessionObj).then(response => {
-      if (response.message === 'OK' && response.status === 0) {
-        if (response.content.session) {
-          // todo
-          // localStorage.setItem("session",JSON.stringify(response.content.session))
-          // ehsan
-          localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
-          // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
-        }
-        generalService.setSession()
-        return true
-        // next()
-      }
-      // eslint-disable-next-line handle-callback-err
-    }).catch(error => {
-      // todo
-      // next({
-      //   name: "login", // back to safety route //
-      //   query: { redirectFrom: to.fullPath }
-      // })
-    })
-  } else {
-    return true
-    // next()
-  }
+  localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
+  generalService.setSession()
+  next()
+  // if (!generalService.getSession()) {
+  //   generalService.postMethod('auth/session', sessionObj).then(response => {
+  //     if (response.message === 'OK' && response.status === 0) {
+  //       if (response.content.session) {
+  //         // todo
+  //         // localStorage.setItem("session",JSON.stringify(response.content.session))
+  //         // ehsan
+  //         localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
+  //         // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
+  //       }
+  //       generalService.setSession()
+  //       return true
+  //       // next()
+  //     }
+  //     // eslint-disable-next-line handle-callback-err
+  //   }).catch(error => {
+  //     // todo
+  //     // next({
+  //     //   name: "login", // back to safety route //
+  //     //   query: { redirectFrom: to.fullPath }
+  //     // })
+  //   })
+  // } else {
+  //   return true
+  //   // next()
+  // }
 }
 var isLogged = function () {
   if (session.has('isLogged')) {
     let logged = session.get('isLogged')
-    if (logged) { return true}
+    if (logged) { return true }
   } else {
     return false
   }
@@ -160,11 +164,35 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: user,
+      // beforeEnter: (to, from, next) => {
+      //   generalService.getMethod('invest/user/')
+      //     .then(response => {
+      //       this.userInfo = response.content
+      //       if (response.status === 0 && response.message === 'OK') {
+      //         let userData = JSON.stringify(response.content)
+      //         localStorage.setItem('userData', userData)
+      //         if (response.content.registerStatus !== 'unknown') {
+      //           next('/userInformation')
+      //         } else {
+      //           next()
+      //         }
+      //       } else {
+      //         console.log()
+      //       }
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //     })
+      // }
+    },
+    {
+      path: '/userInformation',
+      name: 'userInformation',
+      component: userInformation,
       beforeEnter: (to, from, next) => {
         checkSession(to, from, next)
       }
     }
-
     // end of all routes
     // check
     // {

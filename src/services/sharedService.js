@@ -17,6 +17,7 @@ export default {
   },
   checkInputs () {
     $('.form-control').each(function () {
+      // if ($(this)[0].val() !== '') {
       if ($(this).val() !== '') {
         $(this).parent().addClass('visited')
       } else {
@@ -49,6 +50,15 @@ export default {
     snackbar.danger({
       text: msg,
       button: 'باشه'
+    })
+  },
+  checkReadOnly () {
+    $('.form-control').each(function () {
+      if ($(this[0]).val() !== '') {
+        $(this).attr('readonly',true);
+      } else {
+        $(this).removeAttr('readonly');
+      }
     })
   }
 }

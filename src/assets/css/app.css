@@ -236,7 +236,13 @@ body {
   }
 }
 .btn.edit_btn {
-  padding: 0 20px;
+  height: 40px;
+  line-height: 39px;
+  padding: 0 20px !important;
+  font-size: 12px !important;
+}
+.btn.edit_btn img {
+  margin-left: 5px;
 }
 
 button.btn {
@@ -1645,6 +1651,56 @@ input:-webkit-autofill:hover {
     font-size: 11px;
   }
 }
+/************ User Information ************/
+.user-details-desc {
+  background-color: #fff;
+  margin: 20px 0;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.user-details-desc .user-details-sec {
+  padding: 15px;
+  border-bottom: solid 1px #e8e8e8;
+}
+.user-details-desc .user-details-sec:last-child {
+  border: none;
+}
+.user-details-desc .user-details-sec .user-details-sec--title {
+  font-size: 16px;
+  display: block;
+  font-family: "Iransans_Bold";
+  margin-bottom: 10px;
+}
+.user-details-desc .user-details-sec .user_info_sec {
+  margin-bottom: 5px;
+}
+.user-details-desc .user-details-sec .user_info_sec .user_info_sec--t {
+  color: #1b1e21;
+  font-size: 12px;
+}
+.user-details-desc .user-details-sec .user_info_sec .user_info_sec--txt {
+  color: #111;
+  font-size: 14px;
+  font-family: "Iransans_Medium";
+}
+
+.conf_text {
+  margin: 10px 0 0 0;
+  background-color: #d8ccbc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.conf_text p {
+  text-align: center;
+  line-height: 24px;
+  font-size: 14px;
+  font-family: "Iransans_Medium";
+}
+
+/************ User Information ************/
 .main-body h1 {
   color: #313131;
   font-size: 20px;

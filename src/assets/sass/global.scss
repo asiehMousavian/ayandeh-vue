@@ -192,7 +192,13 @@ body{
     }
   }
   &.edit_btn{
-    padding: 0 20px;
+    height: 40px;
+    line-height: 39px;
+    padding: 0 20px !important;
+    font-size: 12px !important;
+    img{
+      margin-left: 5px;
+    }
   }
 }
 button.btn{

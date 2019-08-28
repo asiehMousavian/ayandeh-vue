@@ -7,10 +7,10 @@
         <div class="container">
           <div class="top_site d-flex">
             <h1 class="page-header ml-auto">ورود اطلاعات کاربر</h1>
-            <button class="btn edit_btn mr-auto" disabled style="cursor: default">
-              <img src="@/assets/img/edit.svg" alt />
-              ویرایش اطلاعات
-            </button>
+<!--            <button class="btn edit_btn mr-auto" disabled style="cursor: default">-->
+<!--              <img src="@/assets/img/edit.svg" alt />-->
+<!--              ویرایش اطلاعات-->
+<!--            </button>-->
           </div>
           <form class="user-details-form" action>
             <div class="form-row-new">
@@ -19,7 +19,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="firstName" class="form-control" v-validate="'required|alpha'"/>
+                      <input type="text" name="firstName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.firstName" />
                       <div class="form-alert">
                         <p v-show="errors.has('firstName')">{{ errors.first('firstName') }}</p>
                       </div>
@@ -31,7 +31,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="lastName" class="form-control" v-validate="'required|alpha'"/>
+                      <input type="text" name="lastName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.lastName"/>
                       <div class="form-alert">
                         <p v-show="errors.first('lastName')">{{ errors.first('lastName') }}</p>
                       </div>
@@ -45,7 +45,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="tell" name="birth" class="form-control birth" v-validate="'required'" @blur="checkDate()" v-mask="'## ## ####'"/>
+                      <input type="tell" name="birth" class="form-control birth" v-validate="'required'" @blur="checkDate()" v-mask="'## ## ####'" v-model="userInfo.birth"/>
                       <div class="form-alert">
                         <p>{{ errors.first('birth') }}</p>
                       </div>
@@ -58,7 +58,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="birthCertNumber" class="form-control" v-validate="'required|numeric|max:10'"/>
+                      <input type="text" name="birthCertNumber" class="form-control" v-validate="'required|numeric|max:10'" v-model="userInfo.birthCertNumber"/>
                       <div class="form-alert">
                         <p>{{ errors.first('birthCertNumber') }}</p>
                       </div>
@@ -70,7 +70,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="issuingCity" class="form-control" v-validate="'required|alpha'"/>
+                      <input type="text" name="issuingCity" class="form-control" v-validate="'required|alpha'" v-model="userInfo.issuingCity"/>
                       <div class="form-alert">
                         <p>{{ errors.first('issuingCity') }}</p>
                       </div>
@@ -84,7 +84,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="nationalId" class="form-control" v-validate="'required|numeric|length:10'"/>
+                      <input type="text" name="nationalId" class="form-control" v-validate="'required|numeric|length:10'" v-model="userInfo.nationalId"/>
                       <div class="form-alert">
                         <p>{{ errors.first('nationalId') }}</p>
                       </div>
@@ -95,30 +95,27 @@
                 </div>
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="d-flex justify-content-end align-items-center uploadBtns">
-                    <div class="form-group">
-                        <div class="d-flex align-items-center">
-                          <div class="upload_file btn">
-                            آپلود تصویر کارت ملی
-                            <input type="file" name="nationalCardPhoto" ref="myFile" @change="previewFiles()"
-                                   class="upload-btn" v-validate="'required'" value=""/>
-                          </div>
-                          <div class="upload_pic" style="margin-right: 20px; width: 120px;">
-                              <img v-bind:src="profileImage" id="sample" alt />
-<!--                              <span class="dl_pic">-->
-<!--                                 <img src="@/assets/img/close2.svg" alt="">-->
-<!--                              </span>-->
-                          </div>
-                        </div>
-                        <div class="form-alert">
-                          <p>{{ errors.first('nationalCardPhoto') }}</p>
-                        </div>
-                        <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>
-                            <!--                      <div class="pic marginR25">-->
-                      <!--                        <span class="dl_pic">-->
-                      <!--                            <img src="@/assets/img/close2.svg" alt="">-->
-                      <!--                        </span>-->
-                      <!--                      </div>-->
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <div class="d-flex align-items-center">-->
+<!--                          <div class="upload_file btn">-->
+<!--                            آپلود تصویر کارت ملی-->
+<!--                            <input type="file" name="nationalCardPhoto" ref="myFile" @change="previewFiles()"-->
+<!--                                   class="upload-btn" v-validate="'required'" value=""/>-->
+<!--                          </div>-->
+<!--                          <div class="upload_pic" style="margin-right: 20px; width: 120px;">-->
+<!--                              <img v-bind:src="profileImage" id="sample" alt />-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-alert">-->
+<!--                          <p>{{ errors.first('nationalCardPhoto') }}</p>-->
+<!--                        </div>-->
+<!--                        <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>-->
+<!--                            &lt;!&ndash;                      <div class="pic marginR25">&ndash;&gt;-->
+<!--                      &lt;!&ndash;                        <span class="dl_pic">&ndash;&gt;-->
+<!--                      &lt;!&ndash;                            <img src="@/assets/img/close2.svg" alt="">&ndash;&gt;-->
+<!--                      &lt;!&ndash;                        </span>&ndash;&gt;-->
+<!--                      &lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    </div>-->
                   </div>
                 </div>
               </div>
@@ -129,7 +126,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="phoneNumber" class="form-control" v-validate="'required|phoneNumberFa'"/>
+                      <input type="text" name="phoneNumber" class="form-control" v-validate="'required|phoneNumberFa'" v-model="userInfo.phoneNumber"/>
                       <div class="form-alert">
                         <p>{{ errors.first('phoneNumber') }}</p>
                       </div>
@@ -143,7 +140,7 @@
                   <div class="form-group">
                     <div class="inp_border">
                       <input type="text" name="mobileNumber" class="form-control"
-                             v-on:blur="nationalIdMobileCompatibility" v-validate="'required|mobileFa'"/>
+                             v-on:blur="nationalIdMobileCompatibility" v-validate="'required|mobileFa'" v-model="userInfo.mobileNumber"/>
                       <div class="form-alert">
                         <p>{{ errors.first('mobileNumber') }}</p>
                       </div>
@@ -158,7 +155,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="address" class="form-control" v-validate="'required'"/>
+                      <input type="text" name="address" class="form-control" v-validate="'required'" v-model="userInfo.address"/>
                       <div class="form-alert">
                         <p>{{ errors.first('address') }}</p>
                       </div>
@@ -170,7 +167,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="postalCode" class="form-control" v-validate="'required|numeric|length:10'"/>
+                      <input type="text" name="postalCode" class="form-control" v-validate="'required|numeric|length:10'" v-model="userInfo.postalCode"/>
                       <div class="form-alert">
                         <p>{{ errors.first('postalCode') }}</p>
                       </div>
@@ -187,7 +184,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="bankName" class="form-control" v-validate="'required|alpha'"/>
+                      <input type="text" name="bankName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.bankName"/>
                       <div class="form-alert">
                         <p>{{ errors.first('bankName') }}</p>
                       </div>
@@ -199,7 +196,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="ibanNumber" v-on:blur="getBankInfo" class="form-control" v-validate="'required|length:27'"/>
+                      <input type="text" name="ibanNumber" @blur="getBankInfo , checkIban()" class="form-control" v-model="userInfo.ibanNumber" v-mask="'IR##-###-######-#############'"/>
                       <div class="form-alert">
                         <p>{{ errors.first('ibanNumber') }}</p>
                       </div>
@@ -240,14 +237,9 @@ import generalService from '@/services/generalService'
 export default {
   name: 'user',
   data () {
-    // var userInfo
     return {
-      userInfo: {
-        profilePic: {},
-        birthCertPic: {},
-        birthCertDescPic: {},
-        nationalCardPic: {}
-      }
+      userInfo: {},
+      get_founds_url: 'invest/user'
     }
   },
   components: {
@@ -255,30 +247,65 @@ export default {
   },
   mounted () {
     sharedService.handleInputLabels()
-    sharedService.checkInputs()
+    // sharedService.checkInputs()
     sharedService.toggleMenu()
+    // if (this.$session.has('clientInfo')) {
+    //   let client = this.$session.get('clientInfo')
+    //   if (client) {
+    //     let user=JSON.parse(client)
+    //   }
+    // }
+    // generalService.getMethod('invest/user/')
+    //   .then(response => {
+    //     this.userInfo = response.content
+    //     if (response.status === 0 && response.message === 'OK') {
+    //       sharedService.checkInputs()
+    //       sharedService.checkReadOnly()
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
+    // if (localStorage.getItem('userData')) {
+    //   this.userInfo = JSON.parse(localStorage.getItem('userData'))
+    // }
   },
   methods: {
-    submitData () {
+    submitData: function () {
       this.$validator.validate().then(valid => {
-        if (!valid) {
-          alert()
+        if (valid) {
+          generalService
+            .postMethod('invest/fund/register/investor/10915', this.userInfo)
+            .then(response => {
+              debugger
+              if (response.status === 0 && response.message === 'OK') {
+                // sharedService.Done('ثبت نام با موفقیت انجام شد')
+              }
+            }).catch(error => {
+              console.log(error)
+              // sharedService.Failed(error.response.data.message)
+            })
         } else {
-          // this.$bvModal.show('modal1')
         }
       })
     },
     checkDate () {
-      let v = this.userInfo.birth.split(' ').reverse()
-      this.userInfo.birth = v.join('/')
+      if (this.userInfo.birth) {
+        let bir = this.userInfo.birth.split(' ').reverse()
+        this.userInfo.birth = bir.join('/')
+      }
+    },
+    checkIban () {
+      let IR = this.userInfo.ibanNumber.split('-')
+      this.userInfo.ibanNumber = IR.join('')
     },
     nationalIdMobileCompatibility () {
-      // check value of mobile and natonalcode
+      // check value of mobile and nationalCode
       let condition = true
       if (condition) {
         generalService
           .getMethod('auth/nationalId-mobile-compatibility', {
-            params: {nationalId: '4680059088', mobileNumber: '09120450115'}
+            params: {nationalId: 'userInfo.nationalId', mobileNumber: 'userInfo.mobileNumber'}
           })
           .then(response => {
             if (response.message === 'OK' && response.status === 0) {

@@ -12,7 +12,7 @@ import VueSession from 'vue-session'
 import VueSnackbar from 'vue-snack'
 import 'vue-snack/dist/vue-snack.min.css'
 
- import DatatableFactory from 'vuejs-datatable'
+import DatatableFactory from 'vuejs-datatable'
 
 // import VuePromiseBtn from 'vue-promise-btn'
 // // // not required. Styles for built-in spinner

@@ -68,7 +68,7 @@ export default {
             // }
             let UserInfo = {
               email: 'ehs.ghasemi@gmail.com',
-              password: '1'
+              password: 'xGgcO5Re'
             }
             //   let UserInfo={
             //     email: "shokri074@gmail.com",

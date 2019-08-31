@@ -27,7 +27,8 @@ const dictionary = {
       gender: 'جنسیت',
       acountType: 'نوع حساب',
       address: 'آدرس',
-      password: 'رمز عبور'
+      password: 'رمز عبور',
+      count: 'تعداد'
     }
   }
 }

@@ -3,7 +3,7 @@
     <h3 class="modal_title">صدور سهم</h3>
     <div class="modal_txt">
       <p>
-        عملیات صدور براساس NAV تخمینی برای ۲ روز کاری بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
+        عملیات صدور براساس <span>NAV</span> تخمینی برای <span>۲ روز کاری</span> بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
         خواهد شد
       </p>
     </div>
@@ -49,12 +49,11 @@
         </div>
       </div>
       <div slot="modal-footer">
-        <a
-          href="#"
-          :class="['btn', 'sodur_btn',enableSodoor?'':'btn-is-disabled']"
+        <!-- <button :class="['btn', 'sodur_btn',enableSodoor?'':'btn-is-disabled']"
           @click.prevent="showSodoor">صدور واحد
-        </a>
-        <b-button class="btn btn-cancel" @click="close">لغو</b-button>
+        </button> -->
+         <button class="btn" :disabled='errors.any() || !enableSodoor' @click.prevent="showSodoor">صدور واحد </button>
+        <button class="btn btn-cancel" @click.prevent="close">لغو</button>
       </div>
     </form>
   </div>
@@ -165,11 +164,15 @@ export default {
 
 <style scoped>
 .form-group {
-  /* width: 41.5%; */
-  width: 100%;
+  width: 41.5%;
+  /* width: 100%; */
 }
 .btn-is-disabled {
   opacity: 0.7;
   pointer-events: none;
+}
+.modal_txt p span
+{
+  font-family:"Iransans_Bold"
 }
 </style>

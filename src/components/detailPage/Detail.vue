@@ -26,7 +26,7 @@
                 <a href="#" v-b-modal.sodoorModal>صدور واحد</a>
               </li>
               <li>
-                <a href="#" data-toggle="modal" data-target="#ebtalModal">ابطال واحد</a>
+                <a href="#" v-b-modal.ebtalModal>ابطال واحد</a>
               </li>
             </ul>
           </div>
@@ -43,7 +43,7 @@
             <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
                 <fund-description></fund-description>
               <div slot="modal-footer">
-                <b-button class="btn" @click="closeModal('descModal')">بستن</b-button>
+                <button class="btn" @click="closeModal('descModal')">بستن</button>
               </div>
             </b-modal>
           </div>
@@ -55,6 +55,11 @@
           <div>
             <b-modal id="innerSodoorModal" title="BootstrapVue" hide-header size="lg"  hide-footer>
                 <inner-sodoor @exit="closeModal('innerSodoorModal')" ></inner-sodoor>
+            </b-modal>
+          </div>
+           <div>
+            <b-modal id="ebtalModal" title="BootstrapVue" hide-header size="lg" hide-footer>
+                <ebtal-unit v-bind:fund="fund" @exit="closeModal('ebtalModal')"></ebtal-unit>
             </b-modal>
           </div>
         </div>
@@ -82,6 +87,7 @@ import turnover from './turnOver'
 import service from '@/services/generalService'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import ebtalUnit from './ebtalUnit'
 export default {
   name: 'Detail',
   data () {
@@ -104,7 +110,8 @@ export default {
     turnover,
     toggleMenu,
     Loading,
-    accounting
+    accounting,
+    ebtalUnit
   },
   methods: {
     showComponent: function (componentName) {

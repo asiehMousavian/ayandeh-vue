@@ -35,9 +35,7 @@ import VueSession from 'vue-session'
 //       window.location.href = "/login";
 //   })
 // }
-
 import generalService from '@/services/generalService'
-// import service from '@/services/generalService'
 Vue.use(Router)
 Vue.use(VueSession)
 const session = Vue.prototype.$session
@@ -55,7 +53,6 @@ let sessionObj = {
     'platform': 'Android'
   }
 }
-
 var GetSession = function (to, from, next) {
   if (!generalService.getSession()) {
     generalService.postMethod('auth/session', sessionObj).then(response => {
@@ -67,29 +64,29 @@ var GetSession = function (to, from, next) {
           // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
         }
         generalService.setSession()
-        next()
+        return true
       }
     }).catch(error => {
-      next()
+      return false
+      // next()
     })
   } else {
-    debugger
-    next()
+    return true
+    // next()
     //  next({
     //   name: "login", // back to safety route //
     //   query: { redirectFrom: to.fullPath }
     // })
   }
 }
-// var isLogged = function () {
-//   if (session.has('isLogged')) {
-//     let logged = session.get('isLogged')
-//     if (logged) { return true}
-//   } else {
-//     return false
-//   }
-// }
-
+var isLogged = function () {
+  if (session.has('isLogged')) {
+    let logged = session.get('isLogged')
+    if (logged) { return true}
+  } else {
+    return false
+  }
+}
 var checkIsLogged = function (to, from, next) {
   if (session.has('isLogged')) {
     let logged = session.get('isLogged')
@@ -106,16 +103,16 @@ export default new Router({
       name: 'Home',
       component: Home,
       beforeEnter: (to, from, next) => {
-        GetSession(to, from, next)
-        // if (GetSession(to, from, next)) {
-        //   // if (isLogged()) {
-        //   //   // next(-2)
-        //   //   next('detailList')
-        //   // } else {
-        //   //   next()
-        //   // }
-        // }
-        // else {}
+        if (GetSession(to, from, next)) {
+          if (isLogged()) {
+            next('detailList')
+          } else {
+            next()
+          }
+        }
+        else {
+          next()
+        }
       },
       children: [
         {
@@ -158,7 +155,6 @@ export default new Router({
       component: user
       // beforeEnter: (to, from, next) => {
       //   checkIsLogged(to, from, next)
-
       // }
       // beforeEnter: (to, from, next) => {
       //   generalService.getMethod('invest/user/')

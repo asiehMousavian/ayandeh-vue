@@ -25,8 +25,8 @@
     </div>
     <br><br>
     <div slot="modal-footer">
-          <a @click="connectToBank" class="btn">اتصال به درگاه بانک</a>
-          <b-button class="btn btn-cancel" @click="close">انصراف</b-button>
+          <button @click="connectToBank" class="btn">اتصال به درگاه بانک</button>
+          <button class="btn btn-cancel" @click.prevent="close">انصراف</button>
     </div>
 
      <div class="modal_extra">

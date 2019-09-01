@@ -31,18 +31,21 @@
       </div>
       <br />
       <div class="modal_desc">
-        <div class="f_text" v-show="showDescription">
-          <p>
+        <div class="f_text" >
+          <p v-show="showDescription">
             شما در حال ابطال
             <i>{{unitCount}}</i> واحد سرمایه‌گذاری به ارزش
             <i>{{price?price:0|persianCurrency}} ریال</i> می باشید
           </p>
+          <p v-show="success">در خواست شما با موفقیت ثبت شد</p>
         </div>
       </div>
       <br>
       <div slot="modal-footer">
         <button class="btn" :disabled='errors.any() || !isComplete' @click.prevent="ebtalUnits" >ابطال واحد
         </button>
+        <!-- <VueLoadingButton class="btn" :disabled= 'errors.any() || !isComplete' type="button" @click.prevent="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton> -->
+
         <button class="btn btn-cancel" @click.prevent="close">لغو</button>
       </div>
     </form>
@@ -53,13 +56,13 @@
 <script>
 import service from "@/services/generalService"
 import sharedService from "@/services/sharedService"
-
+import VueLoadingButton from 'vue-loading-button'
 export default {
   name: "issueUnit",
   data() {
     return {
       nationalId: "",
-      licenseNumber: 0,
+      licenseNumber: '12345678',
       unitCount:'',
       fund: {},
       fundId: 0,
@@ -70,7 +73,9 @@ export default {
       errorMsg:'',
       price:0,
       showDescription:false,
-      responseError:false
+      responseError:false,
+      success:false,
+      isLoading:false
     }
   },
   computed: {
@@ -82,14 +87,17 @@ export default {
     checkInput(){
       sharedService.checkInputs()
       this.price = this.fund.saleNav * this.unitCount
-      this.showDescription=true
-
+      if(this.price>0)
+          this.showDescription=true
+      else
+          this.showDescription=false
     },
      close() {
       this.$emit("exit", true)
     },
     ebtalUnits()
     {
+      this.isLoading=true
         this.revokeFund = {
         fundId:    this.fundId,
         licenseNumber: this.licenseNumber,
@@ -98,6 +106,8 @@ export default {
         service.postMethod(`invest/fund/revoke`, this.revokeFund)
         .then(response => {
           //todo
+          this.success=true
+          this.showDescription=false
           debugger
         })
         .catch(error => {
@@ -109,6 +119,7 @@ export default {
             this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
           }
         })
+        this.isLoading=false
     },
     getLicense(){
       this.userLicense= this.$session.get("userLicense")

@@ -42,9 +42,9 @@
       </div>
       <br>
       <div slot="modal-footer">
-        <button class="btn" :disabled='errors.any() || !isComplete' @click.prevent="ebtalUnits" >ابطال واحد
-        </button>
-        <!-- <VueLoadingButton class="btn" :disabled= 'errors.any() || !isComplete' type="button" @click.prevent="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton> -->
+        <!-- <button class="btn" :disabled='errors.any() || !isComplete' @click.prevent="ebtalUnits" >ابطال واحد
+        </button> -->
+        <VueLoadingButton class="btn" :disabled='errors.any() || !isComplete' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
 
         <button class="btn btn-cancel" @click.prevent="close">لغو</button>
       </div>
@@ -78,6 +78,9 @@ export default {
       isLoading:false
     }
   },
+  components:{
+    VueLoadingButton
+  },
   computed: {
     isComplete () {
       return this.unitCount && 1
@@ -98,6 +101,8 @@ export default {
     ebtalUnits()
     {
       this.isLoading=true
+      setTimeout(() => {
+        
         this.revokeFund = {
         fundId:    this.fundId,
         licenseNumber: this.licenseNumber,
@@ -108,10 +113,9 @@ export default {
           //todo
           this.success=true
           this.showDescription=false
-          debugger
         })
         .catch(error => {
-          debugger
+          //todo
             this.responseError=true
           if (error.response.data.status === 500501) {
             this.errorMsg = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
@@ -119,7 +123,7 @@ export default {
             this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
           }
         })
-        this.isLoading=false
+      this.isLoading = false}, 1000)
     },
     getLicense(){
       this.userLicense= this.$session.get("userLicense")

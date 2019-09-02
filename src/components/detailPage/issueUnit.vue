@@ -38,16 +38,16 @@
           </div>
         </div>
       </div>
-      <br />
       <div class="modal_desc">
         <div class="f_text">
-          <p>
+          <p v-show="!(errors.any() || !enableSodoor)">
             شما در حال صدور
             <i>{{unitCount}}</i> واحد سرمایه‌گذاری به ارزش
             <i>{{price?price:0|persianCurrency}} ریال</i> می باشید
           </p>
         </div>
       </div>
+      <br>
       <div slot="modal-footer">
         <!-- <button :class="['btn', 'sodur_btn',enableSodoor?'':'btn-is-disabled']"
           @click.prevent="showSodoor">صدور واحد
@@ -75,8 +75,9 @@ export default {
       priceErr: false,
       fund: {},
       fundId: 0,
-      userLicense: {},
-    };
+      userLicense: {}
+      // showDescription:false,
+    }
   },
   methods: {
     showSodoor() {
@@ -101,10 +102,12 @@ export default {
         this.unitCount = Math.floor(this.price / this.unitValue)
         this.priceErr = false
         this.enableSodoor = true
+        // this.showDescription = true
       } else {
         this.unitCount = 0
         this.priceErr = true
         this.enableSodoor = false
+        // this.showDescription = false
       }
     },
     getLicense(){

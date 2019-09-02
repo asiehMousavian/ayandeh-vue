@@ -120,6 +120,7 @@ export default {
     },
     goToUserProfile: function () {
       this.$router.push('/user')
+      this.$session.set('currentComponent', 'requestReport')
     },
     closeModal: function (modalId) {
       this.$bvModal.hide(modalId)
@@ -161,7 +162,6 @@ export default {
               // this.canInvokeMsg = 'در حال حاضر قادر به انجام این کار نمی باشید'
             }
           }
-          // this.canRevoke = false
         })
     }
   },

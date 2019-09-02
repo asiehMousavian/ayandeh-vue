@@ -28,7 +28,9 @@ const dictionary = {
       acountType: 'نوع حساب',
       address: 'آدرس',
       password: 'رمز عبور',
-      count: 'تعداد'
+      confirmpassword: 'تکرار رمز عبور',
+      count: 'تعداد',
+      verificationCode:'کد اعتبارسنجی'
     }
   }
 }

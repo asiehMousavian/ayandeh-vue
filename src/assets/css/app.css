@@ -1158,6 +1158,124 @@ input:-webkit-autofill:hover {
 }
 
 /******* Login/register tab ******/
+/******azadeh 11-06-98*********/
+#homePage .box_tab .mytab {
+  width: 50%;
+}
+#homePage .box_tab .mytab .active {
+  background-color: transparent;
+  position: relative;
+}
+#homePage .box_tab .mytab .active::before {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  z-index: 100;
+  background-color: #7d4434;
+}
+#homePage .box_tab .mytab a {
+  display: block;
+  height: 68px;
+  line-height: 68px;
+  text-align: center;
+  color: #000;
+  font-family: "Iransans_Medium";
+  font-size: 24px;
+  padding: 0;
+  border: none;
+}
+@media only screen and (max-width: 991px) {
+  #homePage .box_tab .mytab a {
+    height: 55px;
+    line-height: 55px;
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 440px) {
+  #homePage .box_tab .mytab a {
+    height: 45px;
+    line-height: 45px;
+    font-size: 15px;
+  }
+}
+
+#registerPage #signUpS1 .option {
+  padding: 10px 15px;
+  height: 50px;
+  border-radius: 24px;
+  box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  margin-bottom: 30px;
+}
+#registerPage #signUpS1 .option img {
+  height: 100%;
+}
+#registerPage #signUpS1 .option span {
+  font-size: 18px;
+  font-family: "Iransans_Bold";
+  margin: 0 auto;
+}
+#registerPage form .form-alert {
+  left: 0;
+  background-color: #fff;
+}
+#registerPage form .format_inp {
+  display: block;
+  color: #575757;
+  font-size: 15px;
+  position: absolute;
+  right: 0;
+}
+@media only screen and (max-width: 991px) {
+  #registerPage form .format_inp {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 567px) {
+  #registerPage form .format_inp {
+    font-size: 12px;
+  }
+}
+
+#verificationPage .verificationForm {
+  padding: 20px 30px;
+}
+#verificationPage .verificationForm .box_title p {
+  font-size: 24px;
+  font-family: "Iransans_Bold";
+  text-align: center;
+  margin-bottom: 30px;
+}
+#verificationPage .verificationForm .box_text span {
+  font-family: "Iransans_Bold";
+}
+#verificationPage .verificationForm form .form-alert {
+  left: 0;
+  background-color: #fff;
+}
+#verificationPage .verificationForm form .format_inp {
+  display: block;
+  color: #575757;
+  font-size: 15px;
+  position: absolute;
+  right: 0;
+}
+@media only screen and (max-width: 991px) {
+  #verificationPage .verificationForm form .format_inp {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 567px) {
+  #verificationPage .verificationForm form .format_inp {
+    font-size: 12px;
+  }
+}
+
+/******azadeh 11-06-98*********/
 /******** Banner ********/
 .banner {
   background-position: center center;

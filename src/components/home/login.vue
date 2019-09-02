@@ -77,6 +77,7 @@ export default {
             generalService.postMethod('auth/login', UserInfo).then(response => {
               if (response.message === 'OK' && response.status === 0) {
                 if (response.content.user.isActive) {
+                  //todo start ?
                   this.$session.start()
                   this.$session.set('isLogged', true)
                   this.$session.set('clientInfo', JSON.stringify(response.content.user))

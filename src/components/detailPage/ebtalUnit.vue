@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!confirm">
     <h3 class="modal_title">ابطال سهم</h3>
     <div class="modal_txt">
       <p>
@@ -14,7 +14,7 @@
         <span>-{{licenseNumber}}-</span> واحد دارد.
       </p>
     </div>
-    <form>
+    <form >
       <div class="f_body d-flex">
         <div class="form-group">
           <div class="inp_border">
@@ -22,31 +22,48 @@
             <i class="placeholder">تعداد واحد ها</i>
             <i class="line"></i>
           </div>
-        <div class="form-alert">
-            <p v-show="errors.has('count')">{{ errors.first('count') }}</p>
-            <p
-              v-show="responseError">{{errorMsg}}</p>
+          <div class="form-alert">
+              <p v-show="errors.has('count')">{{ errors.first('count') }}</p>
           </div>
         </div>
       </div>
-      <br />
       <div class="modal_desc">
         <div class="f_text" >
-          <p v-show="showDescription">
+          <p v-show="!(errors.any() || !isComplete)">
             شما در حال ابطال
             <i>{{unitCount}}</i> واحد سرمایه‌گذاری به ارزش
             <i>{{price?price:0|persianCurrency}} ریال</i> می باشید
           </p>
-          <p v-show="success">در خواست شما با موفقیت ثبت شد</p>
+            <!-- <p v-if="success">در خواست شما با موفقیت ثبت شد</p>
+            <p v-else>{{errorMsg}}</p> -->
         </div>
       </div>
       <br>
       <div slot="modal-footer">
-        <!-- <button class="btn" :disabled='errors.any() || !isComplete' @click.prevent="ebtalUnits" >ابطال واحد
-        </button> -->
-        <VueLoadingButton class="btn" :disabled='errors.any() || !isComplete' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
-
+        <button class="btn" :disabled='errors.any() || !isComplete' @click.prevent="confirmRevoke" >ابطال واحد</button>
+        <!-- <VueLoadingButton class="btn" :disabled='errors.any() || !isComplete' type="button" @click.native="confirmRevoke" :loading="isLoading">ابطال واحد</VueLoadingButton> -->
         <button class="btn btn-cancel" @click.prevent="close">لغو</button>
+      </div>
+    </form>
+  </div>
+  <div v-else>
+   <form >
+        <div class="modal_desc">
+        <div class="f_text">
+          <p>از ابطال سهم اطمینان دارید؟</p>
+          <p>
+            بعد از ابطال شما <i>{{unitCount}}</i> واحد از سهم خود را از مالکیت خارج می کنید
+          </p>
+          <br>
+          <p v-if="success">در خواست شما با موفقیت ثبت شد</p>
+          <p v-else>{{errorMsg}}</p>
+        </div>
+       </div>
+      <br/>
+      <br>
+      <div slot="modal-footer">
+        <VueLoadingButton class="btn" :disabled='errors.any() || !isComplete' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
+        <button class="btn btn-cancel" @click.prevent="check">بررسی مجدد</button>
       </div>
     </form>
   </div>
@@ -72,10 +89,11 @@ export default {
       revokeFund:{},
       errorMsg:'',
       price:0,
-      showDescription:false,
-      responseError:false,
+      // showDescription:false,
+      // responseError:false,
       success:false,
-      isLoading:false
+      isLoading:false,
+      confirm:false
     }
   },
   components:{
@@ -87,13 +105,23 @@ export default {
     }
   },
   methods: {
+    check()
+    {
+      this.confirm=false
+      // sharedService.checkInputs()
+      this.unitCount=''
+      // this.showDescription=false
+    },
+    confirmRevoke(){
+      this.confirm=true
+    },
     checkInput(){
       sharedService.checkInputs()
       this.price = this.fund.saleNav * this.unitCount
-      if(this.price>0)
-          this.showDescription=true
-      else
-          this.showDescription=false
+      // if(this.price>0)
+      //     this.showDescription=true
+      // else
+      //     this.showDescription=false
     },
      close() {
       this.$emit("exit", true)
@@ -104,19 +132,22 @@ export default {
       setTimeout(() => {
         
         this.revokeFund = {
-        fundId:    this.fundId,
-        licenseNumber: this.licenseNumber,
-        fundUnit: this.unitCount
-      }
+          fundId:this.fundId,
+          licenseNumber: this.licenseNumber,
+          fundUnit: this.unitCount
+        }
         service.postMethod(`invest/fund/revoke`, this.revokeFund)
         .then(response => {
           //todo
           this.success=true
           this.showDescription=false
+
         })
         .catch(error => {
+          
           //todo
-            this.responseError=true
+          this.success=false
+          this.showDescription=false
           if (error.response.data.status === 500501) {
             this.errorMsg = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
           } else {
@@ -143,7 +174,6 @@ export default {
     },
     getFundInfo(){
        this.fund = JSON.parse(this.$session.get("currentFund"))
-      // this.unitValue = this.fund.purchaseNav + 20000
       this.fundId = this.fund.code
 
     }

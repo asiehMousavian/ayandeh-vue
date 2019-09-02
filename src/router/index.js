@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/home/Home'
 import register from '@/components/home/register'
 import login from '@/components/home//login'
+import verificationCode from '@/components/home/verificationCode'
 
 import Detail from '@/components/detailPage/Detail'
 
@@ -123,6 +124,7 @@ export default new Router({
           path: 'register',
           component: register
         }
+      
       ]
     },
     {
@@ -184,6 +186,21 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         checkIsLogged(to, from, next)
       }
+    },
+
+    {
+      path: '/verification',
+      name:'verification',
+      component:verificationCode,
+      beforeEnter: (to, from, next) => {
+        if (session.has('mobile')) {
+          let logged = session.get('mobile')
+          if (logged) { next() }
+        } else {
+          next('login')
+        }
+      }
+    
     }
     // end of all routes
     // check

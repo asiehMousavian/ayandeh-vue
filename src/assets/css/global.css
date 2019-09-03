@@ -450,6 +450,11 @@ button.btn {
   position: absolute;
   right: 0;
 }
+@media only screen and (max-width: 991px) {
+  .format_inp {
+    font-size: 12px;
+  }
+}
 
 .select2-container {
   width: 225px !important;

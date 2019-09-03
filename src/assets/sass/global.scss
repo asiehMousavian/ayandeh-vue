@@ -350,6 +350,9 @@ button.btn{
   font-size: 13px;
   position: absolute;
   right: 0;
+  @media #{$size992} {
+    font-size: 12px;
+  }
 }
 .select2-container{
   width: 225px !important;

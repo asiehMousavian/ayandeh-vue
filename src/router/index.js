@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/home/Home'
 import register from '@/components/home/register'
 import login from '@/components/home//login'
+import verificationPage from '@/components/home/verificationPage'
 
 import Detail from '@/components/detailPage/Detail'
 
@@ -58,7 +59,7 @@ var GetSession = function (to, from, next) {
     generalService.postMethod('auth/session', sessionObj).then(response => {
       if (response.message === 'OK' && response.status === 0) {
         if (response.content.session) {
-          //todo
+          // todo
           // localStorage.setItem("session",JSON.stringify(response.content.session))
           localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
           // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
@@ -82,6 +83,7 @@ var GetSession = function (to, from, next) {
 var isLogged = function () {
   if (session.has('isLogged')) {
     let logged = session.get('isLogged')
+
     if (logged) { return true }
   } else {
     return false
@@ -109,8 +111,7 @@ export default new Router({
           } else {
             next()
           }
-        }
-        else {
+        } else {
           next()
         }
       },
@@ -123,6 +124,7 @@ export default new Router({
           path: 'register',
           component: register
         }
+
       ]
     },
     {
@@ -194,6 +196,20 @@ export default new Router({
         checkIsLogged(to, from, next)
       }
     },
+    {
+      path: '/verification',
+      name: 'verification',
+      component: verificationPage,
+      beforeEnter: (to, from, next) => {
+        if (session.has('mobile')) {
+          // let logged = session.get('mobile')
+          // if (logged) { next() }
+          next()
+        } else {
+          next('login')
+        }
+      }
+    }
     // end of all routes
     // check
     // {

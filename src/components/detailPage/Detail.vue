@@ -20,13 +20,13 @@
                 <a href="#" @click.prevent="goToUserProfile()">اطلاعات کاربر</a>
               </li>
               <li>
-                <a href="#" v-b-modal.descModal>توضیحات صندوق</a>
+                <a href="#" @click="showModal('descModal')" >توضیحات صندوق</a>
               </li>
               <li>
-                <a href="#" v-b-modal.sodoorModal>صدور واحد</a>
+                <a href="#" @click="showModal('sodoorModal')">صدور واحد</a>
               </li>
               <li>
-                <a href="#" data-toggle="modal" data-target="#ebtalModal">ابطال واحد</a>
+                <a href="#" @click="showModal('ebtalModal')">ابطال واحد</a>
               </li>
             </ul>
           </div>
@@ -40,10 +40,10 @@
             <accounting></accounting>
            </div>
           <div>
-            <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
+            <b-modal id="descModal" title="BootstrapVue" hide-header size="lg" >
                 <fund-description></fund-description>
               <div slot="modal-footer">
-                <b-button class="btn" @click="closeModal('descModal')">بستن</b-button>
+                <button class="btn" @click="closeModal('descModal')">بستن</button>
               </div>
             </b-modal>
           </div>
@@ -55,6 +55,11 @@
           <div>
             <b-modal id="innerSodoorModal" title="BootstrapVue" hide-header size="lg"  hide-footer>
                 <inner-sodoor @exit="closeModal('innerSodoorModal')"></inner-sodoor>
+            </b-modal>
+          </div>
+           <div>
+            <b-modal id="ebtalModal" title="BootstrapVue" hide-header size="lg" hide-footer>
+                <ebtal-unit v-bind:fund="fund" @exit="closeModal('ebtalModal')"></ebtal-unit>
             </b-modal>
           </div>
         </div>
@@ -82,6 +87,7 @@ import turnover from './turnOver'
 import service from '@/services/generalService'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import ebtalUnit from './ebtalUnit'
 export default {
   name: 'Detail',
   data () {
@@ -104,17 +110,30 @@ export default {
     turnover,
     toggleMenu,
     Loading,
-    accounting
+    accounting,
+    ebtalUnit
   },
   methods: {
-    showComponent: function (componentName) {
+    showModal (modalId) {
+      // v-b-modal.descModal
+      let logged = this.$session.get('isLogged')
+      if (logged) {
+        if (modalId == 'sodoorModal') {
+          //if (this.getUserValidate()) {
+            this.$bvModal.show(modalId)
+         // }
+        } else { this.$bvModal.show(modalId) }
+      }
+    },
+    showComponent (componentName) {
       this.currentComponent = componentName
       this.$session.set('currentComponent', this.currentComponent)
     },
-    goToUserProfile: function () {
+    goToUserProfile () {
       this.$router.push('/user')
+      this.$session.set('currentComponent', 'requestReport')
     },
-    closeModal: function (modalId) {
+    closeModal (modalId) {
       this.$bvModal.hide(modalId)
     },
     getFunds () {
@@ -138,7 +157,7 @@ export default {
       }
     },
     getLicense () {
-      service.getMethod(`/invest/fund/license/${this.fundId}`)
+      service.getMethod(`invest/fund/license/${this.fundId}`)
         .then(response => {
           if (response.status === 0) {
             this.userLicense = response.content
@@ -154,7 +173,18 @@ export default {
               // this.canInvokeMsg = 'در حال حاضر قادر به انجام این کار نمی باشید'
             }
           }
-          // this.canRevoke = false
+        })
+    },
+    getUserValidate () {
+      service.getMethod('invest/user/validate')
+        .then(response => {
+          if (response.status === 0) {
+            debugger
+            if (response.content === true) { return true } else { return false }
+          }
+        })
+        .catch(error => {
+          debugger
         })
     }
   },

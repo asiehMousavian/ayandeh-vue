@@ -3,7 +3,7 @@
     <h3 class="modal_title">صدور سهم</h3>
     <div class="modal_txt">
       <p>
-        عملیات صدور براساس NAV تخمینی برای ۲ روز کاری بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
+        عملیات صدور براساس <span>NAV</span> تخمینی برای <span>۲ روز کاری</span> بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
         خواهد شد
       </p>
     </div>
@@ -38,23 +38,22 @@
           </div>
         </div>
       </div>
-      <br />
       <div class="modal_desc">
         <div class="f_text">
-          <p>
+          <p v-show="!(errors.any() || !enableSodoor)">
             شما در حال صدور
             <i>{{unitCount}}</i> واحد سرمایه‌گذاری به ارزش
             <i>{{price?price:0|persianCurrency}} ریال</i> می باشید
           </p>
         </div>
       </div>
+      <br>
       <div slot="modal-footer">
-        <a
-          href="#"
-          :class="['btn', 'sodur_btn',enableSodoor?'':'btn-is-disabled']"
+        <!-- <button :class="['btn', 'sodur_btn',enableSodoor?'':'btn-is-disabled']"
           @click.prevent="showSodoor">صدور واحد
-        </a>
-        <button class="btn btn-cancel" @click="close">لغو</button>
+        </button> -->
+        <button class="btn" :disabled='errors.any() || !enableSodoor' @click.prevent="showSodoor">صدور واحد </button>
+        <button class="btn btn-cancel" @click.prevent="close">لغو</button>
       </div>
     </form>
   </div>
@@ -77,6 +76,7 @@ export default {
       fund: {},
       fundId: 0,
       userLicense: {}
+      // showDescription:false,
     }
   },
   methods: {
@@ -102,15 +102,17 @@ export default {
         this.unitCount = Math.floor(this.price / this.unitValue)
         this.priceErr = false
         this.enableSodoor = true
+        // this.showDescription = true
       } else {
         this.unitCount = 0
         this.priceErr = true
         this.enableSodoor = false
+        // this.showDescription = false
       }
     },
     getLicense () {
       this.userLicense = this.$session.get('userLicense')
-      if (this.userLicense.licenseNumber !== undefined) {
+      if (this.userLicense.licenseNumber != undefined) {
         this.licenseNumber = this.userLicense.licenseNumber
       }
     },
@@ -162,8 +164,16 @@ export default {
 </script>
 
 <style scoped>
+  .form-group {
+    width: 41.5%;
+    /* width: 100%; */
+  }
   .btn-is-disabled {
     opacity: 0.7;
     pointer-events: none;
+  }
+  .modal_txt p span
+  {
+    font-family:"Iransans_Bold"
   }
 </style>

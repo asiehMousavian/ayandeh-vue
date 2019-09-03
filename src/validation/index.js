@@ -27,7 +27,10 @@ const dictionary = {
       gender: 'جنسیت',
       acountType: 'نوع حساب',
       address: 'آدرس',
-      password: 'رمز عبور'
+      password: 'رمز عبور',
+      confirmpassword: 'تکرار رمز عبور',
+      count: 'تعداد',
+      verificationCode:'کد اعتبارسنجی'
     }
   }
 }

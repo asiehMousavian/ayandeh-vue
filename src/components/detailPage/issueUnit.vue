@@ -15,8 +15,8 @@
       </p>
     </div>
     <form>
-      <div class="f_body d-flex">
-        <div class="form-group">
+      <div class="f_body d-flex justify-content-center ebtal_form">
+        <div class="form-group f_form">
           <div class="inp_border">
             <input
               type="text"
@@ -54,21 +54,21 @@
           :class="['btn', 'sodur_btn',enableSodoor?'':'btn-is-disabled']"
           @click.prevent="showSodoor">صدور واحد
         </a>
-        <b-button class="btn btn-cancel" @click="close">لغو</b-button>
+        <button class="btn btn-cancel" @click="close">لغو</button>
       </div>
     </form>
   </div>
 </template>
 <script>
-import service from "@/services/generalService"
-import sharedService from "@/services/sharedService"
+import service from '@/services/generalService'
+import sharedService from '@/services/sharedService'
 
 export default {
-  name: "issueUnit",
-  data() {
+  name: 'issueUnit',
+  data () {
     return {
       enableSodoor: false,
-      nationalId: "",
+      nationalId: '',
       licenseNumber: 0,
       unitValue: 0,
       price: null,
@@ -76,25 +76,25 @@ export default {
       priceErr: false,
       fund: {},
       fundId: 0,
-      userLicense: {},
-    };
+      userLicense: {}
+    }
   },
   methods: {
-    showSodoor() {
+    showSodoor () {
       let baseUrl = window.location.origin
-      let purchaseObj={
-          detail: 'string',
-          price: this.price,
-          unitCount:this.unitCount,
-          redirectUrl: `${baseUrl}/redirect`
+      let purchaseObj = {
+        detail: 'string',
+        price: this.price,
+        unitCount: this.unitCount,
+        redirectUrl: `${baseUrl}/redirect`
       }
-      this.$session.set("purchaseObj",JSON.stringify(purchaseObj))
-      this.$emit("purchase", true)
+      this.$session.set('purchaseObj', JSON.stringify(purchaseObj))
+      this.$emit('purchase', true)
     },
-    close() {
-      this.$emit("exit", true)
+    close () {
+      this.$emit('exit', true)
     },
-    calculatePrice() {
+    calculatePrice () {
       sharedService.checkInputs()
       let p = parseInt(this.price)
       let n = parseInt(this.fund.purchaseNav)
@@ -108,24 +108,23 @@ export default {
         this.enableSodoor = false
       }
     },
-    getLicense(){
-      this.userLicense= this.$session.get("userLicense")
-      if(this.userLicense.licenseNumber != undefined)
-      {
-        this.licenseNumber=this.userLicense.licenseNumber
+    getLicense () {
+      this.userLicense = this.$session.get('userLicense')
+      if (this.userLicense.licenseNumber !== undefined) {
+        this.licenseNumber = this.userLicense.licenseNumber
       }
     },
-    getClientInfo(){
-      if (this.$session.has("clientInfo")) {
-        let client = this.$session.get("clientInfo")
+    getClientInfo () {
+      if (this.$session.has('clientInfo')) {
+        let client = this.$session.get('clientInfo')
         if (client) {
           let user = JSON.parse(client)
           this.nationalId = user.nationalId
         }
       }
     },
-    getFundInfo(){
-       this.fund = JSON.parse(this.$session.get("currentFund"))
+    getFundInfo () {
+      this.fund = JSON.parse(this.$session.get('currentFund'))
       this.unitValue = this.fund.purchaseNav + 20000
       this.fundId = this.fund.code
     }
@@ -134,42 +133,37 @@ export default {
     //   let n = parseInt(this.fund.purchaseNav)
     //   this.priceErr = p < n
     // },
-    //getFundDetail() {
-      // service
-      //   .getMethod(`invest/fund/${this.fundId}`)
-      //   .then(response => {
-      //     this.fund = response.content
-      //     this.unitValue = this.fund.purchaseNav
-      //     localStorage.setItem("unitValue", this.unitValue)
-      //     localStorage.setItem("fundId", this.fundId)
-      //     localStorage.setItem("currentFund", JSON.stringify(this.fund))
-      //   })
-      //   .catch(error => {
-      //     //todo
-      //   });
-    //}
+    // getFundDetail() {
+    // service
+    //   .getMethod(`invest/fund/${this.fundId}`)
+    //   .then(response => {
+    //     this.fund = response.content
+    //     this.unitValue = this.fund.purchaseNav
+    //     localStorage.setItem("unitValue", this.unitValue)
+    //     localStorage.setItem("fundId", this.fundId)
+    //     localStorage.setItem("currentFund", JSON.stringify(this.fund))
+    //   })
+    //   .catch(error => {
+    //     //todo
+    //   });
+    // }
   },
-  mounted() {
+  mounted () {
     this.getClientInfo()
     this.getFundInfo()
     this.getLicense()
-
   },
   filters: {
-    persianCurrency: function(value) {
-      return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1/")
+    persianCurrency: function (value) {
+      return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1/')
     }
   }
 }
 </script>
 
 <style scoped>
-.form-group {
-  /* width: 41.5%; */
-  width: 100%;
-}
-.btn-is-disabled {
-  opacity: 0.7;
-  pointer-events: none;
-}
+  .btn-is-disabled {
+    opacity: 0.7;
+    pointer-events: none;
+  }
 </style>

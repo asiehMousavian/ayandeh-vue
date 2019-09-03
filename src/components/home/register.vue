@@ -39,15 +39,15 @@ export default {
   name: 'register',
   data () {
     return {
-      registerButton: "ورود به پیشخوان",
-      account: "0121212121212"
+      registerButton: 'ورود به پیشخوان',
+      account: '0121212121212'
     }
   },
   computed: {
-  isComplete () {
-    return this.account
-  }
-},
+    isComplete () {
+      return this.account
+    }
+  },
   methods: {
     register: function () {
       this.$validator.validateAll().then(result => {
@@ -66,9 +66,8 @@ export default {
             }).catch(error => {
               sharedService.requestFailed(error.response.data.message)
             })
-        }
-        else {
-          //todo
+        } else {
+          // todo
         }
       })
     }
@@ -77,8 +76,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 
   #registerForm .form-alert {
     left: 0;

@@ -2,7 +2,7 @@
   <div class="all">
     <page-header></page-header>
     <!-- Main -->
-    <div id="main" role="main">
+    <div id="main" role="main" v-if="isDone">
       <div class="mainarea">
           <div class="container">
               <div class="top_site d-flex">
@@ -20,12 +20,12 @@
                     </div>
                   </div>
                   <div class="d-flex">
-                    <button class="btn edit_btn mr-auto">
+                    <button class="btn edit_btn mr-auto" @click.prevent="editUser()" v-if="userInfo.registerStatus === 'FAILED'">
                       <img src="@/assets/img/edit.svg" alt />ویرایش اطلاعات
                     </button>
                   </div>
                   <div class="conf_text">
-                    <p>اطلاعات شما ثبت گردیده است و در انتظار تایید مدیریت می باشد.</p>
+                    <p>{{registerStatusMsg}}</p>
                   </div>
                 </div>
               </div>
@@ -121,6 +121,9 @@
           </div>
       </div>
     </div>
+    <div v-else>
+      <loading :active.sync="isLoading"></loading>
+    </div>
     <!-- Main -->
     <!-- Mobile Menu -->
     <toggleMenu></toggleMenu>
@@ -132,28 +135,59 @@
 
 import PageHeader from '../header/PageHeader'
 import toggleMenu from '../share/toggleMenu'
+import generalService from '@/services/generalService'
 import sharedService from '@/services/sharedService'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'userInformation',
   data () {
     return {
       userInfo: {},
+      foundId: this.$route.params.foundId,
+      registerStatusMsg: '',
+      isLoading: true,
+      isDone: false,
       get_founds_url: 'invest/userInformation'
     }
   },
   components: {
-    PageHeader, toggleMenu
+    PageHeader, toggleMenu, Loading
   },
   mounted () {
+    this.isDone = false
     sharedService.handleInputLabels()
     sharedService.toggleMenu()
     if (localStorage.getItem('userData')) {
       this.userInfo = JSON.parse(localStorage.getItem('userData'))
     }
+    generalService
+      .getMethod('/invest/user/')
+      .then(response => {
+        this.user = response.content
+        this.isDone = true
+        localStorage.setItem('regUser', JSON.stringify(this.user))
+        if (response.content.registerStatus === 'UNKNOWN') {
+          this.registerStatusMsg = 'اطلاعات شما در سیستم ثبت نشده است'
+        } else if (response.content.registerStatus === 'PENDING') {
+          this.registerStatusMsg = 'اطلاعات شما در انتظار تایید است'
+        } else if (response.content.registerStatus === 'FAILED') {
+          this.registerStatusMsg = 'برخی از اطلاعات شما توسط مدیر سیستم تایید نشده است لطفا از دکمه ویرایش جهت تکمیل اطالاعات استفاده کنید'
+        } else if (response.content.registerStatus === 'READY') {
+          this.registerStatusMsg = ''
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        this.user = null
+        this.isDone = true
+      })
   },
   methods: {
-
+    editUser () {
+      this.$router.push('user/edit')
+    }
   }
 }
 </script>

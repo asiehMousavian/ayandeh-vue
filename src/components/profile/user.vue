@@ -19,7 +19,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="firstName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.firstName" />
+                      <input type="text" name="firstName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.firstName" :disabled="validations && validations.firstNameConfirmed" />
                       <div class="form-alert">
                         <p v-show="errors.has('firstName')">{{ errors.first('firstName') }}</p>
                       </div>
@@ -31,7 +31,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="lastName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.lastName"/>
+                      <input type="text" name="lastName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.lastName" :disabled="validations && validations.lastNameConfirmed"/>
                       <div class="form-alert">
                         <p v-show="errors.first('lastName')">{{ errors.first('lastName') }}</p>
                       </div>
@@ -45,7 +45,12 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="tell" name="birth" class="form-control birth" v-validate="'required'" @blur="checkDate()" v-mask="'## ## ####'" v-model="userInfo.birth"/>
+                      <input type="tell" name="birth" class="form-control birth"
+                             v-validate="'required'"
+                             @blur="checkDate()"
+                             v-mask="'## ## ####'"
+                             v-model="userInfo.birth"
+                             :disabled="validations && validations.birthDateConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('birth') }}</p>
                       </div>
@@ -58,7 +63,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="birthCertNumber" class="form-control" v-validate="'required|numeric|max:10'" v-model="userInfo.birthCertNumber"/>
+                      <input type="text" name="birthCertNumber" class="form-control" v-validate="'required|numeric|max:10'" v-model="userInfo.birthCertNumber" :disabled="validations && validations.birthCertNumberConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('birthCertNumber') }}</p>
                       </div>
@@ -70,7 +75,7 @@
                 <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="issuingCity" class="form-control" v-validate="'required|alpha'" v-model="userInfo.issuingCity"/>
+                      <input type="text" name="issuingCity" class="form-control" v-validate="'required|alpha'" v-model="userInfo.issuingCity" :disabled="validations && validations.issuingCityConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('issuingCity') }}</p>
                       </div>
@@ -84,7 +89,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="nationalId" class="form-control" v-validate="'required|numeric|length:10'" v-model="userInfo.nationalId"/>
+                      <input type="text" name="nationalId" class="form-control" v-validate="'required|numeric|length:10'" v-model="userInfo.nationalId" :disabled="validations && validations.nationalIdConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('nationalId') }}</p>
                       </div>
@@ -126,7 +131,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="phoneNumber" class="form-control" v-validate="'required|phoneNumberFa'" v-model="userInfo.phoneNumber"/>
+                      <input type="text" name="phoneNumber" class="form-control" v-validate="'required|phoneNumberFa'" v-model="userInfo.phoneNumber" :disabled="validations && validations.phoneNumberConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('phoneNumber') }}</p>
                       </div>
@@ -140,7 +145,7 @@
                   <div class="form-group">
                     <div class="inp_border">
                       <input type="text" name="mobileNumber" class="form-control"
-                             v-on:blur="nationalIdMobileCompatibility" v-validate="'required|mobileFa'" v-model="userInfo.mobileNumber"/>
+                             v-on:blur="nationalIdMobileCompatibility" v-validate="'required|mobileFa'" v-model="userInfo.mobileNumber" :disabled="validations && validations.mobileNumberConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('mobileNumber') }}</p>
                       </div>
@@ -155,7 +160,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="address" class="form-control" v-validate="'required'" v-model="userInfo.address"/>
+                      <input type="text" name="address" class="form-control" v-validate="'required'" v-model="userInfo.address" :disabled="validations && validations.addressConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('address') }}</p>
                       </div>
@@ -167,7 +172,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="postalCode" class="form-control" v-validate="'required|numeric|length:10'" v-model="userInfo.postalCode"/>
+                      <input type="text" name="postalCode" class="form-control" v-validate="'required|numeric|length:10'" v-model="userInfo.postalCode" :disabled="validations && validations.postalCodeConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('postalCode') }}</p>
                       </div>
@@ -184,7 +189,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="bankName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.bankName"/>
+                      <input type="text" name="bankName" class="form-control" v-validate="'required|alpha'" v-model="userInfo.bankName" :disabled="validations && validations.bankNameConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('bankName') }}</p>
                       </div>
@@ -196,7 +201,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="ibanNumber" @blur="getBankInfo , checkIban()" class="form-control" v-model="userInfo.ibanNumber" v-mask="'IR##-###-######-#############'"/>
+                      <input type="text" name="ibanNumber" @blur="getBankInfo , checkIban()" class="form-control" v-model="userInfo.ibanNumber" v-mask="'IR##-###-######-#############'" :disabled="validations && validations.ibanNumberConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('ibanNumber') }}</p>
                       </div>
@@ -211,8 +216,8 @@
             <div class="form-row-new">
               <div class="form-group">
                 <div class="d-flex justify-content-start submitBtns">
-                  <button class="btn" @click.prevent="submitData()">ثبت اطلاعات</button>
-                  <button type="button" class="btn btn-cancel marginR25">انصراف</button>
+                  <button type="button" class="btn" @click.prevent="submitData()">ثبت اطلاعات</button>
+                  <button type="button" class="btn btn-cancel marginR25" @click="cancelOp()">انصراف</button>
                 </div>
               </div>
             </div>
@@ -224,6 +229,28 @@
     <!-- Mobile Menu -->
     <toggleMenu></toggleMenu>
     <!-- Mobile Menu -->
+    <!-- confirmCancel Modal -->
+    <b-modal id="confirmCancel" title="BootstrapVue" hide-header hide-footer size="md">
+      <div class="confirm_txt">
+        <p>آیا از انصراف خود اطمینان دارید؟</p>
+      </div>
+      <div class="d-flex justify-content-start confirm_btn">
+        <a href="#" class="btn" @click.prevent="yesConfirmCancel() , $bvModal.hide('confirmCancel')">بله</a>
+        <a href="#" class="btn btn-cancel" @click.prevent="noConfirmCancel() , $bvModal.hide('confirmCancel')">خیر</a>
+      </div>
+    </b-modal>
+    <!-- confirmCancel Modal -->
+    <!-- confirmRefresh Modal -->
+    <b-modal id="confirmRefresh" title="BootstrapVue" hide-header hide-footer size="md" ref="confirmRefresh">
+      <div class="confirm_txt">
+        <p>آیا مایل به بازخوانی اطلاعات خود هستید؟</p>
+      </div>
+      <div class="d-flex justify-content-start confirm_btn">
+        <a href="#" class="btn" @click.prevent="yesConfirmRefresh() , $bvModal.hide('confirmRefresh')">بله</a>
+        <a href="#" class="btn btn-cancel" @click.prevent="noConfirmRefresh() , $bvModal.hide('confirmRefresh')">خیر</a>
+      </div>
+    </b-modal>
+    <!-- confirmRefresh Modal -->
   </div>
 </template>
 
@@ -239,15 +266,19 @@ export default {
   data () {
     return {
       userInfo: {},
+      mode: 'create',
+      validations: {},
       get_founds_url: 'invest/user'
     }
   },
+  // beforeUpdate () {
+  //   sharedService.checkInputs()
+  // },
   components: {
     PageHeader, toggleMenu
   },
   mounted () {
     sharedService.handleInputLabels()
-    // sharedService.checkInputs()
     sharedService.toggleMenu()
     // if (this.$session.has('clientInfo')) {
     //   let client = this.$session.get('clientInfo')
@@ -266,26 +297,57 @@ export default {
     //   .catch(error => {
     //     console.log(error)
     //   })
-    // if (localStorage.getItem('userData')) {
-    //   this.userInfo = JSON.parse(localStorage.getItem('userData'))
-    // }
+    if (this.$route.params.mode) {
+      this.mode = 'update'
+      generalService.getMethod('/invest/user/')
+        .then(response => {
+          this.userInfo = response.content
+          this.getRegisteredUserConfirmations()
+          setTimeout(() => {
+            sharedService.checkInputs()
+          }, 500)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+    if (localStorage.getItem('userInfoData')) {
+      this.showMyModal()
+    }
   },
   methods: {
+    showMyModal () {
+      this.$refs['confirmRefresh'].show()
+    },
     submitData: function () {
       this.$validator.validate().then(valid => {
         if (valid) {
-          generalService
-            .postMethod('invest/fund/register/investor/10915', this.userInfo)
-            .then(response => {
-              debugger
-              if (response.status === 0 && response.message === 'OK') {
-                // sharedService.Done('ثبت نام با موفقیت انجام شد')
-              }
-            }).catch(error => {
-            console.log(error)
-            // sharedService.Failed(error.response.data.message)
-          })
-        } else {
+          if (this.mode !== 'creat') {
+            // debugger
+            generalService
+              .putMethod('invest/fund/register/investor/10915', this.userInfo)
+              .then(response => {
+                debugger
+                if (response.status === 0 && response.message === 'OK') {
+                  // sharedService.Done('ثبت نام با موفقیت انجام شد')
+                }
+              }).catch(error => {
+                console.log(error)
+              // sharedService.Failed(error.response.data.message)
+              })
+          } else {
+            generalService
+              .postMethod('invest/fund/register/investor/10915', this.userInfo)
+              .then(response => {
+                debugger
+                if (response.status === 0 && response.message === 'OK') {
+                  // sharedService.Done('ثبت نام با موفقیت انجام شد')
+                }
+              }).catch(error => {
+                console.log(error)
+              // sharedService.Failed(error.response.data.message)
+              })
+          }
         }
       })
     },
@@ -359,23 +421,61 @@ export default {
         }
         reader.readAsDataURL(files[0])
       }
+    },
+    noConfirmCancel () {
+      this.$validator.validate()
+    },
+    yesConfirmCancel () {
+      let userInfoData = JSON.stringify(this.userInfo)
+      localStorage.setItem('userInfoData', userInfoData)
+      this.$router.push('detail/10915')
+    },
+    yesConfirmRefresh () {
+      this.userInfo = JSON.parse(localStorage.getItem('userInfoData'))
+      setTimeout(() => {
+        sharedService.checkInputs()
+      }, 10)
+    },
+    noConfirmRefresh () {
+      localStorage.removeItem('userInfoData')
+    },
+    getRegisteredUserConfirmations () {
+      generalService
+        .getMethod('/invest/user/validate/info')
+        .then(response => {
+          this.validations = response.content
+          debugger
+          for (let item in this.validations) {
+            if (!this.validations[item]) {
+              let data = item.split('Confirmed')
+              data = data[0]
+              if (this.userInfo.hasOwnProperty(data)) {
+                this.userInfo[data] = ''
+                this.errors.add({
+                  field: data,
+                  msg: 'مقدار فیلد مورد تایید نمی باشد.'
+                })
+              }
+            }
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    // TODO fix cancel op
+    cancelOp () {
+      if (this.mode === 'create') {
+        this.$bvModal.show('confirmCancel')
+      } else {
+        this.$router.back()
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-  .form-alert {
-    left: 0;
-    background-color: #f2f2f2;
-  }
-  .format_inp {
-    display: block;
-    color: #666;
-    font-size: 13px;
-    position: absolute;
-    right: 0;
-  }
   .upload_file{
     position: relative;
     cursor: pointer;
@@ -394,5 +494,19 @@ export default {
     opacity: 0;
     cursor: pointer;
     margin-top: 0;
+  }
+  .confirm_txt{
+    margin-bottom: 15px;
+  }
+  .confirm_txt p{
+    font-size: 15px;
+  }
+  .confirm_btn .btn{
+    width: 130px;
+    height: 40px;
+    line-height: 39px;
+  }
+  .confirm_btn .btn-cancel{
+    margin-right: 25px;
   }
 </style>

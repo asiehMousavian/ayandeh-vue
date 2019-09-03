@@ -17,7 +17,7 @@ export default {
   },
   checkInputs () {
     $('.form-control').each(function () {
-      // if ($(this)[0].val() !== '') {
+      //if ($(this)[0].val() !== '') {
       if ($(this).val() !== '') {
         $(this).parent().addClass('visited')
       } else {
@@ -76,6 +76,24 @@ export default {
   },
   closeModal(){
     $('.modal .modal-content .modal_extra').removeClass('active')
+  },
+  loginBox () {
+    $('#header .header .login_link .login_link_t').click(function () {
+      if ($(this).parent().hasClass('active')){
+        $(this).parent().removeClass('active');
+        $(this).next().fadeOut(300);
+      }
+      else {
+        $(this).parent().addClass('active');
+        $(this).next().fadeIn(300);
+      }
+    });
+  },
+  closeLoginBox() {
+    $('#header .header .login_link .login_link_box > ul > li > a').click(function () {
+      $(this).parent().parent().parent().fadeOut(300);
+      $(this).parent().parent().parent().parent().removeClass('active');
+    });
   }
 }
 

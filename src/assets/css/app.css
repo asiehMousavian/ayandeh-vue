@@ -112,7 +112,7 @@ img {
   clear: both;
 }
 
-.sprite, .box_tab .box_tab_t ul li a.active:before, .banner .banner_desc .banner_desc_body:before {
+.sprite, .modal .modal-content .nav-tabs li a.active:before, .box_tab .box_tab_t ul li a.active:before, .banner .banner_desc .banner_desc_body:before {
   display: block;
   content: "";
 }
@@ -234,6 +234,9 @@ body {
     height: 40px;
     line-height: 39px;
   }
+}
+.btn.btn-cancel.active {
+  background-color: #5c3226;
 }
 .btn.edit_btn {
   height: 40px;
@@ -415,6 +418,8 @@ button.btn {
 .form-alert {
   position: absolute;
   right: 0;
+  left: 0;
+  background-color: #f2f2f2;
   top: 100%;
   z-index: 100;
 }
@@ -436,6 +441,14 @@ button.btn {
   .form-alert p {
     font-size: 11px;
   }
+}
+
+.format_inp {
+  display: block;
+  color: #666;
+  font-size: 13px;
+  position: absolute;
+  right: 0;
 }
 
 .select2-container {
@@ -677,8 +690,7 @@ button.btn {
   transform-origin: 5px -6px;
 }
 #header .header .login_link {
-  font-size: 16px;
-  color: #333300;
+  position: relative;
 }
 @media only screen and (max-width: 567px) {
   #header .header .login_link {
@@ -690,14 +702,63 @@ button.btn {
     font-size: 12px;
   }
 }
-#header .header .login_link img {
-  margin-right: 12px;
+#header .header .login_link .login_link_t {
+  font-size: 16px;
+  color: #333300;
+  cursor: pointer;
+}
+#header .header .login_link .login_link_t > img {
+  margin-right: 8px;
 }
 @media only screen and (max-width: 567px) {
-  #header .header .login_link img {
-    margin-right: 5px;
+  #header .header .login_link .login_link_t > img {
+    margin-right: 4px;
     width: 20px;
   }
+}
+#header .header .login_link .login_link_t > img.login_link_arrow {
+  margin-right: 0;
+  margin-left: 8px;
+}
+@media only screen and (max-width: 567px) {
+  #header .header .login_link .login_link_t > img.login_link_arrow {
+    margin-left: 4px;
+  }
+}
+#header .header .login_link .login_link_box {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  top: 35px;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 1000;
+  display: none;
+}
+#header .header .login_link .login_link_box > ul > li > a {
+  display: block;
+  font-size: 16px;
+  color: #333300;
+  padding: 10px 17px;
+  border-bottom: solid 1px #f2f2f2;
+}
+#header .header .login_link .login_link_box > ul > li > a.logout {
+  color: #cb0d0d;
+}
+#header .header .login_link .login_link_box > ul > li:hover > a {
+  background-color: #f8f8f8;
+}
+#header .header .login_link .login_link_box > ul > li:last-child > a {
+  border: none;
+}
+#header .header .login_link.active .login_link_t > img.login_link_arrow {
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .top_site {
@@ -795,6 +856,10 @@ button.btn {
   position: relative;
   height: 100%;
 }
+.modal .modal-content .modal_extra .box_tab .tab-content {
+  padding: 20px;
+  margin-top: 0 !important;
+}
 .modal .modal-content .modal_extra .box_tab #box_tab_content2 {
   height: calc(100% - 68px);
   padding-bottom: 15px;
@@ -803,44 +868,63 @@ button.btn {
   height: 100%;
   overflow-y: auto;
 }
-.modal .modal-content .box_tab .box_tab_t {
+.modal .modal-content .nav-tabs {
   border: none;
 }
-.modal .modal-content .box_tab .box_tab_t ul {
-  border: none;
-}
-.modal .modal-content .box_tab .box_tab_t ul li {
+.modal .modal-content .nav-tabs li {
   width: auto;
 }
-.modal .modal-content .box_tab .box_tab_t ul li a {
+.modal .modal-content .nav-tabs li a {
   padding: 0 20px;
+  display: block;
+  height: 68px;
+  line-height: 68px;
+  text-align: center;
+  color: #000;
+  font-family: "Iransans_Medium";
+  font-size: 24px;
+  border: none;
 }
 @media only screen and (max-width: 1440px) {
-  .modal .modal-content .box_tab .box_tab_t ul li a {
+  .modal .modal-content .nav-tabs li a {
     padding: 0 15px;
     font-size: 16px;
   }
 }
 @media only screen and (max-width: 767px) {
-  .modal .modal-content .box_tab .box_tab_t ul li a {
+  .modal .modal-content .nav-tabs li a {
     font-size: 14px;
   }
 }
 @media only screen and (max-width: 567px) {
-  .modal .modal-content .box_tab .box_tab_t ul li a {
+  .modal .modal-content .nav-tabs li a {
     font-size: 12px;
   }
 }
-.modal .modal-content .box_tab .tab-content {
+.modal .modal-content .nav-tabs li a.active {
+  color: #7d4434;
+  position: relative;
+}
+.modal .modal-content .nav-tabs li a.active:before {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  z-index: 100;
+  background-color: #7d4434;
+}
+.modal .modal-content .nav-tabs .tab-content {
   padding: 25px 20px;
+  margin: 0 !important;
 }
 @media only screen and (max-width: 1440px) {
-  .modal .modal-content .box_tab .tab-content {
+  .modal .modal-content .nav-tabs .tab-content {
     padding: 20px 15px;
   }
 }
 @media only screen and (max-width: 1199px) {
-  .modal .modal-content .box_tab .tab-content {
+  .modal .modal-content .nav-tabs .tab-content {
     padding: 8px 15px;
   }
 }
@@ -984,6 +1068,22 @@ button.btn {
 .modal .modal-content .modal-footer {
   border: none;
   justify-content: start;
+}
+.modal#descModal .modal-content .modal-body {
+  padding: 0 !important;
+}
+.modal#descModal .modal-content .modal-body .desc {
+  padding: 15px 20px 0 20px;
+}
+@media only screen and (max-width: 567px) {
+  .modal#descModal .modal-content .modal-body .desc {
+    padding: 15px 15px 0 15px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .modal#descModal .modal-content .modal-body .desc {
+    padding: 15px 10px 0 10px;
+  }
 }
 
 .modal-backdrop {
@@ -1691,11 +1791,10 @@ input:-webkit-autofill:hover {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  padding: 5px;
 }
 .conf_text p {
   text-align: center;
-  line-height: 24px;
+  line-height: 26px;
   font-size: 14px;
   font-family: "Iransans_Medium";
 }

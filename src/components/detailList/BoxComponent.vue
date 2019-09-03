@@ -42,9 +42,7 @@ export default {
     VueLoadingButton
   },
   methods: {
-    
     goToDetail: function () {
-      
       this.isLoading = true
       setTimeout(() => {
         this.isLoading = true

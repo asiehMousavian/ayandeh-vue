@@ -50,7 +50,7 @@ export default {
       responseRresult: ''
     }
   },
-  components:{VueLoadingButton},
+  components: {VueLoadingButton},
   computed: {
     isComplete () {
       return this.mobile && this.password
@@ -68,7 +68,7 @@ export default {
             // }
             let UserInfo = {
               email: 'ehs.ghasemi@gmail.com',
-              password: '1'
+              password: 'xGgcO5Re'
             }
             //   let UserInfo={
             //     email: "shokri074@gmail.com",
@@ -102,7 +102,6 @@ export default {
 </script>
 <style scoped>
   .form-alert {
-    left: 0;
     background-color: #fff;
   }
   .format_inp {
@@ -128,13 +127,5 @@ export default {
     #loginForm .format_inp {
       font-size: 10px;
     }
-  }
-  .btn {
-    height: 48px;
-    line-height: 47px;
-    font-size: 18px;
-    font-family: "Iransans_Bold";
-    padding: 0 45px;
-    cursor: pointer;
   }
 </style>

@@ -5,7 +5,7 @@
     <div id="main" role="main" v-if="isDone">
       <banner v-bind:fund="fund"></banner>
       <div class="mainarea">
-        <div class="container" >
+        <div class="container">
           <div class="detail_btn">
             <ul class="list-unstyled">
               <li>
@@ -54,7 +54,7 @@
           </div>
           <div>
             <b-modal id="innerSodoorModal" title="BootstrapVue" hide-header size="lg"  hide-footer>
-                <inner-sodoor @exit="closeModal('innerSodoorModal')" ></inner-sodoor>
+                <inner-sodoor @exit="closeModal('innerSodoorModal')"></inner-sodoor>
             </b-modal>
           </div>
         </div>
@@ -122,14 +122,14 @@ export default {
         .then(response => {
           this.fund = response.content
           this.isDone = true
-          this.$session.set('currentFund',JSON.stringify(this.fund))
+          this.$session.set('currentFund', JSON.stringify(this.fund))
         })
         .catch(error => {
           console.log(error)
           this.isDone = true
         })
     },
-    getCurrentComponent(){
+    getCurrentComponent () {
       let savedComponent = this.$session.get('currentComponent')
       if (savedComponent == null) {
         this.$session.set('currentComponent', this.currentComponent)
@@ -169,11 +169,5 @@ export default {
 </script>
 
 <style scoped>
-  .btn.btn-cancel {
-    border: none;
-  }
-  .active {
-      background-color: #5c3226;
-  }
 
 </style>

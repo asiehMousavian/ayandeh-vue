@@ -37,7 +37,7 @@ export default {
         {label: 'تاریخ', field: 'orderDate', filterable: false},
         {label: 'عملیات', field: 'orderTypeName'},
         {label: 'مبلغ سفارش', field: 'orderAmount'},
-        {label: 'شماره پیگیری', field: 'receiptId'},
+        {label: 'شماره پیگیری', field: 'receiptId'}
         // {label: 'بستانکار', field: 'transactionType', align: 'right', sortable: false},
         // {label: 'شعبه', field: 'transactionType', align: 'right', sortable: false}
       ],
@@ -46,18 +46,18 @@ export default {
       per_page: 10,
       hasError: false,
       errorMsg: '',
-      fund:{},
-      fundId:0
+      fund: {},
+      fundId: 0
     }
   },
   mounted () {
   },
   methods: {
-    getFundInfo(){
-      this.fund = JSON.parse(this.$session.get("currentFund"))
+    getFundInfo () {
+      this.fund = JSON.parse(this.$session.get('currentFund'))
       this.fundId = this.fund.code
     },
-    getData:  function (params, setRowData) {
+    getData: function (params, setRowData) {
       params.dsCode = this.fundId// this.$route.params.foundId
       params.from = (params.page_number - 1) * params.page_length
       params.page = params.page_number
@@ -68,7 +68,6 @@ export default {
             this.hasError = true
             this.errorMsg = 'نتیجه ای یافت نشد'
             // sharedService.requestFailed(this.errorMsg)
-
           }
           let start_index = (params.page_number - 1) * params.page_length
           let end_index = start_index + params.page_length
@@ -76,22 +75,20 @@ export default {
             response.content.data,
             response.content.totalSize
           )
-          $("li a").addClass("page-link");
+          $('li a').addClass('page-link')
         }).catch(error => {
-        this.hasError = true
-        if (error.response.data.message) {
-          if (error.response.data.developerMessage === 'errors.kariz.dev') {
-            this.errorMsg = 'در بازه زمانی کنونی قادر به دریافت اطلاعات نیستیم'
-          }
-          else {
-            this.errorMsg = 'اطلاعاتی وجود ندارد'
+          this.hasError = true
+          if (error.response.data.message) {
+            if (error.response.data.developerMessage === 'errors.kariz.dev') {
+              this.errorMsg = 'در بازه زمانی کنونی قادر به دریافت اطلاعات نیستیم'
+            } else {
+              this.errorMsg = 'اطلاعاتی وجود ندارد'
             // sharedService.requestFailed(this.errorMsg)
-
+            }
+          } else {
+            this.errorMsg = 'از سرور پاسخ مناسبی دریافت نشد لطفا بعدا مراجعه نمایید'
           }
-        } else {
-          this.errorMsg = 'از سرور پاسخ مناسبی دریافت نشد لطفا بعدا مراجعه نمایید'
-        }
-      })
+        })
     }
   }
 }
@@ -111,5 +108,4 @@ export default {
     text-align: right;
     direction: rtl;
   }
-
 </style>

@@ -39,10 +39,26 @@
           </div>
           <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-5 d-flex">
             <div class="d-flex align-items-center mr-auto">
-              <span class="login_link">
-                {{name}}
-                <img src="@/assets/img/avatar.svg" alt="" v-if="name">
-              </span>
+              <div class="login_link">
+                <div class="login_link_t">
+                  <img src="@/assets/img/arrow_down.svg" alt="" class="login_link_arrow" v-if="name">
+                  {{name}}
+                  <img src="@/assets/img/avatar.svg" alt="" v-if="name">
+                </div>
+                <div class="login_link_box">
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#" @click.prevent="goToUserProfile">اطلاعات کاربر</a>
+                    </li>
+                    <li>
+                      <a href="#" @click.prevent="logout" class="logout">
+                        <img src="@/assets/img/logout.svg" alt="">
+                        خروج از حساب
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
               <!-- <a href="/" class="login_link"> -->
               <!-- {{name}} -->
               <!-- <a href="/login" class="login_link">ورود</a>/ <a href="/register" class="login_link">عضویت</a> -->
@@ -58,17 +74,13 @@
 
 </template>
 <script>
-import { debuglog } from 'util'
+import sharedService from '../../services/sharedService'
+
 export default {
   name: 'PageHeader',
   data () {
     return {
       name: ''
-    }
-  },
-  methods: {
-    goToDetailList: function () {
-      this.$router.push('/detailList')
     }
   },
   mounted () {
@@ -78,14 +90,26 @@ export default {
     //     this.name = clientname
     //   }
     // }
-
-
+    sharedService.loginBox()
+    sharedService.closeLoginBox()
     if (this.$session.has('clientInfo')) {
       let client = this.$session.get('clientInfo')
       if (client) {
-        let user=JSON.parse(client)
+        let user = JSON.parse(client)
         this.name = user.firstName + ' ' + user.lastName
       }
+    }
+  },
+  methods: {
+    goToDetailList: function () {
+      this.$router.push('/detailList')
+    },
+    goToUserProfile: function () {
+      this.$router.push('/user')
+    },
+    logout: function () {
+      this.$session.clear()
+      this.$router.push('/login')
     }
   }
 }

@@ -179,27 +179,34 @@ export default {
         },
       sendSms(){
         let smsObj={}
-        debugger
         if(this.nationalId != '' && this.nationalId != undefined)
         {
           smsObj={
             nationalId : this.nationalId
             }
+            generalService.postMethod("auth/smsCode/nationalId",smsObj).then(response=>{
+              if(response.status == 0 && response.message=="OK")
+              {
+                //todo
+              }
+            }).catch(error=>{
+              debugger
+            })
         }
         else
         {
           smsObj={
             phoneNumber: this.mobile
           }
+            generalService.postMethod("auth/smsCode",smsObj).then(response=>{
+              if(response.status == 0 && response.message=="OK")
+              {
+                //todo
+              }
+            }).catch(error=>{
+              debugger
+            })
         }
-        generalService.postMethod("auth/smsCode",smsObj).then(response=>{
-            if(response.status == 0 && response.message=="OK")
-            {
-              //todo
-            }
-        }).catch(error=>{
-          debugger
-        })
       },
       registerCode()
       {

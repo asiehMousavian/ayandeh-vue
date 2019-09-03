@@ -118,7 +118,15 @@ export default {
       //v-b-modal.descModal
        let logged = this.$session.get('isLogged')
       if (logged) { 
-        this.$bvModal.show(modalId)
+        if(modalId =="sodoorModal")
+        {
+          if(this.getUserValidate())
+          {
+            this.$bvModal.show(modalId)
+          }
+        }
+        else
+          this.$bvModal.show(modalId)
       }
     },
     showComponent(componentName) {
@@ -153,7 +161,7 @@ export default {
       }
     },
     getLicense () {
-      service.getMethod(`/invest/fund/license/${this.fundId}`)
+      service.getMethod(`invest/fund/license/${this.fundId}`)
         .then(response => {
           if (response.status === 0) {
             this.userLicense = response.content
@@ -171,7 +179,22 @@ export default {
           }
         })
     },
-    getUserValidate(){}
+    getUserValidate()
+    {
+        service.getMethod("invest/user/validate")
+        .then(response => {
+          if (response.status === 0) {
+            debugger
+            if(response.content === true)
+              return true
+            else
+              return false
+          }
+        })
+        .catch(error => {
+        debugger
+        })
+    }
   },
   mounted: function () {
     this.isDone = false

@@ -20,13 +20,13 @@
                 <a href="#" @click.prevent="goToUserProfile()">اطلاعات کاربر</a>
               </li>
               <li>
-                <a href="#" v-b-modal.descModal>توضیحات صندوق</a>
+                <a href="#" @click="showModal('descModal')" >توضیحات صندوق</a>
               </li>
               <li>
-                <a href="#" v-b-modal.sodoorModal>صدور واحد</a>
+                <a href="#" @click="showModal('sodoorModal')">صدور واحد</a>
               </li>
               <li>
-                <a href="#" v-b-modal.ebtalModal>ابطال واحد</a>
+                <a href="#" @click="showModal('ebtalModal')">ابطال واحد</a>
               </li>
             </ul>
           </div>
@@ -40,7 +40,7 @@
             <accounting></accounting>
            </div>
           <div>
-            <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
+            <b-modal id="descModal" title="BootstrapVue" hide-header size="lg" >
                 <fund-description></fund-description>
               <div slot="modal-footer">
                 <button class="btn" @click="closeModal('descModal')">بستن</button>
@@ -114,15 +114,22 @@ export default {
     ebtalUnit
   },
   methods: {
-    showComponent: function (componentName) {
+    showModal(modalId){
+      //v-b-modal.descModal
+       let logged = this.$session.get('isLogged')
+      if (logged) { 
+        this.$bvModal.show(modalId)
+      }
+    },
+    showComponent(componentName) {
       this.currentComponent = componentName
       this.$session.set('currentComponent', this.currentComponent)
     },
-    goToUserProfile: function () {
+    goToUserProfile() {
       this.$router.push('/user')
       this.$session.set('currentComponent', 'requestReport')
     },
-    closeModal: function (modalId) {
+    closeModal (modalId) {
       this.$bvModal.hide(modalId)
     },
     getFunds () {
@@ -163,7 +170,8 @@ export default {
             }
           }
         })
-    }
+    },
+    getUserValidate(){}
   },
   mounted: function () {
     this.isDone = false
@@ -176,11 +184,12 @@ export default {
 </script>
 
 <style scoped>
-  .btn.btn-cancel {
+
+/*  .btn.btn-cancel {
     border: none;
   }
-  .active {
+   .active {
       background-color: #5c3226;
-  }
+  } */
 
 </style>

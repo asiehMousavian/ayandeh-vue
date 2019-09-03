@@ -10,13 +10,13 @@
       </div>
     </div>
       <div id="signUpS1">
-        <div class="option" @click.prevent= "signUpWithAccount">
+        <div class="option" @click.prevent= "goToWithAccount">
           <div class="d-flex justify-content-between">
             <img src="@/assets/img/MaskGroup.png" alt="" />
             <span >حساب بانک آینده دارم</span>
           </div>
         </div>
-        <div class="option" @click.prevent= "signUpWithoutAccount">
+        <div class="option" @click.prevent= "goToWithoutAccount">
           <div class="d-flex justify-content-between">
             <img src="@/assets/img/smartphone.png" alt="" />
             <span>ورود با شماره تلفن</span>
@@ -27,13 +27,16 @@
   <div v-else-if= "signupStep=='withAccount'">
         <div class="box_text">
       <div class="text">
-        <p>
+        <!-- <p>
         شماره حساب بانک آینده و کد ملی خود را وارد کنید
+        </p> -->
+         <p>
+        کد ملی خود را وارد کنید
         </p>
       </div>
     </div>
     <form>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <div class="inp_border">
           <input type="text" v-model="account" name="accountNumber" class="form-control" v-validate="'required|ayandeAccountNumber'" />
           <div class="form-alert">
@@ -43,20 +46,19 @@
           <i class="placeholder">شماره حساب</i>
           <i class="line"></i>
         </div>
-      </div>
+      </div> -->
         <div class="form-group">
         <div class="inp_border">
           <input type="text" v-model="nationalId" name="nationalId" class="form-control" v-validate="'required|nationalCode'"/>
           <div class="form-alert">
             <p>{{ errors.first('nationalId') }}</p>
           </div>
-          <!-- <span class="format_inp">نمونه شماره حساب : 021586521485</span> -->
           <i class="placeholder">کد ملی</i>
           <i class="line"></i>
         </div>
       </div>
       <div class="d-flex box_c">
-        <button :disabled = 'errors.any() || !isComplete' type="button" class="btn mx-auto" @click.prevent="getCustomerAccount">مرحله بعد</button>
+        <button :disabled = 'errors.any() || !isComplete' type="button" class="btn mx-auto" @click.prevent="sendSmsCode">مرحله بعد</button>
       </div>
        <div class="d-flex">
         <a href="" @click.prevent="goToWithoutAccount" class="forget_pass mx-auto">حساب بانک آینده ندارید؟</a>
@@ -113,30 +115,26 @@ export default {
   },
   computed: {
     isComplete() {
-      return this.account && this.nationalId
+      // return this.account && this.nationalId
+      return this.nationalId
     }
   },
   methods: {
-    signUpWithAccount(){
-      this.signupStep="withAccount"
-    },
-    signUpWithoutAccount(){
-      this.signupStep="withoutAccount"
-    },
-    getCustomerAccount()
-    {
-      //todo
-      //get account and send message
-      this.sendSmsCode()
-    },
     goToWithoutAccount(){
       this.signupStep="withoutAccount"
     },
     goToWithAccount(){
       this.signupStep="withAccount"
     },
+    // getCustomerAccount()
+    // {
+    //   //todo
+    //   //get account and send message
+    //   this.sendSmsCode()
+    // },
     sendSmsCode()
     {
+      this.$session.set('nationalId', this.nationalId)
       this.$session.set('mobile', this.mobile)
       this.$router.push('verification')
     }
@@ -166,6 +164,5 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 </style>

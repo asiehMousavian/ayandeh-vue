@@ -89,7 +89,6 @@ export default {
       revokeFund:{},
       errorMsg:'',
       price:0,
-      // showDescription:false,
       // responseError:false,
       success:false,
       isLoading:false,
@@ -108,20 +107,12 @@ export default {
     check()
     {
       this.confirm=false
-      // sharedService.checkInputs()
-      this.unitCount=''
-      // this.showDescription=false
     },
     confirmRevoke(){
       this.confirm=true
     },
     checkInput(){
-      sharedService.checkInputs()
       this.price = this.fund.saleNav * this.unitCount
-      // if(this.price>0)
-      //     this.showDescription=true
-      // else
-      //     this.showDescription=false
     },
      close() {
       this.$emit("exit", true)
@@ -129,8 +120,7 @@ export default {
     ebtalUnits()
     {
       this.isLoading=true
-      setTimeout(() => {
-        
+      //setTimeout(() => {
         this.revokeFund = {
           fundId:this.fundId,
           licenseNumber: this.licenseNumber,
@@ -141,10 +131,10 @@ export default {
           //todo
           this.success=true
           this.showDescription=false
-
+          this.isLoading = false
         })
         .catch(error => {
-          
+          this.isLoading = false
           //todo
           this.success=false
           this.showDescription=false
@@ -154,7 +144,7 @@ export default {
             this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
           }
         })
-      this.isLoading = false}, 1000)
+      //}, 1000)
     },
     getLicense(){
       this.userLicense= this.$session.get("userLicense")
@@ -174,20 +164,23 @@ export default {
     },
     getFundInfo(){
        this.fund = JSON.parse(this.$session.get("currentFund"))
-      this.fundId = this.fund.code
-
+        this.fundId = this.fund.code
     }
   },
     filters: {
-    persianCurrency: function(value) {
-      return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1/")
-    }
+      persianCurrency: function(value) {
+        return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1/")
+      }
   },
   mounted() {
     this.getClientInfo()
     this.getFundInfo()
     this.getLicense()
-
+  },
+  beforeUpdate(){
+    sharedService.handleInputLabels()
+    sharedService.checkInputs()
+    sharedService.toggleMenu()
   }
 }
 </script>

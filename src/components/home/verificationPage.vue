@@ -8,20 +8,23 @@
           <div class="row">
             <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12">
               <div class="box">
-                <!-- <div class=""> -->
-                  <div v-if="verifyCode" class="verificationForm">
+                  <div class="verificationForm">
                     <div class="box_title">
                         <p>ورود کد احراز هویت</p>
                     </div>
                       <div class="box_text">
                         <div class="text">
-                          <p>
-                            کد احراز هویت شما که به شماره موبایل <span>{{mobile}}</span>
-                            تا <span>{{timer}}</span> دقیقه دیگر ارسال خواهد شد را وارد کنید
-                          </p>
-                          <p v-show="hasAccount">
+                           <p v-show="hasAccount">
                             <span>توجه</span>: شماره موبایل شما از اطلاعات حساب بانک آینده به صورت
                             اتوماتیک خوانده شده است
+                          </p>
+                          <!-- <p>
+                            کد احراز هویت شما که به شماره موبایل <span>{{mobile}}</span>
+                            تا <span>{{minutes}}:{{seconds}}</span> دقیقه دیگر ارسال خواهد شد را وارد کنید
+                          </p> -->
+                          <p>
+                            کد احراز هویت شما     
+                            تا <span>{{minutes}}:{{seconds}}</span> دقیقه دیگر ارسال خواهد شد را وارد کنید
                           </p>
                         </div>
                       </div>
@@ -47,9 +50,9 @@
                         </div>
                       </form>
                   </div>
-                  <div v-else class="verificationForm">
+                  <!-- <div v-else class="verificationForm">
                     <div class="box_title">
-                        <p>ورود کد احراز هویت</p>
+                        <p>ثبت رمز عبور</p>
                     </div>
                       <div class="box_text">
                         <div class="text">
@@ -94,8 +97,7 @@
                           > ورود به پیشخوان</button>
                         </div>
                       </form>
-                  </div>
-                <!-- </div> -->
+                  </div> -->
               </div>
             </div>
           </div>
@@ -114,26 +116,38 @@ import sharedService from "@/services/sharedService"
 import PageHeader from '../header/PageHeader'
 import toggleMenu from '../share/toggleMenu'
 export default {
-  name: "verificationCode",
+  name: "verificationPage",
   data() {
     return {
-      hasAccount: true,
-      verificationCode: "",
+      hasAccount: false,
+      verificationCode: '',
       mobile:'',
-      timer:'',
-      verifyCode:true,
-      password:'',
-     confirmpassword:''
+      nationalId:'',
+      // verifyCode:true,
+      //password:'',
+      //confirmpassword:'',
+      minutes:4,
+      seconds:59
     }
   },
   components:{PageHeader,toggleMenu},
   mounted() {
+    this.hasAccount=false
     this.mobile=this.$session.get('mobile')
+    this.nationalId=this.$session.get('nationalId')
+    if(this.nationalId)
+    {
+      this.hasAccount=true
+    }
+
+    //todo
+    //check session to see has account or not
+    //this.hasAccount=true
+    this.setTimer()
     this.sendSms()
     sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()
-    
   },
   beforeUpdate() {
     sharedService.handleInputLabels()
@@ -141,35 +155,75 @@ export default {
     sharedService.toggleMenu()
   },
   computed: {
-    isComplete() {
-       return this.password && this.confirmpassword
-    }
+    // isComplete() {
+    //    return this.password && this.confirmpassword
+    // }
   },
   methods: {
+      setTimer(){
+        setInterval(() => 
+        {
+          if(this.seconds>0){
+            this.seconds--
+              if(this.seconds==0 && this.minutes>0)
+              {
+                this.seconds=59
+                this.minutes--
+              }
+              else if(this.minutes==0 && this.seconds==0)
+              {
+                return
+              }
+            }
+          }, 1000)
+        },
       sendSms(){
-        let smsObj={
-            //phoneNumber: this.mobile
+        let smsObj={}
+        debugger
+        if(this.nationalId != '' && this.nationalId != undefined)
+        {
+          smsObj={
+            nationalId : this.nationalId
+            }
+        }
+        else
+        {
+          smsObj={
+            phoneNumber: this.mobile
+          }
         }
         generalService.postMethod("auth/smsCode",smsObj).then(response=>{
             if(response.status == 0 && response.message=="OK")
             {
-            debugger
+              //todo
             }
-        }).catch(error=>{})
+        }).catch(error=>{
+          debugger
+        })
       },
       registerCode()
       {
-          //todo
-          //check code
-        this.verifyCode=false
+        let smsObj={
+          phoneNumber: this.mobile,
+          code : this.verificationCode
+        }
+        generalService.postMethod("auth/signin",smsObj).then(response=>{
+            if(response.status == 0 && response.message=="OK")
+            {
+              if (response.content.user.isActive) {
+              this.$session.start()
+              this.$session.set('isLogged', true)
+              this.$session.set('clientInfo', JSON.stringify(response.content.user))
+              this.$router.push('detailList')
+              }
+            }
+        }).catch(error=>{
+          debugger
+        })
       },
-      registerPass()
-      {
-          //todo
-      }
+      registerPass(){}
   }
 };
 </script>
-
 <style scoped>
 </style>

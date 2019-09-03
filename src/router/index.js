@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/home/Home'
 import register from '@/components/home/register'
 import login from '@/components/home//login'
-import verificationCode from '@/components/home/verificationCode'
+import verificationPage from '@/components/home/verificationPage'
 
 import Detail from '@/components/detailPage/Detail'
 
@@ -191,11 +191,12 @@ export default new Router({
     {
       path: '/verification',
       name:'verification',
-      component:verificationCode,
+      component:verificationPage,
       beforeEnter: (to, from, next) => {
         if (session.has('mobile')) {
-          let logged = session.get('mobile')
-          if (logged) { next() }
+          // let logged = session.get('mobile')
+          // if (logged) { next() }
+          next()
         } else {
           next('login')
         }

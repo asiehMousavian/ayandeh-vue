@@ -46,10 +46,10 @@ export default {
     goToDetail: function () {
       
       this.isLoading = true
-      setTimeout(() => {
-        this.isLoading = true
+      //setTimeout(() => {
+       // this.isLoading = true
         this.$router.push('detail/10915')
-      }, 1000)
+      //}, 1000)
     }
   }
 }

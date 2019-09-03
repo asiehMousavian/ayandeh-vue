@@ -1203,6 +1203,28 @@ input:-webkit-autofill:hover {
   }
 }
 
+form .form-alert {
+  left: 0;
+  background-color: #fff;
+}
+form .format_inp {
+  display: block;
+  color: #575757;
+  font-size: 15px;
+  position: absolute;
+  right: 0;
+}
+@media only screen and (max-width: 991px) {
+  form .format_inp {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 567px) {
+  form .format_inp {
+    font-size: 12px;
+  }
+}
+
 #registerPage #signUpS1 .option {
   padding: 10px 15px;
   height: 50px;
@@ -1219,27 +1241,6 @@ input:-webkit-autofill:hover {
   font-family: "Iransans_Bold";
   margin: 0 auto;
 }
-#registerPage form .form-alert {
-  left: 0;
-  background-color: #fff;
-}
-#registerPage form .format_inp {
-  display: block;
-  color: #575757;
-  font-size: 15px;
-  position: absolute;
-  right: 0;
-}
-@media only screen and (max-width: 991px) {
-  #registerPage form .format_inp {
-    font-size: 12px;
-  }
-}
-@media only screen and (max-width: 567px) {
-  #registerPage form .format_inp {
-    font-size: 12px;
-  }
-}
 
 #verificationPage .verificationForm {
   padding: 20px 30px;
@@ -1253,26 +1254,14 @@ input:-webkit-autofill:hover {
 #verificationPage .verificationForm .box_text span {
   font-family: "Iransans_Bold";
 }
-#verificationPage .verificationForm form .form-alert {
-  left: 0;
-  background-color: #fff;
-}
-#verificationPage .verificationForm form .format_inp {
-  display: block;
-  color: #575757;
-  font-size: 15px;
-  position: absolute;
-  right: 0;
-}
-@media only screen and (max-width: 991px) {
-  #verificationPage .verificationForm form .format_inp {
-    font-size: 12px;
-  }
-}
-@media only screen and (max-width: 567px) {
-  #verificationPage .verificationForm form .format_inp {
-    font-size: 12px;
-  }
+
+#loginForm .btn {
+  height: 48px;
+  line-height: 47px;
+  font-size: 18px;
+  font-family: "Iransans_Bold";
+  padding: 0 45px;
+  cursor: pointer;
 }
 
 /******azadeh 11-06-98*********/

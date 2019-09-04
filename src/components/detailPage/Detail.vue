@@ -119,9 +119,12 @@ export default {
       let logged = this.$session.get('isLogged')
       if (logged) {
         if (modalId == 'sodoorModal') {
-          //if (this.getUserValidate()) {
+          if (!this.getUserValidate()) {
             this.$bvModal.show(modalId)
-         // }
+          }
+          else{
+            this.$router.push('/user')
+          }
         } else { this.$bvModal.show(modalId) }
       }
     },
@@ -179,7 +182,6 @@ export default {
       service.getMethod('invest/user/validate')
         .then(response => {
           if (response.status === 0) {
-            debugger
             if (response.content === true) { return true } else { return false }
           }
         })

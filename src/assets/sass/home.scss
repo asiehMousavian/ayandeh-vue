@@ -132,6 +132,7 @@
       box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.2);
       background-color: #ffffff;
       margin-bottom: 30px;
+      cursor: pointer;
 
       img {
         height: 100%;
@@ -193,5 +194,24 @@
   }
 }
 
+
+.reSend_Code{
+  font-family: "Iransans_Medium";
+  font-size: 18px;
+  color: $c5;
+  border-bottom: dashed 1px $c5;
+  @media #{$size992}{
+    font-size: 16px;
+  }
+  @media #{$size768}{
+    font-size: 14px;
+  }
+  @media #{$size414}{
+    font-size: 12px;
+  }
+  &:hover{
+    color: $c5;
+  }
+}
 /******azadeh 11-06-98*********/
 

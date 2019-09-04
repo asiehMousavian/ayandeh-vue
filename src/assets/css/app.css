@@ -1315,6 +1315,7 @@ input:-webkit-autofill:hover {
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 #registerPage #signUpS1 .option img {
   height: 100%;
@@ -1363,6 +1364,31 @@ input:-webkit-autofill:hover {
   #loginForm .format_inp {
     font-size: 12px;
   }
+}
+
+.reSend_Code {
+  font-family: "Iransans_Medium";
+  font-size: 18px;
+  color: #7d4434;
+  border-bottom: dashed 1px #7d4434;
+}
+@media only screen and (max-width: 991px) {
+  .reSend_Code {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .reSend_Code {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .reSend_Code {
+    font-size: 12px;
+  }
+}
+.reSend_Code:hover {
+  color: #7d4434;
 }
 
 /******azadeh 11-06-98*********/

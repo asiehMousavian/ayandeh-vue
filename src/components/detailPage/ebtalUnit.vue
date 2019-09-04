@@ -8,11 +8,11 @@
       </p>
     </div>
     <div class="modal_desc">
-      <p>
+      <!-- <p>
         کد ملی
         <span>{{nationalId}}</span>
         <span>-{{licenseNumber}}-</span> واحد دارد.
-      </p>
+      </p> -->
     </div>
     <form >
       <div class="f_body d-flex justify-content-center ebtal_form">
@@ -55,14 +55,14 @@
             بعد از ابطال شما <i>{{unitCount}}</i> واحد از سهم خود را از مالکیت خارج می کنید
           </p>
           <br>
-          <p v-if="success">در خواست شما با موفقیت ثبت شد</p>
-          <p v-else>{{errorMsg}}</p>
+          <p style="color : #0f7d29" v-if="success">در خواست شما با موفقیت ثبت شد</p>
+          <p style="color : #e2241b" v-else>{{errorMsg}}</p>
         </div>
        </div>
       <br/>
       <br>
       <div slot="modal-footer">
-        <VueLoadingButton class="btn" :disabled='errors.any() || !isComplete' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
+        <VueLoadingButton class="btn" :disabled='success' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
         <button class="btn btn-cancel" @click.prevent="check">بررسی مجدد</button>
       </div>
     </form>
@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       nationalId: "",
-      licenseNumber: '12345678',
+      licenseNumber: '12',
       unitCount:'',
       fund: {},
       fundId: 0,
@@ -120,31 +120,29 @@ export default {
     ebtalUnits()
     {
       this.isLoading=true
-      //setTimeout(() => {
         this.revokeFund = {
           fundId:this.fundId,
           licenseNumber: this.licenseNumber,
           fundUnit: this.unitCount
         }
-        service.postMethod(`invest/fund/revoke`, this.revokeFund)
+        service.postMethod(`invest/fund/revoke/${this.revokeFund}`)
         .then(response => {
           //todo
           this.success=true
-          this.showDescription=false
           this.isLoading = false
         })
         .catch(error => {
+          debugger
           this.isLoading = false
-          //todo
           this.success=false
-          this.showDescription=false
+
+          //todo
           if (error.response.data.status === 500501) {
             this.errorMsg = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
           } else {
             this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
           }
         })
-      //}, 1000)
     },
     getLicense(){
       this.userLicense= this.$session.get("userLicense")

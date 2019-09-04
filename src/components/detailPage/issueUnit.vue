@@ -8,11 +8,11 @@
       </p>
     </div>
     <div class="modal_desc">
-      <p>
+      <!-- <p>
         کد ملی
         <span>{{nationalId}}</span>
         <span>-{{licenseNumber}}-</span> واحد دارد.
-      </p>
+      </p> -->
     </div>
     <form>
       <div class="f_body d-flex justify-content-center ebtal_form">

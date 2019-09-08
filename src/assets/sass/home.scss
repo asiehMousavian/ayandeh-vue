@@ -213,5 +213,32 @@
     color: $c5;
   }
 }
+
+
+#turnOverTable, #accountingTable {
+  .table-responsive {
+    margin-top: 10px;
+  }
+  .table {
+    thead {
+      tr {
+        border-bottom: 2px solid #dee2e6;
+
+        th {
+          border: none;
+          text-align: right !important;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          text-align: right !important;
+          width: 20%;
+        }
+      }
+    }
+  }
+}
 /******azadeh 11-06-98*********/
 

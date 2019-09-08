@@ -12,7 +12,7 @@
                 <a href="#" @click.prevent="showComponent('requestReport')" >گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="#" @click.prevent="showComponent('turnover')">گردش حساب</a>
+                <a href="#" @click.prevent="showComponent('accounting')">گردش حساب</a>
                 <!-- <a href="" @click.prevent="showComponent('turnover')">گردش حساب</a> -->
 <!--                <a href="" @click.prevent="showComponent('accounting')">گردش حساب</a>-->
               </li>
@@ -143,12 +143,12 @@ export default {
       service.getMethod('invest/fund/' + this.fundId)
         .then(response => {
           this.fund = response.content
-          this.isDone = true
+          // this.isDone = true
           this.$session.set('currentFund', JSON.stringify(this.fund))
         })
         .catch(error => {
           console.log(error)
-          this.isDone = true
+          // this.isDone = true
         })
     },
     getCurrentComponent () {
@@ -166,8 +166,11 @@ export default {
             this.userLicense = response.content
             this.$session.set('userLicense', this.userLicense)
           }
+          this.isDone = true
         })
         .catch(error => {
+          this.isDone = true
+
           this.$session.set('userLicense', this.userLicense)
           if (error.response.data) {
             if (error.response.data.message) {
@@ -196,6 +199,7 @@ export default {
     this.getFunds()
     this.getLicense()
     this.getCurrentComponent()
+    console.log(Object.keys(this.fund).length)
   }
 }
 </script>

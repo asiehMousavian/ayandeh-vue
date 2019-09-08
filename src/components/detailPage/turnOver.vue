@@ -1,14 +1,14 @@
 
 <template>
-  <div class="container">
+  <div  class="container">
     <div class="back fund_detail mb15 table-err" v-if="hasError">
       <div  class="register_top error">
         <p>{{errorMsg}}</p>
       </div>
     </div>
-    <div class="back fund_detail" v-show="!hasError">
+    <div id="turnOverTable" class="back fund_detail" v-show="!hasError">
       <div class="row">
-        <div id="table" class="col-xs-12 table-responsive">
+        <div id="table" class="col-xs-12 table-responsive ">
           <datatable :columns="columns" :data="getData"  id="data-table" class="table-responsive"></datatable>
         </div>
       </div>
@@ -18,13 +18,19 @@
         </div>
       </div>
     </div>
+     <!-- <div v-else>
+      <loading :active.sync="TisLoading"></loading>
+    </div> -->
   </div>
+ 
 
 </template>
 
 <script>
 import generalService from '@/services/generalService'
 import sharedService from '@/services/sharedService'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'turnOver',
@@ -37,7 +43,7 @@ export default {
         {label: 'توضیحات', field: 'comments'},
         {label: 'میزان اعتبار', field: 'creditAmount'},
         {label: 'میزان بدهی', field: 'debitAmount'},
-        {label: 'نوع تراکنش', field: 'transactionType', align: 'right', sortable: false},
+        {label: 'نوع تراکنش', field: 'transactionType', sortable: false},
       ],
       rows: window.rows,
       page: 1,
@@ -45,8 +51,11 @@ export default {
       hasError: false,
       errorMsg: '',
       fund:{},
-      fundId:0
+      fundId:0,
     }
+  },
+  components:{
+    Loading
   },
   mounted() {
   },
@@ -61,12 +70,12 @@ export default {
       params.from = (params.page_number - 1) * params.page_length
       params.page = params.page_number
       params.page_saze = 10
+
       generalService.getMethod('/invest/fund/user/turnover', {params: params})
         .then(response => {
           if (response.content.data.length === 0) {
             this.hasError = true
             this.errorMsg = 'نتیجه ای یافت نشد'
-            // sharedService.requestFailed(this.errorMsg)
           }
           let start_index = (params.page_number - 1) * params.page_length
           let end_index = start_index + params.page_length
@@ -74,7 +83,8 @@ export default {
             response.content.data,
             response.content.totalSize
           )
-          $("li a").addClass("page-link");
+          //todo
+          $("#turnOverTable li a").addClass("page-link");
         }).catch(error => {
           this.hasError = true
           if (error.response.data.message) {
@@ -83,11 +93,9 @@ export default {
             }
             else {
               this.errorMsg = 'اطلاعاتی وجود ندارد'
-              // sharedService.requestFailed(this.errorMsg)
             }
           } else {
             this.errorMsg = 'اطلاعاتی وجود ندارد'
-            // sharedService.requestFailed(this.errorMsg)
           }
       })
     }
@@ -105,4 +113,6 @@ export default {
     color: #5c3226;
     font-size: 18px;
   }
+
+
 </style>

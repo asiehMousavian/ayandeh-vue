@@ -638,6 +638,9 @@ button.btn {
 }
 #header .header #menu ul li a {
   display: block;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
   font-size: 16px;
   color: #333300;
 }
@@ -1391,6 +1394,21 @@ input:-webkit-autofill:hover {
   color: #7d4434;
 }
 
+#turnOverTable .table-responsive, #accountingTable .table-responsive {
+  margin-top: 10px;
+}
+#turnOverTable .table thead tr, #accountingTable .table thead tr {
+  border-bottom: 2px solid #dee2e6;
+}
+#turnOverTable .table thead tr th, #accountingTable .table thead tr th {
+  border: none;
+  text-align: right !important;
+}
+#turnOverTable .table tbody tr td, #accountingTable .table tbody tr td {
+  text-align: right !important;
+  width: 20%;
+}
+
 /******azadeh 11-06-98*********/
 /******** Banner ********/
 .banner {
@@ -1574,7 +1592,7 @@ input:-webkit-autofill:hover {
   line-height: 48px;
   text-align: center;
   font-size: 16px;
-  color: #fff;
+  color: #fff !important;
   background-color: #7d4434;
   font-family: "Iransans_Bold";
   -moz-border-radius: 4px;

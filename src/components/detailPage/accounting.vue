@@ -5,7 +5,7 @@
         <p>{{errorMsg}}</p>
       </div>
     </div>
-    <div class="back fund_detail" v-show="!hasError">
+    <div id="accountingTable" class="back fund_detail" v-show="!hasError">
       <div class="row">
         <div id="table" class="col-xs-12 table-responsive">
           <datatable
@@ -67,7 +67,6 @@ export default {
           if (response.content.data.length === 0) {
             this.hasError = true
             this.errorMsg = 'نتیجه ای یافت نشد'
-            // sharedService.requestFailed(this.errorMsg)
           }
           let start_index = (params.page_number - 1) * params.page_length
           let end_index = start_index + params.page_length
@@ -75,7 +74,9 @@ export default {
             response.content.data,
             response.content.totalSize
           )
-          $('li a').addClass('page-link')
+
+          //todo
+          $('#accountingTable li a').addClass('page-link')
         }).catch(error => {
           this.hasError = true
           if (error.response.data.message) {
@@ -83,7 +84,6 @@ export default {
               this.errorMsg = 'در بازه زمانی کنونی قادر به دریافت اطلاعات نیستیم'
             } else {
               this.errorMsg = 'اطلاعاتی وجود ندارد'
-            // sharedService.requestFailed(this.errorMsg)
             }
           } else {
             this.errorMsg = 'از سرور پاسخ مناسبی دریافت نشد لطفا بعدا مراجعه نمایید'

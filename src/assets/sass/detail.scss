@@ -147,7 +147,7 @@
         line-height: 48px;
         text-align: center;
         font-size: 16px;
-        color: $c2;
+        color: $c2 !important;
         background-color: $c5;
         font-family: "Iransans_Bold";
         @include border-radius(4px);

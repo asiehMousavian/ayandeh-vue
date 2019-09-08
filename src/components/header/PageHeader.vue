@@ -40,10 +40,10 @@
           <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-5 d-flex">
             <div class="d-flex align-items-center mr-auto">
               <div class="login_link">
-                <div class="login_link_t">
-                  <img src="@/assets/img/arrow_down.svg" alt="" class="login_link_arrow" v-if="name">
-                  {{name}}
-                  <img src="@/assets/img/avatar.svg" alt="" v-if="name">
+                <div class="login_link_t d-flex align-items-center">
+                  <img src="@/assets/img/arrow_down.svg" alt="" class="login_link_arrow ml-auto" v-if="name">
+                  <span style="margin: 0 4px;">{{name}}</span>
+                  <img src="@/assets/img/avatar.svg" alt="" v-if="name" class="login_link_pic mr-auto">
                 </div>
                 <div class="login_link_box">
                   <ul class="list-unstyled">
@@ -98,6 +98,9 @@ export default {
         let user = JSON.parse(client)
         this.name = user.firstName + ' ' + user.lastName
       }
+    }
+    if (this.name === 'null null') {
+      this.name = 'کاربر جدید'
     }
   },
   methods: {

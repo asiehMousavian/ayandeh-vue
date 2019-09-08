@@ -1,21 +1,21 @@
 /*
 Error: Undefined variable: "$c1".
-        on line 17 of D:/work-space/ayandeh-vue/src/assets/sass/home.scss
+        on line 14 of D:/work-space/ayandeh-vue/src/assets/sass/home.scss
 
-12:         a {
-13:           display: block;
-14:           height: 68px;
-15:           line-height: 68px;
-16:           text-align: center;
-17:           color: $c1;
-18:           font-family: "Iransans_Medium";
-19:           font-size: 24px;
-20:           @media #{$size992}{
-21:             height: 55px;
-22:             line-height: 55px;
+9:         a {
+10:           display: block;
+11:           height: 68px;
+12:           line-height: 68px;
+13:           text-align: center;
+14:           color: $c1;
+15:           font-family: "Iransans_Medium";
+16:           font-size: 24px;
+17:           @media #{$size992}{
+18:             height: 55px;
+19:             line-height: 55px;
 
 Backtrace:
-D:/work-space/ayandeh-vue/src/assets/sass/home.scss:17
+D:/work-space/ayandeh-vue/src/assets/sass/home.scss:14
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/lib/sass/script/tree/variable.rb:49:in `_perform'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/lib/sass/script/tree/node.rb:58:in `perform'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/lib/sass/tree/visitors/perform.rb:398:in `visit_prop'
@@ -111,4 +111,4 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/vendor/listen/lib/listen/adap
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$c1\".\A         on line 17 of D:/work-space/ayandeh-vue/src/assets/sass/home.scss\A \A 12:         a {\A 13:           display: block;\A 14:           height: 68px;\A 15:           line-height: 68px;\A 16:           text-align: center;\A 17:           color: $c1;\A 18:           font-family: \"Iransans_Medium\";\A 19:           font-size: 24px;\A 20:           @media #{$size992}{\A 21:             height: 55px;\A 22:             line-height: 55px;"; }
+  content: "Error: Undefined variable: \"$c1\".\A         on line 14 of D:/work-space/ayandeh-vue/src/assets/sass/home.scss\A \A 9:         a {\A 10:           display: block;\A 11:           height: 68px;\A 12:           line-height: 68px;\A 13:           text-align: center;\A 14:           color: $c1;\A 15:           font-family: \"Iransans_Medium\";\A 16:           font-size: 24px;\A 17:           @media #{$size992}{\A 18:             height: 55px;\A 19:             line-height: 55px;"; }

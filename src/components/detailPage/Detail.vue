@@ -118,10 +118,10 @@ export default {
       // v-b-modal.descModal
       let logged = this.$session.get('isLogged')
       if (logged) {
-        if (modalId == 'sodoorModal') {
-          //if (this.getUserValidate()) {
-            this.$bvModal.show(modalId)
-         // }
+        if (modalId === 'sodoorModal') {
+          // if (this.getUserValidate()) {
+          this.$bvModal.show(modalId)
+          // }
         } else { this.$bvModal.show(modalId) }
       }
     },

@@ -2,13 +2,10 @@
 .box_tab {
   .box_tab_t {
     border-bottom: solid 1px #dfdfdf;
-
     ul {
       display: flex;
-
       li {
         width: 50%;
-
         a {
           display: block;
           height: 68px;
@@ -27,11 +24,9 @@
             line-height: 45px;
             font-size: 15px;
           }
-
           &.active {
             color: $c5;
             position: relative;
-
             &:before {
               @extend .sprite;
               width: 100%;
@@ -47,7 +42,6 @@
       }
     }
   }
-
   .tab-content {
     padding: 60px 20px 70px 20px;
     @media #{$size992}{
@@ -55,11 +49,9 @@
     }
   }
 }
-
 .box_c {
   margin: 50px 0 20px 0;
 }
-
 .box_text {
   text-align: center;
   margin-bottom: 50px;
@@ -70,7 +62,6 @@
     margin-bottom: 20px;
   }
 }
-
 /******* Login/register tab ******/
 
 /******azadeh 11-06-98*********/
@@ -78,11 +69,9 @@
   .box_tab {
     .mytab {
       width: 50%;
-
       .active {
         background-color: transparent;
         position: relative;
-
         &::before {
           display: block;
           content: '';
@@ -95,7 +84,6 @@
           background-color: #7d4434;
         }
       }
-
       a {
         display: block;
         height: 68px;
@@ -121,7 +109,6 @@
     }
   }
 }
-
 #registerPage {
   #signUpS1 {
     .option {
@@ -145,11 +132,9 @@
     }
   }
 }
-
 #verificationPage {
   .verificationForm {
     padding: 20px 30px;
-
     .box_title {
       p {
         font-size: 24px;
@@ -158,7 +143,6 @@
         margin-bottom: 30px;
       }
     }
-
     .box_text {
       span {
         font-family: "Iransans_Bold";
@@ -166,7 +150,6 @@
     }
   }
 }
-
 #loginForm {
   .btn {
     height: 48px;
@@ -177,14 +160,12 @@
     cursor: pointer;
   }
 }
-
 #registerPage,
 #verificationPage,
 #loginForm {
   .form-alert {
     background-color: #fff;
   }
-
   .format_inp {
     font-size: 15px;
     @media #{$size992} {
@@ -192,6 +173,4 @@
     }
   }
 }
-
 /******azadeh 11-06-98*********/
-

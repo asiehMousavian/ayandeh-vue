@@ -163,7 +163,7 @@ export default new Router({
               if (response.status === 0 && response.message === 'OK') {
                 let userData = JSON.stringify(response.content)
                 localStorage.setItem('userData', userData)
-                if (response.content.registerStatus !== 'unknown') {
+                if (response.content.registerStatus !== 'UNKNOWN') {
                   next('/userInformation')
                 } else {
                   next()

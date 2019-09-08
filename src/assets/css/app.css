@@ -696,15 +696,16 @@ button.btn {
 }
 #header .header .login_link {
   position: relative;
+  min-width: 155px;
 }
 @media only screen and (max-width: 567px) {
   #header .header .login_link {
-    font-size: 13px;
+    min-width: 130px;
   }
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 414px) {
   #header .header .login_link {
-    font-size: 12px;
+    min-width: auto;
   }
 }
 #header .header .login_link .login_link_t {
@@ -712,22 +713,24 @@ button.btn {
   color: #333300;
   cursor: pointer;
 }
-#header .header .login_link .login_link_t > img {
-  margin-right: 8px;
+@media only screen and (max-width: 767px) {
+  #header .header .login_link .login_link_t {
+    font-size: 14px;
+  }
 }
 @media only screen and (max-width: 567px) {
-  #header .header .login_link .login_link_t > img {
-    margin-right: 4px;
+  #header .header .login_link .login_link_t {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 567px) {
+  #header .header .login_link .login_link_t > img.login_link_pic {
     width: 20px;
   }
 }
-#header .header .login_link .login_link_t > img.login_link_arrow {
-  margin-right: 0;
-  margin-left: 8px;
-}
-@media only screen and (max-width: 567px) {
-  #header .header .login_link .login_link_t > img.login_link_arrow {
-    margin-left: 4px;
+@media only screen and (max-width: 414px) {
+  #header .header .login_link .login_link_t > img.login_link_pic {
+    display: none;
   }
 }
 #header .header .login_link .login_link_box {
@@ -743,12 +746,29 @@ button.btn {
   z-index: 1000;
   display: none;
 }
+@media only screen and (max-width: 414px) {
+  #header .header .login_link .login_link_box {
+    width: 130px;
+    left: 0;
+    right: auto;
+  }
+}
 #header .header .login_link .login_link_box > ul > li > a {
   display: block;
   font-size: 16px;
   color: #333300;
   padding: 10px 17px;
   border-bottom: solid 1px #f2f2f2;
+}
+@media only screen and (max-width: 767px) {
+  #header .header .login_link .login_link_box > ul > li > a {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 567px) {
+  #header .header .login_link .login_link_box > ul > li > a {
+    font-size: 12px;
+  }
 }
 #header .header .login_link .login_link_box > ul > li > a.logout {
   color: #cb0d0d;
@@ -1185,6 +1205,24 @@ input:-webkit-autofill:hover {
 
 .spinner span {
   border-color: #fff transparent transparent transparent !important;
+}
+
+.tt_body {
+  display: flex;
+  align-items: flex-end;
+  height: 50px;
+}
+.tt_body .tt {
+  font-size: 13px;
+  color: #575757;
+  margin-left: 10px;
+}
+.tt_body label {
+  margin-left: 5px;
+  margin-bottom: 0;
+  cursor: pointer;
+  color: #575757;
+  font-size: 13px;
 }
 
 /*********** New Style ***********/

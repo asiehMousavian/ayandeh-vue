@@ -68,34 +68,33 @@
     </form>
   </div>
 
-
 </template>
 <script>
-import service from "@/services/generalService"
-import sharedService from "@/services/sharedService"
+import service from '@/services/generalService'
+import sharedService from '@/services/sharedService'
 import VueLoadingButton from 'vue-loading-button'
 export default {
-  name: "issueUnit",
-  data() {
+  name: 'issueUnit',
+  data () {
     return {
-      nationalId: "",
+      nationalId: '',
       licenseNumber: '12345678',
-      unitCount:'',
+      unitCount: '',
       fund: {},
       fundId: 0,
       userLicense: {},
-      unitValue:0,
-      fundId:0,
-      revokeFund:{},
-      errorMsg:'',
-      price:0,
+      unitValue: 0,
+      fundId: 0,
+      revokeFund: {},
+      errorMsg: '',
+      price: 0,
       // responseError:false,
-      success:false,
-      isLoading:false,
-      confirm:false
+      success: false,
+      isLoading: false,
+      confirm: false
     }
   },
-  components:{
+  components: {
     VueLoadingButton
   },
   computed: {
@@ -104,80 +103,77 @@ export default {
     }
   },
   methods: {
-    check()
-    {
-      this.confirm=false
+    check () {
+      this.confirm = false
     },
-    confirmRevoke(){
-      this.confirm=true
+    confirmRevoke () {
+      this.confirm = true
     },
-    checkInput(){
+    checkInput () {
       this.price = this.fund.saleNav * this.unitCount
     },
-     close() {
-      this.$emit("exit", true)
+    close () {
+      this.$emit('exit', true)
     },
-    ebtalUnits()
-    {
-      this.isLoading=true
-      //setTimeout(() => {
-        this.revokeFund = {
-          fundId:this.fundId,
-          licenseNumber: this.licenseNumber,
-          fundUnit: this.unitCount
-        }
-        service.postMethod(`invest/fund/revoke`, this.revokeFund)
+    ebtalUnits () {
+      this.isLoading = true
+      // setTimeout(() => {
+      this.revokeFund = {
+        fundId: this.fundId,
+        licenseNumber: this.licenseNumber,
+        fundUnit: this.unitCount
+      }
+      service.postMethod(`invest/fund/revoke`, this.revokeFund)
         .then(response => {
-          //todo
-          this.success=true
-          this.showDescription=false
+          // todo
+          this.success = true
+          this.showDescription = false
           this.isLoading = false
         })
         .catch(error => {
           this.isLoading = false
-          //todo
-          this.success=false
-          this.showDescription=false
+          // todo
+          this.success = false
+          this.showDescription = false
           if (error.response.data.status === 500501) {
             this.errorMsg = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
           } else {
             this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
           }
         })
-      //}, 1000)
+      // }, 1000)
     },
-    getLicense(){
-      this.userLicense= this.$session.get("userLicense")
-      if(this.userLicense.licenseNumber != undefined)
-      {
-        this.licenseNumber=this.userLicense.licenseNumber
+    getLicense () {
+      this.userLicense = this.$session.get('userLicense')
+      if (this.userLicense.licenseNumber != undefined) {
+        this.licenseNumber = this.userLicense.licenseNumber
       }
     },
-    getClientInfo(){
-      if (this.$session.has("clientInfo")) {
-        let client = this.$session.get("clientInfo")
+    getClientInfo () {
+      if (this.$session.has('clientInfo')) {
+        let client = this.$session.get('clientInfo')
         if (client) {
           let user = JSON.parse(client)
           this.nationalId = user.nationalId
         }
       }
     },
-    getFundInfo(){
-       this.fund = JSON.parse(this.$session.get("currentFund"))
-        this.fundId = this.fund.code
+    getFundInfo () {
+      this.fund = JSON.parse(this.$session.get('currentFund'))
+      this.fundId = this.fund.code
     }
   },
-    filters: {
-      persianCurrency: function(value) {
-        return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1/")
-      }
+  filters: {
+    persianCurrency: function (value) {
+      return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1/')
+    }
   },
-  mounted() {
+  mounted () {
     this.getClientInfo()
     this.getFundInfo()
     this.getLicense()
   },
-  beforeUpdate(){
+  beforeUpdate () {
     sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()

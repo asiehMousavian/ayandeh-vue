@@ -30,7 +30,7 @@ const dictionary = {
       password: 'رمز عبور',
       confirmpassword: 'تکرار رمز عبور',
       count: 'تعداد',
-      verificationCode:'کد اعتبارسنجی'
+      verificationCode: 'کد اعتبارسنجی'
     }
   }
 }

@@ -65,10 +65,52 @@
                     </div>
                     <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
                       <div class="user_info_sec">
+                        <span class="user_info_sec--t">سریال شناسنامه :</span>
+                        <span class="user_info_sec--txt">{{userInfo.birthCertSerial}}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                      <div class="user_info_sec">
+                        <span class="user_info_sec--t">نام پدر :</span>
+                        <span class="user_info_sec--txt">{{userInfo.fatherName}}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                      <div class="user_info_sec">
                         <span class="user_info_sec--t">کد ملی :</span>
                         <span class="user_info_sec--txt">{{userInfo.nationalId}}</span>
                       </div>
                     </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                      <div class="user_info_sec">
+                        <span class="user_info_sec--t">جنسیت :</span>
+                        <span class="user_info_sec--txt">{{userInfo.gender}}</span>
+                      </div>
+                    </div>
+<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
+<!--                      <div class="user_info_sec">-->
+<!--                        <span class="user_info_sec&#45;&#45;t"> تصویر پروفایل کاربری :</span>-->
+<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.profilePic}}</span>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
+<!--                      <div class="user_info_sec">-->
+<!--                        <span class="user_info_sec&#45;&#45;t">تصویر اول شناسنامه :</span>-->
+<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.birthCertPic}}</span>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
+<!--                      <div class="user_info_sec">-->
+<!--                        <span class="user_info_sec&#45;&#45;t">تصویر توضیحات شناسنامه :</span>-->
+<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.birthCertDescPic}}</span>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
+<!--                      <div class="user_info_sec">-->
+<!--                        <span class="user_info_sec&#45;&#45;t">تصویر توضیحات شناسنامه :</span>-->
+<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.nationalCardPic}}</span>-->
+<!--                      </div>-->
+<!--                    </div>-->
                   </div>
                 </div>
                 <div class="user-details-sec">
@@ -76,7 +118,7 @@
                   <div class="row">
                     <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
                       <div class="user_info_sec">
-                        <span class="user_info_sec--t">اطلاعات تماس :</span>
+                        <span class="user_info_sec--t">شماره تماس :</span>
                         <span class="user_info_sec--txt">{{userInfo.phoneNumber}}</span>
                       </div>
                     </div>
@@ -88,8 +130,26 @@
                     </div>
                     <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
                       <div class="user_info_sec">
+                        <span class="user_info_sec--t">فکس :</span>
+                        <span class="user_info_sec--txt">{{userInfo.fax}}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                      <div class="user_info_sec">
                         <span class="user_info_sec--t">کدپستی :</span>
                         <span class="user_info_sec--txt">{{userInfo.postalCode}}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                      <div class="user_info_sec">
+                        <span class="user_info_sec--t">ایمیل :</span>
+                        <span class="user_info_sec--txt">{{userInfo.email}}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                      <div class="user_info_sec">
+                        <span class="user_info_sec--t">نوع حساب :</span>
+                        <span class="user_info_sec--txt">{{userInfo.accountType}}</span>
                       </div>
                     </div>
                     <div class="col-xl-12 clo-lg-12 col-md-12 col-sm-12 col-12">
@@ -109,7 +169,13 @@
                         <span class="user_info_sec--txt">{{userInfo.bankName}}</span>
                       </div>
                     </div>
-                    <div class="">
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                      <div class="user_info_sec">
+                        <span class="user_info_sec--t">شماره حساب بانکی :</span>
+                        <span class="user_info_sec--txt">{{userInfo.accountNumber}}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">شماره شبا :</span>
                         <span class="user_info_sec--txt">{{userInfo.ibanNumber}}</span>
@@ -155,7 +221,10 @@ export default {
   components: {
     PageHeader, toggleMenu, Loading
   },
-  mounted () {
+  mounted: function () {
+    // let loader = Vue.$loading.show({
+    //   color: 'blue'
+    // }
     this.isDone = false
     sharedService.handleInputLabels()
     sharedService.toggleMenu()
@@ -167,7 +236,7 @@ export default {
       .then(response => {
         this.user = response.content
         this.isDone = true
-        localStorage.setItem('regUser', JSON.stringify(this.user))
+        // localStorage.setItem('regUser', JSON.stringify(this.user))
         if (response.content.registerStatus === 'UNKNOWN') {
           this.registerStatusMsg = 'اطلاعات شما در سیستم ثبت نشده است'
         } else if (response.content.registerStatus === 'PENDING') {

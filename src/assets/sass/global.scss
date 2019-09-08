@@ -563,27 +563,30 @@ button.btn{
     }
     .login_link{
       position: relative;
+      min-width: 155px;
       @media #{$size568}{
-        font-size: 13px;
+        min-width: 130px;
       }
-      @media #{$size375}{
-        font-size: 12px;
+      @media #{$size414}{
+        min-width: auto;
       }
       .login_link_t{
         font-size: 16px;
         color: $c4;
         cursor: pointer;
+        @media #{$size768}{
+          font-size: 14px;
+        }
+        @media #{$size568}{
+          font-size: 12px;
+        }
         >img{
-          margin-right: 8px;
-          @media #{$size568}{
-            margin-right: 4px;
-            width: 20px;
-          }
-          &.login_link_arrow{
-            margin-right: 0;
-            margin-left: 8px;
+          &.login_link_pic{
             @media #{$size568}{
-              margin-left: 4px;
+              width: 20px;
+            }
+            @media #{$size414}{
+              display: none;
             }
           }
         }
@@ -598,6 +601,11 @@ button.btn{
         overflow: hidden;
         z-index: 1000;
         display: none;
+        @media #{$size414}{
+          width: 130px;
+          left: 0;
+          right: auto;
+        }
         >ul{
           >li{
             >a{
@@ -606,6 +614,12 @@ button.btn{
               color: #333300;
               padding: 10px 17px;
               border-bottom: solid 1px #f2f2f2;
+              @media #{$size768}{
+                font-size: 14px;
+              }
+              @media #{$size568}{
+                font-size: 12px;
+              }
               &.logout{
                 color: #cb0d0d;
               }
@@ -994,5 +1008,22 @@ input:-webkit-autofill:hover{
 }
 .spinner span{
   border-color: $c2 transparent transparent transparent !important;
+}
+.tt_body{
+  display: flex;
+  align-items: flex-end;
+  height: 50px;
+  .tt{
+    font-size: 13px;
+    color: #575757;
+    margin-left: 10px;
+  }
+  label{
+    margin-left: 5px;
+    margin-bottom: 0;
+    cursor: pointer;
+    color: #575757;
+    font-size: 13px;
+  }
 }
 /*********** New Style ***********/

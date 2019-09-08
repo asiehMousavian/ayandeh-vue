@@ -12,7 +12,7 @@
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
             </p>
             <div class="d-flex justify-content-end">
-              <VueLoadingButton @click.native="goToDetail(10915)" class="btn" :loading="isLoading" >
+              <VueLoadingButton @click.native="goToDetail(fund.code)" class="btn" :loading="isLoading" >
                 {{submitTitle}}
               </VueLoadingButton>
             </div>
@@ -42,12 +42,16 @@ export default {
     VueLoadingButton
   },
   methods: {
-    goToDetail: function () {
+    // goToDetail: function () {
+    //   this.isLoading = true
+    //   // setTimeout(() => {
+    //   // this.isLoading = true
+    //   this.$router.push('detail/10915')
+    //   // }, 1000)
+    // },
+    goToDetail (id) {
       this.isLoading = true
-      //setTimeout(() => {
-       // this.isLoading = true
-        this.$router.push('detail/10915')
-      //}, 1000)
+      this.$router.push(`detail/${id}`)
     }
   }
 }

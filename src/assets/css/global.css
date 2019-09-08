@@ -638,6 +638,9 @@ button.btn {
 }
 #header .header #menu ul li a {
   display: block;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
   font-size: 16px;
   color: #333300;
 }

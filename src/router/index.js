@@ -62,14 +62,12 @@ var GetSession = function (to, from, next) {
           // todo
           // localStorage.setItem("session",JSON.stringify(response.content.session))
           localStorage.setItem('session', 'EUc8Zc24AY9CCMjD78Y8PHFhy3RM3LWJod2j')
-          // localStorage.setItem("session","BqwGB79bYVCTPDL52nSMPZUvDGowNQXOQ2yW")
         }
         generalService.setSession()
         return true
       }
     }).catch(error => {
       return false
-      // next()
     })
   } else {
     return true
@@ -209,12 +207,15 @@ export default new Router({
           next('login')
         }
       }
-    }
+    },
     // end of all routes
     // check
-    // {
-    //   path: '*',
-    //   redirect: '/login'
-    // }
-  ]
+    {
+      path: '*',
+      redirect: '/login'
+    }
+  ],
+  // abort: () => {
+  //   this.
+  // }
 })

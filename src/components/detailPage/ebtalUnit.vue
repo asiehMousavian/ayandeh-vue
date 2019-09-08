@@ -8,11 +8,11 @@
       </p>
     </div>
     <div class="modal_desc">
-      <p>
+      <!-- <p>
         کد ملی
         <span>{{nationalId}}</span>
         <span>-{{licenseNumber}}-</span> واحد دارد.
-      </p>
+      </p> -->
     </div>
     <form >
       <div class="f_body d-flex justify-content-center ebtal_form">
@@ -55,46 +55,47 @@
             بعد از ابطال شما <i>{{unitCount}}</i> واحد از سهم خود را از مالکیت خارج می کنید
           </p>
           <br>
-          <p v-if="success">در خواست شما با موفقیت ثبت شد</p>
-          <p v-else>{{errorMsg}}</p>
+          <p style="color : #0f7d29" v-if="success">در خواست شما با موفقیت ثبت شد</p>
+          <p style="color : #e2241b" v-else>{{errorMsg}}</p>
         </div>
        </div>
       <br/>
       <br>
       <div slot="modal-footer">
-        <VueLoadingButton class="btn" :disabled='errors.any() || !isComplete' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
+        <VueLoadingButton class="btn" :disabled='success' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
         <button class="btn btn-cancel" @click.prevent="check">بررسی مجدد</button>
       </div>
     </form>
   </div>
 
+
 </template>
 <script>
-import service from '@/services/generalService'
-import sharedService from '@/services/sharedService'
+import service from "@/services/generalService"
+import sharedService from "@/services/sharedService"
 import VueLoadingButton from 'vue-loading-button'
 export default {
-  name: 'issueUnit',
-  data () {
+  name: "issueUnit",
+  data() {
     return {
-      nationalId: '',
-      licenseNumber: '12345678',
-      unitCount: '',
+      nationalId: "",
+      licenseNumber: '12',
+      unitCount:'',
       fund: {},
       fundId: 0,
       userLicense: {},
-      unitValue: 0,
-      fundId: 0,
-      revokeFund: {},
-      errorMsg: '',
-      price: 0,
+      unitValue:0,
+      fundId:0,
+      revokeFund:{},
+      errorMsg:'',
+      price:0,
       // responseError:false,
-      success: false,
-      isLoading: false,
-      confirm: false
+      success:false,
+      isLoading:false,
+      confirm:false
     }
   },
-  components: {
+  components:{
     VueLoadingButton
   },
   computed: {
@@ -103,77 +104,79 @@ export default {
     }
   },
   methods: {
-    check () {
-      this.confirm = false
+    check()
+    {
+      this.confirm=false
     },
-    confirmRevoke () {
-      this.confirm = true
+    confirmRevoke(){
+      this.confirm=true
     },
-    checkInput () {
+    checkInput(){
       this.price = this.fund.saleNav * this.unitCount
     },
-    close () {
-      this.$emit('exit', true)
+     close() {
+      this.$emit("exit", true)
     },
-    ebtalUnits () {
-      this.isLoading = true
-      // setTimeout(() => {
-      this.revokeFund = {
-        fundId: this.fundId,
-        licenseNumber: this.licenseNumber,
-        fundUnit: this.unitCount
-      }
-      service.postMethod(`invest/fund/revoke`, this.revokeFund)
+    ebtalUnits()
+    {
+      this.isLoading=true
+        this.revokeFund = {
+          fundId:this.fundId,
+          licenseNumber: this.licenseNumber,
+          fundUnit: this.unitCount
+        }
+        service.postMethod(`invest/fund/revoke/${this.revokeFund}`)
         .then(response => {
-          // todo
-          this.success = true
-          this.showDescription = false
+          //todo
+          this.success=true
           this.isLoading = false
         })
         .catch(error => {
+          console.log(error)
+          debugger
           this.isLoading = false
-          // todo
-          this.success = false
-          this.showDescription = false
+          this.success=false
+
+          //todo
           if (error.response.data.status === 500501) {
             this.errorMsg = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
           } else {
             this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
           }
         })
-      // }, 1000)
     },
-    getLicense () {
-      this.userLicense = this.$session.get('userLicense')
-      if (this.userLicense.licenseNumber != undefined) {
-        this.licenseNumber = this.userLicense.licenseNumber
+    getLicense(){
+      this.userLicense= this.$session.get("userLicense")
+      if(this.userLicense.licenseNumber != undefined)
+      {
+        this.licenseNumber=this.userLicense.licenseNumber
       }
     },
-    getClientInfo () {
-      if (this.$session.has('clientInfo')) {
-        let client = this.$session.get('clientInfo')
+    getClientInfo(){
+      if (this.$session.has("clientInfo")) {
+        let client = this.$session.get("clientInfo")
         if (client) {
           let user = JSON.parse(client)
           this.nationalId = user.nationalId
         }
       }
     },
-    getFundInfo () {
-      this.fund = JSON.parse(this.$session.get('currentFund'))
-      this.fundId = this.fund.code
+    getFundInfo(){
+       this.fund = JSON.parse(this.$session.get("currentFund"))
+        this.fundId = this.fund.code
     }
   },
-  filters: {
-    persianCurrency: function (value) {
-      return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1/')
-    }
+    filters: {
+      persianCurrency: function(value) {
+        return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1/")
+      }
   },
-  mounted () {
+  mounted() {
     this.getClientInfo()
     this.getFundInfo()
     this.getLicense()
   },
-  beforeUpdate () {
+  beforeUpdate(){
     sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()

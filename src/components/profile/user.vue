@@ -508,10 +508,11 @@ export default {
             generalService
               .postMethod('invest/fund/register/investor/10915', this.userInfo)
               .then(response => {
-                debugger
                 if (response.status === 0 && response.message === 'OK') {
                   // sharedService.Done('ثبت نام با موفقیت انجام شد')
-                  this.$router.push('/userInformation')
+                  setTimeout(() => {
+                    this.$router.push('/userInformation')
+                  }, 3000)
                 }
               }).catch(error => {
                 console.log(error)

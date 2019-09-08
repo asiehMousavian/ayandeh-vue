@@ -12,7 +12,7 @@
                 <a href="#" @click.prevent="showComponent('requestReport')" >گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="#" @click.prevent="showComponent('turnover')">گردش حساب</a>
+                <a href="#" @click.prevent="showComponent('accounting')">گردش حساب</a>
                 <!-- <a href="" @click.prevent="showComponent('turnover')">گردش حساب</a> -->
 <!--                <a href="" @click.prevent="showComponent('accounting')">گردش حساب</a>-->
               </li>
@@ -118,10 +118,13 @@ export default {
       // v-b-modal.descModal
       let logged = this.$session.get('isLogged')
       if (logged) {
-        if (modalId === 'sodoorModal') {
-          // if (this.getUserValidate()) {
-          this.$bvModal.show(modalId)
-          // }
+        if (modalId == 'sodoorModal') {
+          if (!this.getUserValidate()) {
+            this.$bvModal.show(modalId)
+          }
+          else{
+            this.$router.push('/user')
+          }
         } else { this.$bvModal.show(modalId) }
       }
     },
@@ -140,12 +143,12 @@ export default {
       service.getMethod('invest/fund/' + this.fundId)
         .then(response => {
           this.fund = response.content
-          this.isDone = true
+          // this.isDone = true
           this.$session.set('currentFund', JSON.stringify(this.fund))
         })
         .catch(error => {
           console.log(error)
-          this.isDone = true
+          // this.isDone = true
         })
     },
     getCurrentComponent () {
@@ -163,8 +166,11 @@ export default {
             this.userLicense = response.content
             this.$session.set('userLicense', this.userLicense)
           }
+          this.isDone = true
         })
         .catch(error => {
+          this.isDone = true
+
           this.$session.set('userLicense', this.userLicense)
           if (error.response.data) {
             if (error.response.data.message) {
@@ -179,7 +185,6 @@ export default {
       service.getMethod('invest/user/validate')
         .then(response => {
           if (response.status === 0) {
-            debugger
             if (response.content === true) { return true } else { return false }
           }
         })
@@ -194,6 +199,7 @@ export default {
     this.getFunds()
     this.getLicense()
     this.getCurrentComponent()
+    console.log(Object.keys(this.fund).length)
   }
 }
 </script>

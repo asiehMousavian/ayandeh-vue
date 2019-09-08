@@ -51,7 +51,6 @@ require('./validation/index')
 require('./assets/css/bootstrap.min.css')
 require('./assets/css/bootstrap.min.rtl.css')
 require('./assets/css/app.css')
-/* eslint-disable */
 require('./assets/js/jquery.js')
 // require('./assets/css/screen.css')
 Vue.config.productionTip = false

@@ -5,7 +5,8 @@
         <div class="inp_border">
           <input type="text" name="mobileNumber" v-model="mobile"  class="form-control" v-validate="'required|mobileFa'">
           <div class="form-alert">
-            <p>{{ errors.first('mobileNumber') }}</p>
+            <p>{{ errors.first('mobileNumber')}}</p>
+            <!-- <p>نمونه شماره موبایل : ۰۹۱۲۱۱۲۲۳۲۱</p> -->
           </div>
           <span class="format_inp">نمونه شماره موبایل : ۰۹۱۲۱۱۲۲۳۲۱</span>
           <i class="placeholder">شماره موبایل</i>

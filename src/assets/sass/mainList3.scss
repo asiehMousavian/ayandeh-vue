@@ -97,3 +97,50 @@
         }
     }
 }
+
+
+//----azade 25-06-98-------------
+#alertModal
+{
+    .modal-body
+    {
+        @media #{$size375}
+        {
+            margin-bottom: 0;
+        }
+    }
+    .modal-footer{
+        @media #{$size375}
+        {
+            width: 100%;
+        }
+        .btn{
+            @media #{$size992}
+            {
+                font-size: 12px !important;
+                margin-top: 0;
+                padding: 0 10px 3px 10px;
+            }
+            @media #{$size375}
+            {
+                width: 100%;
+                margin-top: 5px;
+            }
+        }
+    .btn-cancel
+    {
+        @media #{$size992}
+        {
+            width: 130px;
+        }
+        @media #{$size440}
+        {
+            width: 100px;
+        }
+        @media #{$size375}
+        {
+            width: 100%;
+        }
+    }
+}
+}

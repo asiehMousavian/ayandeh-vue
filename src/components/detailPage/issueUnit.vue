@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="modal_title">صدور سهم</h3>
-    <div class="modal_txt">
+    <div class="modal_txt userAlert">
       <p>
         عملیات صدور براساس <span>NAV</span> تخمینی برای <span>۲ روز کاری</span> بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
         خواهد شد
@@ -13,6 +13,7 @@
         <span>{{nationalId}}</span>
         <span>-{{licenseNumber}}-</span> واحد دارد.
       </p> -->
+      <p>قیمت هر واحد در تاریخ {{new Date() | moment("jYYYY/jMM/jDD")}} ، {{unitValue}} ریال می باشد.</p>
     </div>
     <form>
       <div class="f_body d-flex justify-content-center ebtal_form">
@@ -61,7 +62,6 @@
 <script>
 import service from '@/services/generalService'
 import sharedService from '@/services/sharedService'
-
 export default {
   name: 'issueUnit',
   data () {

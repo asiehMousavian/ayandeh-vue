@@ -26,24 +26,30 @@
                             کد احراز هویت شما     
                             تا <span>{{minutes}}:{{seconds}}</span> دقیقه دیگر ارسال خواهد شد را وارد کنید
                           </p>
+                          <br><br>
+                          <p style="color: #575757;font-family:'Iransans_Bold'">ورود کد :</p>
                         </div>
                       </div>
                       <form>
                         <div class="form-group">
                           <div class="inp_border">
-                            <input
+                            <div class="verificationCode">
+                                  <input type="text" v-model= "dig_one" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
+                                  <input type="text" v-model= "dig_two" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
+                                  <input type="text" v-model= "dig_three" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
+                                  <input type="text" v-model= "dig_four" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
+                            </div>
+                            <!-- <input
                               type="text"
                               v-model="verificationCode"
                               name="verificationCode"
                               class="form-control"
                               v-validate="'required'"
-                            />
-                            <div class="form-alert">
-                              <p>{{ errors.first('verificationCode') }}</p>
+                            /> -->
+                            <div class="form-alert" style="text-align:center">
+                              <br>
                               <p>{{responseRresult}}</p>
                             </div>
-                            <i class="placeholder">ورود کد</i>
-                            <i class="line"></i>
                           </div>
                         </div>
                         <div class="d-flex box_c">
@@ -54,55 +60,8 @@
                           <a href="" v-show="reSend" @click.prevent="reSendCode" class="reSend_Code mx-auto" >ارسال مجدد کد</a>
                         </div>
                       </form>
+                      <br>
                   </div>
-                  <!-- <div v-else class="verificationForm">
-                    <div class="box_title">
-                        <p>ثبت رمز عبور</p>
-                    </div>
-                      <div class="box_text">
-                        <div class="text">
-                          <p>
-                            رمز عبور دلخواه خود را ثبت کنید
-                          </p>
-                          <p>
-                            <span>توجه</span>: لطفا از انتخاب رمز عبور‌های ساده مانند کد ملی و یا شماره 
-موبایل پرهیز کنید
-                          </p>
-                        </div>
-                      </div>
-                      <form>
-                        <div class="form-group">
-                          <div class="inp_border">
-                            <input
-                              type="password" v-model="password" name="password" class="form-control" v-validate="'required'" ref="password"/>
-                            <div class="form-alert">
-                              <p>{{ errors.first('password')}}</p>
-                            </div>
-                            <i class="placeholder">ورود رمز عبور</i>
-                            <i class="line"></i>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="inp_border">
-                            <input
-                              type="password" v-model="confirmpassword" name="confirmpassword" class="form-control" v-validate="'required|confirmed:password'" />
-                            <div class="form-alert">
-                              <p>{{ errors.first('confirmpassword') }}</p>
-                            </div>
-                            <i class="placeholder">تکرار رمز عبور</i>
-                            <i class="line"></i>
-                          </div>
-                        </div>
-                        <div class="d-flex box_c">
-                          <button
-                            :disabled="errors.any() || !isComplete"
-                            type="button"
-                            class="btn mx-auto"
-                            @click.prevent="registerPass"
-                          > ورود به پیشخوان</button>
-                        </div>
-                      </form>
-                  </div> -->
               </div>
             </div>
           </div>
@@ -137,11 +96,20 @@ export default {
       seconds:'',
       isLoading: false,
       reSend:false,
-      responseRresult:''
+      responseRresult:'',
+      dig_one:'',
+      dig_two:'',
+      dig_three:'',
+      dig_four:'',
+      leavePage:false
+
     }
   },
   components:{PageHeader,toggleMenu,VueLoadingButton},
   mounted() {
+     sharedService.handleInputLabels()
+    sharedService.checkInputs()
+    sharedService.toggleMenu()
     this.hasAccount=false
     this.mobile=this.$session.get('mobile')
     this.nationalId=this.$session.get('nationalId')
@@ -153,19 +121,26 @@ export default {
     this.resetTimer()
     this.setTimer()
     this.sendSms()
-    sharedService.handleInputLabels()
-    sharedService.checkInputs()
-    sharedService.toggleMenu()
   },
+beforeRouteLeave (to, from, next) {
+  if(to.fullPath=="/detailList")
+  {
+    next()
+  }
+  if(this.leavePage==true)
+  {
+    next()
+  }
+},
   beforeUpdate() {
-    sharedService.handleInputLabels()
+   sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()
-    // this.responseRresult=''
   },
   computed: {
     isComplete() {
-       return this.verificationCode
+      // return this.verificationCode
+      return  this.$validator.validateAll()
     }
   },
   methods: {
@@ -188,6 +163,7 @@ export default {
           }, 1000)
         },
       sendSms(){
+        debugger
         let smsObj={}
         if(this.nationalId != '' && this.nationalId != undefined)
         {
@@ -198,12 +174,15 @@ export default {
               //todo
             }
           }).catch(error=>{
-            debugger
-            if (error.response.data.status === 500501) {
-            this.responseRresult = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
-            }else {
-            this.responseRresult = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
-            }
+              debugger
+              this.responseRresult = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
+              if(error.response != null){
+                if (error.response.data.status === 500501) {
+                this.responseRresult = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
+                }else {
+                this.responseRresult = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
+                }
+              }
           })
         }
         else
@@ -218,17 +197,23 @@ export default {
             }
           }).catch(error=>{
             debugger
-            if (error.response.data.status === 500501) {
-            this.responseRresult = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
-            }else {
             this.responseRresult = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
+            if(error.response != null){
+              if (error.response.data.status === 500501) {
+              this.responseRresult = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
+              }else {
+              this.responseRresult = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
+              }
             }
           })
         }
       },
       registerCode()
       {
-        this.isLoading = true
+        this.isLoading= true
+        // this.verificationCode= this.dig_four+ this.dig_three+ this.dig_two+ this.dig_one
+        this.verificationCode= this.dig_one+ this.dig_two+ this.dig_three+ this.dig_four
+        //  this.verificationCode= this.$refs.dig_one.value + this.$refs.dig_two.value +this.$refs.dig_three.value+this.$refs.dig_four.value
         let smsObj={
           phoneNumber: this.mobile,
           code : this.verificationCode
@@ -254,29 +239,32 @@ export default {
               }
             }
         }).catch(error=>{
-          debugger
           this.isLoading= false
           this.responseRresult="کد وارد شده معتبر نیست" //error.response.data.message
           this.stopTimer()
           this.reSend=true
-
+          this.leavePage=false
         })
       },
       reSendCode(){
-       this.resetTimer()
-        this.responseRresult=''
-        this.reSend=false
+        this.resetTimer()
+        this.responseRresult= ''
+        this.reSend= false
         this.setTimer()
         this.sendSms()
       },
       stopTimer()
       {
-        this.minutes=0
-        this.seconds=0
+        this.minutes =0
+        this.seconds =0
+        this.dig_one= ''
+        this.dig_two =''
+        this.dig_three =''
+        this.dig_four =''
       },
       resetTimer()
       {
-        this.minutes=0
+        this.minutes=4
         this.seconds=59
       }
   }

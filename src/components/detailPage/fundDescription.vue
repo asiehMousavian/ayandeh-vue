@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-      <b-tabs>
+      <!-- {{tabIndex}} -->
+      <b-tabs v-model= "tabIndex">
         <b-tab title="توضیحات صندوق" title-item-class="desctab" active>
           <div class="desc">
             <h3>لورم ایپسوم</h3>
@@ -29,7 +30,17 @@
 
 <script>
 export default {
-  name: 'fundDescription'
+  props: ['desTabIndex'],
+  name: 'fundDescription',
+  data(){
+    return{
+      tabIndex:0
+    }
+  }
+  ,mounted()
+  {
+    this.tabIndex=this.desTabIndex
+  }
 }
 </script>
 

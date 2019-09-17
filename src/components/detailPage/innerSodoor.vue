@@ -2,9 +2,11 @@
   <div>
     <form action="">
       <h3 class="modal_title">پیش فاکتور صدور</h3>
-      <div class="modal_txt">
-        <p>عملیات صدور براساس NAV تخمینی برای ۲ روز کاری بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
-          خواهد شد</p>
+      <div class="modal_txt userAlert">
+       <p>
+        عملیات صدور براساس <span>NAV</span> تخمینی برای <span>۲ روز کاری</span> بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
+        خواهد شد
+      </p>
       </div>
       <div class="modal_desc">
         <p>
@@ -13,6 +15,25 @@
           <i>{{purchaseObj.price}} ریال</i> می باشید
         </p>
       </div>
+  
+      <div class="paymentContainer">
+        <div>
+          <p>
+            نوع پرداخت از طریق :
+          </p>
+        </div>
+        <div class="d-flex">
+        <div class="radioOprion" @click="selectOption('ayande')">
+          <span v-bind:class= "['circle', {'fillCircle' : isSelected}]"></span>
+          <p>پیشخوان مجازی بانک آینده</p>
+        </div>
+        <div class="radioOprion" @click="selectOption('gate')">
+          <span v-bind:class= "['circle', {'fillCircle' : !isSelected}]"><span></span></span>
+          <p>درگاه پرداخت</p>
+        </div>
+        </div>
+        </div>
+      
       <div class="confirm_text">
         <p>
           با زدن دکمه اتصال به درگاه قبول میکنم که <a href="javascripts:void(0)" @click="showInnerModal(0)" class="link1"> توضیحات صندوق</a>
@@ -28,11 +49,10 @@
         <button @click="connectToBank" class="btn">اتصال به درگاه بانک</button>
         <button class="btn btn-cancel" @click.prevent="close">انصراف</button>
       </div>
-
       <div class="modal_extra">
-                    <span class="modal_extra_close" >
-                        <img src="@/assets/img/close.png" alt="" @click="closeInnerModal">
-                    </span>
+        <span class="modal_extra_close" >
+            <img src="@/assets/img/close.png" alt="" @click="closeInnerModal">
+        </span>
 
         <div class="box_tab">
           <b-tabs content-class="mt-3"  v-model="tabIndex">
@@ -75,7 +95,9 @@ export default {
     return {
       purchaseObj: {},
       errMsg: null,
-      tabIndex: 0
+      tabIndex: 0,
+      isSelected:true,
+      paymentOption:'ayande'
     }
   },
   mounted () {
@@ -83,6 +105,13 @@ export default {
     this.purchaseObj = JSON.parse(this.$session.get('purchaseObj'))
   },
   methods: {
+    selectOption(option)
+    {
+      if(option != this.paymentOption){
+      this.isSelected= !this.isSelected
+      this.paymentOption=option
+      }
+    },
     closeInnerModal () {
       sharedService.closeModal()
     },
@@ -100,6 +129,7 @@ export default {
       //   price: 100000,
       //   redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
       // }
+      //todo base on payment option
       service.postMethod('payment', this.purchaseObj)
         .then(response => {
           debugger
@@ -116,5 +146,8 @@ export default {
 }
 </script>
 <style scoped>
-
+.modal_txt p span
+{
+  font-family:"Iransans_Bold"
+}
 </style>

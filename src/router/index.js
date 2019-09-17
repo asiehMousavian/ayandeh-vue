@@ -116,13 +116,17 @@ export default new Router({
       children: [
         {
           path: 'login',
-          component: login
+          component: login,
+          beforeEnter(from,to,next)
+          {
+            session.clear()
+            next()
+          }
         },
         {
           path: 'register',
           component: register
         }
-
       ]
     },
     {
@@ -199,13 +203,27 @@ export default new Router({
       name: 'verification',
       component: verificationPage,
       beforeEnter: (to, from, next) => {
-        if (session.has('mobile')) {
-          // let logged = session.get('mobile')
-          // if (logged) { next() }
-          next()
-        } else {
-          next('login')
+        debugger
+        if (from.fullPath == "/login" || from.fullPath == "/") {
+          if (session.has('mobile')) {
+            let mobNum = session.get('mobile')
+            if (mobNum == "") {
+              //todo
+              next('login')
+            }
+          }
         }
+        else if (GetSession(to, from, next)) {
+          if (isLogged()) {
+            next('detailList')
+          } else {
+            next('login')
+          }
+        }
+        else {
+          next()
+        }
+        next()
       }
     },
     // end of all routes

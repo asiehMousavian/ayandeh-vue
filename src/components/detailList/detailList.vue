@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div>
     <page-header></page-header>
     <!-- Main -->
     <div id="main" role="main" v-if="isDone">
@@ -10,6 +10,8 @@
             <box-component v-for= "fund in funds" v-bind:key="fund.id" v-on:goToBoxDetail="goToBoxDetail(fund.id)" v-bind:fund="fund"></box-component>
           </div>
         </div>
+       
+
       </div>
     </div>
     <div v-else>
@@ -19,6 +21,33 @@
     <!-- Mobile Menu -->
     <toggleMenu></toggleMenu>
     <!-- Mobile Menu -->
+
+    <div>
+      <b-modal id="alertModal" title="BootstrapVue" hide-header size="lg">
+        <h3 class="modal_title">تکمیل اطلاعات کاربری</h3>
+        <div class="modal_txt">
+          <p style="text-align: right">
+              اطلاعات کاربری شما ناقص است. لطفا برای کامل کردن اطلاعات اقدام کنید.
+          </p>
+        </div>
+        <div slot="modal-footer">
+          <button class="btn" @click= "goToUserProfile">کامل کردن اطلاعات</button>
+          <button class="btn" @click= "goToAuthentication">شرایط احراز هویت</button>
+          <button class="btn btn-cancel" @click= "$bvModal.hide('alertModal')">بعدا یادآوری کن</button>
+        </div>
+      </b-modal>
+    </div>
+
+    <div>
+        <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
+            <fund-description v-bind:desTabIndex = "1"></fund-description>
+          <div slot="modal-footer">
+            <button class="btn" @click= "$bvModal.hide('descModal')">بستن</button>
+          </div>
+        </b-modal>
+      </div>
+
+
   </div>
 </template>
 
@@ -29,6 +58,8 @@ import toggleMenu from '../share/toggleMenu'
 import BoxComponent from './BoxComponent'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import fundDescription from '../detailPage/fundDescription'
+import sharedService from '@/services/sharedService'
 
 export default {
   name: 'detailList',
@@ -42,9 +73,13 @@ export default {
     }
   },
   components: {
-    PageHeader, BoxComponent, toggleMenu, Loading
+    PageHeader, BoxComponent, toggleMenu, Loading, fundDescription
   },
-  mounted: function () {
+  beforeUpdate(){
+    sharedService.toggleMenu()
+  },
+  mounted() {
+      
     // if (!this.getLocalItem()) {
     //   this.getFunds()
     // }
@@ -52,11 +87,13 @@ export default {
       .then(response => {
         this.funds = response.content
         this.isDone = true
+         this.$bvModal.show('alertModal') 
         // this.setLocalItem()
       })
       .catch(error => {
         console.log(error)
         this.isDone = true
+         this.$bvModal.show('alertModal') 
       })
   },
   methods: {
@@ -72,7 +109,7 @@ export default {
     // },
     goToBoxDetail: function (id) {
       this.$router.push('/detail/' + id)
-    }
+    },
     // getLocalItem () {
     //   let mySession = localStorage.getItem('item')
     //   if (mySession) {
@@ -85,6 +122,14 @@ export default {
     // setLocalItem () {
     //   localStorage.setItem('item', JSON.stringify(this.funds))
     // }
+     goToUserProfile () {
+      this.$router.push('/user')
+    },
+    goToAuthentication()
+    {
+      this.$bvModal.hide('alertModal')
+      this.$bvModal.show('descModal')
+    }
   }
 }
 </script>

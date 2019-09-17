@@ -1305,6 +1305,14 @@ input:-webkit-autofill:hover {
 
 /******* Login/register tab ******/
 /******azadeh 11-06-98*********/
+#homePage {
+  height: 450px;
+}
+@media only screen and (max-width: 440px) {
+  #homePage {
+    height: 340px;
+  }
+}
 #homePage .box_tab .mytab {
   width: 50%;
 }
@@ -1366,15 +1374,42 @@ input:-webkit-autofill:hover {
   font-family: "Iransans_Bold";
   margin: 0 auto;
 }
+@media only screen and (max-width: 440px) {
+  #registerPage #signUpS1 .option span {
+    font-size: 14px;
+  }
+}
 
 #verificationPage .verificationForm {
   padding: 20px 30px;
+}
+#verificationPage .verificationForm .verificationCode {
+  text-align: center;
+  direction: ltr;
+}
+#verificationPage .verificationForm .verificationCode input {
+  margin: 0 5px;
+  text-align: center;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #000;
+  font-size: 20px;
+}
+@media only screen and (max-width: 440px) {
+  #verificationPage .verificationForm .verificationCode input {
+    font-size: 16px;
+  }
 }
 #verificationPage .verificationForm .box_title p {
   font-size: 24px;
   font-family: "Iransans_Bold";
   text-align: center;
   margin-bottom: 30px;
+}
+@media only screen and (max-width: 440px) {
+  #verificationPage .verificationForm .box_title p {
+    font-size: 18px;
+  }
 }
 #verificationPage .verificationForm .box_text span {
   font-family: "Iransans_Bold";
@@ -1445,6 +1480,12 @@ input:-webkit-autofill:hover {
 #turnOverTable .table tbody tr td, #accountingTable .table tbody tr td {
   text-align: right !important;
   width: 20%;
+}
+
+.disableButton {
+  background-color: rgba(92, 50, 38, 0.1) !important;
+  color: #cfcac8 !important;
+  box-shadow: none !important;
 }
 
 /******azadeh 11-06-98*********/
@@ -1774,6 +1815,156 @@ input:-webkit-autofill:hover {
   text-align: center;
 }
 
+.userAlert {
+  height: 80px;
+  border-radius: 10px;
+  border: solid 3px #c9b10b;
+  background-color: rgba(196, 174, 8, 0.21);
+  margin-bottom: 40px;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media only screen and (max-width: 767px) {
+  .userAlert {
+    height: 110px;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .userAlert {
+    height: 130px;
+  }
+}
+.userAlert .closeContainer {
+  display: flex;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: solid 1px #c9b10b;
+  background-color: rgba(201, 177, 11, 0.3);
+  cursor: pointer;
+}
+@media only screen and (max-width: 767px) {
+  .userAlert .closeContainer {
+    height: 25px;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .userAlert .closeContainer {
+    height: 20px;
+  }
+}
+.userAlert .closeContainer img {
+  width: 100%;
+}
+.userAlert .msgContainer {
+  margin-right: 10px;
+}
+.userAlert .msgContainer p {
+  font-size: 16px;
+  color: #746500;
+}
+@media only screen and (max-width: 991px) {
+  .userAlert .msgContainer p {
+    font-size: 13px;
+  }
+}
+.userAlert .btnContainers {
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 767px) {
+  .userAlert .btnContainers {
+    display: block;
+  }
+}
+.userAlert .btnContainers button {
+  width: 156px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  background-color: #746500;
+  margin: 10px;
+  font-size: 13px !important;
+}
+@media only screen and (max-width: 991px) {
+  .userAlert .btnContainers button {
+    margin: 5px;
+    width: 140px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .userAlert .btnContainers button {
+    font-size: 11px !important;
+  }
+}
+
+.paymentContainer {
+  display: flex;
+  width: 100%;
+  margin: 30px 0;
+}
+@media only screen and (max-width: 375px) {
+  .paymentContainer {
+    flex-direction: column;
+  }
+}
+.paymentContainer div {
+  margin-left: 10px;
+}
+@media only screen and (max-width: 440px) {
+  .paymentContainer div {
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
+}
+.paymentContainer p {
+  font-family: "Iransans_Bold";
+  font-size: 16px;
+  display: inline;
+}
+@media only screen and (max-width: 991px) {
+  .paymentContainer p {
+    font-size: 12px;
+  }
+}
+.paymentContainer .radioOprion {
+  position: relative;
+  padding-right: 30px;
+}
+.paymentContainer .radioOprion .circle {
+  width: 22px;
+  height: 22px;
+  border: solid 2px #000;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.paymentContainer .radioOprion .fillCircle {
+  border: solid 2px #7a3624;
+}
+.paymentContainer .radioOprion .fillCircle::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #7a3624;
+}
+
+@media only screen and (max-width: 375px) {
+  #innerSodoorModal .btn-cancel {
+    width: 140px;
+  }
+}
+
 .centerHeading {
   color: #000;
   font-family: "Iransans_Bold";
@@ -1863,6 +2054,45 @@ input:-webkit-autofill:hover {
     float: none;
   }
 }
+@media only screen and (max-width: 375px) {
+  #alertModal .modal-body {
+    margin-bottom: 0;
+  }
+}
+@media only screen and (max-width: 375px) {
+  #alertModal .modal-footer {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 991px) {
+  #alertModal .modal-footer .btn {
+    font-size: 12px !important;
+    margin-top: 0;
+    padding: 0 10px 3px 10px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  #alertModal .modal-footer .btn {
+    width: 100%;
+    margin-top: 5px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  #alertModal .modal-footer .btn-cancel {
+    width: 130px;
+  }
+}
+@media only screen and (max-width: 440px) {
+  #alertModal .modal-footer .btn-cancel {
+    width: 100px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  #alertModal .modal-footer .btn-cancel {
+    width: 100%;
+  }
+}
+
 .user-details-form {
   width: 100%;
 }

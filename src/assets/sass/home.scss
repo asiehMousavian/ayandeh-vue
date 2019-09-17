@@ -66,6 +66,11 @@
 
 /******azadeh 11-06-98*********/
 #homePage {
+  height: 450px;
+  @media #{$size440}
+  {
+    height: 340px;
+  }
   .box_tab {
     .mytab {
       width: 50%;
@@ -120,7 +125,7 @@
       background-color: #ffffff;
       margin-bottom: 30px;
       cursor: pointer;
-
+    
       img {
         height: 100%;
       }
@@ -129,6 +134,10 @@
         font-size: 18px;
         font-family: "Iransans_Bold";
         margin: 0 auto;
+        @media #{$size440}
+        {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -136,12 +145,34 @@
 #verificationPage {
   .verificationForm {
     padding: 20px 30px;
+    .verificationCode
+    {
+      text-align: center;
+      direction: ltr;
+      input{
+        margin: 0 5px;
+        text-align: center;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #000;
+        font-size: 20px;
+        @media #{$size440}
+        {
+          font-size: 16px;
+        }
+      }
+    }
+
     .box_title {
       p {
         font-size: 24px;
         font-family: "Iransans_Bold";
         text-align: center;
         margin-bottom: 30px;
+        @media #{$size440}
+        {
+          font-size: 18px;
+        }
       }
     }
     .box_text {
@@ -221,4 +252,10 @@
   }
 }
 
+//-----23-06-98-----------
+.disableButton{
+  background-color: rgba(92, 50, 38, 0.1) !important;
+  color: #cfcac8 !important;
+  box-shadow: none !important;
+}
 /******azadeh 11-06-98*********/

@@ -163,7 +163,8 @@
 }
 #registerPage,
 #verificationPage,
-#loginForm {
+#loginForm,
+.user-details-form{
   .form-alert {
     background-color: #fff;
   }
@@ -174,7 +175,6 @@
     }
   }
 }
-
 .reSend_Code{
   font-family: "Iransans_Medium";
   font-size: 18px;

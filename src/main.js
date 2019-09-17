@@ -7,6 +7,7 @@ import BootstrapVue from 'bootstrap-vue'
 import VeeValidate from 'vee-validate'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import vSelect from 'vue-select2'
 import VueMask from 'v-mask'
 import VueSession from 'vue-session'
 import VueSnackbar from 'vue-snack'
@@ -44,6 +45,7 @@ Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(VeeValidate)
 Vue.use(VueMask)
+Vue.use(vSelect)
 Vue.use(DatatableFactory)
 
 // require('./assets/css/global.css')
@@ -51,6 +53,7 @@ require('./validation/index')
 require('./assets/css/bootstrap.min.css')
 require('./assets/css/bootstrap.min.rtl.css')
 require('./assets/css/app.css')
+require('./assets/css/materialUi.css')
 require('./assets/js/jquery.js')
 // require('./assets/css/screen.css')
 Vue.config.productionTip = false

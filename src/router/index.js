@@ -204,26 +204,41 @@ export default new Router({
       component: verificationPage,
       beforeEnter: (to, from, next) => {
         debugger
-        if (from.fullPath == "/login" || from.fullPath == "/") {
-          if (session.has('mobile')) {
-            let mobNum = session.get('mobile')
-            if (mobNum == "") {
-              //todo
-              next('login')
-            }
-          }
-        }
-        else if (GetSession(to, from, next)) {
+        if (GetSession(to, from, next)) {
           if (isLogged()) {
             next('detailList')
-          } else {
-            next('login')
           }
+          else {
+            if (session.has('mobile')) {
+              let mobNum = session.get('mobile')
+              if (mobNum != "") {
+                next()
+                return
+              }
+            }
+          }
+          next('login')
         }
-        else {
-          next()
-        }
-        next()
+        else
+          next('login')
+
+        // if (from.fullPath == "/login" || from.fullPath == "/") {
+        //   if (session.has('mobile')) {
+        //     let mobNum = session.get('mobile')
+        //     if (mobNum == "") {
+        //       //todo
+        //       next('login')
+        //     }
+        //   }
+        // }
+        // else if (GetSession(to, from, next)) {
+        //   if (isLogged()) {
+        //     next('detailList')
+        //   } else {
+        //     next('login')
+        //   }
+        // }
+       // next()
       }
     },
     // end of all routes

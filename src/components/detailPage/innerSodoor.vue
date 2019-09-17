@@ -123,12 +123,11 @@ export default {
       this.$emit('exit', true)
     },
     connectToBank () {
-      // let baseUrl = window.location.origin // + '/#/'
       // let paymentObj = {
       //   detail: 'string',
       //   price: 100000,
       //   redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
-      // }
+     // }
       //todo base on payment option
       service.postMethod('payment', this.purchaseObj)
         .then(response => {
@@ -138,6 +137,7 @@ export default {
           }
         })
         .catch(error => {
+          debugger
           this.errMsg = error.response.data.message
           // todo
         })

@@ -1469,6 +1469,8 @@ input:-webkit-autofill:hover {
 
 #turnOverTable .table-responsive, #accountingTable .table-responsive {
   margin-top: 10px;
+  min-width: 500px;
+  overflow-x: scroll;
 }
 #turnOverTable .table thead tr, #accountingTable .table thead tr {
   border-bottom: 2px solid #dee2e6;
@@ -2220,82 +2222,67 @@ input:-webkit-autofill:hover {
 }
 
 /************ User Information ************/
-.main-body h1 {
+#redirectPage h1 {
   color: #313131;
   font-size: 20px;
   line-height: 23px;
   margin: 30px 0;
   text-align: center;
 }
-.main-body .pursuit-btns {
+@media only screen and (max-width: 480px) {
+  #redirectPage h1 {
+    font-size: 16px;
+  }
+}
+#redirectPage p {
+  text-align: center;
+  font-size: 14px;
+  font-family: "Iransans_Bold";
+}
+@media only screen and (max-width: 480px) {
+  #redirectPage .statusPic {
+    height: 60px;
+  }
+}
+#redirectPage .redirectpursuit-btn-group {
+  display: flex;
+}
+@media only screen and (max-width: 480px) {
+  #redirectPage .redirectpursuit-btn-group {
+    flex-direction: column;
+  }
+}
+#redirectPage .redirectpursuit-btn-group .btn {
+  margin: auto;
+}
+@media only screen and (max-width: 480px) {
+  #redirectPage .redirectpursuit-btn-group .btn {
+    margin: 0 auto 10px;
+    width: 80%;
+  }
+}
+#redirectPage .pursuit-btns {
   padding: 40px 15px;
   border-top: 2px solid #b7b7b7;
 }
-.main-body .pursuit-btns .code-span {
+#redirectPage .pursuit-btns span {
   font-size: 25px;
-  line-height: 18px;
-  color: #303030;
-  font-family: "Iransans_Medium";
 }
-.main-body .pursuit-btns .value-span {
-  color: #000000;
-  font-size: 25px;
-  line-height: 16px;
-  font-family: "Iransans_Bold";
-}
-
-@media only screen and (max-width: 1199px) {
-  .pursuit-btn-group .btn {
-    font-weight: 100;
-    font-size: 14px;
-    font-family: "Iransans";
-  }
-
-  .main-body .pursuit-btns .code-span {
+@media only screen and (max-width: 440px) {
+  #redirectPage .pursuit-btns span {
     font-size: 20px;
-  }
-  .main-body .pursuit-btns .value-span {
-    font-size: 18px;
-  }
-}
-@media only screen and (max-width: 567px) {
-  .pursuit-btn-group {
-    margin-top: 0;
-    flex-direction: column;
-  }
-  .pursuit-btn-group .btn {
-    margin: 0 auto 10px;
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .main-body h1 {
-    font-size: 14px;
-    margin: 10px 0;
-  }
-
-  .img-container img {
-    height: 50px;
-  }
-
-  .main-body .pursuit-btns {
-    padding: 15px 5px;
-    margin: 0 0 10px 0;
-  }
-  .main-body .pursuit-btns .code-span {
-    font-size: 15px;
-  }
-  .main-body .pursuit-btns .value-span {
-    font-size: 15px;
   }
 }
 @media only screen and (max-width: 375px) {
-  .pursuit-btn-group .btn {
-    width: 60%;
+  #redirectPage .pursuit-btns span {
+    font-size: 16px;
   }
 }
-@media only screen and (max-width: 360px) {
-  .pursuit-btn-group .btn {
-    width: 70%;
-  }
+#redirectPage .pursuit-btns .code-span {
+  color: #303030;
+  font-family: "Iransans_Medium";
+}
+#redirectPage .pursuit-btns .value-span {
+  color: #000000;
+  font-family: "Iransans_Bold";
 }

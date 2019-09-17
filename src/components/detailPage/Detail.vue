@@ -115,7 +115,7 @@ export default {
       userLicense: {},
       isLoading: true,
       isDone: false,
-      isUserVerified:false,
+      isUserVerified:true,
       showUserAlert:true,
       desTabIndex:0
     }
@@ -241,7 +241,7 @@ export default {
     this.getFunds()
     this.getLicense()
     this.getCurrentComponent()
-    this.getUserValidate()
+    // this.getUserValidate()
   }
 }
 </script>

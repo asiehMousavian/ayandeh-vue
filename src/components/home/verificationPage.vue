@@ -255,17 +255,17 @@ beforeRouteLeave (to, from, next) {
       },
       stopTimer()
       {
-        this.minutes =0
-        this.seconds =0
+        this.minutes=0
+        this.seconds= 0
         this.dig_one= ''
-        this.dig_two =''
-        this.dig_three =''
-        this.dig_four =''
+        this.dig_two= ''
+        this.dig_three= ''
+        this.dig_four= ''
       },
       resetTimer()
       {
-        this.minutes=4
-        this.seconds=59
+        this.minutes= 4
+        this.seconds= 59
       }
   }
 };

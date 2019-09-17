@@ -229,6 +229,8 @@
 #turnOverTable, #accountingTable {
   .table-responsive {
     margin-top: 10px;
+    min-width: 500px;
+    overflow-x: scroll;
   }
   .table {
     thead {

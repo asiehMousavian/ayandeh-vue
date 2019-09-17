@@ -5,24 +5,21 @@ import axiosRetry from 'axios-retry'
 axios.defaults.baseURL = process.env.SERVER_URL
 
 axios.interceptors.request.use(function (config) {
-  // Do something before request is sent
   config.headers = {'X-Session': localStorage.getItem('session')}
   return config
 }, function (error) {
-  // Do something with request error
   return Promise.reject(error)
 })
 //---------azade 13-6-98
 axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  if(error.response.status==401)
+  if(error.response.status == 401)
   {
       router.push('/')
   }
   return Promise.reject(error);
 });
-
 
 
 export default {

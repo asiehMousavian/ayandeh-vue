@@ -15,6 +15,8 @@ import 'vue-snack/dist/vue-snack.min.css'
 
 import DatatableFactory from 'vuejs-datatable'
 
+Vue.use(require('vue-jalali-moment'))
+
 // import VuePromiseBtn from 'vue-promise-btn'
 // // // not required. Styles for built-in spinner
 // // import 'vue-promise-btn/dist/vue-promise-btn.css'

@@ -6,6 +6,14 @@ const snackbar = Vue.prototype.$snack
 
 /* eslint-disable */
 export default {
+  //todo use log to see how many times this function is called
+  //VerificationcheckInputs () {
+    // $('.verificationCode input').each(function () {
+    //   if ($(this).val().length == 1) 
+    //     $(this).next().focus()
+    //     // $(this).next().addClass('visited')
+    // })
+  //},
   handleInputLabels () {
     $('.form-control').blur(function () {
       if ($(this).val() !== '') {

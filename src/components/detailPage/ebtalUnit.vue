@@ -1,7 +1,7 @@
 <template>
   <div v-if="!confirm">
     <h3 class="modal_title">ابطال سهم</h3>
-    <div class="modal_txt">
+    <div class="modal_txt userAlert">
       <p>
         عملیات صدور براساس <span>NAV</span> تخمینی برای <span>۲ روز کاری</span> بعد انجام می‌پذیرد و مابه التفاوت به مشخص شده توسط شما در صندوق برگردانده
         خواهد شد
@@ -13,6 +13,7 @@
         <span>{{nationalId}}</span>
         <span>-{{licenseNumber}}-</span> واحد دارد.
       </p> -->
+      <p>قیمت هر واحد در تاریخ {{new Date() | moment("jYYYY/jMM/jDD")}} ، {{unitValue}} ریال می باشد.</p>
     </div>
     <form >
       <div class="f_body d-flex justify-content-center ebtal_form">
@@ -51,6 +52,7 @@
         <div class="modal_desc">
         <div class="f_text">
           <p>از ابطال سهم اطمینان دارید؟</p>
+          <br>
           <p>
             بعد از ابطال شما <i>{{unitCount}}</i> واحد از سهم خود را از مالکیت خارج می کنید
           </p>
@@ -62,8 +64,8 @@
       <br/>
       <br>
       <div slot="modal-footer">
-        <VueLoadingButton class="btn" :disabled='success' type="button" @click.native="ebtalUnits" :loading="isLoading">ابطال واحد</VueLoadingButton>
-        <button class="btn btn-cancel" @click.prevent="check">بررسی مجدد</button>
+        <VueLoadingButton v-show="!success" class="btn" :disabled= "isSuccessed" type="button" @click.native= "ebtalUnits" :loading= "isLoading">ابطال واحد</VueLoadingButton>
+        <button class="btn btn-cancel" @click.prevent= "check">{{canselBtn}}</button>
       </div>
     </form>
   </div>
@@ -92,21 +94,29 @@ export default {
       // responseError:false,
       success:false,
       isLoading:false,
-      confirm:false
+      confirm:false,
+      canselBtn:'بررسی مجدد'
     }
   },
   components:{
     VueLoadingButton
   },
+  
   computed: {
     isComplete () {
       return this.unitCount && 1
+    },
+    isSuccessed(){
+      return this.success
     }
   },
   methods: {
     check()
     {
-      this.confirm=false
+      this.confirm= false
+      this.canselBtn= 'بررسی مجدد'
+      this.success=false
+      this.errorMsg= ''
     },
     confirmRevoke(){
       this.confirm=true
@@ -128,21 +138,23 @@ export default {
         service.postMethod(`invest/fund/revoke/${this.revokeFund}`)
         .then(response => {
           //todo
-          this.success=true
+          this.success= true
           this.isLoading = false
+          this.canselBtn='بازگشت'
         })
         .catch(error => {
-          console.log(error)
-          debugger
+          this.success= false
           this.isLoading = false
-          this.success=false
-
+          this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
+          if(error.response!= null){
           //todo
-          if (error.response.data.status === 500501) {
-            this.errorMsg = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
-          } else {
-            this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
-          }
+            if (error.response.data.status === 500501) {
+              this.errorMsg = 'خطا در ارتباط با صندوق لطفا مجددا بعدا تلاش نمایید'
+             }
+             // else {
+            //   this.errorMsg = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
+            //}
+            }
         })
     },
     getLicense(){
@@ -162,8 +174,9 @@ export default {
       }
     },
     getFundInfo(){
-       this.fund = JSON.parse(this.$session.get("currentFund"))
-        this.fundId = this.fund.code
+      this.fund = JSON.parse(this.$session.get("currentFund"))
+      this.fundId = this.fund.code
+      this.unitValue=this.fund.saleNav
     }
   },
     filters: {

@@ -120,7 +120,7 @@ export default {
     //todo
     this.resetTimer()
     this.setTimer()
-   // this.sendSms()
+    this.sendSms()
   },
   beforeRouteLeave (to, from, next) {
     if(to.fullPath=="/detailList")

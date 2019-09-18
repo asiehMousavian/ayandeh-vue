@@ -3,7 +3,7 @@
     <page-header></page-header>
     <!-- Main -->
     <div id="main" role="main" v-if="isDone">
-      <div class="mainarea">
+      <div class="mainarea main_wh">
           <div class="container">
               <div class="top_site d-flex">
                 <h1 class="page-header ml-auto">اطلاعات کاربر</h1>
@@ -12,7 +12,7 @@
                 <div class="user-details-sec">
                   <h1 class="user-details-sec--title">مشخصات کاربری</h1>
                   <div class="row">
-                    <div class="col-xl-12 clo-lg-12 col-md-12 col-sm-4 col-12">
+                    <div class="col-xl-12 clo-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">ایمیل :</span>
                         <span class="user_info_sec--txt">{{userInfo.email}}</span>
@@ -33,126 +33,182 @@
                 <div class="user-details-sec">
                   <h1 class="user-details-sec--title">مشخصات عمومی</h1>
                   <div class="row">
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">نام :</span>
                         <span class="user_info_sec--txt">{{userInfo.firstName}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">نام خانوادگی :</span>
                         <span class="user_info_sec--txt">{{userInfo.lastName}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">تاریخ تولد :</span>
                         <span class="user_info_sec--txt">{{userInfo.birth}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">شماره شناسنامه :</span>
                         <span class="user_info_sec--txt">{{userInfo.birthCertNumber}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">محل صدور :</span>
                         <span class="user_info_sec--txt">{{userInfo.issuingCity}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">سریال شناسنامه :</span>
                         <span class="user_info_sec--txt">{{userInfo.birthCertSerial}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">نام پدر :</span>
                         <span class="user_info_sec--txt">{{userInfo.fatherName}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">کد ملی :</span>
                         <span class="user_info_sec--txt">{{userInfo.nationalId}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">جنسیت :</span>
                         <span class="user_info_sec--txt">{{userInfo.gender}}</span>
                       </div>
                     </div>
-<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
-<!--                      <div class="user_info_sec">-->
-<!--                        <span class="user_info_sec&#45;&#45;t"> تصویر پروفایل کاربری :</span>-->
-<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.profilePic}}</span>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
-<!--                      <div class="user_info_sec">-->
-<!--                        <span class="user_info_sec&#45;&#45;t">تصویر اول شناسنامه :</span>-->
-<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.birthCertPic}}</span>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
-<!--                      <div class="user_info_sec">-->
-<!--                        <span class="user_info_sec&#45;&#45;t">تصویر توضیحات شناسنامه :</span>-->
-<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.birthCertDescPic}}</span>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">-->
-<!--                      <div class="user_info_sec">-->
-<!--                        <span class="user_info_sec&#45;&#45;t">تصویر توضیحات شناسنامه :</span>-->
-<!--                        <span class="user_info_sec&#45;&#45;txt">{{userInfo.nationalCardPic}}</span>-->
-<!--                      </div>-->
-<!--                    </div>-->
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-3 clo-lg-3 col-md-6 col-sm-6 col-12">
+                      <div class="user_info_sec">
+                        <div class="upload_body">
+                          <div class="upload_file">
+                            <img src="@/assets/img/default.svg" alt="">
+                            <div class="upload_pic">
+                              <img v-if="userInfo.profilePic" v-bind:src="userInfo.profilePic.previewUrl" alt />
+                              <div class="upload_back" v-if="userInfo.profilePic">
+                                <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal2')">
+                                  <img src="@/assets/img/see.svg" alt="">
+                                  مشاهده تصویر
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="upload_title">
+                             تصویر پروفایل کاربری
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-6 col-sm-6 col-12">
+                      <div class="user_info_sec">
+                        <div class="upload_body">
+                          <div class="upload_file">
+                            <img src="@/assets/img/default.svg" alt="">
+                            <div class="upload_pic">
+                              <img v-if="userInfo.birthCertPic" v-bind:src="userInfo.birthCertPic.previewUrl" alt />
+                              <div class="upload_back" v-if="userInfo.birthCertPic">
+                                <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal')">
+                                  <img src="@/assets/img/see.svg" alt="">
+                                  مشاهده تصویر
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="upload_title">
+                             تصویر صفحه اول شناسنامه
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-6 col-sm-6 col-12">
+                      <div class="user_info_sec">
+                        <div class="upload_body">
+                          <div class="upload_file">
+                            <img src="@/assets/img/default.svg" alt="">
+                            <div class="upload_pic">
+                              <img v-if="userInfo.birthCertDescPic" v-bind:src="userInfo.birthCertDescPic.previewUrl" alt />
+                              <div class="upload_back" v-if="userInfo.birthCertDescPic">
+                                <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal3')">
+                                  <img src="@/assets/img/see.svg" alt="">
+                                  مشاهده تصویر
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="upload_title">
+                             تصویر توضیحات شناسنامه
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 clo-lg-3 col-md-6 col-sm-6 col-12">
+                      <div class="user_info_sec">
+                        <div class="upload_body">
+                          <div class="upload_file">
+                            <img src="@/assets/img/default.svg" alt="">
+                            <div class="upload_pic">
+                              <img v-if="userInfo.nationalCardPic" v-bind:src="userInfo.nationalCardPic.previewUrl" alt />
+                              <div class="upload_back" v-if="userInfo.nationalCardPic">
+                                <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal4')">
+                                  <img src="@/assets/img/see.svg" alt="">
+                                  مشاهده تصویر
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="upload_title">
+                             تصویر کارت ملی
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="user-details-sec">
                   <h1 class="user-details-sec--title">اطلاعات تماس</h1>
                   <div class="row">
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">شماره تماس :</span>
                         <span class="user_info_sec--txt">{{userInfo.phoneNumber}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">شماره موبایل :</span>
                         <span class="user_info_sec--txt">{{userInfo.mobileNumber}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
-                      <div class="user_info_sec">
-                        <span class="user_info_sec--t">فکس :</span>
-                        <span class="user_info_sec--txt">{{userInfo.fax}}</span>
-                      </div>
-                    </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">کدپستی :</span>
                         <span class="user_info_sec--txt">{{userInfo.postalCode}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">ایمیل :</span>
                         <span class="user_info_sec--txt">{{userInfo.email}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
-                        <span class="user_info_sec--t">نوع حساب :</span>
-                        <span class="user_info_sec--txt">{{userInfo.accountType}}</span>
+                        <span class="user_info_sec--t">فکس :</span>
+                        <span class="user_info_sec--txt">{{userInfo.fax}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-12 clo-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="col-xl-9 clo-lg-6 col-md-9 col-sm-12 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">آدرس :</span>
                         <span class="user_info_sec--txt">{{userInfo.address}}</span>
@@ -163,22 +219,28 @@
                 <div class="user-details-sec">
                   <h1 class="user-details-sec--title">اطلاعات بانکی</h1>
                   <div class="row">
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">نام بانک :</span>
                         <span class="user_info_sec--txt">{{userInfo.bankName}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">شماره حساب بانکی :</span>
                         <span class="user_info_sec--txt">{{userInfo.accountNumber}}</span>
                       </div>
                     </div>
-                    <div class="col-xl-3 clo-lg-3 col-md-4 col-sm-4 col-6">
+                    <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">شماره شبا :</span>
                         <span class="user_info_sec--txt">{{userInfo.ibanNumber}}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-6 col-12">
+                      <div class="user_info_sec">
+                        <span class="user_info_sec--t">نوع حساب :</span>
+                        <span class="user_info_sec--txt">{{userInfo.accountType}}</span>
                       </div>
                     </div>
                   </div>
@@ -194,6 +256,11 @@
     <!-- Mobile Menu -->
     <toggleMenu></toggleMenu>
     <!-- Mobile Menu -->
+    <!-- Show Photo Modal -->
+    <b-modal id="displayPhoto" title="BootstrapVue" hide-header hide-footer size="md">
+      <img v-if="hasPic" v-bind:src="imgSrc" alt />
+    </b-modal>
+    <!-- Show Photo Modal -->
   </div>
 </template>
 
@@ -210,12 +277,19 @@ export default {
   name: 'userInformation',
   data () {
     return {
-      userInfo: {},
+      userInfo: {
+        profilePic: {},
+        birthCertPic: {},
+        birthCertDescPic: {},
+        nationalCardPic: {}
+      },
       foundId: this.$route.params.foundId,
       registerStatusMsg: '',
       isLoading: true,
       isDone: false,
-      get_founds_url: 'invest/userInformation'
+      get_founds_url: 'invest/userInformation',
+      imgSrc: '',
+      hasPic: false
     }
   },
   components: {
@@ -256,6 +330,38 @@ export default {
   methods: {
     editUser () {
       this.$router.push('user/edit')
+    },
+    showMyModal (modalId) {
+      if (modalId === 'showPhotoModal') {
+        this.imgSrc = this.userInfo.birthCertPic.previewUrl
+        if (this.userInfo.birthCertPic != null) {
+          this.hasPic = true
+        } else {
+          this.hasPic = false
+        }
+      } else if (modalId === 'showPhotoModal2') {
+        this.imgSrc = this.userInfo.profilePic.previewUrl
+        if (this.userInfo.profilePic != null) {
+          this.hasPic = true
+        } else {
+          this.hasPic = false
+        }
+      } else if (modalId === 'showPhotoModal3') {
+        this.imgSrc = this.userInfo.birthCertDescPic.previewUrl
+        if (this.userInfo.birthCertDescPic != null) {
+          this.hasPic = true
+        } else {
+          this.hasPic = false
+        }
+      } else if (modalId === 'showPhotoModal4') {
+        this.imgSrc = this.userInfo.nationalCardPic.previewUrl
+        if (this.userInfo.nationalCardPic != null) {
+          this.hasPic = true
+        } else {
+          this.hasPic = false
+        }
+      }
+      this.$bvModal.show('displayPhoto')
     }
   }
 }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <style>
+            .cls-1{fill-rule:evenodd}
+        </style>
+    </defs>
+    <g id="Close">
+        <path id="Path_118" d="M12.377 10l7.131-7.131A1.681 1.681 0 0 0 17.131.492L10 7.623 2.869.492A1.681 1.681 0 0 0 .492 2.869L7.623 10 .492 17.13a1.681 1.681 0 1 0 2.377 2.377L10 12.376l7.131 7.131a1.681 1.681 0 0 0 2.377-2.377z" class="cls-1" data-name="Path 118"/>
+    </g>
+</svg>

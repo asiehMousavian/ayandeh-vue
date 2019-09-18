@@ -134,39 +134,34 @@ export default {
     ebtalUnit
   },
   methods: {
-    resetModal(modal){
+    resetModal (modal) {
       // modal.preventDefault()
     },
     showModal (modalId) {
       // v-b-modal.descModal
       let logged = this.$session.get('isLogged')
       if (logged) {
-        if(modalId== 'ebtalModal'){
-          if(this.isUserVerified)
-             this.$bvModal.show(modalId)
-          return   
+        if (modalId === 'ebtalModal') {
+          if (this.isUserVerified) { this.$bvModal.show(modalId) }
+          return
         }
-        if(modalId == 'sodoorModal') {
-            if(this.isUserVerified)
-              this.$bvModal.show(modalId)
-            else
-              this.goToUserProfile()
-            return
-          }
-        if(modalId == 'descModal'){
-          this.desTabIndex=0
-           this.$bvModal.show(modalId)
-           return
-          }
+        if (modalId === 'sodoorModal') {
+          if (this.isUserVerified) { this.$bvModal.show(modalId) } else { this.goToUserProfile() }
+          return
+        }
+        if (modalId === 'descModal') {
+          this.desTabIndex = 0
+          this.$bvModal.show(modalId)
+        }
       }
     },
     showComponent (componentName) {
       this.currentComponent = componentName
       this.$session.set('currentComponent', this.currentComponent)
     },
-    goToAuthentication(){
-      this.desTabIndex=1
-      this.$bvModal.show('descModal') 
+    goToAuthentication () {
+      this.desTabIndex = 1
+      this.$bvModal.show('descModal')
     },
     goToUserProfile () {
       this.$router.push('/user')
@@ -175,8 +170,8 @@ export default {
     closeModal (modalId) {
       this.$bvModal.hide(modalId)
     },
-    closeAlert(){
-      this.showUserAlert=false
+    closeAlert () {
+      this.showUserAlert = false
     },
     getFunds () {
       service.getMethod('invest/fund/' + this.fundId)
@@ -224,7 +219,7 @@ export default {
       service.getMethod('invest/user/validate')
         .then(response => {
           if (response.status === 0) {
-            if (response.content === true) { this.isUserVerified=true } //else { return false }
+            if (response.content === true) { this.isUserVerified = true } // else { return false }
           }
         })
         .catch(error => {
@@ -232,7 +227,7 @@ export default {
         })
     }
   },
-  beforeUpdate(){
+  beforeUpdate () {
     sharedService.toggleMenu()
   },
   mounted: function () {

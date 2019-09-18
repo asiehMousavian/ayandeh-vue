@@ -166,6 +166,9 @@ body {
     padding: 20px 0;
   }
 }
+.mainarea.main_wh {
+  background-color: #fff;
+}
 
 .box {
   -moz-border-radius: 8px;
@@ -263,9 +266,14 @@ button.btn {
   margin-bottom: 40px;
   position: relative;
 }
+@media only screen and (max-width: 767px) {
+  .form-group {
+    margin-bottom: 30px;
+  }
+}
 @media only screen and (max-width: 567px) {
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
 }
 .form-group label {
@@ -298,7 +306,7 @@ button.btn {
 }
 .form-group .inp_border .placeholder {
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 0;
   font-size: 18px;
   color: #575757;
@@ -324,6 +332,7 @@ button.btn {
 @media only screen and (max-width: 480px) {
   .form-group .inp_border .placeholder {
     font-size: 12px;
+    top: 10px;
   }
 }
 @media only screen and (max-width: 360px) {
@@ -350,7 +359,7 @@ button.btn {
 }
 .form-group .inp_border .form-control {
   width: 100%;
-  height: 50px;
+  height: 40px;
   border: none;
   border-bottom: solid 1px #727d7d;
   -moz-border-radius: 0px;
@@ -364,15 +373,18 @@ button.btn {
   position: relative;
   z-index: 1;
   background-color: transparent;
-}
-@media only screen and (max-width: 767px) {
-  .form-group .inp_border .form-control {
-    height: 45px;
-  }
+  font-size: 14px;
+  font-family: "IRANSans_Medium";
+  color: #575757;
 }
 @media only screen and (max-width: 480px) {
   .form-group .inp_border .form-control {
-    height: 40px;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .form-group .inp_border .form-control {
+    font-size: 11px;
   }
 }
 .form-group .inp_border .form-control:focus ~ .placeholder {
@@ -389,6 +401,7 @@ button.btn {
 @media only screen and (max-width: 480px) {
   .form-group .inp_border .form-control:focus ~ .placeholder {
     font-size: 11px;
+    top: -5px;
   }
 }
 @media only screen and (max-width: 360px) {
@@ -406,13 +419,58 @@ button.btn {
 }
 @media only screen and (max-width: 767px) {
   .form-group .inp_border.visited .placeholder {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 @media only screen and (max-width: 480px) {
   .form-group .inp_border.visited .placeholder {
-    font-size: 12px;
+    font-size: 11px;
+    top: -5px;
   }
+}
+@media only screen and (max-width: 360px) {
+  .form-group .inp_border.visited .placeholder {
+    font-size: 10px;
+  }
+}
+
+.select_t {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 15px;
+  color: #575757;
+}
+@media only screen and (max-width: 767px) {
+  .select_t {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .select_t {
+    font-size: 11px;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .select_t {
+    font-size: 10px;
+  }
+}
+
+select.form-control {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+  outline: none;
+  padding: 0 !important;
+  height: 40px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #ebebeb;
+  color: #575757;
+  font-size: 15px;
+  font-family: "IRANSans_Medium";
 }
 
 .form-alert {
@@ -807,7 +865,6 @@ button.btn {
 @media only screen and (max-width: 480px) {
   .page-header {
     font-size: 17px;
-    margin: 20px 0;
   }
 }
 .page-header.c_green {
@@ -1114,6 +1171,10 @@ button.btn {
   }
 }
 
+.modal#displayPhoto .modal-content .modal-body {
+  padding: 0 !important;
+}
+
 .modal-backdrop {
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -1193,17 +1254,7 @@ input:-webkit-autofill:hover {
   -moz-box-shadow: 0 0 0 30px #fff inset !important;
   -o-box-shadow: 0 0 0 30px #fff inset !important;
   box-shadow: 0 0 0 30px #fff inset !important;
-}
-
-.user-details-form input:-webkit-autofill,
-.user-details-form input:-webkit-autofill:active,
-.user-details-form input:-webkit-autofill:focus,
-.user-details-form input:-webkit-autofill:hover {
-  background-color: transparent !important;
-  -webkit-box-shadow: 0 0 0 30px #f2f2f2 inset !important;
-  -moz-box-shadow: 0 0 0 30px #f2f2f2 inset !important;
-  -o-box-shadow: 0 0 0 30px #f2f2f2 inset !important;
-  box-shadow: 0 0 0 30px #f2f2f2 inset !important;
+  color: #575757 !important;
 }
 
 .spinner span {
@@ -1216,16 +1267,153 @@ input:-webkit-autofill:hover {
   height: 50px;
 }
 .tt_body .tt {
-  font-size: 13px;
+  font-size: 15px;
   color: #575757;
   margin-left: 10px;
+  font-family: "Iransans_Bold";
 }
 .tt_body label {
-  margin-left: 5px;
   margin-bottom: 0;
   cursor: pointer;
+  font-size: 15px;
+  font-family: "IRANSans";
+}
+
+.upload_body {
+  text-align: center;
+}
+.upload_body .upload_title {
+  display: block;
+  text-align: center;
+  font-size: 16px;
   color: #575757;
+  font-family: "IRANSans_Medium";
+}
+@media only screen and (max-width: 567px) {
+  .upload_body .upload_title {
+    font-size: 14px;
+  }
+}
+.upload_body .upload_file {
+  position: relative;
+  cursor: pointer;
+  border: dashed 2px rgba(112, 112, 112, 0.5);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 25px 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+@media only screen and (max-width: 567px) {
+  .upload_body .upload_file {
+    margin-bottom: 10px;
+    padding: 15px 10px;
+  }
+}
+.upload_body .upload_file > img {
+  margin-bottom: 15px;
+}
+@media only screen and (max-width: 567px) {
+  .upload_body .upload_file > img {
+    margin-bottom: 10px;
+  }
+}
+.upload_body .upload_file .upload_file_t {
+  display: inline-block;
+  width: 167px;
+  height: 34px;
+  line-height: 34px;
   font-size: 13px;
+  background-color: #fff;
+  color: #7a3624;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.16);
+  margin: 0 auto;
+}
+.upload_body .upload_file .upload-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  font-size: 0;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+  margin-top: 0;
+}
+.upload_body .upload_file .upload_back {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 150;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  -webkit-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.upload_body .upload_file .upload_back .upload_back_btn {
+  width: 167px;
+  padding: 0 5px;
+  height: 34px;
+  line-height: 34px;
+  font-size: 13px;
+  font-family: "Iransans_Medium";
+  color: #7a3624;
+  background-color: #fff;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.16);
+  -webkit-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.16);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.upload_body .upload_file .upload_back .upload_back_btn:last-child {
+  margin-bottom: 0;
+}
+.upload_body .upload_file .upload_back .upload_back_btn img {
+  position: absolute;
+  right: 10px;
+}
+.upload_body .upload_file:hover .upload_back {
+  opacity: 1;
+}
+
+.upload_pic {
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  left: -2px;
+  bottom: -2px;
+  z-index: 90;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
+.upload_pic > img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 /*********** New Style ***********/

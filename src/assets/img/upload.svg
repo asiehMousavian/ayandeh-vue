@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <style>
+            .cls-1{fill:#7a3624}
+        </style>
+    </defs>
+    <g id="uploading-archive" transform="translate(-2.731)">
+        <g id="Group_1641" data-name="Group 1641" transform="translate(2.731)">
+            <g id="Group_1640" data-name="Group 1640">
+                <path id="Path_371" d="M19.662 0l-4.45 4.45c-.443.433-.345.738.274.738h2.484V13.6a1.692 1.692 0 0 0 1.692 1.692 1.692 1.692 0 0 0 1.691-1.692V5.188h2.485c.618 0 .716-.306.273-.739z" class="cls-1" data-name="Path 371" transform="translate(-9.776)"/>
+                <path id="Path_372" d="M22.309 28.77h-1.558a.422.422 0 0 0-.423.423v5.266H5.135v-5.266a.422.422 0 0 0-.423-.423H3.154a.423.423 0 0 0-.423.423v5.654a2.338 2.338 0 0 0 2.336 2.335H20.4a2.338 2.338 0 0 0 2.336-2.335v-5.654a.422.422 0 0 0-.427-.423z" class="cls-1" data-name="Path 372" transform="translate(-2.731 -17.182)"/>
+            </g>
+        </g>
+    </g>
+</svg>

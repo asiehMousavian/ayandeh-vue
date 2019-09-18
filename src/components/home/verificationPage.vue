@@ -34,10 +34,10 @@
                         <div class="form-group">
                           <div class="inp_border">
                             <div class="verificationCode">
-                                  <input type="text" v-model= "dig_one" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
-                                  <input type="text" v-model= "dig_two" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
-                                  <input type="text" v-model= "dig_three" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
-                                  <input type="text" v-model= "dig_four" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'"/>
+                                  <input type="text" id="dig_one" v-model= "dig_one"  maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_one')"/>
+                                  <input type="text" id="dig_two" v-model= "dig_two" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_two')"/>
+                                  <input type="text" id="dig_three" v-model= "dig_three" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_three')"/>
+                                  <input type="text" id="dig_four" v-model= "dig_four" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_four')"/>
                             </div>
                             <!-- <input
                               type="text"
@@ -120,18 +120,18 @@ export default {
     //todo
     this.resetTimer()
     this.setTimer()
-    this.sendSms()
+   // this.sendSms()
   },
-beforeRouteLeave (to, from, next) {
-  if(to.fullPath=="/detailList")
-  {
-    next()
-  }
-  if(this.leavePage==true)
-  {
-    next()
-  }
-},
+  beforeRouteLeave (to, from, next) {
+    if(to.fullPath=="/detailList")
+    {
+      next()
+    }
+    if(this.leavePage==true)
+    {
+      next()
+    }
+  },
   beforeUpdate() {
    sharedService.handleInputLabels()
     sharedService.checkInputs()
@@ -144,6 +144,9 @@ beforeRouteLeave (to, from, next) {
     }
   },
   methods: {
+    test(id){
+      sharedService.test(".verificationCode #"+id,1)
+    },
       setTimer(){
         setInterval(() => 
         {

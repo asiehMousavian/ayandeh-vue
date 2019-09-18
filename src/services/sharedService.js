@@ -14,6 +14,17 @@ export default {
     //     // $(this).next().addClass('visited')
     // })
   //},
+
+test(id,length)
+{
+    if($(id).val().length==length){
+        $(id).next().focus();
+    }
+  //   if($(id).val().length==0){
+  //     $(id).before().focus();
+  // }
+},
+
   handleInputLabels () {
     $('.form-control').blur(function () {
       if ($(this).val() !== '') {

@@ -42,7 +42,7 @@
         <b-modal id="descModal" title="BootstrapVue" hide-header size="lg">
             <fund-description v-bind:desTabIndex = "1"></fund-description>
           <div slot="modal-footer">
-            <button class="btn" @click= "$bvModal.hide('descModal')">بستن</button>
+            <button class="btn" @click= "closeDesModal()">بستن</button>
           </div>
         </b-modal>
       </div>
@@ -129,6 +129,11 @@ export default {
     {
       this.$bvModal.hide('alertModal')
       this.$bvModal.show('descModal')
+    },
+    closeDesModal()
+    {
+      this.$bvModal.hide('descModal')
+        this.$bvModal.show('alertModal')
     }
   }
 }

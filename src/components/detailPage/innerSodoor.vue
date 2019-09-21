@@ -15,7 +15,7 @@
           <i>{{purchaseObj.price}} ریال</i> می باشید
         </p>
       </div>
-  
+
       <div class="paymentContainer">
         <div>
           <p>
@@ -33,7 +33,7 @@
         </div>
         </div>
         </div>
-      
+
       <div class="confirm_text">
         <p>
           با زدن دکمه اتصال به درگاه قبول میکنم که <a href="javascripts:void(0)" @click="showInnerModal(0)" class="link1"> توضیحات صندوق</a>
@@ -128,6 +128,8 @@ export default {
       //   price: 100000,
       //   redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
      // }
+      debugger
+
       //todo base on payment option
           debugger
 

@@ -112,7 +112,7 @@ export default {
     },
     getLicense () {
       this.userLicense = this.$session.get('userLicense')
-      if (this.userLicense.licenseNumber != undefined) {
+      if (this.userLicense.licenseNumber !== undefined) {
         this.licenseNumber = this.userLicense.licenseNumber
       }
     },

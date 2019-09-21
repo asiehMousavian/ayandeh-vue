@@ -908,32 +908,6 @@ select.form-control {
 .modal .modal-content .modal_extra.active {
   right: 0;
 }
-.modal .modal-content .modal_extra .modal_extra_close {
-  display: block;
-  width: 36px;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  background-color: #fff;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  -moz-box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.16);
-  -webkit-box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.16);
-  box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.16);
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  z-index: 100;
-  cursor: pointer;
-}
-@media only screen and (max-width: 1440px) {
-  .modal .modal-content .modal_extra .modal_extra_close {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-  }
-}
 .modal .modal-content .modal_extra .desc_scroll {
   overflow-y: auto;
 }
@@ -1168,6 +1142,33 @@ select.form-control {
 @media only screen and (max-width: 480px) {
   .modal#descModal .modal-content .modal-body .desc {
     padding: 15px 10px 0 10px;
+  }
+}
+
+.modal_extra_close {
+  display: block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  background-color: #fff;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.16);
+  -webkit-box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.16);
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 100;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1440px) {
+  .modal_extra_close {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
   }
 }
 

@@ -155,15 +155,13 @@
                               <img src="@/assets/img/see.svg" alt="">
                               مشاهده تصویر
                             </a>
-                            <a href="#" v-if="validations && !validations.profilePicConfirmed" class="dl_pic upload_back_btn mx-auto" @click.prevent="deleteImage('profilePhotoInput')">
+                            <a href="#" v-if="validations && !validations.profilePicConfirmed" class="dl_pic upload_back_btn mx-auto" @click.prevent="showDelete('profilePhotoInput')">
                               <img src="@/assets/img/close.svg" alt="">
                               حذف تصویر
                             </a>
                             <label v-if="validations && !validations.profilePicConfirmed" class="upload_back_btn mx-auto" for="pic1">
                               <img src="@/assets/img/upload.svg" alt="">
                               بارگزاری مجدد
-<!--                              <input type="file" name="profilePhoto" @change="uploadProfilePic()"-->
-<!--                                     class="upload-btn" value=""/>-->
                             </label>
                           </div>
                         </div>
@@ -194,15 +192,13 @@
                               <img src="@/assets/img/see.svg" alt="">
                               مشاهده تصویر
                             </a>
-                            <a v-if="validations && !validations.birthCertPicConfirmed" href="#" class="dl_pic upload_back_btn mx-auto" @click.prevent="deleteImage('birthCertPhotoInput')">
+                            <a v-if="validations && !validations.birthCertPicConfirmed" href="#" class="dl_pic upload_back_btn mx-auto" @click.prevent="showDelete('birthCertPhotoInput')">
                               <img src="@/assets/img/close.svg" alt="">
                               حذف تصویر
                             </a>
                             <label v-if="validations && !validations.birthCertPicConfirmed" class="upload_back_btn mx-auto" for="pic2">
                               <img src="@/assets/img/upload.svg" alt="">
                               بارگزاری مجدد
-<!--                              <input type="file" name="birthCertPic" ref="birthCertPhotoInput" @change="uploadBirthCertPicId()"-->
-<!--                                     class="upload-btn" value=""/>-->
                             </label>
                           </div>
                         </div>
@@ -233,7 +229,7 @@
                               <img src="@/assets/img/see.svg" alt="">
                               مشاهده تصویر
                             </a>
-                            <a href="#" v-if="validations && !validations.birthCertDescPicConfirmed" class="dl_pic upload_back_btn mx-auto" @click.prevent="deleteImage('birthCertDescPhotoInput')">
+                            <a href="#" v-if="validations && !validations.birthCertDescPicConfirmed" class="dl_pic upload_back_btn mx-auto" @click.prevent="showDelete('birthCertDescPhotoInput')">
                               <img src="@/assets/img/close.svg" alt="">
                               حذف تصویر
                             </a>
@@ -272,15 +268,13 @@
                               <img src="@/assets/img/see.svg" alt="">
                               مشاهده تصویر
                             </a>
-                            <a href="#" v-if="validations && !validations.nationalCardPicConfirmed" class="dl_pic upload_back_btn mx-auto" @click.prevent="deleteImage('nationalCardPhotoInput')">
+                            <a href="#" v-if="validations && !validations.nationalCardPicConfirmed" class="dl_pic upload_back_btn mx-auto" @click.prevent="showDelete('nationalCardPhotoInput')">
                               <img src="@/assets/img/close.svg" alt="">
                               حذف تصویر
                             </a>
                             <label v-if="validations && !validations.nationalCardPicConfirmed" class="upload_back_btn mx-auto" for="pic4">
                               <img src="@/assets/img/upload.svg" alt="">
                               بارگزاری مجدد
-<!--                              <input type="file" name="nationalCardPic" @change="uploadNationalCardPicId()"-->
-<!--                                     class="upload-btn" value=""/>-->
                             </label>
                           </div>
                         </div>
@@ -294,75 +288,6 @@
                     </div>
                   </div>
                 </div>
-<!--                <div class="col-xl-3 clo-lg-3 col-md-6 col-sm-12 col-12">-->
-<!--                  <div class="d-flex justify-content-end align-items-center uploadBtns">-->
-<!--                    <div class="form-group">-->
-<!--                      <div class="d-flex align-items-center">-->
-<!--                        <div class="upload_file btn">-->
-<!--                          آپلود تصویر اول شناسنامه-->
-<!--                          <input type="file" name="birthCertPic" ref="birthCertPhotoInput" @change="uploadBirthCertPicId()"-->
-<!--                                 class="upload-btn" v-validate="'required'" value=""/>-->
-<!--                        </div>-->
-<!--                        <div class="upload_pic" style="margin-right: 20px; width: 120px;">-->
-<!--                          <img v-if="userInfo.birthCertPic" v-bind:src="userInfo.birthCertPic.previewUrl" alt />-->
-<!--&lt;!&ndash;                          <span class="dl_pic" v-if="userInfo.birthCertPic.previewUrl" @click="deleteImage()">&ndash;&gt;-->
-<!--&lt;!&ndash;                              <img src="@/assets/img/close2.svg" alt="">&ndash;&gt;-->
-<!--&lt;!&ndash;                          </span>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="form-alert">-->
-<!--                        <p>{{ errors.first('birthCertPic') }}</p>-->
-<!--                      </div>-->
-<!--                      <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="col-xl-3 clo-lg-3 col-md-6 col-sm-12 col-12">-->
-<!--                  <div class="d-flex justify-content-end align-items-center uploadBtns">-->
-<!--                    <div class="form-group">-->
-<!--                      <div class="d-flex align-items-center">-->
-<!--                        <div class="upload_file btn">-->
-<!--                          آپلود تصویرآپلود تصویر توضیحات شناسنامه-->
-<!--                          <input type="file" name="birthCertDescPic" ref="birthCertDescPhotoInput" @change="uploadBirthCertDescPicId()"-->
-<!--                                 class="upload-btn" v-validate="'required'" value=""/>-->
-<!--                        </div>-->
-<!--                        <div class="upload_pic" style="margin-right: 20px; width: 120px;">-->
-<!--                          <img v-if="userInfo.birthCertDescPic" v-bind:src="userInfo.birthCertDescPic.previewUrl" alt />-->
-<!--&lt;!&ndash;                          <span class="dl_pic" v-if="userInfo.birthCertDescPic.previewUrl" @click="deleteImage()">&ndash;&gt;-->
-<!--&lt;!&ndash;                              <img src="@/assets/img/close2.svg" alt="">&ndash;&gt;-->
-<!--&lt;!&ndash;                          </span>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="form-alert">-->
-<!--                        <p>{{ errors.first('birthCertDescPic') }}</p>-->
-<!--                      </div>-->
-<!--                      <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="col-xl-3 clo-lg-3 col-md-6 col-sm-12 col-12">-->
-<!--                  <div class="d-flex justify-content-end align-items-center uploadBtns">-->
-<!--                    <div class="form-group">-->
-<!--                      <div class="d-flex align-items-center">-->
-<!--                        <div class="upload_file btn">-->
-<!--                          آپلود تصویر کارت ملی-->
-<!--                          <input type="file" name="nationalCardPic" ref="nationalCardPhotoInput" @change="uploadNationalCardPicId()"-->
-<!--                                 class="upload-btn" v-validate="'required'" value=""/>-->
-<!--                        </div>-->
-<!--                        <div class="upload_pic" style="margin-right: 20px; width: 120px;">-->
-<!--                          <img v-if="userInfo.nationalCardPic" v-bind:src="userInfo.nationalCardPic.previewUrl" alt />-->
-<!--&lt;!&ndash;                          <span class="dl_pic" v-if="userInfo.nationalCardPic.previewUrl" @click="deleteImage()">&ndash;&gt;-->
-<!--&lt;!&ndash;                              <img src="@/assets/img/close2.svg" alt="">&ndash;&gt;-->
-<!--&lt;!&ndash;                          </span>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="form-alert">-->
-<!--                        <p>{{ errors.first('nationalCardPic') }}</p>-->
-<!--                      </div>-->
-<!--                      <span class="format_inp">فرمت تصویر png یا jpeg وارد شود</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
               </div>
             </div>
             <div class="form-row-new">
@@ -544,20 +469,24 @@
     </b-modal>
     <!-- Show Photo Modal -->
     <!-- Show Delete Modal -->
-<!--    <b-modal id="deleteModal" title="BootstrapVue" hide-header hide-footer size="md">-->
-<!--      <h3 class="delete_title">حذف تصویر</h3>-->
-<!--      <div class="delete_txt">-->
-<!--        <p>-->
-<!--          آیا از-->
-<!--          <i>حذف تصویر</i>-->
-<!--          اطمینان دارید؟-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="d-flex justify-content-start confirm_btn">-->
-<!--        <a href="#" class="btn" @click.prevent="deleteImage('ref') , $bvModal.hide('deleteModal')" v-bind:ref="ref">بله</a>-->
-<!--        <a href="#" class="btn btn-cancel" @click.prevent="$bvModal.hide('deleteModal')">خیر</a>-->
-<!--      </div>-->
-<!--    </b-modal>-->
+    <b-modal id="deleteModal" title="BootstrapVue" hide-header hide-footer size="md">
+      <h3 class="delete_title">حذف تصویر</h3>
+      <span class="modal_extra_close">
+        <img src="@/assets/img/close.png" alt="" @click="$bvModal.hide('deleteModal')">
+      </span>
+      <div class="delete_txt">
+        <p>
+          آیا از
+          <i>حذف تصویر</i>
+          اطمینان دارید؟
+        </p>
+      </div>
+      <span style="display: none" v-bind:src="srcDl"></span>
+      <div class="d-flex justify-content-start confirm_btn">
+        <a href="#" class="btn" @click.prevent="deleteImage() , $bvModal.hide('deleteModal')">بله</a>
+        <a href="#" class="btn btn-cancel" @click.prevent="$bvModal.hide('deleteModal')">خیر</a>
+      </div>
+    </b-modal>
     <!-- Show Photo Modal -->
   </div>
 </template>
@@ -576,6 +505,7 @@ export default {
       file: '',
       fund: [],
       d: '',
+      srcDl: '',
       userInfo: {
         profilePic: {},
         birthCertPic: {},
@@ -674,9 +604,10 @@ export default {
       }
       this.$bvModal.show('displayPhoto')
     },
-    // showDelete () {
-    //   this.$bvModal.show('deleteModal')
-    // },
+    showDelete (ref) {
+      this.$bvModal.show('deleteModal')
+      this.srcDl = ref
+    },
     submitData: function () {
       this.$validator.validate().then(valid => {
         if (valid) {
@@ -865,20 +796,20 @@ export default {
         }
       }, 5000)
     },
-    deleteImage (ref) {
-      if (ref === 'profilePhotoInput') {
+    deleteImage () {
+      if (this.srcDl === 'profilePhotoInput') {
         this.$refs.profilePic = ''
         this.userInfo.profilePic.previewUrl = ''
         sharedService.test2('#pic1')
-      } else if (ref === 'birthCertPhotoInput') {
+      } else if (this.srcDl === 'birthCertPhotoInput') {
         this.$refs.birthCertPic = ''
         this.userInfo.birthCertPic.previewUrl = ''
         sharedService.test2('#pic2')
-      } else if (ref === 'birthCertDescPhotoInput') {
+      } else if (this.srcDl === 'birthCertDescPhotoInput') {
         this.$refs.birthCertDescPic = ''
         this.userInfo.birthCertDescPic.previewUrl = ''
         sharedService.test2('#pic3')
-      } else if (ref === 'nationalCardPhotoInput') {
+      } else if (this.srcDl === 'nationalCardPhotoInput') {
         this.$refs.nationalCardPic = ''
         this.userInfo.nationalCardPic.previewUrl = ''
         sharedService.test2('#pic4')
@@ -935,6 +866,9 @@ export default {
       } else {
         this.$router.back()
       }
+    },
+    closeInnerModal () {
+      sharedService.closeModal()
     }
   }
 }
@@ -957,5 +891,19 @@ export default {
   }
   .upload_back_btn{
     cursor: pointer;
+  }
+  .delete_title{
+    font-size: 15px;
+    color: #cb0d0d;
+    font-family: "Iransans_Bold";
+  }
+  .delete_txt{
+    text-align: center;
+    font-family: "Iransans_Medium";
+    font-size: 15px;
+    margin: 35px 0;
+  }
+  .delete_txt i{
+    color: #cb0d0d;
   }
 </style>

@@ -173,7 +173,7 @@ body{
     font-size: 15px;
     padding: 0 20px;
   }
- 
+
   @media #{$size480}{
     padding: 0 10px;
     font-size: 13px !important;
@@ -745,26 +745,6 @@ select{
       &.active{
         right: 0;
       }
-      .modal_extra_close{
-        display: block;
-        width: 36px;
-        height: 36px;
-        line-height: 36px;
-        text-align: center;
-        background-color: $c2;
-        @include border-radius(50%);
-        @include box-shadow(0 0 13px 0 rgba(0, 0, 0, 0.16));
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        z-index: 100;
-        cursor: pointer;
-        @media #{$size1440}{
-          width: 32px;
-          height: 32px;
-          line-height: 32px;
-        }
-      }
       .desc_scroll{
         overflow-y: auto;
       }
@@ -963,6 +943,26 @@ select{
         }
       }
     }
+  }
+}
+.modal_extra_close{
+  display: block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  background-color: $c2;
+  @include border-radius(50%);
+  @include box-shadow(0 0 13px 0 rgba(0, 0, 0, 0.16));
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 100;
+  cursor: pointer;
+  @media #{$size1440}{
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
   }
 }
 .modal#displayPhoto .modal-content .modal-body{

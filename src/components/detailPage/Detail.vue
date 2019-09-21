@@ -115,9 +115,9 @@ export default {
       userLicense: {},
       isLoading: true,
       isDone: false,
-      isUserVerified: false,
-      showUserAlert: true,
-      desTabIndex: 0
+      isUserVerified:false,
+      showUserAlert:true,
+      desTabIndex:0
     }
   },
   components: {

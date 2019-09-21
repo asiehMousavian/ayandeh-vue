@@ -15,10 +15,19 @@ export default {
     // })
   //},
 
+test2(id){
+  $(id).val("");
+},
+test(id,length)
+{
+    if($(id).val().length==length){
+        $(id).next().focus();
+    }
+  //   if($(id).val().length==0){
+  //     $(id).before().focus();
+  // }
+},
 
-  test2(id){
-    $(id).val("");
-  },
 
   handleInputLabels () {
     $('.form-control').blur(function () {

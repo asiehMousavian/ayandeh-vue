@@ -612,6 +612,7 @@ export default {
       this.$validator.validate().then(valid => {
         if (valid) {
           if (this.mode === 'creat') {
+            debugger
             this.userInfo.personalPicId = this.userInfo.profilePic ? this.userInfo.profilePic.uniqueId : null
             this.userInfo.profilePicId = this.userInfo.profilePic ? this.userInfo.profilePic.uniqueId : null
             this.userInfo.birthCertPicId = this.userInfo.birthCertPic ? this.userInfo.birthCertPic.uniqueId : null

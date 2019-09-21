@@ -14,7 +14,7 @@
               <div id="menu">
                 <ul class="list-unstyled">
                   <li>
-                    <a href="#" @click.prevent="goToDetailList">صندوق‌های سرمایه‌گذاری</a>
+                    <a href="#" @click.prevent="goToDetailList()">صندوق‌های سرمایه‌گذاری</a>
                   </li>
                   <li>
                     <a href="#">همکاران ما</a>

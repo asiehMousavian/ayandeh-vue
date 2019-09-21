@@ -95,7 +95,7 @@
                           <div class="upload_file">
                             <img src="@/assets/img/default.svg" alt="">
                             <div class="upload_pic">
-                              <img v-if="userInfo.profilePic" v-bind:src="userInfo.profilePic.previewUrl" alt />
+                              <img v-if="userInfo.profilePic" v-bind:src="(userInfo.profilePic)?userInfo.profilePic.previewUrl:''" alt />
                               <div class="upload_back" v-if="userInfo.profilePic">
                                 <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal2')">
                                   <img src="@/assets/img/see.svg" alt="">
@@ -116,7 +116,7 @@
                           <div class="upload_file">
                             <img src="@/assets/img/default.svg" alt="">
                             <div class="upload_pic">
-                              <img v-if="userInfo.birthCertPic" v-bind:src="userInfo.birthCertPic.previewUrl" alt />
+                              <img v-if="userInfo.birthCertPic" v-bind:src="(userInfo.birthCertPic)?userInfo.birthCertPic.previewUrl:''" alt />
                               <div class="upload_back" v-if="userInfo.birthCertPic">
                                 <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal')">
                                   <img src="@/assets/img/see.svg" alt="">
@@ -137,7 +137,7 @@
                           <div class="upload_file">
                             <img src="@/assets/img/default.svg" alt="">
                             <div class="upload_pic">
-                              <img v-if="userInfo.birthCertDescPic" v-bind:src="userInfo.birthCertDescPic.previewUrl" alt />
+                              <img v-if="userInfo.birthCertDescPic" v-bind:src="(userInfo.birthCertDescPic)?userInfo.birthCertDescPic.previewUrl:''" alt />
                               <div class="upload_back" v-if="userInfo.birthCertDescPic">
                                 <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal3')">
                                   <img src="@/assets/img/see.svg" alt="">
@@ -158,7 +158,7 @@
                           <div class="upload_file">
                             <img src="@/assets/img/default.svg" alt="">
                             <div class="upload_pic">
-                              <img v-if="userInfo.nationalCardPic" v-bind:src="userInfo.nationalCardPic.previewUrl" alt />
+                              <img v-if="userInfo.nationalCardPic" v-bind:src="(userInfo.nationalCardPic)?userInfo.nationalCardPic.previewUrl:''" alt />
                               <div class="upload_back" v-if="userInfo.nationalCardPic">
                                 <a href="#" class="upload_back_btn mx-auto" @click.prevent="showMyModal('showPhotoModal4')">
                                   <img src="@/assets/img/see.svg" alt="">
@@ -308,7 +308,7 @@ export default {
     generalService
       .getMethod('/invest/user/')
       .then(response => {
-        this.user = response.content
+        this.userInfo = response.content
         this.isDone = true
         // localStorage.setItem('regUser', JSON.stringify(this.user))
         if (response.content.registerStatus === 'UNKNOWN') {

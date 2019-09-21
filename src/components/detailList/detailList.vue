@@ -10,8 +10,6 @@
             <box-component v-for= "fund in funds" v-bind:key="fund.id" v-on:goToBoxDetail="goToBoxDetail(fund.id)" v-bind:fund="fund"></box-component>
           </div>
         </div>
-       
-
       </div>
     </div>
     <div v-else>
@@ -75,11 +73,10 @@ export default {
   components: {
     PageHeader, BoxComponent, toggleMenu, Loading, fundDescription
   },
-  beforeUpdate(){
+  beforeUpdate () {
     sharedService.toggleMenu()
   },
-  mounted() {
-      
+  mounted () {
     // if (!this.getLocalItem()) {
     //   this.getFunds()
     // }
@@ -87,13 +84,13 @@ export default {
       .then(response => {
         this.funds = response.content
         this.isDone = true
-         this.$bvModal.show('alertModal') 
+        this.$bvModal.show('alertModal')
         // this.setLocalItem()
       })
       .catch(error => {
         console.log(error)
         this.isDone = true
-         this.$bvModal.show('alertModal') 
+        this.$bvModal.show('alertModal')
       })
   },
   methods: {
@@ -122,7 +119,7 @@ export default {
     // setLocalItem () {
     //   localStorage.setItem('item', JSON.stringify(this.funds))
     // }
-     goToUserProfile () {
+    goToUserProfile () {
       this.$router.push('/user')
     },
     goToAuthentication()

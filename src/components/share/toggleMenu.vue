@@ -8,7 +8,7 @@
       <span class="small_menu_t">منوی دسترسی</span>
       <ul class="list-unstyled">
         <li>
-          <a href="#">صندوق‌های سرمایه‌گذاری</a>
+          <a href="#" @click.prevent="goToDetailList">صندوق‌های سرمایه‌گذاری</a>
         </li>
         <li>
           <a href="#">همکاران ما</a>
@@ -29,7 +29,12 @@
 </template>
 <script>
 export default {
-  name: 'toggleMenu'
+  name: 'toggleMenu',
+  methods: {
+    goToDetailList () {
+      this.$router.push('/detailList')
+    }
+  }
 }
 
 </script>

@@ -28,7 +28,8 @@
     "vue-session": "^1.0.0",
     "vue-snack": "^0.1.4",
     "vuejs-datatable": "^1.7.0",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "jalali-moment": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "^3.9.2",

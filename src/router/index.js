@@ -117,8 +117,7 @@ export default new Router({
         {
           path: 'login',
           component: login,
-          beforeEnter(from,to,next)
-          {
+          beforeEnter (from, to, next) {
             session.clear()
             next()
           }
@@ -158,7 +157,7 @@ export default new Router({
       name: 'user',
       component: user,
       beforeEnter: (to, from, next) => {
-        // checkIsLogged(to, from, next)
+        checkIsLogged(to, from, next)
         if (isLogged()) {
           generalService.getMethod('invest/user/')
             .then(response => {
@@ -204,24 +203,22 @@ export default new Router({
       name: 'verification',
       component: verificationPage,
       beforeEnter: (to, from, next) => {
-        debugger
         if (GetSession(to, from, next)) {
           if (isLogged()) {
             next('detailList')
-          }
-          else {
+          } else {
             if (session.has('mobile')) {
               let mobNum = session.get('mobile')
-              if (mobNum != "") {
+              if (mobNum !== '') {
                 next()
                 return
               }
             }
           }
           next('login')
-        }
-        else
+        } else {
           next('login')
+        }
 
         // if (from.fullPath == "/login" || from.fullPath == "/") {
         //   if (session.has('mobile')) {
@@ -239,7 +236,7 @@ export default new Router({
         //     next('login')
         //   }
         // }
-       // next()
+        // next()
       }
     },
     // end of all routes
@@ -248,7 +245,7 @@ export default new Router({
       path: '*',
       redirect: '/login'
     }
-  ],
+  ]
   // abort: () => {
   //   this.
   // }

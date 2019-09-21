@@ -109,7 +109,7 @@ export default {
     {
       if(option != this.paymentOption){
       this.isSelected= !this.isSelected
-      this.paymentOption=option
+      this.paymentOption = option
       }
     },
     closeInnerModal () {
@@ -129,6 +129,8 @@ export default {
       //   redirectUrl: baseUrl + '/redirect' // `${baseUrl}/redirect`
      // }
       //todo base on payment option
+          debugger
+
       service.postMethod('payment', this.purchaseObj)
         .then(response => {
           debugger

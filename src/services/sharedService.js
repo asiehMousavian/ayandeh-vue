@@ -58,7 +58,7 @@ test(id,length)
       $('.small_menu').animate({'right': '-300px'}, 400)
     })
     $('.filter_body').click(function () {
-      $('.small_menu').animate({'right': '-300px'}, 300)
+      $('.small_menu').animate({'right': '-300px'}, 400)
       $(this).css('display', 'none')
     })
   },

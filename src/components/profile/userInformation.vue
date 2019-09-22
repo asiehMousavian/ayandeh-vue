@@ -329,7 +329,7 @@ export default {
   },
   methods: {
     editUser () {
-      this.$router.push('user/edit')
+      this.$router.push('user/update')
     },
     showMyModal (modalId) {
       if (modalId === 'showPhotoModal') {

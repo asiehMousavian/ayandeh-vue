@@ -15,6 +15,8 @@
     "axios-retry": "^3.1.2",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.26",
+    "http-server": "^0.11.1",
+    "jalali-moment": "latest",
     "js-tabs": "^1.0.1",
     "v-mask": "^2.0.2",
     "vee-validate": "^2.2.15",
@@ -28,8 +30,7 @@
     "vue-session": "^1.0.0",
     "vue-snack": "^0.1.4",
     "vuejs-datatable": "^1.7.0",
-    "vuex": "^3.1.1",
-    "jalali-moment": "latest"
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "^3.9.2",

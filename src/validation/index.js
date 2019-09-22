@@ -78,6 +78,6 @@ Validator.extend('nationalCode', {
 
 Validator.extend('ibanNumber', {
   validate (value) {
-    return /^[a-z]{2}[ ]{1}[0-9]{24}$/g.test(value)
+    return  true // /^[a-z]{2}[ ]{1}[0-9]{24}$/g.test(value)
   }
 })

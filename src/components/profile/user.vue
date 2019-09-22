@@ -397,7 +397,7 @@
                 <div class="col-xl-6 clo-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="form-group">
                     <div class="inp_border">
-                      <input type="text" name="ibanNumber" @blur="getBankInfo() , checkIban()" class="form-control" v-model="userInfo.ibanNumber" v-mask="'IR##-###-######-#############'" :disabled="validations && validations.ibanNumberConfirmed"/>
+                      <input type="text" name="ibanNumber" @blur="getBankInfo() , checkIban()"  v-validate="'ibanNumber'" class="form-control" v-model="userInfo.ibanNumber"  :disabled="validations && validations.ibanNumberConfirmed"/>
                       <div class="form-alert">
                         <p>{{ errors.first('ibanNumber') }}</p>
                       </div>
@@ -532,6 +532,7 @@ export default {
     PageHeader, toggleMenu
   },
   mounted () {
+    debugger
     sharedService.handleInputLabels()
     sharedService.toggleMenu()
     // if (this.$session.has('clientInfo')) {
@@ -552,7 +553,7 @@ export default {
     //     console.log(error)
     //   })
     if (this.$route.params.mode) {
-      this.mode = 'update'
+      this.mode = this.$route.params.mode
       generalService.getMethod('/invest/user/')
         .then(response => {
           this.userInfo = response.content
@@ -611,8 +612,7 @@ export default {
     submitData: function () {
       this.$validator.validate().then(valid => {
         if (valid) {
-          if (this.mode === 'creat') {
-            debugger
+          if (this.mode === 'create') {
             this.userInfo.personalPicId = this.userInfo.profilePic ? this.userInfo.profilePic.uniqueId : null
             this.userInfo.profilePicId = this.userInfo.profilePic ? this.userInfo.profilePic.uniqueId : null
             this.userInfo.birthCertPicId = this.userInfo.birthCertPic ? this.userInfo.birthCertPic.uniqueId : null
@@ -666,11 +666,12 @@ export default {
       if (condition) {
         generalService
           .getMethod('auth/nationalId-mobile-compatibility', {
-            params: {nationalId: 'userInfo.nationalId', mobileNumber: 'userInfo.mobileNumber'}
+            params: {nationalId: this.userInfo.nationalId, mobileNumber: this.userInfo.mobileNumber}
           })
           .then(response => {
             if (response.message === 'OK' && response.status === 0) {
               if (response.content.status) {
+                debugger
               } else {
                 this.errors.add({
                   field: 'mobileNumber',

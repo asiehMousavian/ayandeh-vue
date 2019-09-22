@@ -34,10 +34,10 @@
                         <div class="form-group">
                           <div class="inp_border">
                             <div class="verificationCode">
-                                  <input type="text" id="dig_one" v-model= "dig_one"  maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_one')"/>
-                                  <input type="text" id="dig_two" v-model= "dig_two" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_two')"/>
-                                  <input type="text" id="dig_three" v-model= "dig_three" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_three')"/>
-                                  <input type="text" id="dig_four" v-model= "dig_four" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "test('dig_four')"/>
+                                  <input type="text" id="dig_one" v-model= "dig_one"  maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "verificationCodeInput('dig_one')"/>
+                                  <input type="text" id="dig_two" v-model= "dig_two" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "verificationCodeInput('dig_two')"/>
+                                  <input type="text" id="dig_three" v-model= "dig_three" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "verificationCodeInput('dig_three')"/>
+                                  <input type="text" id="dig_four" v-model= "dig_four" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" v-validate="'required|numeric'" @keyup= "verificationCodeInput('dig_four')"/>
                             </div>
                             <!-- <input
                               type="text"
@@ -89,9 +89,6 @@ export default {
       verificationCode: '',
       mobile:'',
       nationalId:'',
-      // verifyCode:true,
-      //password:'',
-      //confirmpassword:'',
       minutes:'',
       seconds:'',
       isLoading: false,
@@ -101,13 +98,14 @@ export default {
       dig_two:'',
       dig_three:'',
       dig_four:'',
-      leavePage:false
+      leavePage:false,
+      timer: null
 
     }
   },
   components:{PageHeader,toggleMenu,VueLoadingButton},
   mounted() {
-     sharedService.handleInputLabels()
+    sharedService.handleInputLabels()
     sharedService.checkInputs()
     sharedService.toggleMenu()
     this.hasAccount=false
@@ -144,11 +142,11 @@ export default {
     }
   },
   methods: {
-    test(id){
-      sharedService.test(".verificationCode #"+id,1)
+    verificationCodeInput(id){
+      sharedService.verificationCodeInput(".verificationCode #"+id,1)
     },
-      setTimer(){
-        setInterval(() => 
+    setTimer(){
+        this.timer= setInterval(() => 
         {
           if(this.seconds>0){
             this.seconds--
@@ -159,10 +157,12 @@ export default {
               }
               else if(this.minutes==0 && this.seconds==0)
               {
+                this.stopTimer()
                 this.reSend=true
                 return
               }
             }
+     
           }, 1000)
         },
       sendSms(){
@@ -174,10 +174,11 @@ export default {
           generalService.postMethod("auth/smsCode/nationalId",smsObj).then(response=>{
             if(response.status == 0 && response.message=="OK")
             {
-              //todo
+              // localStorage.setItem('hasAyandeAccount', true)
+                this.$session.set('hasAyandeAccount', true)
             }
           }).catch(error=>{
-              debugger
+              
               this.responseRresult = 'خطا در برقراری ارتباط با سرور لطفا با پشتیبانی تماس بگیرید'
               if(error.response != null){
                 if (error.response.data.status === 500501) {
@@ -238,14 +239,15 @@ export default {
                     localStorage.setItem('session', value.session)
                     generalService.setSession()
                   }
-                });
+                })
               }
             }
         }).catch(error=>{
           this.isLoading= false
           this.responseRresult="کد وارد شده معتبر نیست" //error.response.data.message
-          this.stopTimer()
-          this.reSend=true
+          this.clearData()
+          // this.stopTimer()
+          // this.reSend=true
           this.leavePage=false
         })
       },
@@ -258,8 +260,12 @@ export default {
       },
       stopTimer()
       {
+         clearInterval(this.timer)
         this.minutes=0
         this.seconds= 0
+     
+      },
+      clearData(){
         this.dig_one= ''
         this.dig_two= ''
         this.dig_three= ''
@@ -267,7 +273,7 @@ export default {
       },
       resetTimer()
       {
-        this.minutes= 4
+        this.minutes= 1
         this.seconds= 59
       }
   }

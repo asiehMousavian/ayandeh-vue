@@ -31,7 +31,7 @@
         <div slot="modal-footer">
           <button class="btn" @click= "goToUserProfile">کامل کردن اطلاعات</button>
           <button class="btn" @click= "goToAuthentication">شرایط احراز هویت</button>
-          <button class="btn btn-cancel" @click= "$bvModal.hide('alertModal')">بعدا یادآوری کن</button>
+          <button class="btn btn-cancel" @click= "skip">بعدا </button>
         </div>
       </b-modal>
     </div>
@@ -84,8 +84,9 @@ export default {
       .then(response => {
         this.funds = response.content
         this.isDone = true
-        this.$bvModal.show('alertModal')
-        // this.setLocalItem()
+        let skipped= this.$session.get('skipped')
+        if(!skipped)
+          this.$bvModal.show('alertModal')
       })
       .catch(error => {
         console.log(error)
@@ -131,6 +132,10 @@ export default {
     {
       this.$bvModal.hide('descModal')
         this.$bvModal.show('alertModal')
+    },
+    skip()
+    {
+        this.$session.set('skipped', true)
     }
   }
 }

@@ -70,7 +70,7 @@
           </div>
           <div>
             <b-modal id="innerSodoorModal" title="BootstrapVue" hide-header size="lg"  hide-footer>
-                <inner-sodoor @exit="closeModal('innerSodoorModal')"></inner-sodoor>
+                <inner-sodoor @exit= "closeModal('innerSodoorModal')"></inner-sodoor>
             </b-modal>
           </div>
            <div>

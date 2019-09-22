@@ -29,9 +29,9 @@
         <!-- <button  :disabled = 'errors.any() || isComplete' type="button" class="btn mx-auto" @click.prevent="login">{{submitTitle}}</button> -->
         <VueLoadingButton :disabled = 'errors.any() || !isComplete' type="button" class="btn mx-auto" @click.native="login" :loading="isLoading">{{submitTitle}}</VueLoadingButton>
       </div>
-      <div class="d-flex">
+      <!-- <div class="d-flex">
         <a href="#" class="forget_pass mx-auto">فراموشی رمز عبور؟</a>
-      </div>
+      </div> -->
     </form>
   </div>
 </template>

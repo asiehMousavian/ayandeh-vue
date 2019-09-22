@@ -1,6 +1,6 @@
 <template>
   <div id="registerPage">
-    <div v-if= "signupStep =='first'">
+    <div>
       <div class="box_text">
         <div class="text">
           <p>
@@ -24,76 +24,6 @@
         </div>
       </div>
     </div>
-    <div v-else-if= "signupStep=='withAccount'">
-      <div class="box_text">
-        <div class="text">
-          <!-- <p>
-          شماره حساب بانک آینده و کد ملی خود را وارد کنید
-          </p> -->
-          <p>
-            کد ملی خود را وارد کنید
-          </p>
-        </div>
-      </div>
-      <form>
-        <!-- <div class="form-group">
-          <div class="inp_border">
-            <input type="text" v-model="account" name="accountNumber" class="form-control" v-validate="'required|ayandeAccountNumber'" />
-            <div class="form-alert">
-              <p>{{ errors.first('accountNumber') }}</p>
-            </div>
-            <span class="format_inp">نمونه شماره حساب : 021586521485</span>
-            <i class="placeholder">شماره حساب</i>
-            <i class="line"></i>
-          </div>
-        </div> -->
-        <div class="form-group">
-          <div class="inp_border">
-            <input type="text" v-model="nationalId" name="nationalId" class="form-control" v-validate="'required|numeric|length:10'"/>
-            <div class="form-alert">
-              <p>{{ errors.first('nationalId') }}</p>
-            </div>
-            <span class="format_inp">نمونه کد ملی : 4680059087</span>
-            <i class="placeholder">کد ملی</i>
-            <i class="line"></i>
-          </div>
-        </div>
-        <div class="d-flex box_c">
-          <button :disabled = 'errors.any() || !isValidId' type="button" class="btn mx-auto" @click.prevent="sendSmsCode">مرحله بعد</button>
-        </div>
-        <div class="d-flex">
-          <a href="" @click.prevent="goToWithoutAccount" class="forget_pass mx-auto">حساب بانک آینده ندارید؟</a>
-        </div>
-      </form>
-    </div>
-    <div v-else-if= "signupStep=='withoutAccount'">
-      <div class="box_text">
-        <div class="text">
-          <p>
-            شماره موبایل خود را وارد کنید
-          </p>
-        </div>
-      </div>
-      <form>
-        <div class="form-group">
-          <div class="inp_border">
-            <input type="text" v-model="mobile" name="mobileNumber" class="form-control" v-validate="'required|mobileFa'"/>
-            <div class="form-alert">
-              <p>{{ errors.first('mobileNumber') }}</p>
-            </div>
-            <span class="format_inp">نمونه شماره موبایل : ۰۹۱۲۱۱۲۲۳۲۱</span>
-            <i class="placeholder">شماره موبایل</i>
-            <i class="line"></i>
-          </div>
-        </div>
-        <div class="d-flex box_c">
-          <button  type="button" :disabled = 'errors.any() || !isValidMobile' class="btn mx-auto" @click.prevent="sendSmsCode">مرحله بعد</button>
-        </div>
-        <div class="d-flex">
-          <a href="" @click.prevent="goToWithAccount" class="forget_pass mx-auto">حساب بانک آینده دارید؟</a>
-        </div>
-      </form>
-    </div>
   </div>
 </template>
 <script>
@@ -103,10 +33,6 @@
     name: "register",
     data() {
       return {
-        account: '',
-        signupStep:'first',
-        nationalId:'',
-        mobile:''
       }
     },
     beforeUpdate () {
@@ -114,55 +40,15 @@
       sharedService.checkInputs()
       sharedService.toggleMenu()
     },
-    computed: {
-      // isComplete() {
-      //   // return this.account && this.nationalId
-      // }
-       isValidMobile() {
-        return this.mobile
-      },
-        isValidId() {
-        return this.nationalId
-      },
-    },
     methods: {
       goToWithoutAccount(){
-        this.signupStep="withoutAccount"
+        this.$emit("goToWithoutAccount", true)
       },
       goToWithAccount(){
-        this.signupStep="withAccount"
-      },
-      sendSmsCode()
-      {
-        this.$session.set('nationalId', this.nationalId)
-        this.$session.set('mobile', this.mobile)
-        this.$router.push('verification')
+         this.$emit("goToWithAccount", true)
       }
-      // register: function() {
-      //   this.$validator.validateAll().then(result => {
-      //     if (result) {
-      //       let userInfo = {
-      //         confirmPassword: "123",
-      //         email: "azade_khalili@yahoo.com",
-      //         password: "123"
-      //       };
-      //       generalService
-      //         .postMethod("auth/register", userInfo)
-      //         .then(response => {
-      //           if (response.status === 0 && response.message === "OK") {
-      //             sharedService.requestDone("ثبت نام با موفقیت انجام شد");
-      //           }
-      //         })
-      //         .catch(error => {
-      //           sharedService.requestFailed(error.response.data.message);
-      //         });
-      //     } else {
-      //       //todo
-      //     }
-      //   })
-      // }
     }
-  };
+  }
 </script>
 <style scoped>
 </style>

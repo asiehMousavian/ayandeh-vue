@@ -18,7 +18,7 @@ export default {
 test2(id){
   $(id).val("");
 },
-test(id,length)
+verificationCodeInput(id,length)
 {
     if($(id).val().length==length){
         $(id).next().focus();

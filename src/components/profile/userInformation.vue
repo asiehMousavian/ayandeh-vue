@@ -48,7 +48,7 @@
                     <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
                       <div class="user_info_sec">
                         <span class="user_info_sec--t">تاریخ تولد :</span>
-                        <span class="user_info_sec--txt">{{userInfo.birth}}</span>
+                        <span class="user_info_sec--txt">{{birthDate}}</span>
                       </div>
                     </div>
                     <div class="col-xl-4 clo-lg-4 col-md-4 col-sm-6 col-12">
@@ -272,6 +272,8 @@ import generalService from '@/services/generalService'
 import sharedService from '@/services/sharedService'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+const moment = require('jalali-moment')
+
 
 export default {
   name: 'userInformation',
@@ -289,7 +291,8 @@ export default {
       isDone: false,
       get_founds_url: 'invest/userInformation',
       imgSrc: '',
-      hasPic: false
+      hasPic: false,
+      birthDate:''
     }
   },
   components: {
@@ -309,6 +312,9 @@ export default {
       .getMethod('/invest/user/')
       .then(response => {
         this.userInfo = response.content
+        let date= moment.unix(this.userInfo.birthDate / 1000).format('jDD jMM jYYYY')
+        this.birthDate=this.checkDate(date);
+
         this.isDone = true
         // localStorage.setItem('regUser', JSON.stringify(this.user))
         if (response.content.registerStatus === 'UNKNOWN') {
@@ -328,6 +334,10 @@ export default {
       })
   },
   methods: {
+        checkDate (date) {
+          let bir = date.split(' ').reverse()
+          return bir.join('/')
+      },
     editUser () {
       this.$router.push('user/update')
     },

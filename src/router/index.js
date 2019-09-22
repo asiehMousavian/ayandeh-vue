@@ -163,13 +163,14 @@ export default new Router({
           generalService.getMethod('invest/user/')
             .then(response => {
               debugger
+
               if (response.status === 0 && response.message === 'OK') {
                 let userData = JSON.stringify(response.content)
                 localStorage.setItem('userData', userData)
                 if (response.content.registerStatus !== 'UNKNOWN') {
                   next('/userInformation')
                 } else {
-                  next('/user/create')
+                  next()
                 }
               } else {
                 console.log()

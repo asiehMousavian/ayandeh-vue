@@ -171,7 +171,7 @@
                       </span>
                     </div>
                     <div class="form-alert">
-                      <p v-if="errors.first('profilePhoto')">{{ errors.first('profilePhoto') }}</p>
+                      <p>{{ errors.first('profilePhoto') }}</p>
                     </div>
                   </div>
                 </div>
@@ -503,7 +503,8 @@ export default {
   data () {
     return {
       file: '',
-      fund: [],
+      fund: {},
+      fundId: 0,
       d: '',
       srcDl: '',
       userInfo: {
@@ -523,6 +524,8 @@ export default {
       get_founds_url: 'invest/user',
       imgSrc: '',
       hasPic: false
+      //  MyDataMask: ['## ## ####']
+      //  '## ## ####'
     }
   },
   // beforeUpdate () {
@@ -532,7 +535,6 @@ export default {
     PageHeader, toggleMenu
   },
   mounted () {
-    debugger
     sharedService.handleInputLabels()
     sharedService.toggleMenu()
     // if (this.$session.has('clientInfo')) {
@@ -557,9 +559,9 @@ export default {
       generalService.getMethod('/invest/user/')
         .then(response => {
           this.userInfo = response.content
-          this.d = this.userInfo.birthDate
+          this.d = moment.unix(this.userInfo.birthDate / 1000).format('jDD jMM jYYYY')
+          this.checkDate()
           this.getRegisteredUserConfirmations()
-          // ss
           setTimeout(() => {
             sharedService.checkInputs()
           }, 500)
@@ -568,11 +570,27 @@ export default {
           console.log(error)
         })
     }
+    else{
+      debugger
+    }
     if (localStorage.getItem('userInfoData')) {
       this.$bvModal.show('confirmRefresh')
     }
+    this.getCurentFund()
   },
   methods: {
+       getCurentFund () {
+      service.getMethod('invest/fund/' + this.fundId)
+        .then(response => {
+          this.fund = response.content
+          this.fundId=this.fund.code
+          console.log(this.fund)
+          this.$session.set('currentFund', JSON.stringify(this.fund))
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     showMyModal (modalId) {
       if (modalId === 'showPhotoModal') {
         this.imgSrc = this.userInfo.birthCertPic.previewUrl
@@ -624,7 +642,7 @@ export default {
               this.userInfo.birthDate = new Date(moment(birthDate, 'jYYYY/jMM/jDD')).getTime()
             }
             generalService
-              .postMethod('invest/fund/register/investor/10915', this.userInfo)
+              .postMethod(`invest/fund/register/investor/${this.fundId}`, this.userInfo)
               .then(response => {
                 if (response.status === 0 && response.message === 'OK') {
                   // sharedService.Done('ثبت نام با موفقیت انجام شد')
@@ -636,6 +654,11 @@ export default {
                 console.log(error)
               })
           } else if (this.mode === 'update') {
+              if (this.d) {
+              let birth = this.d.split(' ')
+              let birthDate = birth[0] + '/' + birth[1] + '/' + birth[2]
+              this.userInfo.birthDate = new Date(moment(birthDate, 'jYYYY/jMM/jDD')).getTime()
+            }
             generalService
               .postMethod('/invest/user/', this.userInfo)
               .then(response => {

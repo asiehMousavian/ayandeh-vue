@@ -2058,7 +2058,6 @@ input:-webkit-autofill:hover {
 }
 .userAlert .msgContainer p {
   font-size: 16px;
-  color: #746500;
 }
 @media only screen and (max-width: 991px) {
   .userAlert .msgContainer p {
@@ -2248,15 +2247,33 @@ input:-webkit-autofill:hover {
     float: none;
   }
 }
+#alertModal {
+  margin-top: 10%;
+}
+#alertModal .modal_title {
+  font-size: 16px;
+}
+#alertModal .modal-body p {
+  font-size: 14px;
+}
 @media only screen and (max-width: 375px) {
   #alertModal .modal-body {
     margin-bottom: 0;
   }
 }
+#alertModal .modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
 @media only screen and (max-width: 375px) {
   #alertModal .modal-footer {
     width: 100%;
+    justify-content: center !important;
   }
+}
+#alertModal .modal-footer .btn {
+  font-size: 14px !important;
+  font-family: "Iransans_Medium";
 }
 @media only screen and (max-width: 991px) {
   #alertModal .modal-footer .btn {

@@ -158,7 +158,8 @@ export default {
               else if(this.minutes==0 && this.seconds==0)
               {
                 this.stopTimer()
-                this.reSend=true
+                this.reSend= true
+                this.responseRresult= ''
                 return
               }
             }

@@ -102,19 +102,33 @@
 //----azade 25-06-98-------------
 #alertModal
 {
+    // width: 686px;
+    // height: 300px;
+    margin-top: 10%;
+    .modal_title{
+        font-size: 16px;
+    }
     .modal-body
     {
+        p{
+        font-size: 14px;
+        }
         @media #{$size375}
         {
             margin-bottom: 0;
         }
     }
     .modal-footer{
+        display: flex;
+        justify-content: space-between;
         @media #{$size375}
         {
             width: 100%;
+            justify-content: center !important;
         }
         .btn{
+            font-size: 14px !important;
+            font-family: "Iransans_Medium";
             @media #{$size992}
             {
                 font-size: 12px !important;

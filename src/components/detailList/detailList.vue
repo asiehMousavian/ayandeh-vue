@@ -131,11 +131,12 @@ export default {
     closeDesModal()
     {
       this.$bvModal.hide('descModal')
-        this.$bvModal.show('alertModal')
+      this.$bvModal.show('alertModal')
     },
     skip()
     {
         this.$session.set('skipped', true)
+        this.$bvModal.hide('alertModal')
     }
   }
 }

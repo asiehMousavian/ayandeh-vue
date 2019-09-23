@@ -687,8 +687,6 @@ export default {
       // check value of mobile and nationalCode
       let condition = true
       if (condition) {
-                
-
         generalService
           .getMethod('auth/nationalId-mobile-compatibility', {
             params: {nationalId: this.userInfo.nationalId, mobileNumber: this.userInfo.mobileNumber}

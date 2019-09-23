@@ -58,6 +58,7 @@ export default {
       this.fundId = this.fund.code
     },
     getData: function (params, setRowData) {
+      this.getFundInfo()
       params.dsCode = this.fundId// this.$route.params.foundId
       params.from = (params.page_number - 1) * params.page_length
       params.page = params.page_number
@@ -74,7 +75,6 @@ export default {
             response.content.data,
             response.content.totalSize
           )
-
           //todo
           $('#accountingTable li a').addClass('page-link')
         }).catch(error => {

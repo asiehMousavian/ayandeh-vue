@@ -292,6 +292,9 @@
     border: solid 1px #c9b10b;
     background-color: rgba(201, 177, 11, 0.3);
     cursor: pointer;
+
+
+
     @media #{$size768} {
       height: 25px;
     }
@@ -299,6 +302,7 @@
       height: 20px;
     }
     img {
+
       width: 100%;
     }
   }

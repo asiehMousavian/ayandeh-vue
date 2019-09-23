@@ -165,13 +165,19 @@ export default {
       }
     },
     getClientInfo(){
-      if (this.$session.has("clientInfo")) {
-        let client = this.$session.get("clientInfo")
-        if (client) {
-          let user = JSON.parse(client)
-          this.nationalId = user.nationalId
-        }
+      // if (this.$session.has("clientInfo")) {
+      //   let client = this.$session.get("clientInfo")
+      //   if (client) {
+      //     let user = JSON.parse(client)
+      //     this.nationalId = user.nationalId
+      //   }
+      // }
+       let client = localStorage.getItem('userData')
+      if (client) {
+        let user = JSON.parse(client)
+        this.nationalId = user.nationalId
       }
+  
     },
     getFundInfo(){
       this.fund = JSON.parse(this.$session.get("currentFund"))

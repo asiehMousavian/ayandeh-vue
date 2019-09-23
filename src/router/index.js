@@ -157,13 +157,10 @@ export default new Router({
       name: 'user',
       component: user,
       beforeEnter: (to, from, next) => {
-        debugger
         checkIsLogged(to, from, next)
         if (isLogged()) {
           generalService.getMethod('invest/user/')
             .then(response => {
-              debugger
-
               if (response.status === 0 && response.message === 'OK') {
                 let userData = JSON.stringify(response.content)
                 localStorage.setItem('userData', userData)

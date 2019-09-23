@@ -28,9 +28,8 @@
                 <a href="#" @click.prevent= "showComponent('requestReport')" >گزارش درخواست‌ها</a>
               </li>
               <li>
-                <a href="#" @click.prevent= "showComponent('accounting')">گردش حساب</a>
-                <!-- <a href="" @click.prevent="showComponent('turnover')">گردش حساب</a> -->
-<!--                <a href="" @click.prevent="showComponent('accounting')">گردش حساب</a>-->
+                <!-- <a href="#" @click.prevent= "showComponent('accounting')">گردش حساب</a> -->
+                <a href="" @click.prevent="showComponent('turnover')">گردش حساب</a>
               </li>
               <li>
                 <a href="#" @click.prevent= "goToUserProfile()">اطلاعات کاربر</a>
@@ -117,7 +116,8 @@ export default {
       isDone: false,
       isUserVerified:false,
       showUserAlert:true,
-      desTabIndex:0
+      desTabIndex:0,
+      userStatus:''
     }
   },
   components: {
@@ -155,6 +155,12 @@ export default {
         }
       }
     },
+     closeModal (modalId) {
+      this.$bvModal.hide(modalId)
+    },
+    closeAlert () {
+      this.showUserAlert = false
+    },
     showComponent (componentName) {
       this.currentComponent = componentName
       this.$session.set('currentComponent', this.currentComponent)
@@ -165,24 +171,16 @@ export default {
     },
     goToUserProfile () {
       this.$router.push('/user')
-      this.$session.set('currentComponent', 'requestReport')
     },
-    closeModal (modalId) {
-      this.$bvModal.hide(modalId)
-    },
-    closeAlert () {
-      this.showUserAlert = false
-    },
-    getFunds () {
+   
+    getCurrentFund () {
       service.getMethod('invest/fund/' + this.fundId)
         .then(response => {
           this.fund = response.content
-          // this.isDone = true
           this.$session.set('currentFund', JSON.stringify(this.fund))
         })
         .catch(error => {
           console.log(error)
-          // this.isDone = true
         })
     },
     getCurrentComponent () {
@@ -198,14 +196,15 @@ export default {
         .then(response => {
           if (response.status === 0) {
             this.userLicense = response.content
+            debugger
             this.$session.set('userLicense', this.userLicense)
           }
           this.isDone = true
         })
         .catch(error => {
-          this.isDone = true
+            debugger
 
-          this.$session.set('userLicense', this.userLicense)
+          this.isDone = true
           if (error.response.data) {
             if (error.response.data.message) {
               // this.canInvokeMsg = error.response.data.message
@@ -223,20 +222,34 @@ export default {
           }
         })
         .catch(error => {
-          debugger
+        console.log(error)
         })
+    },
+    getUserStatus()
+    {
+      // let user=JSON.parse(localStorage.getItem('userInfoData'))
+      let client = localStorage.getItem('userData')
+      if (client) {
+        let user = JSON.parse(client)
+        this.userStatus = user.registerStatus
+      }
     }
   },
   beforeUpdate () {
     sharedService.toggleMenu()
   },
+  beforeRouteLeave (to, from, next) {
+    this.$session.set('currentComponent', 'requestReport')
+    next()
+  },
   mounted: function () {
     this.isDone = false
     this.fundId = this.$route.params.fundId
-    this.getFunds()
+    this.getCurrentFund()
+    this.getUserValidate()
     this.getLicense()
     this.getCurrentComponent()
-    this.getUserValidate()
+    this.getUserStatus()
   }
 }
 </script>

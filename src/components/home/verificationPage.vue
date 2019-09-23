@@ -229,7 +229,8 @@ export default {
               if (response.content.user.isActive) {
               this.$session.start()
               this.$session.set('isLogged', true)
-              this.$session.set('clientInfo', JSON.stringify(response.content.user))
+              localStorage.setItem('userData', JSON.stringify(response.content.user))
+              // this.$session.set('clientInfo', JSON.stringify(response.content.user))
               this.$router.push('detailList')
               }
               if(response.commands.length>0)

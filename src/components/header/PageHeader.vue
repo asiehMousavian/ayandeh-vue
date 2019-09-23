@@ -92,13 +92,21 @@ export default {
     // }
     sharedService.loginBox()
     sharedService.closeLoginBox()
-    if (this.$session.has('clientInfo')) {
-      let client = this.$session.get('clientInfo')
+    // if (this.$session.has('clientInfo')) {
+    //   let client = this.$session.get('clientInfo')
+    //   if (client) {
+    //     let user = JSON.parse(client)
+    //     this.name = user.firstName + ' ' + user.lastName
+    //   }
+    // }
+    // if (this.name === 'null null') {
+    //   this.name = 'کاربر جدید'
+    // }
+    let client = localStorage.getItem('userData')
       if (client) {
         let user = JSON.parse(client)
         this.name = user.firstName + ' ' + user.lastName
       }
-    }
     if (this.name === 'null null') {
       this.name = 'کاربر جدید'
     }

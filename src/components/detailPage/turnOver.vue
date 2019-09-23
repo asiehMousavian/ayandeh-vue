@@ -1,4 +1,3 @@
-
 <template>
   <div  class="container">
     <div class="back fund_detail mb15 table-err" v-if="hasError">
@@ -29,8 +28,8 @@
 <script>
 import generalService from '@/services/generalService'
 import sharedService from '@/services/sharedService'
-import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+// import Loading from 'vue-loading-overlay'
+// import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'turnOver',
@@ -50,12 +49,12 @@ export default {
       per_page: 10,
       hasError: false,
       errorMsg: '',
-      fund:{},
-      fundId:0,
+      fund: {},
+      fundId: 0,
     }
   },
   components:{
-    Loading
+    // Loading
   },
   mounted() {
   },
@@ -113,6 +112,8 @@ export default {
     color: #5c3226;
     font-size: 18px;
   }
-
-
+  #data-table{
+    text-align: right;
+    direction: rtl;
+  }
 </style>
